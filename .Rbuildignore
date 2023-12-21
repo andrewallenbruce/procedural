@@ -1,4 +1,13 @@
 ^procedural\.Rproj$
 ^\.Rproj\.user$
-^README\.Rmd$
 ^LICENSE\.md$
+vignettes
+^README\.Rmd$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^CODE_OF_CONDUCT\.md$
+^vignettes/articles$
+^codecov\.yml$
+^data-raw$

@@ -6,11 +6,15 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
+  collapse  = FALSE,
+  echo      = TRUE,
+  message   = TRUE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 600, 
   out.width = "100%"
-)
+  )
 ```
 
 # procedural
@@ -18,38 +22,33 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of procedural is to ...
+>  Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs.
 
-## Installation
+## :package: Installation
 
-You can install the development version of procedural from [GitHub](https://github.com/) with:
+You can install __`provider`__ from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("andrewallenbruce/procedural")
+# install.packages("pak")
+pak::pak("andrewallenbruce/provider")
 ```
 
-## Example
+## :beginner: Usage
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(procedural)
-## basic example code
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(provider)
+library(dplyr)
+library(tidyr)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
-```
+------------------------------------------------------------------------------
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+## :balance_scale: Code of Conduct
 
-You can also embed plots, for example:
+Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## :classical_building: Governance
+
+This project is primarily maintained by [Andrew Bruce](https://github.com/andrewallenbruce). Other authors may occasionally assist with some of these duties.
