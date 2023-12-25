@@ -6,25 +6,20 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-> Providing easy access to [healthcare
-> provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-> through publicly available APIs.
-
 ## :package: Installation
 
-You can install **`provider`** from [GitHub](https://github.com/) with:
+You can install **`procedural`** from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("pak")
-pak::pak("andrewallenbruce/provider")
+pak::pak("andrewallenbruce/procedural")
 ```
 
 ## :beginner: Usage
 
 ``` r
-library(provider)
-library(dplyr)
-library(tidyr)
+library(procedural)
 ```
 
 ------------------------------------------------------------------------
@@ -33,7 +28,7 @@ library(tidyr)
 
 Please note that the `provider` project is released with a [Contributor
 Code of
-Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html).
+Conduct](https://andrewallenbruce.github.io/procedural/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
 ## :classical_building: Governance

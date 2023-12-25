@@ -2,11 +2,90 @@
 # library(tidyverse)
 # library(janitor)
 # library(zeallot)
+# library(datawizard)
+#
+# tbl[23107:23129,]
+#
+# wiz_rotate <- tbl[23107:23129,] |>
+#   select(title, label, code, axis_title, axis_label, axis_code) |>
+#   datawizard::data_rotate() |>
+#   tibble()
+#
+# names(wiz_rotate) <- unname(unlist(wiz_rotate[1, ], use.names = FALSE))
+#
+# wiz_rotate[2:nrow(wiz_rotate),]
+#
+#   pivot_wider(names_from = title, values_from = c(pos, code, label), names_sep = ".", values_fn = list) |>
+#   print(n = 200)
+#
+# tbl |>
+#   mutate(rowid = row_number(), .before = 1) |>
+#   select(-definition) |>
+#   filter(label == "Placement")
+#   pivot_wider(names_from = title, values_from = c(code, pos, label, definition), names_sep = ".", values_fn = list) |>
+#   clean_names() |>
+#   unnest(code_section)
 #
 # # Import and Parse _____________________________________________________________
-# pcs_def_xsd <- "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definitions.xsd"
-# pcs_def_xml <- "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definitions_2024.xml"
-# pcs_def <- fxml_importXMLFlat(pcs_def_xml)
+# # pcs_def_xsd <- "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definitions.xsd"
+# # pcs_def_xml <- "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definitions_2024.xml"
+# # pcs_def <- fxml_importXMLFlat(pcs_def_xml)
+# # qs::qsave(pcs_def, "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definition_2024")
+# pcs_def <- qs::qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definition_2024")
+#
+# pcs_def <- pcs_def |>
+#   tibble() |>
+#   clean_names() |>
+#   filter(!is.na(value)) |>
+#   filter(elem != "version") |>
+#   filter(level2 != "title",
+#          level2 != "deviceAggregation") |>
+#   mutate(rowid = row_number(), .before = 1) |>
+#   mutate(level1 = NULL)
+#
+# pcs_def |>
+#   print(n = 200)
+#   unite('sections', c(attr, level2:level4), na.rm = TRUE, remove = FALSE) |>
+#   mutate(sections = dplyr::na_if(sections, c("section_axis_terms"))) |>
+#   unite('columns', c(attr, level3:level5), na.rm = TRUE, remove = TRUE) |>
+#   mutate(level2 = NULL,
+#          elem = NULL,
+#          elemid = NULL) |>
+#   pivot_wider(names_from = columns, values_from = value) |>
+#   mutate(
+#     title = lead(title),
+#     pos = lead(pos_axis, 2),
+#     axis = lead(axis_title, 3),
+#     terms = lead(axis_terms_title, 4),
+#     definition = lead(axis_terms_definition, 5),
+#     explanation = lead(axis_terms_explanation, 6),
+#     includes = lead(axis_terms_includes, 7)) |>
+#   select(rowid,
+#          code,
+#          title,
+#          pos,
+#          axis,
+#          terms,
+#          includes,
+#          definition,
+#          explanation) |>
+#   fill(code, title, pos, axis)
+#
+#
+# op <- base[1:118,] |>
+#   filter(!is.na(terms))
+#
+# op
+#
+# pt <- base[123:nrow(base),] |>
+#   mutate(includes = lag(includes))
+#
+# pt[2:nrow(pt),] |> print(n = 200)
+#
+# pt[2:]
+#
+# base |> print(n = 200)
+# base[base$code == "0",] |> print(n = 200)
 #
 # # Data Cleaning ________________________________________________________________
 # def_sec <- pcs_def |>
@@ -19,7 +98,8 @@
 #   mutate(rowid = row_number(), .before = 1) |>
 #   mutate(level1 = NULL,
 #          attr = NULL) |>
-#   unite('levels', level2:level5, na.rm = TRUE, remove = TRUE)
+#   unite('levels', level2:level5, na.rm = TRUE, remove = TRUE) |>
+#   pivot_wider(names_from = levels, values_from = value)
 #
 # # Sections Intervals ___________________________________________________________
 # sections <- def_sec |>
@@ -36,8 +116,7 @@
 #
 # def_ivs <- left_join(def_sec, sections,
 #                      by = join_by(rowid, elem, elemid, value, levels)) |>
-#   fill(c(start, end)) |>
-#   mutate(range = ivs::iv(start, end + 1))
+#   fill(c(start, end))
 #
 # # [0] Medical & Surgical _______________________________________________________
 # filter(sections, value == "0") |> select(start, end) %->% c(start, end)
@@ -75,14 +154,17 @@
 #     section_axis_title = lead(section_axis_title, 1),
 #     section_axis_terms_title = lead(section_axis_terms_title, 2),
 #     section_axis_terms_definition = lead(section_axis_terms_definition, 3),
-#     section_axis_terms_explanation = lead(section_axis_terms_explanation, 4)) |>
+#     section_axis_terms_explanation = lead(section_axis_terms_explanation, 4),
+#     section_axis_terms_includes = lead(section_axis_terms_includes, 5)) |>
 #   filter(!is.na(section_axis_terms_title)) |>
 #   rename(axis = section_axis,
 #          name = section_axis_title,
 #          term = section_axis_terms_title,
 #          definition = section_axis_terms_definition,
-#          explanation = section_axis_terms_explanation) |>
-#   fill(c(axis, name))
+#          explanation = section_axis_terms_explanation,
+#          includes = section_axis_terms_includes) |>
+#   fill(c(axis, name)) |>
+#   select(-elem)
 #
 # md_axis_5 <- md_base |>
 #   filter(between(rowid, md_axis$start_axis[2], md_axis$end_axis[2])) |>
@@ -90,13 +172,13 @@
 #   mutate(
 #     section_axis_title = lead(section_axis_title, 1),
 #     section_axis_terms_title = lead(section_axis_terms_title, 2),
-#     section_axis_terms_definition = lead(section_axis_terms_definition, 3)) |>
+#     section_axis_terms_includes = lead(section_axis_terms_includes, 4)) |>
 #   filter(!is.na(section_axis_terms_title)) |>
 #   rename(axis = section_axis,
 #          name = section_axis_title,
 #          term = section_axis_terms_title,
-#          definition = section_axis_terms_definition) |>
-#   fill(c(axis, name))
+#          includes = section_axis_terms_includes) |>
+#   fill(c(axis, name)) |> print(n = Inf)
 #
 # md_axes <- bind_rows(md_axis_3, md_axis_5) |>
 #   select(axis.code = axis,
