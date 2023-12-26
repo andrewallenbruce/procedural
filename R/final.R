@@ -2,7 +2,7 @@
 # library(janitor)
 # library(zeallot)
 #
-# `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
+
 # pcs <- qs::qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\pcs_tbl2") |> select(-definition)
 #
 #
