@@ -20,6 +20,9 @@ knitr::opts_chunk$set(
 # procedural
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/procedural/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/procedural?branch=main)
+[![R-CMD-check](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## :package: Installation
@@ -37,6 +40,143 @@ pak::pak("andrewallenbruce/procedural")
 library(procedural)
 ```
 
+<br>
+
+## Medical and Surgical
+
+```{r}
+pcs("0016070")
+```
+
+<br>
+
+### Obstetrics
+
+```{r}
+pcs("10D20ZZ")
+```
+
+<br>
+
+### Placement
+
+```{r}
+pcs("2W0UX0Z")
+```
+
+<br>
+
+### Administration
+
+```{r}
+pcs("3E1938X")
+```
+
+<br>
+
+### Measurement and Monitoring
+
+```{r}
+pcs("4B01XVZ")
+```
+
+<br>
+
+### Extracorporeal or Systemic Assistance and Performance
+
+```{r}
+pcs("5A02110")
+```
+
+<br>
+
+### Extracorporeal or Systemic Therapies
+
+```{r}
+pcs("6A0Z0ZZ")
+```
+
+<br>
+
+### Osteopathic
+
+```{r}
+pcs("7W00X0Z")
+```
+
+<br>
+
+### Other Procedures
+
+```{r}
+pcs("8C01X6J")
+```
+
+<br>
+
+### Chiropractic
+
+```{r}
+pcs("9WB0XBZ")
+```
+
+<br>
+
+### Imaging
+
+```{r}
+pcs("B00B0ZZ")
+```
+
+<br>
+
+### Nuclear Medicine
+
+```{r}
+pcs("C0101ZZ")
+```
+<br>
+
+### Radiation Therapy
+
+```{r}
+pcs("DG22DZZ")
+```
+
+
+<br>
+
+### Physical Rehabilitation and Diagnostic Audiology
+
+```{r}
+pcs("F14Z01Z")
+```
+
+<br>
+
+### Mental Health
+
+```{r}
+pcs("GZ10ZZZ")
+```
+
+<br>
+
+### Substance Abuse Treatment
+
+```{r}
+pcs("HZ96ZZZ")
+```
+
+<br>
+
+### New Technology
+
+```{r}
+pcs("XY0YX37")
+```
+
+<br>
 
 ------------------------------------------------------------------------------
 

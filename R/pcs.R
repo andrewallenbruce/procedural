@@ -1,96 +1,95 @@
 #' Look up ICD-10-PCS Codes
 #' @param x ICD-10-PCS code, a __7-character__ alphanumeric code
-#' @return description
+#' @return [tibble()]
 #' @examplesIf interactive()
+#' pcs("0G9000Z")
+#' pcs("0016070")
 #' pcs("2W0UX0Z")
 #' pcs("2W20X4Z")
 #' pcs("2W10X7Z")
 #' pcs("2W10X6Z")
 #' pcs("2W1HX7Z")
-#' pcs("0G9000Z")
-#' pcs("0016070")
 #' @export
 pcs <- function(x) {
+
+  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
   xs <- unlist(strsplit(x, ""), use.names = FALSE)
 
   sec_sys_op <- pins::board_url(
-    github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
+    github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")) |>
     pins::pin_read("pcs_2024_tables")
 
   search <- sec_sys_op |>
-    filter(sec_code == xs[1]) |>
-    filter(sys_code == xs[2]) |>
-    filter(op_code == xs[3])
+    dplyr::filter(sec_code == xs[1]) |>
+    dplyr::filter(sys_code == xs[2]) |>
+    dplyr::filter(op_code == xs[3])
 
   rmin <- min(search$rowid)
   rmax <- max(search$rowid)
 
   pcs_2024 <- pins::board_url(
-    github_raw("andrewallenbruce/provider/main/pkgdown/assets/pins-board/")) |>
+    github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")) |>
     pins::pin_read("pcs_2024")
 
   pcs2 <- pcs_2024 |>
-    filter(between(rowid, rmin, rmax))
+    dplyr::filter(dplyr::between(rowid, rmin, rmax))
 
   tbl <- search |>
-    mutate(rowid = NULL) |>
-    distinct()
+    dplyr::mutate(rowid = NULL) |>
+    dplyr::distinct()
 
-  table <- tibble(
+  table <- dplyr::tibble(
     position = c(tbl$sec_pos, tbl$sys_pos, tbl$op_pos),
     title = c("Section", "Body System", "Root Operation"),
     code = c(tbl$sec_code, tbl$sys_code, tbl$op_code),
     label = c(tbl$sec_lbl, tbl$sys_lbl, tbl$op_lbl))
 
   b4 <- pcs2 |>
-    filter(code == xs[3], axis_pos == "4" & axis_code == xs[4]) |>
-    mutate(rowid = NULL) |>
-    distinct()
+    dplyr::filter(code == xs[3], axis_pos == "4" & axis_code == xs[4]) |>
+    dplyr::mutate(rowid = NULL) |>
+    dplyr::distinct()
 
-  body <- tibble(
+  body <- dplyr::tibble(
     position = b4$axis_pos,
     title = b4$axis_title,
     code = b4$axis_code,
     label = b4$axis_label)
 
   a5 <- pcs2 |>
-    filter(code == xs[3],
-           axis_pos == "5" &  axis_code == xs[5]) |>
-    mutate(rowid = NULL) |>
-    distinct()
+    dplyr::filter(code == xs[3], axis_pos == "5" &  axis_code == xs[5]) |>
+    dplyr::mutate(rowid = NULL) |>
+    dplyr::distinct()
 
-  approach <- tibble(
+  approach <- dplyr::tibble(
     position = a5$axis_pos,
     title = a5$axis_title,
     code = a5$axis_code,
     label = a5$axis_label)
 
   d6 <- pcs2 |>
-    filter(code == xs[3],
-           axis_pos == "6" &  axis_code == xs[6]) |>
-    mutate(rowid = NULL) |>
-    distinct()
+    dplyr::filter(code == xs[3], axis_pos == "6" &  axis_code == xs[6]) |>
+    dplyr::mutate(rowid = NULL) |>
+    dplyr::distinct()
 
-  device <- tibble(
+  device <- dplyr::tibble(
     position = d6$axis_pos,
     title = d6$axis_title,
     code = d6$axis_code,
     label = d6$axis_label)
 
   q7 <- pcs2 |>
-    filter(code == xs[3],
-           axis_pos == "7" &  axis_code == xs[7]) |>
-    mutate(rowid = NULL) |>
-    distinct()
+    dplyr::filter(code == xs[3], axis_pos == "7" &  axis_code == xs[7]) |>
+    dplyr::mutate(rowid = NULL) |>
+    dplyr::distinct()
 
-  qualifier <- tibble(
+  qualifier <- dplyr::tibble(
     position = q7$axis_pos,
     title = q7$axis_title,
     code = q7$axis_code,
     label = q7$axis_label)
 
-  cli::cli_blockquote("PCS Code: {.val {x}}")
+  # cli::cli_blockquote("PCS Code: {.val {x}}")
 
   vctrs::vec_rbind(
     table,
@@ -142,4 +141,30 @@ prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
   return(list(code = rlang::sym(x),
               split = sp,
               table = rlang::sym(tbl)))
+}
+
+#' @noRd
+sections <- function() {
+
+  dplyr::tibble(
+    code = c(as.character(0:9),
+             "B", "C", "D", "F", "G",
+             "H", "X"),
+    label = c("Medical and Surgical",
+              "Obstetrics",
+              "Placement",
+              "Administration",
+              "Measurement and Monitoring",
+              "Extracorporeal or Systemic Assistance and Performance",
+              "Extracorporeal or Systemic Therapies",
+              "Osteopathic",
+              "Other Procedures",
+              "Chiropractic",
+              "Imaging",
+              "Nuclear Medicine",
+              "Radiation Therapy",
+              "Physical Rehabilitation and Diagnostic Audiology",
+              "Mental Health",
+              "Substance Abuse Treatment",
+              "New Technology"))
 }
