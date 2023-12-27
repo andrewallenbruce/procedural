@@ -2,7 +2,7 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles: {}
-last_built: 2023-12-26T02:19Z
+last_built: 2023-12-27T23:21Z
 urls:
   reference: https://andrewallenbruce.github.io/procedural/reference
   article: https://andrewallenbruce.github.io/procedural/articles
