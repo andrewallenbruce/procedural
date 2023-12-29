@@ -12,104 +12,99 @@
 #' @export
 pcs <- function(x) {
 
+  # checks _______________________
+
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
+  xs <- splitter(x)
 
-  xs <- unlist(strsplit(x, ""), use.names = FALSE)
+  # boards _______________________
 
-  sec_sys_op <- pins::board_url(
-    github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")) |>
-    pins::pin_read("pcs_2024_tables")
+  board <- pins::board_url(github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/"))
+  tables <- pins::pin_read(board, "pcs_2024_tables")
+  pcs_2024 <- pins::pin_read(board, "pcs_2024")
 
-  search <- sec_sys_op |>
-    dplyr::filter(sec_code == xs[1]) |>
-    dplyr::filter(sys_code == xs[2]) |>
-    dplyr::filter(op_code == xs[3])
+  # search _______________________
 
-  rmin <- min(search$rowid)
-  rmax <- max(search$rowid)
+  tables <- vctrs::vec_slice(tables, tables$sec_code == xs[1])
+  tables <- vctrs::vec_slice(tables, tables$sys_code == xs[2])
+  tables <- vctrs::vec_slice(tables, tables$op_code == xs[3])
+  pcs_2024 <- vctrs::vec_slice(pcs_2024, pcs_2024$rowid >= min(tables$rowid) & pcs_2024$rowid <= max(tables$rowid))
 
-  pcs_2024 <- pins::board_url(
-    github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")) |>
-    pins::pin_read("pcs_2024")
+  # table _______________________
 
-  pcs2 <- pcs_2024 |>
-    dplyr::filter(dplyr::between(rowid, rmin, rmax))
+  tables$rowid <- NULL
 
-  tbl <- search |>
-    dplyr::mutate(rowid = NULL) |>
-    dplyr::distinct()
+  tables <- dplyr::distinct(tables)
 
-  table <- dplyr::tibble(
-    position = c(tbl$sec_pos, tbl$sys_pos, tbl$op_pos),
-    title = c("Section", "Body System", "Root Operation"),
-    code = c(tbl$sec_code, tbl$sys_code, tbl$op_code),
-    label = c(tbl$sec_lbl, tbl$sys_lbl, tbl$op_lbl))
+  tables <- dplyr::tibble(
+    axis = c(tables$sec_pos, tables$sys_pos, tables$op_pos),
+    name = unlist(axis(xs[1])[1:3, 2], use.names = FALSE),
+    code = c(tables$sec_code, tables$sys_code, tables$op_code),
+    label = c(tables$sec_lbl, tables$sys_lbl, tables$op_lbl))
 
-  b4 <- pcs2 |>
-    dplyr::filter(code == xs[3], axis_pos == "4" & axis_code == xs[4]) |>
-    dplyr::mutate(rowid = NULL) |>
-    dplyr::distinct()
+  # axis 4 _______________________
 
-  body <- dplyr::tibble(
-    position = b4$axis_pos,
-    title = b4$axis_title,
-    code = b4$axis_code,
-    label = b4$axis_label)
+  ax4 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
+  ax4 <- vctrs::vec_slice(ax4, ax4$axis_pos == "4")
+  ax4 <- vctrs::vec_slice(ax4, ax4$axis_code == xs[4])
+  ax4$rowid <- NULL
+  ax4 <- dplyr::distinct(ax4)
 
-  a5 <- pcs2 |>
-    dplyr::filter(code == xs[3], axis_pos == "5" &  axis_code == xs[5]) |>
-    dplyr::mutate(rowid = NULL) |>
-    dplyr::distinct()
+  ax4 <- dplyr::tibble(
+    axis = ax4$axis_pos,
+    name = ax4$axis_title,
+    code = ax4$axis_code,
+    label = ax4$axis_label)
 
-  approach <- dplyr::tibble(
-    position = a5$axis_pos,
-    title = a5$axis_title,
-    code = a5$axis_code,
-    label = a5$axis_label)
+  # axis 5 _______________________
 
-  d6 <- pcs2 |>
-    dplyr::filter(code == xs[3], axis_pos == "6" &  axis_code == xs[6]) |>
-    dplyr::mutate(rowid = NULL) |>
-    dplyr::distinct()
+  ax5 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
+  ax5 <- vctrs::vec_slice(ax5, ax5$axis_pos == "5")
+  ax5 <- vctrs::vec_slice(ax5, ax5$axis_code == xs[5])
+  ax5$rowid <- NULL
+  ax5 <- dplyr::distinct(ax5)
 
-  device <- dplyr::tibble(
-    position = d6$axis_pos,
-    title = d6$axis_title,
-    code = d6$axis_code,
-    label = d6$axis_label)
+  ax5 <- dplyr::tibble(
+    axis = ax5$axis_pos,
+    name = ax5$axis_title,
+    code = ax5$axis_code,
+    label = ax5$axis_label)
 
-  q7 <- pcs2 |>
-    dplyr::filter(code == xs[3], axis_pos == "7" &  axis_code == xs[7]) |>
-    dplyr::mutate(rowid = NULL) |>
-    dplyr::distinct()
+  # axis 6 _______________________
 
-  qualifier <- dplyr::tibble(
-    position = q7$axis_pos,
-    title = q7$axis_title,
-    code = q7$axis_code,
-    label = q7$axis_label)
+  ax6 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
+  ax6 <- vctrs::vec_slice(ax6, ax6$axis_pos == "6")
+  ax6 <- vctrs::vec_slice(ax6, ax6$axis_code == xs[6])
+  ax6$rowid <- NULL
+  ax6 <- dplyr::distinct(ax6)
 
-  # cli::cli_blockquote("PCS Code: {.val {x}}")
+  ax6 <- dplyr::tibble(
+    axis = ax6$axis_pos,
+    name = ax6$axis_title,
+    code = ax6$axis_code,
+    label = ax6$axis_label)
 
-  vctrs::vec_rbind(
-    table,
-    body,
-    approach,
-    device,
-    qualifier
-  )
+  # axis 7 _______________________
 
-  # list(
-  #   table = table,
-  #   body = body,
-  #   approach = approach,
-  #   device = device,
-  #   qualifier = qualifier
-  # )
+  ax7 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
+  ax7 <- vctrs::vec_slice(ax7, ax7$axis_pos == "7")
+  ax7 <- vctrs::vec_slice(ax7, ax7$axis_code == xs[7])
+  ax7$rowid <- NULL
+  ax7 <- dplyr::distinct(ax7)
+
+  ax7 <- dplyr::tibble(
+    axis = ax7$axis_pos,
+    name = ax7$axis_title,
+    code = ax7$axis_code,
+    label = ax7$axis_label)
+
+  vctrs::vec_rbind(tables, ax4, ax5, ax6, ax7)
 }
 
 #' @noRd
-prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
+prep <- function(x,
+                 arg = rlang::caller_arg(x),
+                 call = rlang::caller_env()) {
 
   if (!nzchar(x)) {cli::cli_abort("x" = "{.strong x} cannot be an {.emph empty} string.", call = call)}
 
@@ -126,45 +121,11 @@ prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
   # If any chars are lowercase, capitalize
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
-  sp <- unlist(strsplit(x, ""), use.names = FALSE)
+  xs <- splitter(x)
 
-  names(sp) <- c("section",
-                 "system",
-                 "operation",
-                 "part",
-                 "approach",
-                 "device",
-                 "qualifier")
+  tbl <- collapser(xs[1:3])
 
-  tbl <- paste0(unname(sp[1:3]), collapse = "")
-
-  return(list(code = rlang::sym(x),
+  return(list(code = x,
               split = sp,
-              table = rlang::sym(tbl)))
-}
-
-#' @noRd
-sections <- function() {
-
-  dplyr::tibble(
-    code = c(as.character(0:9),
-             "B", "C", "D", "F", "G",
-             "H", "X"),
-    label = c("Medical and Surgical",
-              "Obstetrics",
-              "Placement",
-              "Administration",
-              "Measurement and Monitoring",
-              "Extracorporeal or Systemic Assistance and Performance",
-              "Extracorporeal or Systemic Therapies",
-              "Osteopathic",
-              "Other Procedures",
-              "Chiropractic",
-              "Imaging",
-              "Nuclear Medicine",
-              "Radiation Therapy",
-              "Physical Rehabilitation and Diagnostic Audiology",
-              "Mental Health",
-              "Substance Abuse Treatment",
-              "New Technology"))
+              table = tbl))
 }

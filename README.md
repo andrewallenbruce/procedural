@@ -28,24 +28,56 @@ pak::pak("andrewallenbruce/procedural")
 library(procedural)
 ```
 
-<br>
+``` r
+section()
+```
+
+    #> # A tibble: 17 × 4
+    #>     axis name    code  label                                                
+    #>    <int> <chr>   <chr> <chr>                                                
+    #>  1     1 Section 0     Medical and Surgical                                 
+    #>  2     1 Section 1     Obstetrics                                           
+    #>  3     1 Section 2     Placement                                            
+    #>  4     1 Section 3     Administration                                       
+    #>  5     1 Section 4     Measurement and Monitoring                           
+    #>  6     1 Section 5     Extracorporeal or Systemic Assistance and Performance
+    #>  7     1 Section 6     Extracorporeal or Systemic Therapies                 
+    #>  8     1 Section 7     Osteopathic                                          
+    #>  9     1 Section 8     Other Procedures                                     
+    #> 10     1 Section 9     Chiropractic                                         
+    #> 11     1 Section B     Imaging                                              
+    #> 12     1 Section C     Nuclear Medicine                                     
+    #> 13     1 Section D     Radiation Therapy                                    
+    #> 14     1 Section F     Physical Rehabilitation and Diagnostic Audiology     
+    #> 15     1 Section G     Mental Health                                        
+    #> 16     1 Section H     Substance Abuse Treatment                            
+    #> 17     1 Section X     New Technology
 
 ## Medical and Surgical
+
+``` r
+section("0")
+```
+
+    #> # A tibble: 1 × 4
+    #>    axis name    code  label               
+    #>   <int> <chr>   <chr> <chr>               
+    #> 1     1 Section 0     Medical and Surgical
 
 ``` r
 pcs("0016070")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label                                    
-    #>   <chr>    <chr>          <chr> <chr>                                    
-    #> 1 1        Section        0     Medical and Surgical                     
-    #> 2 2        Body System    0     Central Nervous System and Cranial Nerves
-    #> 3 3        Root Operation 1     Bypass                                   
-    #> 4 4        Body Part      6     Cerebral Ventricle                       
-    #> 5 5        Approach       0     Open                                     
-    #> 6 6        Device         7     Autologous Tissue Substitute             
-    #> 7 7        Qualifier      0     Nasopharynx
+    #>   axis  name           code  label                                    
+    #>   <chr> <chr>          <chr> <chr>                                    
+    #> 1 1     Section        0     Medical and Surgical                     
+    #> 2 2     Body System    0     Central Nervous System and Cranial Nerves
+    #> 3 3     Root Operation 1     Bypass                                   
+    #> 4 4     Body Part      6     Cerebral Ventricle                       
+    #> 5 5     Approach       0     Open                                     
+    #> 6 6     Device         7     Autologous Tissue Substitute             
+    #> 7 7     Qualifier      0     Nasopharynx
 
 <br>
 
@@ -56,15 +88,15 @@ pcs("10D20ZZ")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label                          
-    #>   <chr>    <chr>          <chr> <chr>                          
-    #> 1 1        Section        1     Obstetrics                     
-    #> 2 2        Body System    0     Pregnancy                      
-    #> 3 3        Root Operation D     Extraction                     
-    #> 4 4        Body Part      2     Products of Conception, Ectopic
-    #> 5 5        Approach       0     Open                           
-    #> 6 6        Device         Z     No Device                      
-    #> 7 7        Qualifier      Z     No Qualifier
+    #>   axis  name           code  label                          
+    #>   <chr> <chr>          <chr> <chr>                          
+    #> 1 1     Section        1     Obstetrics                     
+    #> 2 2     Body System    0     Pregnancy                      
+    #> 3 3     Root Operation D     Extraction                     
+    #> 4 4     Body Part      2     Products of Conception, Ectopic
+    #> 5 5     Approach       0     Open                           
+    #> 6 6     Device         Z     No Device                      
+    #> 7 7     Qualifier      Z     No Qualifier
 
 <br>
 
@@ -75,15 +107,15 @@ pcs("2W0UX0Z")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label             
-    #>   <chr>    <chr>          <chr> <chr>             
-    #> 1 1        Section        2     Placement         
-    #> 2 2        Body System    W     Anatomical Regions
-    #> 3 3        Root Operation 0     Change            
-    #> 4 4        Body Region    U     Toe, Right        
-    #> 5 5        Approach       X     External          
-    #> 6 6        Device         0     Traction Apparatus
-    #> 7 7        Qualifier      Z     No Qualifier
+    #>   axis  name           code  label             
+    #>   <chr> <chr>          <chr> <chr>             
+    #> 1 1     Section        2     Placement         
+    #> 2 2     Body System    W     Anatomical Regions
+    #> 3 3     Root Operation 0     Change            
+    #> 4 4     Body Region    U     Toe, Right        
+    #> 5 5     Approach       X     External          
+    #> 6 6     Device         0     Traction Apparatus
+    #> 7 7     Qualifier      Z     No Qualifier
 
 <br>
 
@@ -94,15 +126,15 @@ pcs("3E1938X")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title                code  label                                     
-    #>   <chr>    <chr>                <chr> <chr>                                     
-    #> 1 1        Section              3     Administration                            
-    #> 2 2        Body System          E     Physiological Systems and Anatomical Regi…
-    #> 3 3        Root Operation       1     Irrigation                                
-    #> 4 4        Body System / Region 9     Nose                                      
-    #> 5 5        Approach             3     Percutaneous                              
-    #> 6 6        Substance            8     Irrigating Substance                      
-    #> 7 7        Qualifier            X     Diagnostic
+    #>   axis  name                 code  label                                       
+    #>   <chr> <chr>                <chr> <chr>                                       
+    #> 1 1     Section              3     Administration                              
+    #> 2 2     Body System          E     Physiological Systems and Anatomical Regions
+    #> 3 3     Root Operation       1     Irrigation                                  
+    #> 4 4     Body System / Region 9     Nose                                        
+    #> 5 5     Approach             3     Percutaneous                                
+    #> 6 6     Substance            8     Irrigating Substance                        
+    #> 7 7     Qualifier            X     Diagnostic
 
 <br>
 
@@ -113,15 +145,15 @@ pcs("4B01XVZ")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title             code  label                     
-    #>   <chr>    <chr>             <chr> <chr>                     
-    #> 1 1        Section           4     Measurement and Monitoring
-    #> 2 2        Body System       B     Physiological Devices     
-    #> 3 3        Root Operation    0     Measurement               
-    #> 4 4        Body System       1     Peripheral Nervous        
-    #> 5 5        Approach          X     External                  
-    #> 6 6        Function / Device V     Stimulator                
-    #> 7 7        Qualifier         Z     No Qualifier
+    #>   axis  name              code  label                     
+    #>   <chr> <chr>             <chr> <chr>                     
+    #> 1 1     Section           4     Measurement and Monitoring
+    #> 2 2     Body System       B     Physiological Devices     
+    #> 3 3     Root Operation    0     Measurement               
+    #> 4 4     Body System       1     Peripheral Nervous        
+    #> 5 5     Approach          X     External                  
+    #> 6 6     Function / Device V     Stimulator                
+    #> 7 7     Qualifier         Z     No Qualifier
 
 <br>
 
@@ -132,15 +164,15 @@ pcs("5A02110")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label                                           
-    #>   <chr>    <chr>          <chr> <chr>                                           
-    #> 1 1        Section        5     Extracorporeal or Systemic Assistance and Perfo…
-    #> 2 2        Body System    A     Physiological Systems                           
-    #> 3 3        Root Operation 0     Assistance                                      
-    #> 4 4        Body System    2     Cardiac                                         
-    #> 5 5        Duration       1     Intermittent                                    
-    #> 6 6        Function       1     Output                                          
-    #> 7 7        Qualifier      0     Balloon Pump
+    #>   axis  name           code  label                                              
+    #>   <chr> <chr>          <chr> <chr>                                              
+    #> 1 1     Section        5     Extracorporeal or Systemic Assistance and Performa…
+    #> 2 2     Body System    A     Physiological Systems                              
+    #> 3 3     Root Operation 0     Assistance                                         
+    #> 4 4     Body System    2     Cardiac                                            
+    #> 5 5     Duration       1     Intermittent                                       
+    #> 6 6     Function       1     Output                                             
+    #> 7 7     Qualifier      0     Balloon Pump
 
 <br>
 
@@ -151,15 +183,15 @@ pcs("6A0Z0ZZ")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label                               
-    #>   <chr>    <chr>          <chr> <chr>                               
-    #> 1 1        Section        6     Extracorporeal or Systemic Therapies
-    #> 2 2        Body System    A     Physiological Systems               
-    #> 3 3        Root Operation 0     Atmospheric Control                 
-    #> 4 4        Body System    Z     None                                
-    #> 5 5        Duration       0     Single                              
-    #> 6 6        Qualifier      Z     No Qualifier                        
-    #> 7 7        Qualifier      Z     No Qualifier
+    #>   axis  name           code  label                               
+    #>   <chr> <chr>          <chr> <chr>                               
+    #> 1 1     Section        6     Extracorporeal or Systemic Therapies
+    #> 2 2     Body System    A     Physiological Systems               
+    #> 3 3     Root Operation 0     Atmospheric Control                 
+    #> 4 4     Body System    Z     None                                
+    #> 5 5     Duration       0     Single                              
+    #> 6 6     Qualifier      Z     No Qualifier                        
+    #> 7 7     Qualifier      Z     No Qualifier
 
 <br>
 
@@ -170,15 +202,15 @@ pcs("7W00X0Z")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label               
-    #>   <chr>    <chr>          <chr> <chr>               
-    #> 1 1        Section        7     Osteopathic         
-    #> 2 2        Body System    W     Anatomical Regions  
-    #> 3 3        Root Operation 0     Treatment           
-    #> 4 4        Body Region    0     Head                
-    #> 5 5        Approach       X     External            
-    #> 6 6        Method         0     Articulatory-Raising
-    #> 7 7        Qualifier      Z     None
+    #>   axis  name           code  label               
+    #>   <chr> <chr>          <chr> <chr>               
+    #> 1 1     Section        7     Osteopathic         
+    #> 2 2     Body System    W     Anatomical Regions  
+    #> 3 3     Root Operation 0     Treatment           
+    #> 4 4     Body Region    0     Head                
+    #> 5 5     Approach       X     External            
+    #> 6 6     Method         0     Articulatory-Raising
+    #> 7 7     Qualifier      Z     None
 
 <br>
 
@@ -189,15 +221,15 @@ pcs("8C01X6J")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label              
-    #>   <chr>    <chr>          <chr> <chr>              
-    #> 1 1        Section        8     Other Procedures   
-    #> 2 2        Body System    C     Indwelling Device  
-    #> 3 3        Root Operation 0     Other Procedures   
-    #> 4 4        Body Region    1     Nervous System     
-    #> 5 5        Approach       X     External           
-    #> 6 6        Method         6     Collection         
-    #> 7 7        Qualifier      J     Cerebrospinal Fluid
+    #>   axis  name           code  label              
+    #>   <chr> <chr>          <chr> <chr>              
+    #> 1 1     Section        8     Other Procedures   
+    #> 2 2     Body System    C     Indwelling Device  
+    #> 3 3     Root Operation 0     Other Procedures   
+    #> 4 4     Body Region    1     Nervous System     
+    #> 5 5     Approach       X     External           
+    #> 6 6     Method         6     Collection         
+    #> 7 7     Qualifier      J     Cerebrospinal Fluid
 
 <br>
 
@@ -208,15 +240,15 @@ pcs("9WB0XBZ")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title          code  label             
-    #>   <chr>    <chr>          <chr> <chr>             
-    #> 1 1        Section        9     Chiropractic      
-    #> 2 2        Body System    W     Anatomical Regions
-    #> 3 3        Root Operation B     Manipulation      
-    #> 4 4        Body Region    0     Head              
-    #> 5 5        Approach       X     External          
-    #> 6 6        Method         B     Non-Manual        
-    #> 7 7        Qualifier      Z     None
+    #>   axis  name           code  label             
+    #>   <chr> <chr>          <chr> <chr>             
+    #> 1 1     Section        9     Chiropractic      
+    #> 2 2     Body System    W     Anatomical Regions
+    #> 3 3     Root Operation B     Manipulation      
+    #> 4 4     Body Region    0     Head              
+    #> 5 5     Approach       X     External          
+    #> 6 6     Method         B     Non-Manual        
+    #> 7 7     Qualifier      Z     None
 
 <br>
 
@@ -229,7 +261,7 @@ pcs("B00B0ZZ")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -243,7 +275,7 @@ pcs("C0101ZZ")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -257,7 +289,7 @@ pcs("DG22DZZ")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -271,7 +303,7 @@ pcs("F14Z01Z")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -285,7 +317,7 @@ pcs("GZ10ZZZ")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -299,7 +331,7 @@ pcs("HZ96ZZZ")
     #> Error in `dplyr::tibble()`:
     #> ! Tibble columns must have compatible sizes.
     #> • Size 0: Existing data.
-    #> • Size 3: Column `title`.
+    #> • Size 3: Column `name`.
     #> ℹ Only values of size one are recycled.
 
 <br>
@@ -311,15 +343,15 @@ pcs("XY0YX37")
 ```
 
     #> # A tibble: 7 × 4
-    #>   position title                           code  label                   
-    #>   <chr>    <chr>                           <chr> <chr>                   
-    #> 1 1        Section                         X     New Technology          
-    #> 2 2        Body System                     Y     Extracorporeal          
-    #> 3 3        Root Operation                  0     Introduction            
-    #> 4 4        Body Part                       Y     Extracorporeal          
-    #> 5 5        Approach                        X     External                
-    #> 6 6        Device / Substance / Technology 3     Nafamostat Anticoagulant
-    #> 7 7        Qualifier                       7     New Technology Group 7
+    #>   axis  name                            code  label                   
+    #>   <chr> <chr>                           <chr> <chr>                   
+    #> 1 1     Section                         X     New Technology          
+    #> 2 2     Body System                     Y     Extracorporeal          
+    #> 3 3     Root Operation                  0     Introduction            
+    #> 4 4     Body Part                       Y     Extracorporeal          
+    #> 5 5     Approach                        X     External                
+    #> 6 6     Device / Substance / Technology 3     Nafamostat Anticoagulant
+    #> 7 7     Qualifier                       7     New Technology Group 7
 
 <br>
 
@@ -331,6 +363,8 @@ Please note that the `provider` project is released with a [Contributor
 Code of
 Conduct](https://andrewallenbruce.github.io/procedural/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
+
+<br>
 
 ## :classical_building: Governance
 

@@ -18,4 +18,9 @@ Imports:
    cli,
    pins,
    rlang,
-   vctrs
+   vctrs,
+   zeallot
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

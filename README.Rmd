@@ -40,11 +40,17 @@ pak::pak("andrewallenbruce/procedural")
 library(procedural)
 ```
 
-<br>
+
+```{r}
+section()
+```
+
 
 ## Medical and Surgical
 
 ```{r}
+section("0")
+
 pcs("0016070")
 ```
 
@@ -184,6 +190,7 @@ pcs("XY0YX37")
 
 Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/procedural/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
+<br>
 
 ## :classical_building: Governance
 

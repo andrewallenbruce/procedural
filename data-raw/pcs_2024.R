@@ -89,6 +89,40 @@ pcs_tbl <- qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\ic
 
 # usethis::use_data(pcs_2024, overwrite = TRUE)
 # code to prepare dataset goes here
+library(icd10us)
+
+tables <- icd10pcs |>
+  dplyr::filter(valid_billing_code == 0) |>
+  dplyr::mutate(start = order_number,
+                end = dplyr::lead(start) - 1,
+                end = dplyr::case_when(start == max(start) ~ {
+                  dplyr::slice_tail(icd10pcs) |>
+                    dplyr::pull(order_number)},
+                  .default = end)) |>
+  dplyr::select(
+    rowid = order_number,
+    start,
+    end,
+    table = icd10pcs_code,
+    description = icd10pcs_long_description)
+
+pcs_by_table <- icd10pcs |>
+  dplyr::select(
+    rowid = order_number,
+    code = icd10pcs_code,
+    valid_billing_code,
+    label = icd10pcs_long_description) |>
+  dplyr::left_join(tables) |>
+  tidyr::fill(table, description, start, end) |>
+  dplyr::filter(valid_billing_code == 1) |>
+  dplyr::select(code,
+                label,
+                table,
+                description) |>
+  dplyr::mutate(medsurg = stringr::str_detect(table, "^0"),
+                description = dplyr::if_else(medsurg == TRUE,
+                  paste0("Medical and Surgical, ", description), description),
+                medsurg = NULL)
 
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
@@ -100,6 +134,11 @@ board |> pins::pin_write(pcs_tbl,
 board |> pins::pin_write(sec_sys_op,
                          name = "pcs_2024_tables",
                          description = "ICD-10-PCS 2024 Tables",
+                         type = "qs")
+
+board |> pins::pin_write(pcs_by_table,
+                         name = "pcs_by_table",
+                         description = "ICD-10-PCS 2024 Tables and Codes",
                          type = "qs")
 
 board |> pins::write_board_manifest()
