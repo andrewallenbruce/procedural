@@ -74,16 +74,22 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/procedural/">procedural</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">icd10us</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/procedural/">procedural</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Attaching package: 'procedural'</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; The following object is masked from 'package:base':</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     table</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">icd10us</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in library(icd10us): there is no package called 'icd10us'</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in library(tidyverse): there is no package called 'tidyverse'</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in library(gt): there is no package called 'gt'</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor" class="external-link">janitor</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in library(janitor): there is no package called 'janitor'</span></span></code></pre>
 <p>The <strong>ICD-10-PCS</strong>, or the <strong>International
@@ -115,8 +121,8 @@ information in that axis of classification.</p>
 <p>For example, The <strong>fifth</strong> axis of classification
 specifies the <em>Approach</em> in sections 0 through 4 and 7 through 9
 of the system.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">tibble</span><span class="op">(</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  axis <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Section'</span>,</span>
 <span>              <span class="st">'Body System'</span>,</span>
@@ -136,7 +142,7 @@ of the system.</p>
 <div class="section level2">
 <h2 id="section">Section<a class="anchor" aria-label="anchor" href="#section"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/section.html">section</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">opt_table_lines</span><span class="op">(</span>extent <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span> </span></code></pre></div>
@@ -145,7 +151,7 @@ of the system.</p>
 <div class="section level2">
 <h2 id="axis">Axis<a class="anchor" aria-label="anchor" href="#axis"></a>
 </h2>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/axis.html" class="external-link">axis</a></span><span class="op">(</span><span class="st">"0"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in axis("0"): plot.new has not been called yet</span></span></code></pre>
 </div>
