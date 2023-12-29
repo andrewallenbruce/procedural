@@ -19,7 +19,8 @@ pcs <- function(x) {
 
   # boards _______________________
 
-  board <- pins::board_url(github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/"))
+  url <- github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")
+  board <- pins::board_url(url)
   tables <- pins::pin_read(board, "pcs_2024_tables")
   pcs_2024 <- pins::pin_read(board, "pcs_2024")
 

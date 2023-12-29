@@ -38,20 +38,70 @@ pak::pak("andrewallenbruce/procedural")
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(procedural)
+library(dplyr)
+library(gt)
+```
+
+## Sections
+
+```{r}
+section()[c('code', 'label')] |> 
+  gt() |> 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
+  cols_align(align = "center", columns = code) |>
+  tab_style(style = list(cell_fill(color = "lightgray", alpha = 0.5), 
+                         cell_text(weight = "bold")), 
+            locations = cells_body(columns = code)) |> 
+  opt_all_caps() |> 
+  opt_align_table_header(align = "left") |>
+  tab_header(title = md("**ICD-10-PCS** Sections"))
 ```
 
 
+## Systems
+
 ```{r}
-section()
+system() |> 
+  gt()
+```
+
+<br>
+
+## Tables
+
+```{r}
+table("00X") |> tidyr::unnest(codes)
 ```
 
 
 ## Medical and Surgical
 
 ```{r}
-section("0")
+bypass <- definitions() |> 
+  dplyr::filter(code == "0", axis == "3", label == "Bypass") |> 
+  dplyr::select(label, definition, explanation, includes)
 
-pcs("0016070")
+code <- pcs("0016070")
+
+x <- dplyr::left_join(code, bypass, by = dplyr::join_by(label))
+```
+
+
+```{r}
+code |> 
+  gt(rowname_col = "axis") |> 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
+  cols_align(align = "center", columns = c(axis, code)) |>
+  tab_style(style = list(cell_fill(color = "lightgray", alpha = 0.5), 
+                         cell_text(weight = "bold")), 
+            locations = cells_body(columns = code)) |> 
+  opt_all_caps() |> 
+  opt_align_table_header(align = "left") |>
+  tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
+             subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
+                              <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
+                              <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
+  sub_missing(missing_text = "")
 ```
 
 <br>

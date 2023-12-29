@@ -3,4 +3,5 @@
 export(long)
 export(pcs)
 export(section)
+export(table)
 importFrom(zeallot,"%<-%")
