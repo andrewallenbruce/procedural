@@ -10,6 +10,12 @@
     <loc>https://andrewallenbruce.github.io/procedural/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/procedural/articles/getting-started.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/articles/index.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/procedural/authors.html</loc>
   </url>
   <url>
@@ -26,5 +32,11 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/pcs.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/procedural-package.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/section.html</loc>
   </url>
 </urlset>
