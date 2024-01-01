@@ -77,15 +77,17 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/procedural/">procedural</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
-<p>The <strong>ICD-10-PCS</strong>, or the <strong>International
+<p>The <strong>ICD-10-PCS</strong>, or <strong>International
 Classification of Diseases, 10th Revision, Procedure Coding
-System</strong>, is a procedure classification system developed by 3M
-Health Information Systems and adopted under HIPAA for classifying
-procedures performed in hospital inpatient health care settings.</p>
+System</strong>, is a procedure classification system developed by <a href="https://www.3m.com/3M/en_US/health-information-systems-us/" class="external-link">3M
+Health Information Systems</a> and adopted under <a href="https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act" class="external-link">HIPAA</a>
+for classifying procedures performed in hospital inpatient health care
+settings.</p>
+<p><br></p>
 <div class="section level2">
 <h2 id="coding-conventions">Coding Conventions<a class="anchor" aria-label="anchor" href="#coding-conventions"></a>
 </h2>
-<p>ICD-10-PCS codes are composed of <strong>seven</strong> alphanumeric
+<p>PCS codes are composed of <strong>seven</strong> alphanumeric
 characters. Each character contains up to <strong>34</strong> possible
 values. The seven characters that make up a complete code have specific
 meanings that vary for each of the <strong>17</strong> sections of the
@@ -93,9 +95,11 @@ manual.</p>
 <p>Each value represents a specific option for the general character
 definition. 10 digits (<code>0-9</code>) and 24 letters
 (<code>A-H</code>, <code>J-N</code>, and <code>P-Z</code>) may be used
-in each character. The letters <code>O</code> and <code>I</code> are not
-used so as to avoid confusion with the digits <code>0</code> and
-<code>1</code>.</p>
+in each character.</p>
+<blockquote>
+<p>The letters <code>O</code> and <code>I</code> are not used so as to
+avoid confusion with the digits <code>0</code> and <code>1</code>.</p>
+</blockquote>
 <div class="section level3">
 <h3 id="axes">Axes<a class="anchor" aria-label="anchor" href="#axes"></a>
 </h3>
@@ -106,38 +110,24 @@ information in that axis of classification.</p>
 <p>For example, The <strong>fifth</strong> axis of classification
 specifies the <em>Approach</em> in sections 0 through 4 and 7 through 9
 of the system.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>  axis <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">7</span>,</span>
-<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'Section'</span>,</span>
-<span>              <span class="st">'Body System'</span>,</span>
-<span>              <span class="st">'Root Operation'</span>,</span>
-<span>              <span class="st">'Body Part'</span>,</span>
-<span>              <span class="st">'Approach'</span>,</span>
-<span>              <span class="st">'Device'</span>,</span>
-<span>              <span class="st">'Qualifier'</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_lines.html" class="external-link">opt_table_lines</a></span><span class="op">(</span>extent <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="nstuafcrce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vtnilgstqg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#nstuafcrce table {
+#vtnilgstqg table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nstuafcrce thead, #nstuafcrce tbody, #nstuafcrce tfoot, #nstuafcrce tr, #nstuafcrce td, #nstuafcrce th {
+#vtnilgstqg thead, #vtnilgstqg tbody, #vtnilgstqg tfoot, #vtnilgstqg tr, #vtnilgstqg td, #vtnilgstqg th {
   border-style: none;
 }
 
-#nstuafcrce p {
+#vtnilgstqg p {
   margin: 0;
   padding: 0;
 }
 
-#nstuafcrce .gt_table {
+#vtnilgstqg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -163,12 +153,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_caption {
+#vtnilgstqg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nstuafcrce .gt_title {
+#vtnilgstqg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -180,7 +170,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#nstuafcrce .gt_subtitle {
+#vtnilgstqg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -192,7 +182,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#nstuafcrce .gt_heading {
+#vtnilgstqg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -204,13 +194,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_bottom_border {
+#vtnilgstqg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_col_headings {
+#vtnilgstqg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -225,7 +215,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_col_heading {
+#vtnilgstqg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -245,7 +235,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#nstuafcrce .gt_column_spanner_outer {
+#vtnilgstqg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -257,15 +247,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#nstuafcrce .gt_column_spanner_outer:first-child {
+#vtnilgstqg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nstuafcrce .gt_column_spanner_outer:last-child {
+#vtnilgstqg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nstuafcrce .gt_column_spanner {
+#vtnilgstqg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -277,11 +267,11 @@ of the system.</p>
   width: 100%;
 }
 
-#nstuafcrce .gt_spanner_row {
+#vtnilgstqg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nstuafcrce .gt_group_heading {
+#vtnilgstqg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -307,7 +297,7 @@ of the system.</p>
   text-align: left;
 }
 
-#nstuafcrce .gt_empty_group_heading {
+#vtnilgstqg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -322,15 +312,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#nstuafcrce .gt_from_md > :first-child {
+#vtnilgstqg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nstuafcrce .gt_from_md > :last-child {
+#vtnilgstqg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nstuafcrce .gt_row {
+#vtnilgstqg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -349,7 +339,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#nstuafcrce .gt_stub {
+#vtnilgstqg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -362,7 +352,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#nstuafcrce .gt_stub_row_group {
+#vtnilgstqg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -376,15 +366,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#nstuafcrce .gt_row_group_first td {
+#vtnilgstqg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nstuafcrce .gt_row_group_first th {
+#vtnilgstqg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nstuafcrce .gt_summary_row {
+#vtnilgstqg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -394,16 +384,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#nstuafcrce .gt_first_summary_row {
+#vtnilgstqg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_first_summary_row.thick {
+#vtnilgstqg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nstuafcrce .gt_last_summary_row {
+#vtnilgstqg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -413,7 +403,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_grand_summary_row {
+#vtnilgstqg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -423,7 +413,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#nstuafcrce .gt_first_grand_summary_row {
+#vtnilgstqg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -433,7 +423,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_last_grand_summary_row_top {
+#vtnilgstqg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -443,11 +433,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_striped {
+#vtnilgstqg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nstuafcrce .gt_table_body {
+#vtnilgstqg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -456,7 +446,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_footnotes {
+#vtnilgstqg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -470,7 +460,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_footnote {
+#vtnilgstqg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -479,7 +469,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#nstuafcrce .gt_sourcenotes {
+#vtnilgstqg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -493,7 +483,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#nstuafcrce .gt_sourcenote {
+#vtnilgstqg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -501,63 +491,63 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#nstuafcrce .gt_left {
+#vtnilgstqg .gt_left {
   text-align: left;
 }
 
-#nstuafcrce .gt_center {
+#vtnilgstqg .gt_center {
   text-align: center;
 }
 
-#nstuafcrce .gt_right {
+#vtnilgstqg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nstuafcrce .gt_font_normal {
+#vtnilgstqg .gt_font_normal {
   font-weight: normal;
 }
 
-#nstuafcrce .gt_font_bold {
+#vtnilgstqg .gt_font_bold {
   font-weight: bold;
 }
 
-#nstuafcrce .gt_font_italic {
+#vtnilgstqg .gt_font_italic {
   font-style: italic;
 }
 
-#nstuafcrce .gt_super {
+#vtnilgstqg .gt_super {
   font-size: 65%;
 }
 
-#nstuafcrce .gt_footnote_marks {
+#vtnilgstqg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nstuafcrce .gt_asterisk {
+#vtnilgstqg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nstuafcrce .gt_indent_1 {
+#vtnilgstqg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nstuafcrce .gt_indent_2 {
+#vtnilgstqg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nstuafcrce .gt_indent_3 {
+#vtnilgstqg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nstuafcrce .gt_indent_4 {
+#vtnilgstqg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nstuafcrce .gt_indent_5 {
+#vtnilgstqg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -598,39 +588,24 @@ of the system.</p>
 </tbody>
 </table>
 </div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>  AXIS <span class="op">=</span> <span class="st">"NAME"</span>,</span>
-<span>  `1` <span class="op">=</span> <span class="st">"Section"</span>,</span>
-<span>  `2` <span class="op">=</span> <span class="st">"Body System"</span>,</span>
-<span>  `3` <span class="op">=</span> <span class="st">"Root Operation"</span>,</span>
-<span>  `4` <span class="op">=</span> <span class="st">"Body Part"</span>,</span>
-<span>  `5` <span class="op">=</span> <span class="st">"Approach"</span>,</span>
-<span>  `6` <span class="op">=</span> <span class="st">"Device"</span>,</span>
-<span>  `7` <span class="op">=</span> <span class="st">"Qualifier"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">'center'</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_lines.html" class="external-link">opt_table_lines</a></span><span class="op">(</span>extent <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="obklnluxmr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oqvkglxkeb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#obklnluxmr table {
+#oqvkglxkeb table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#obklnluxmr thead, #obklnluxmr tbody, #obklnluxmr tfoot, #obklnluxmr tr, #obklnluxmr td, #obklnluxmr th {
+#oqvkglxkeb thead, #oqvkglxkeb tbody, #oqvkglxkeb tfoot, #oqvkglxkeb tr, #oqvkglxkeb td, #oqvkglxkeb th {
   border-style: none;
 }
 
-#obklnluxmr p {
+#oqvkglxkeb p {
   margin: 0;
   padding: 0;
 }
 
-#obklnluxmr .gt_table {
+#oqvkglxkeb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -656,12 +631,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_caption {
+#oqvkglxkeb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#obklnluxmr .gt_title {
+#oqvkglxkeb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -673,7 +648,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#obklnluxmr .gt_subtitle {
+#oqvkglxkeb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -685,7 +660,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#obklnluxmr .gt_heading {
+#oqvkglxkeb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -697,13 +672,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_bottom_border {
+#oqvkglxkeb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_col_headings {
+#oqvkglxkeb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -718,7 +693,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_col_heading {
+#oqvkglxkeb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -738,7 +713,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#obklnluxmr .gt_column_spanner_outer {
+#oqvkglxkeb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -750,15 +725,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#obklnluxmr .gt_column_spanner_outer:first-child {
+#oqvkglxkeb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#obklnluxmr .gt_column_spanner_outer:last-child {
+#oqvkglxkeb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#obklnluxmr .gt_column_spanner {
+#oqvkglxkeb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -770,11 +745,11 @@ of the system.</p>
   width: 100%;
 }
 
-#obklnluxmr .gt_spanner_row {
+#oqvkglxkeb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#obklnluxmr .gt_group_heading {
+#oqvkglxkeb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -800,7 +775,7 @@ of the system.</p>
   text-align: left;
 }
 
-#obklnluxmr .gt_empty_group_heading {
+#oqvkglxkeb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -815,15 +790,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#obklnluxmr .gt_from_md > :first-child {
+#oqvkglxkeb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#obklnluxmr .gt_from_md > :last-child {
+#oqvkglxkeb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#obklnluxmr .gt_row {
+#oqvkglxkeb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -842,7 +817,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#obklnluxmr .gt_stub {
+#oqvkglxkeb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -855,7 +830,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#obklnluxmr .gt_stub_row_group {
+#oqvkglxkeb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -869,15 +844,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#obklnluxmr .gt_row_group_first td {
+#oqvkglxkeb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#obklnluxmr .gt_row_group_first th {
+#oqvkglxkeb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#obklnluxmr .gt_summary_row {
+#oqvkglxkeb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -887,16 +862,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#obklnluxmr .gt_first_summary_row {
+#oqvkglxkeb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_first_summary_row.thick {
+#oqvkglxkeb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#obklnluxmr .gt_last_summary_row {
+#oqvkglxkeb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -906,7 +881,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_grand_summary_row {
+#oqvkglxkeb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -916,7 +891,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#obklnluxmr .gt_first_grand_summary_row {
+#oqvkglxkeb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -926,7 +901,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_last_grand_summary_row_top {
+#oqvkglxkeb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -936,11 +911,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_striped {
+#oqvkglxkeb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#obklnluxmr .gt_table_body {
+#oqvkglxkeb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -949,7 +924,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_footnotes {
+#oqvkglxkeb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -963,7 +938,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_footnote {
+#oqvkglxkeb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -972,7 +947,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#obklnluxmr .gt_sourcenotes {
+#oqvkglxkeb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -986,7 +961,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#obklnluxmr .gt_sourcenote {
+#oqvkglxkeb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -994,63 +969,63 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#obklnluxmr .gt_left {
+#oqvkglxkeb .gt_left {
   text-align: left;
 }
 
-#obklnluxmr .gt_center {
+#oqvkglxkeb .gt_center {
   text-align: center;
 }
 
-#obklnluxmr .gt_right {
+#oqvkglxkeb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#obklnluxmr .gt_font_normal {
+#oqvkglxkeb .gt_font_normal {
   font-weight: normal;
 }
 
-#obklnluxmr .gt_font_bold {
+#oqvkglxkeb .gt_font_bold {
   font-weight: bold;
 }
 
-#obklnluxmr .gt_font_italic {
+#oqvkglxkeb .gt_font_italic {
   font-style: italic;
 }
 
-#obklnluxmr .gt_super {
+#oqvkglxkeb .gt_super {
   font-size: 65%;
 }
 
-#obklnluxmr .gt_footnote_marks {
+#oqvkglxkeb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#obklnluxmr .gt_asterisk {
+#oqvkglxkeb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#obklnluxmr .gt_indent_1 {
+#oqvkglxkeb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#obklnluxmr .gt_indent_2 {
+#oqvkglxkeb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#obklnluxmr .gt_indent_3 {
+#oqvkglxkeb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#obklnluxmr .gt_indent_4 {
+#oqvkglxkeb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#obklnluxmr .gt_indent_5 {
+#oqvkglxkeb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1066,7 +1041,7 @@ of the system.</p>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="7">7</th>
     </tr></thead>
 <tbody class="gt_table_body"><tr>
-<td headers="AXIS" class="gt_row gt_center">NAME</td>
+<td headers="AXIS" class="gt_row gt_center">Name</td>
 <td headers="1" class="gt_row gt_center">Section</td>
 <td headers="2" class="gt_row gt_center">Body System</td>
 <td headers="3" class="gt_row gt_center">Root Operation</td>
@@ -1082,7 +1057,7 @@ of the system.</p>
 <div class="section level2">
 <h2 id="sections">Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 4</span></span></span>
 <span><span class="co">#&gt;     axis name    code  label                                                </span></span>
@@ -1104,35 +1079,24 @@ of the system.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>     1 Section G     Mental Health                                        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>     1 Section H     Substance Abuse Treatment                            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>     1 Section X     New Technology</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'code'</span>, <span class="st">'label'</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
-<span>                         <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>            locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_align_table_header.html" class="external-link">opt_align_table_header</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**ICD-10-PCS** Sections"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="zieuvlzihp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xdqqjfkbaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#zieuvlzihp table {
+#xdqqjfkbaw table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zieuvlzihp thead, #zieuvlzihp tbody, #zieuvlzihp tfoot, #zieuvlzihp tr, #zieuvlzihp td, #zieuvlzihp th {
+#xdqqjfkbaw thead, #xdqqjfkbaw tbody, #xdqqjfkbaw tfoot, #xdqqjfkbaw tr, #xdqqjfkbaw td, #xdqqjfkbaw th {
   border-style: none;
 }
 
-#zieuvlzihp p {
+#xdqqjfkbaw p {
   margin: 0;
   padding: 0;
 }
 
-#zieuvlzihp .gt_table {
+#xdqqjfkbaw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1158,12 +1122,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_caption {
+#xdqqjfkbaw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zieuvlzihp .gt_title {
+#xdqqjfkbaw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1175,7 +1139,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#zieuvlzihp .gt_subtitle {
+#xdqqjfkbaw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1187,7 +1151,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#zieuvlzihp .gt_heading {
+#xdqqjfkbaw .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1199,13 +1163,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_bottom_border {
+#xdqqjfkbaw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_col_headings {
+#xdqqjfkbaw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1220,7 +1184,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_col_heading {
+#xdqqjfkbaw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1240,7 +1204,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#zieuvlzihp .gt_column_spanner_outer {
+#xdqqjfkbaw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1252,15 +1216,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#zieuvlzihp .gt_column_spanner_outer:first-child {
+#xdqqjfkbaw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zieuvlzihp .gt_column_spanner_outer:last-child {
+#xdqqjfkbaw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zieuvlzihp .gt_column_spanner {
+#xdqqjfkbaw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1272,11 +1236,11 @@ of the system.</p>
   width: 100%;
 }
 
-#zieuvlzihp .gt_spanner_row {
+#xdqqjfkbaw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zieuvlzihp .gt_group_heading {
+#xdqqjfkbaw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1302,7 +1266,7 @@ of the system.</p>
   text-align: left;
 }
 
-#zieuvlzihp .gt_empty_group_heading {
+#xdqqjfkbaw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1317,15 +1281,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#zieuvlzihp .gt_from_md > :first-child {
+#xdqqjfkbaw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zieuvlzihp .gt_from_md > :last-child {
+#xdqqjfkbaw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zieuvlzihp .gt_row {
+#xdqqjfkbaw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1344,7 +1308,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#zieuvlzihp .gt_stub {
+#xdqqjfkbaw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1357,7 +1321,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#zieuvlzihp .gt_stub_row_group {
+#xdqqjfkbaw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1371,15 +1335,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#zieuvlzihp .gt_row_group_first td {
+#xdqqjfkbaw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zieuvlzihp .gt_row_group_first th {
+#xdqqjfkbaw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zieuvlzihp .gt_summary_row {
+#xdqqjfkbaw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1389,16 +1353,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#zieuvlzihp .gt_first_summary_row {
+#xdqqjfkbaw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_first_summary_row.thick {
+#xdqqjfkbaw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zieuvlzihp .gt_last_summary_row {
+#xdqqjfkbaw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1408,7 +1372,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_grand_summary_row {
+#xdqqjfkbaw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1418,7 +1382,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#zieuvlzihp .gt_first_grand_summary_row {
+#xdqqjfkbaw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1428,7 +1392,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_last_grand_summary_row_top {
+#xdqqjfkbaw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1438,11 +1402,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_striped {
+#xdqqjfkbaw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zieuvlzihp .gt_table_body {
+#xdqqjfkbaw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1451,7 +1415,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_footnotes {
+#xdqqjfkbaw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1465,7 +1429,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_footnote {
+#xdqqjfkbaw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1474,7 +1438,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#zieuvlzihp .gt_sourcenotes {
+#xdqqjfkbaw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1488,7 +1452,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#zieuvlzihp .gt_sourcenote {
+#xdqqjfkbaw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1496,145 +1460,163 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#zieuvlzihp .gt_left {
+#xdqqjfkbaw .gt_left {
   text-align: left;
 }
 
-#zieuvlzihp .gt_center {
+#xdqqjfkbaw .gt_center {
   text-align: center;
 }
 
-#zieuvlzihp .gt_right {
+#xdqqjfkbaw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zieuvlzihp .gt_font_normal {
+#xdqqjfkbaw .gt_font_normal {
   font-weight: normal;
 }
 
-#zieuvlzihp .gt_font_bold {
+#xdqqjfkbaw .gt_font_bold {
   font-weight: bold;
 }
 
-#zieuvlzihp .gt_font_italic {
+#xdqqjfkbaw .gt_font_italic {
   font-style: italic;
 }
 
-#zieuvlzihp .gt_super {
+#xdqqjfkbaw .gt_super {
   font-size: 65%;
 }
 
-#zieuvlzihp .gt_footnote_marks {
+#xdqqjfkbaw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zieuvlzihp .gt_asterisk {
+#xdqqjfkbaw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zieuvlzihp .gt_indent_1 {
+#xdqqjfkbaw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zieuvlzihp .gt_indent_2 {
+#xdqqjfkbaw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zieuvlzihp .gt_indent_3 {
+#xdqqjfkbaw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zieuvlzihp .gt_indent_4 {
+#xdqqjfkbaw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zieuvlzihp .gt_indent_5 {
+#xdqqjfkbaw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
 <strong>ICD-10-PCS</strong> Sections</td>
     </tr>
 <tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="code">code</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="code">code</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label">label</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="label" class="gt_row gt_left">Medical and Surgical</td>
+<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub">1</th>
+<td headers="stub_1_1 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
+<td headers="stub_1_1 label" class="gt_row gt_left">Medical and Surgical</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">1</td>
-<td headers="label" class="gt_row gt_left">Obstetrics</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub">2</th>
+<td headers="stub_1_2 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">1</td>
+<td headers="stub_1_2 label" class="gt_row gt_left">Obstetrics</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">2</td>
-<td headers="label" class="gt_row gt_left">Placement</td>
+<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub">3</th>
+<td headers="stub_1_3 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">2</td>
+<td headers="stub_1_3 label" class="gt_row gt_left">Placement</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">3</td>
-<td headers="label" class="gt_row gt_left">Administration</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub">4</th>
+<td headers="stub_1_4 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">3</td>
+<td headers="stub_1_4 label" class="gt_row gt_left">Administration</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">4</td>
-<td headers="label" class="gt_row gt_left">Measurement and Monitoring</td>
+<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub">5</th>
+<td headers="stub_1_5 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">4</td>
+<td headers="stub_1_5 label" class="gt_row gt_left">Measurement and Monitoring</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">5</td>
-<td headers="label" class="gt_row gt_left">Extracorporeal or Systemic Assistance and Performance</td>
+<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub">6</th>
+<td headers="stub_1_6 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">5</td>
+<td headers="stub_1_6 label" class="gt_row gt_left">Extracorporeal or Systemic Assistance and Performance</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">6</td>
-<td headers="label" class="gt_row gt_left">Extracorporeal or Systemic Therapies</td>
+<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub">7</th>
+<td headers="stub_1_7 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">6</td>
+<td headers="stub_1_7 label" class="gt_row gt_left">Extracorporeal or Systemic Therapies</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">7</td>
-<td headers="label" class="gt_row gt_left">Osteopathic</td>
+<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub">8</th>
+<td headers="stub_1_8 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">7</td>
+<td headers="stub_1_8 label" class="gt_row gt_left">Osteopathic</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">8</td>
-<td headers="label" class="gt_row gt_left">Other Procedures</td>
+<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub">9</th>
+<td headers="stub_1_9 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">8</td>
+<td headers="stub_1_9 label" class="gt_row gt_left">Other Procedures</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">9</td>
-<td headers="label" class="gt_row gt_left">Chiropractic</td>
+<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub">10</th>
+<td headers="stub_1_10 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">9</td>
+<td headers="stub_1_10 label" class="gt_row gt_left">Chiropractic</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">B</td>
-<td headers="label" class="gt_row gt_left">Imaging</td>
+<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub">11</th>
+<td headers="stub_1_11 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">B</td>
+<td headers="stub_1_11 label" class="gt_row gt_left">Imaging</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">C</td>
-<td headers="label" class="gt_row gt_left">Nuclear Medicine</td>
+<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub">12</th>
+<td headers="stub_1_12 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">C</td>
+<td headers="stub_1_12 label" class="gt_row gt_left">Nuclear Medicine</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">D</td>
-<td headers="label" class="gt_row gt_left">Radiation Therapy</td>
+<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub">13</th>
+<td headers="stub_1_13 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">D</td>
+<td headers="stub_1_13 label" class="gt_row gt_left">Radiation Therapy</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">F</td>
-<td headers="label" class="gt_row gt_left">Physical Rehabilitation and Diagnostic Audiology</td>
+<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub">14</th>
+<td headers="stub_1_14 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">F</td>
+<td headers="stub_1_14 label" class="gt_row gt_left">Physical Rehabilitation and Diagnostic Audiology</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">G</td>
-<td headers="label" class="gt_row gt_left">Mental Health</td>
+<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub">15</th>
+<td headers="stub_1_15 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">G</td>
+<td headers="stub_1_15 label" class="gt_row gt_left">Mental Health</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">H</td>
-<td headers="label" class="gt_row gt_left">Substance Abuse Treatment</td>
+<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub">16</th>
+<td headers="stub_1_16 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">H</td>
+<td headers="stub_1_16 label" class="gt_row gt_left">Substance Abuse Treatment</td>
 </tr>
 <tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">X</td>
-<td headers="label" class="gt_row gt_left">New Technology</td>
+<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub">17</th>
+<td headers="stub_1_17 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">X</td>
+<td headers="stub_1_17 label" class="gt_row gt_left">New Technology</td>
 </tr>
 </tbody>
 </table>
@@ -1643,7 +1625,7 @@ of the system.</p>
 <div class="section level2">
 <h2 id="systems">Systems<a class="anchor" aria-label="anchor" href="#systems"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/systems.html">systems</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 114 × 4</span></span></span>
 <span><span class="co">#&gt;     axis name        code  label                                    </span></span>
@@ -1659,36 +1641,93 @@ of the system.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     2 Body System 08    Eye                                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     2 Body System 09    Ear, Nose, Sinus                         </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 104 more rows</span></span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/systems.html">systems</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>sys.axis <span class="op">=</span> <span class="va">name</span>,</span>
+<span>         sys.code <span class="op">=</span> <span class="va">code</span>, </span>
+<span>         sys.label <span class="op">=</span> <span class="va">label</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>code <span class="op">=</span> <span class="fu">splitter</span><span class="op">(</span><span class="va">sys.code</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="va">name</span>, </span>
+<span>         <span class="va">code</span>, </span>
+<span>         <span class="va">label</span>, </span>
+<span>         <span class="va">sys.axis</span>, </span>
+<span>         <span class="va">sys.code</span>, </span>
+<span>         <span class="va">sys.label</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `mutate()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `code = splitter(sys.code)[1]`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In row 1.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `splitter()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "splitter"</span></span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">joined</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'joined' not found</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">joined</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>section <span class="op">=</span> <span class="va">label</span>, </span>
+<span>         code <span class="op">=</span> <span class="va">sys.code</span>, </span>
+<span>         system <span class="op">=</span> <span class="va">sys.label</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"section"</span>, </span>
+<span>     rowname_col <span class="op">=</span> <span class="st">"system"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>code <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>, </span>
+<span>                                   alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
+<span>                         <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>            locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span>locations <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row_group"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_align_table_header.html" class="external-link">opt_align_table_header</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;b&gt;ICD-10-PCS&lt;/b&gt; 2024"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
+<span>    heading.title.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">22</span><span class="op">)</span>,</span>
+<span>    table.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
+<span>    column_labels.border.bottom.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>    column_labels.border.top.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>    row_group.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,</span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'joined' not found</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span> <span class="op">&lt;-</span> <span class="fu">prep</span><span class="op">(</span><span class="st">"001"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in prep("001"): could not find function "prep"</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'prp' not found</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span><span class="op">$</span><span class="va">section</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="va">prp</span><span class="op">$</span><span class="va">section</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'code'</span>, <span class="st">'label'</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'prp' not found</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span><span class="op">$</span><span class="va">system</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/systems.html">systems</a></span><span class="op">(</span><span class="va">prp</span><span class="op">$</span><span class="va">system</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'code'</span>, <span class="st">'label'</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'prp' not found</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span><span class="op">$</span><span class="va">table</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/tables.html">tables</a></span><span class="op">(</span><span class="va">prp</span><span class="op">$</span><span class="va">table</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'table'</span>, <span class="st">'description'</span>, <span class="st">'codes'</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'prp' not found</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prp</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'prp' not found</span></span></code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># BR Imaging, Axial Skeleton, Except Skull and Facial Bones</span></span>
 <span><span class="co"># C9 Nuclear Medicine Ear, Nose, Mouth and Throat</span></span>
 <span><span class="co"># D9 Radiation Therapy Ear, Nose, Mouth and Throat</span></span>
 <span><span class="co"># G Mental Health</span></span>
 <span><span class="co"># H Substance Abuse Treatment</span></span>
-<span><span class="fu"><a href="../reference/tables.html">tables</a></span><span class="op">(</span><span class="st">"gz"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">codes</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 30 × 6</span></span></span>
-<span><span class="co">#&gt;    section system table description                             code    label   </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> G       GZ     GZ1   Mental Health, Psychological Tests      GZ10ZZZ Psychol…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> G       GZ     GZ1   Mental Health, Psychological Tests      GZ11ZZZ Psychol…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> G       GZ     GZ1   Mental Health, Psychological Tests      GZ12ZZZ Psychol…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> G       GZ     GZ1   Mental Health, Psychological Tests      GZ13ZZZ Psychol…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> G       GZ     GZ1   Mental Health, Psychological Tests      GZ14ZZZ Psychol…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> G       GZ     GZ2   Mental Health, Crisis Intervention      GZ2ZZZZ Crisis …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> G       GZ     GZ3   Mental Health, Medication Management    GZ3ZZZZ Medicat…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> G       GZ     GZ5   Mental Health, Individual Psychotherapy GZ50ZZZ Individ…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> G       GZ     GZ5   Mental Health, Individual Psychotherapy GZ51ZZZ Individ…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> G       GZ     GZ5   Mental Health, Individual Psychotherapy GZ52ZZZ Individ…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more rows</span></span></span></code></pre>
+<span></span>
+<span><span class="fu"><a href="../reference/tables.html">tables</a></span><span class="op">(</span><span class="st">"dg2"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span></span>
+<span><span class="co">#&gt;   section system table description                                    codes     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> D       DG     DG2   Radiation Therapy, Endocrine System, Stereota… <span style="color: #949494;">&lt;spc_tbl_&gt;</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="definitions">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>            .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">section</span>, <span class="va">axis</span>, <span class="va">axis_name</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -1706,7 +1745,7 @@ of the system.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 3     Administration       5     Approach      6</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 3     Administration       6     Substance    35</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span></span>
 <span>    <span class="va">code</span> <span class="op">==</span> <span class="st">"0"</span> </span>
@@ -1720,7 +1759,7 @@ of the system.</p>
 <div class="section level3">
 <h3 id="medical-and-surgical">Medical and Surgical<a class="anchor" aria-label="anchor" href="#medical-and-surgical"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1734,26 +1773,25 @@ of the system.</p>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;b&gt;ICD-10-PCS&lt;/b&gt; 2024&lt;hr&gt;"</span><span class="op">)</span>,</span>
 <span>             subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;small&gt;SECTION:&lt;/small&gt; &lt;b&gt;0&lt;/b&gt; Medical and Surgical&lt;br&gt;</span></span>
 <span><span class="st">                              &lt;small&gt;SYSTEM:&lt;/small&gt; &lt;b&gt;0&lt;/b&gt; Central Nervous System and Cranial Nerves&lt;br&gt;</span></span>
-<span><span class="st">                              &lt;small&gt;OPERATION:&lt;/small&gt; &lt;b&gt;1&lt;/b&gt; Bypass&lt;br&gt;&lt;br&gt;"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/sub_missing.html" class="external-link">sub_missing</a></span><span class="op">(</span>missing_text <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
-<div id="klzbggnsnw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span><span class="st">                              &lt;small&gt;OPERATION:&lt;/small&gt; &lt;b&gt;1&lt;/b&gt; Bypass&lt;br&gt;&lt;br&gt;"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="cxewxbmohi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#klzbggnsnw table {
+#cxewxbmohi table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#klzbggnsnw thead, #klzbggnsnw tbody, #klzbggnsnw tfoot, #klzbggnsnw tr, #klzbggnsnw td, #klzbggnsnw th {
+#cxewxbmohi thead, #cxewxbmohi tbody, #cxewxbmohi tfoot, #cxewxbmohi tr, #cxewxbmohi td, #cxewxbmohi th {
   border-style: none;
 }
 
-#klzbggnsnw p {
+#cxewxbmohi p {
   margin: 0;
   padding: 0;
 }
 
-#klzbggnsnw .gt_table {
+#cxewxbmohi .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1779,12 +1817,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_caption {
+#cxewxbmohi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#klzbggnsnw .gt_title {
+#cxewxbmohi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1796,7 +1834,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#klzbggnsnw .gt_subtitle {
+#cxewxbmohi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1808,7 +1846,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#klzbggnsnw .gt_heading {
+#cxewxbmohi .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1820,13 +1858,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_bottom_border {
+#cxewxbmohi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_col_headings {
+#cxewxbmohi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1841,7 +1879,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_col_heading {
+#cxewxbmohi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1861,7 +1899,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#klzbggnsnw .gt_column_spanner_outer {
+#cxewxbmohi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1873,15 +1911,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#klzbggnsnw .gt_column_spanner_outer:first-child {
+#cxewxbmohi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#klzbggnsnw .gt_column_spanner_outer:last-child {
+#cxewxbmohi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#klzbggnsnw .gt_column_spanner {
+#cxewxbmohi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1893,11 +1931,11 @@ of the system.</p>
   width: 100%;
 }
 
-#klzbggnsnw .gt_spanner_row {
+#cxewxbmohi .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#klzbggnsnw .gt_group_heading {
+#cxewxbmohi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1923,7 +1961,7 @@ of the system.</p>
   text-align: left;
 }
 
-#klzbggnsnw .gt_empty_group_heading {
+#cxewxbmohi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1938,15 +1976,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#klzbggnsnw .gt_from_md > :first-child {
+#cxewxbmohi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#klzbggnsnw .gt_from_md > :last-child {
+#cxewxbmohi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#klzbggnsnw .gt_row {
+#cxewxbmohi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1965,7 +2003,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#klzbggnsnw .gt_stub {
+#cxewxbmohi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1978,7 +2016,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#klzbggnsnw .gt_stub_row_group {
+#cxewxbmohi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1992,15 +2030,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#klzbggnsnw .gt_row_group_first td {
+#cxewxbmohi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#klzbggnsnw .gt_row_group_first th {
+#cxewxbmohi .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#klzbggnsnw .gt_summary_row {
+#cxewxbmohi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2010,16 +2048,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#klzbggnsnw .gt_first_summary_row {
+#cxewxbmohi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_first_summary_row.thick {
+#cxewxbmohi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#klzbggnsnw .gt_last_summary_row {
+#cxewxbmohi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2029,7 +2067,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_grand_summary_row {
+#cxewxbmohi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2039,7 +2077,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#klzbggnsnw .gt_first_grand_summary_row {
+#cxewxbmohi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2049,7 +2087,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_last_grand_summary_row_top {
+#cxewxbmohi .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2059,11 +2097,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_striped {
+#cxewxbmohi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#klzbggnsnw .gt_table_body {
+#cxewxbmohi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2072,7 +2110,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_footnotes {
+#cxewxbmohi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2086,7 +2124,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_footnote {
+#cxewxbmohi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2095,7 +2133,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#klzbggnsnw .gt_sourcenotes {
+#cxewxbmohi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2109,7 +2147,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#klzbggnsnw .gt_sourcenote {
+#cxewxbmohi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2117,63 +2155,63 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#klzbggnsnw .gt_left {
+#cxewxbmohi .gt_left {
   text-align: left;
 }
 
-#klzbggnsnw .gt_center {
+#cxewxbmohi .gt_center {
   text-align: center;
 }
 
-#klzbggnsnw .gt_right {
+#cxewxbmohi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#klzbggnsnw .gt_font_normal {
+#cxewxbmohi .gt_font_normal {
   font-weight: normal;
 }
 
-#klzbggnsnw .gt_font_bold {
+#cxewxbmohi .gt_font_bold {
   font-weight: bold;
 }
 
-#klzbggnsnw .gt_font_italic {
+#cxewxbmohi .gt_font_italic {
   font-style: italic;
 }
 
-#klzbggnsnw .gt_super {
+#cxewxbmohi .gt_super {
   font-size: 65%;
 }
 
-#klzbggnsnw .gt_footnote_marks {
+#cxewxbmohi .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#klzbggnsnw .gt_asterisk {
+#cxewxbmohi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#klzbggnsnw .gt_indent_1 {
+#cxewxbmohi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#klzbggnsnw .gt_indent_2 {
+#cxewxbmohi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#klzbggnsnw .gt_indent_3 {
+#cxewxbmohi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#klzbggnsnw .gt_indent_4 {
+#cxewxbmohi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#klzbggnsnw .gt_indent_5 {
+#cxewxbmohi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
