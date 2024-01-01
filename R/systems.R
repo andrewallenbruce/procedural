@@ -20,8 +20,7 @@ systems <- function() {
   msg <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep(0, 10), c(0:9,
-                                  LETTERS[c(2:4, 6:8, 10:14, 16:25)]))),
+    code = c(paste0(rep(0, 10), c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]))),
     label = c("Central Nervous System and Cranial Nerves",
               "Peripheral Nervous System",
               "Heart and Great Vessels",
@@ -122,7 +121,7 @@ systems <- function() {
     axis = 2L,
     name = "Body System",
     code = c(paste0(rep("B", 23), c(0, 2:5, 7:9,
-                                    LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]))),
+           LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]))),
     label = c("Central Nervous System",
               "Heart",
               "Upper Arteries",
@@ -151,7 +150,8 @@ systems <- function() {
   nuc <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("C", 15), c(0, 2, 5, 7:9, LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]))),
+    code = c(paste0(rep("C", 15), c(0, 2, 5, 7:9,
+           LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]))),
     label = c("Central Nervous System",
               "Heart",
               "Veins",
@@ -172,7 +172,8 @@ systems <- function() {
   rad <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("D", 15), c(0, 7:9, LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]))),
+    code = c(paste0(rep("D", 15), c(0, 7:9,
+            LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]))),
     label = c("Central and Peripheral Nervous System",
               "Lymphatic and Hematologic System",
               "Eye",
@@ -214,7 +215,9 @@ systems <- function() {
   new <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("X", 12), c(0, 2, LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]))),
+    code = c(paste0(rep("X", 12), c(0, 2,
+                   # D, F, H, K, N, R, T, W, X, Y
+           LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]))),
     label = c("Nervous System",
               "Cardiovascular System",
               "Gastrointestinal System",

@@ -22,7 +22,6 @@ knitr::opts_chunk$set(
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(procedural)
-library(janitor)
 library(dplyr)
 library(gt)
 ```
@@ -115,7 +114,12 @@ systems()
 # Tables
 
 ```{r}
-tables()
+# BR Imaging, Axial Skeleton, Except Skull and Facial Bones
+# C9 Nuclear Medicine Ear, Nose, Mouth and Throat
+# D9 Radiation Therapy Ear, Nose, Mouth and Throat
+# G Mental Health
+# H Substance Abuse Treatment
+tables("gz") |> tidyr::unnest(codes)
 ```
 
 

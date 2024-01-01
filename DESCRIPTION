@@ -23,5 +23,6 @@ Imports:
    zeallot
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    gt
 VignetteBuilder: knitr
