@@ -2,7 +2,7 @@
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 17 sections.
 #' @return [tibble()]
-#' @examplesIf interactive()
+#' @examples
 #' sections()
 #' sections("0")
 #' sections("2")

@@ -1,20 +1,14 @@
 #' ICD-10-PCS Body Systems
+#' @param x ICD-10-PCS body systems character, an alphanumeric code of length 1.
+#'    If `NULL` (default), returns all 114 systems.
 #' @return [tibble()]
-#' @examplesIf interactive()
+#' @examples
 #' systems()
+#' systems("0")
+#' systems("2")
+#' systems("X")
 #' @export
-systems <- function() {
-
-  # if (!is.null(x)) {
-  #   if (is.numeric(x)) x <- as.character(x)
-  #   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
-  #   xs <- x
-  #
-  #   if (nchar(x) > 1L) {
-  #     s <- splitter(x)[1]
-  #     s <- rlang::arg_match(s, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
-  #     }
-  #   }
+systems <- function(x = NULL) {
 
   # Medical and Surgical
   msg <- dplyr::tibble(
@@ -231,7 +225,38 @@ systems <- function() {
               "Physiological Systems",
               "Extracorporeal"))
 
-  vctrs::vec_rbind(msg, obs, plc, adm, mam, xpr,
-                   xth, ost, otp, chi, img, nuc,
-                   rad, phy, men, sub, new)
+  sys <- vctrs::vec_rbind(msg, obs, plc, adm, mam, xpr,
+                          xth, ost, otp, chi, img, nuc,
+                          rad, phy, men, sub, new)
+
+  if (!is.null(x)) {
+
+    if (is.numeric(x)) x <- as.character(x)
+
+    if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
+
+    if (nchar(x) == 1L) {
+
+      x <- splitter(x)[1]
+
+      x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+
+      sys <- sys |>
+        dplyr::rowwise() |>
+        dplyr::mutate(sec = splitter(code)[1]) |>
+        dplyr::ungroup()
+
+      sys <- vctrs::vec_slice(sys, sys$sec == x)
+
+      }
+
+    if (nchar(x) > 1L) {
+
+      x <- collapser(splitter(x)[1:2])
+
+      sys <- vctrs::vec_slice(sys, sys$code == x)
+
+      }
+  }
+  return(sys)
 }

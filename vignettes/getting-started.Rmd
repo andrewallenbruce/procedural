@@ -27,19 +27,17 @@ library(gt)
 ```
 
 
-The __ICD-10-PCS__, or the __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by 3M Health Information Systems and adopted under HIPAA for classifying procedures performed in hospital inpatient health care settings.
+The __ICD-10-PCS__, or __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M Health Information Systems](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
+
+<br>
 
 # Coding Conventions
 
-ICD-10-PCS codes are composed of __seven__ alphanumeric characters. Each character contains up to __34__ possible values. The seven characters that make up a complete code have specific meanings that vary for each of the __17__ sections of the manual.
+PCS codes are composed of __seven__ alphanumeric characters. Each character contains up to __34__ possible values. The seven characters that make up a complete code have specific meanings that vary for each of the __17__ sections of the manual.
 
-Each value represents a specific option for the general character definition. 10 digits (`0-9`) and 24 letters (`A-H`, `J-N`, and `P-Z`) may be used in each character. The letters `O` and `I` are not used so as to avoid confusion with the digits `0` and `1`.
+Each value represents a specific option for the general character definition. 10 digits (`0-9`) and 24 letters (`A-H`, `J-N`, and `P-Z`) may be used in each character. 
 
-```{r echo=FALSE, eval=FALSE}
-length(c(0:9, LETTERS[c(1:8, 10:14, 16:26)]))
-c(0:9, LETTERS[c(1:8, 10:14, 16:26)])
-stringr::str_flatten_comma(c(0:9, LETTERS[c(1:8, 10:14, 16:26)]), last = ", and ")
-```
+> The letters `O` and `I` are not used so as to avoid confusion with the digits `0` and `1`.
 
 ## Axes
 
@@ -50,7 +48,7 @@ Within a defined code range, a character specifies the same type of information 
 For example, The __fifth__ axis of classification specifies the _Approach_ in sections 0 through 4 and 7 through 9 of the system.
 
 
-```{r}
+```{r echo=FALSE}
 tibble(
   axis = 1:7,
   name = c('Section',
@@ -67,9 +65,9 @@ tibble(
 ```
 
 
-```{r}
+```{r echo=FALSE}
 tibble(
-  AXIS = "NAME",
+  AXIS = "Name",
   `1` = "Section",
   `2` = "Body System",
   `3` = "Root Operation",
@@ -92,9 +90,10 @@ sections()
 ```
 
 
-```{r}
+```{r echo=FALSE}
 sections()[c('code', 'label')] |> 
-  gt() |> 
+  mutate(id = row_number(), .before = 1) |>
+  gt(rowname_col = "id") |> 
   opt_table_font(font = google_font(name = "Rubik")) |> 
   cols_align(align = "center", columns = code) |>
   tab_style(style = list(cell_fill(color = "lightgray", alpha = 0.5), 
@@ -111,7 +110,70 @@ sections()[c('code', 'label')] |>
 systems()
 ```
 
+
+```{r}
+joined <- systems() |> 
+  select(sys.axis = name,
+         sys.code = code, 
+         sys.label = label) |>
+  rowwise() |> 
+  mutate(code = splitter(sys.code)[1]) |> 
+  ungroup() |>
+  left_join(sections(), by = join_by(code)) |> 
+  select(axis = name, 
+         code, 
+         label, 
+         sys.axis, 
+         sys.code, 
+         sys.label)
+
+joined
+```
+
+
+```{r}
+joined |>
+  select(section = label, 
+         code = sys.code, 
+         system = sys.label) |> 
+  gt(groupname_col = "section", 
+     rowname_col = "system") |>
+  opt_table_font(font = google_font(name = "Rubik")) |> 
+  cols_align(align = "center", columns = code) |>
+  cols_label(code = "") |> 
+  tab_style(style = list(cell_fill(color = "lightgray", 
+                                   alpha = 0.5), 
+                         cell_text(weight = "bold")), 
+            locations = cells_body(columns = code)) |> 
+  opt_all_caps(locations = c("row_group")) |> 
+  opt_align_table_header(align = "left") |>
+  tab_header(title = html("<b>ICD-10-PCS</b> 2024")) |> 
+  tab_options(
+    heading.title.font.size = px(22),
+    table.font.size = px(14),
+    column_labels.border.bottom.width = px(0),
+    column_labels.border.top.width = px(0),
+    row_group.font.size = px(16),
+  )
+```
+
+
+
 # Tables
+
+```{r}
+prp <- prep("001")
+prp
+```
+
+
+```{r}
+prp$section <- sections(prp$section)[c('code', 'label')]
+prp$system <- systems(prp$system)[c('code', 'label')]
+prp$table <- tables(prp$table)[c('table', 'description', 'codes')]
+prp
+```
+
 
 ```{r}
 # BR Imaging, Axial Skeleton, Except Skull and Facial Bones
@@ -119,7 +181,8 @@ systems()
 # D9 Radiation Therapy Ear, Nose, Mouth and Throat
 # G Mental Health
 # H Substance Abuse Treatment
-tables("gz") |> tidyr::unnest(codes)
+
+tables("dg2")
 ```
 
 
@@ -169,7 +232,6 @@ pcs("0016070") |>
   tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
              subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
                               <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
-                              <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
-  sub_missing(missing_text = "")
+                              <small>OPERATION:</small> <b>1</b> Bypass<br><br>"))
 ```
 

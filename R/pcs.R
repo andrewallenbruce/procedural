@@ -129,6 +129,7 @@ prep <- function(x,
 
   if (nchar(x) <= 2L) tbl <- NULL
   if (nchar(x) == 1L) bsys <- NULL
+  if (nchar(x) != 7L) x <- NULL
 
   results <- purrr::compact(
     list(code = x,

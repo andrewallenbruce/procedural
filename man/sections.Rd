@@ -17,10 +17,8 @@ If \code{NULL} (default), returns all 17 sections.}
 ICD-10-PCS Sections
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 sections()
 sections("0")
 sections("2")
 sections("X")
-\dontshow{\}) # examplesIf}
 }

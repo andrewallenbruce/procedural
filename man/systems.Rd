@@ -4,7 +4,11 @@
 \alias{systems}
 \title{ICD-10-PCS Body Systems}
 \usage{
-systems()
+systems(x = NULL)
+}
+\arguments{
+\item{x}{ICD-10-PCS body systems character, an alphanumeric code of length 1.
+If \code{NULL} (default), returns all 114 systems.}
 }
 \value{
 \code{\link[=tibble]{tibble()}}
@@ -13,7 +17,8 @@ systems()
 ICD-10-PCS Body Systems
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 systems()
-\dontshow{\}) # examplesIf}
+systems("0")
+systems("2")
+systems("X")
 }

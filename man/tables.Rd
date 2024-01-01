@@ -17,10 +17,8 @@ If \code{NULL} (default), returns all 895 tables.}
 ICD-10-PCS Tables
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 tables()
 tables("0")
 tables("00")
 tables("00X")
-\dontshow{\}) # examplesIf}
 }
