@@ -162,7 +162,7 @@ joined |>
 # Tables
 
 ```{r}
-prp <- prep("001")
+prp <- procedural:::prep("001")
 prp
 ```
 

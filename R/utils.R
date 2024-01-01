@@ -30,12 +30,20 @@ mount_board <- function() {
 #' @noRd
 `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
-#' @noRd
+#' Wrapper for [strsplit()] that unlists result
+#' @param x character vector
+#' @return split character vector
+#' @export
+#' @keywords internal
 splitter <- function(x) {
   unlist(strsplit(x, ""), use.names = FALSE)
 }
 
-#' @noRd
+#' Wrapper for [paste0()] that collapses result
+#' @param x split character vector
+#' @return collapsed character vector
+#' @export
+#' @keywords internal
 collapser <- function(x) {
   paste0(x, collapse = "")
 }
