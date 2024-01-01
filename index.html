@@ -78,1381 +78,308 @@
 <span class="emoji" data-emoji="beginner">🔰</span> Usage<a class="anchor" aria-label="anchor" href="#beginner-usage"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/procedural/">procedural</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com" class="external-link">gt</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/procedural/">procedural</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="sections">Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/section.html">section</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'code'</span>, <span class="st">'label'</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_table_font</span><span class="op">(</span>font <span class="op">=</span> <span class="fu">google_font</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">cols_align</span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tab_style</span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">cell_fill</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
-<span>                         <span class="fu">cell_text</span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>            locations <span class="op">=</span> <span class="fu">cells_body</span><span class="op">(</span>columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_all_caps</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_align_table_header</span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tab_header</span><span class="op">(</span>title <span class="op">=</span> <span class="fu">md</span><span class="op">(</span><span class="st">"**ICD-10-PCS** Sections"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="sqeztmimsh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#sqeztmimsh table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-&#10;#sqeztmimsh thead, #sqeztmimsh tbody, #sqeztmimsh tfoot, #sqeztmimsh tr, #sqeztmimsh td, #sqeztmimsh th {
-  border-style: none;
-}
-&#10;#sqeztmimsh p {
-  margin: 0;
-  padding: 0;
-}
-&#10;#sqeztmimsh .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-&#10;#sqeztmimsh .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-&#10;#sqeztmimsh .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-&#10;#sqeztmimsh .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-&#10;#sqeztmimsh .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-&#10;#sqeztmimsh .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-&#10;#sqeztmimsh .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-&#10;#sqeztmimsh .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-&#10;#sqeztmimsh .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-&#10;#sqeztmimsh .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-&#10;#sqeztmimsh .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-&#10;#sqeztmimsh .gt_from_md > :first-child {
-  margin-top: 0;
-}
-&#10;#sqeztmimsh .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-&#10;#sqeztmimsh .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-&#10;#sqeztmimsh .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#sqeztmimsh .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-&#10;#sqeztmimsh .gt_row_group_first td {
-  border-top-width: 2px;
-}
-&#10;#sqeztmimsh .gt_row_group_first th {
-  border-top-width: 2px;
-}
-&#10;#sqeztmimsh .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#sqeztmimsh .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-&#10;#sqeztmimsh .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#sqeztmimsh .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-&#10;#sqeztmimsh .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#sqeztmimsh .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#sqeztmimsh .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#sqeztmimsh .gt_left {
-  text-align: left;
-}
-&#10;#sqeztmimsh .gt_center {
-  text-align: center;
-}
-&#10;#sqeztmimsh .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-&#10;#sqeztmimsh .gt_font_normal {
-  font-weight: normal;
-}
-&#10;#sqeztmimsh .gt_font_bold {
-  font-weight: bold;
-}
-&#10;#sqeztmimsh .gt_font_italic {
-  font-style: italic;
-}
-&#10;#sqeztmimsh .gt_super {
-  font-size: 65%;
-}
-&#10;#sqeztmimsh .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-&#10;#sqeztmimsh .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-&#10;#sqeztmimsh .gt_indent_1 {
-  text-indent: 5px;
-}
-&#10;#sqeztmimsh .gt_indent_2 {
-  text-indent: 10px;
-}
-&#10;#sqeztmimsh .gt_indent_3 {
-  text-indent: 15px;
-}
-&#10;#sqeztmimsh .gt_indent_4 {
-  text-indent: 20px;
-}
-&#10;#sqeztmimsh .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>ICD-10-PCS</strong> Sections
-</td>
-</tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="code">
-code
-</th>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label">
-label
-</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-0
-</td>
-<td headers="label" class="gt_row gt_left">
-Medical and Surgical
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-1
-</td>
-<td headers="label" class="gt_row gt_left">
-Obstetrics
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-2
-</td>
-<td headers="label" class="gt_row gt_left">
-Placement
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-3
-</td>
-<td headers="label" class="gt_row gt_left">
-Administration
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-4
-</td>
-<td headers="label" class="gt_row gt_left">
-Measurement and Monitoring
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-5
-</td>
-<td headers="label" class="gt_row gt_left">
-Extracorporeal or Systemic Assistance and Performance
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-6
-</td>
-<td headers="label" class="gt_row gt_left">
-Extracorporeal or Systemic Therapies
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-7
-</td>
-<td headers="label" class="gt_row gt_left">
-Osteopathic
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-8
-</td>
-<td headers="label" class="gt_row gt_left">
-Other Procedures
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-9
-</td>
-<td headers="label" class="gt_row gt_left">
-Chiropractic
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-B
-</td>
-<td headers="label" class="gt_row gt_left">
-Imaging
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-C
-</td>
-<td headers="label" class="gt_row gt_left">
-Nuclear Medicine
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-D
-</td>
-<td headers="label" class="gt_row gt_left">
-Radiation Therapy
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-F
-</td>
-<td headers="label" class="gt_row gt_left">
-Physical Rehabilitation and Diagnostic Audiology
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-G
-</td>
-<td headers="label" class="gt_row gt_left">
-Mental Health
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-H
-</td>
-<td headers="label" class="gt_row gt_left">
-Substance Abuse Treatment
-</td>
-</tr>
-<tr>
-<td headers="code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-X
-</td>
-<td headers="label" class="gt_row gt_left">
-New Technology
-</td>
-</tr>
-</tbody>
-</table>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 17 × 4</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     axis name    code  label                                                </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;                                                </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1     1 Section 0     Medical and Surgical                                 </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2     1 Section 1     Obstetrics                                           </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3     1 Section 2     Placement                                            </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4     1 Section 3     Administration                                       </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5     1 Section 4     Measurement and Monitoring                           </span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6     1 Section 5     Extracorporeal or Systemic Assistance and Performance</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7     1 Section 6     Extracorporeal or Systemic Therapies                 </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8     1 Section 7     Osteopathic                                          </span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9     1 Section 8     Other Procedures                                     </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10     1 Section 9     Chiropractic                                         </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11     1 Section B     Imaging                                              </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12     1 Section C     Nuclear Medicine                                     </span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 13     1 Section D     Radiation Therapy                                    </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 14     1 Section F     Physical Rehabilitation and Diagnostic Audiology     </span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 15     1 Section G     Mental Health                                        </span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 16     1 Section H     Substance Abuse Treatment                            </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17     1 Section X     New Technology</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="systems">Systems<a class="anchor" aria-label="anchor" href="#systems"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in system(): argument "command" is missing, with no default</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/systems.html">systems</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 114 × 4</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     axis name        code  label                                    </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;                                    </span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1     2 Body System 00    Central Nervous System and Cranial Nerves</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2     2 Body System 01    Peripheral Nervous System                </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3     2 Body System 02    Heart and Great Vessels                  </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4     2 Body System 03    Upper Arteries                           </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5     2 Body System 04    Lower Arteries                           </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6     2 Body System 05    Upper Veins                              </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7     2 Body System 06    Lower Veins                              </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8     2 Body System 07    Lymphatic and Hemic Systems              </span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9     2 Body System 08    Eye                                      </span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10     2 Body System 09    Ear, Nose, Sinus                         </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 104 more rows</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/table.html">table</a></span><span class="op">(</span><span class="st">"00X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">codes</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 288 × 6</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    section system table description                                  code  label</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                        &lt;chr&gt; &lt;chr&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 0       00     00X   Medical and Surgical, Central Nervous Syste… 00XF… Tran…</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 278 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tables.html">tables</a></span><span class="op">(</span><span class="st">"00X"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   section system table description                                    codes     </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                                          &lt;list&gt;    </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 0       00     00X   Medical and Surgical, Central Nervous System … &lt;spc_tbl_&gt;</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="medical-and-surgical">Medical and Surgical<a class="anchor" aria-label="anchor" href="#medical-and-surgical"></a>
+<h2 id="definitions">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bypass</span> <span class="op">&lt;-</span> <span class="fu">definitions</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op">==</span> <span class="st">"0"</span>, <span class="va">axis</span> <span class="op">==</span> <span class="st">"3"</span>, <span class="va">label</span> <span class="op">==</span> <span class="st">"Bypass"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span>, <span class="va">definition</span>, <span class="va">explanation</span>, <span class="va">includes</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in definitions(): could not find function "definitions"</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">bypass</span>, by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in is.data.frame(y): object 'bypass' not found</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">code</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_table_font</span><span class="op">(</span>font <span class="op">=</span> <span class="fu">google_font</span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">cols_align</span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">axis</span>, <span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tab_style</span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">cell_fill</span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>, alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, </span>
-<span>                         <span class="fu">cell_text</span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>            locations <span class="op">=</span> <span class="fu">cells_body</span><span class="op">(</span>columns <span class="op">=</span> <span class="va">code</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_all_caps</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">opt_align_table_header</span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">tab_header</span><span class="op">(</span>title <span class="op">=</span> <span class="fu">html</span><span class="op">(</span><span class="st">"&lt;b&gt;ICD-10-PCS&lt;/b&gt; 2024&lt;hr&gt;"</span><span class="op">)</span>,</span>
-<span>             subtitle <span class="op">=</span> <span class="fu">html</span><span class="op">(</span><span class="st">"&lt;small&gt;SECTION:&lt;/small&gt; &lt;b&gt;0&lt;/b&gt; Medical and Surgical&lt;br&gt;</span></span>
-<span><span class="st">                              &lt;small&gt;SYSTEM:&lt;/small&gt; &lt;b&gt;0&lt;/b&gt; Central Nervous System and Cranial Nerves&lt;br&gt;</span></span>
-<span><span class="st">                              &lt;small&gt;OPERATION:&lt;/small&gt; &lt;b&gt;1&lt;/b&gt; Bypass&lt;br&gt;&lt;br&gt;"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">sub_missing</span><span class="op">(</span>missing_text <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
-<div id="wcsdsykzhf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wcsdsykzhf table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-&#10;#wcsdsykzhf thead, #wcsdsykzhf tbody, #wcsdsykzhf tfoot, #wcsdsykzhf tr, #wcsdsykzhf td, #wcsdsykzhf th {
-  border-style: none;
-}
-&#10;#wcsdsykzhf p {
-  margin: 0;
-  padding: 0;
-}
-&#10;#wcsdsykzhf .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-&#10;#wcsdsykzhf .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-&#10;#wcsdsykzhf .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-&#10;#wcsdsykzhf .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-&#10;#wcsdsykzhf .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-&#10;#wcsdsykzhf .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-&#10;#wcsdsykzhf .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-&#10;#wcsdsykzhf .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-&#10;#wcsdsykzhf .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-&#10;#wcsdsykzhf .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-&#10;#wcsdsykzhf .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-&#10;#wcsdsykzhf .gt_from_md > :first-child {
-  margin-top: 0;
-}
-&#10;#wcsdsykzhf .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-&#10;#wcsdsykzhf .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-&#10;#wcsdsykzhf .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#wcsdsykzhf .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-&#10;#wcsdsykzhf .gt_row_group_first td {
-  border-top-width: 2px;
-}
-&#10;#wcsdsykzhf .gt_row_group_first th {
-  border-top-width: 2px;
-}
-&#10;#wcsdsykzhf .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#wcsdsykzhf .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-&#10;#wcsdsykzhf .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#wcsdsykzhf .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-&#10;#wcsdsykzhf .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#wcsdsykzhf .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-&#10;#wcsdsykzhf .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-&#10;#wcsdsykzhf .gt_left {
-  text-align: left;
-}
-&#10;#wcsdsykzhf .gt_center {
-  text-align: center;
-}
-&#10;#wcsdsykzhf .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-&#10;#wcsdsykzhf .gt_font_normal {
-  font-weight: normal;
-}
-&#10;#wcsdsykzhf .gt_font_bold {
-  font-weight: bold;
-}
-&#10;#wcsdsykzhf .gt_font_italic {
-  font-style: italic;
-}
-&#10;#wcsdsykzhf .gt_super {
-  font-size: 65%;
-}
-&#10;#wcsdsykzhf .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-&#10;#wcsdsykzhf .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-&#10;#wcsdsykzhf .gt_indent_1 {
-  text-indent: 5px;
-}
-&#10;#wcsdsykzhf .gt_indent_2 {
-  text-indent: 10px;
-}
-&#10;#wcsdsykzhf .gt_indent_3 {
-  text-indent: 15px;
-}
-&#10;#wcsdsykzhf .gt_indent_4 {
-  text-indent: 20px;
-}
-&#10;#wcsdsykzhf .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal" style>
-<b>ICD-10-PCS</b> 2024
-<hr>
-</td>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="er">/</span>tr<span class="sc">&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>tr class<span class="ot">=</span><span class="st">"gt_heading"</span><span class="sc">&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>td colspan<span class="ot">=</span><span class="st">"4"</span> class<span class="ot">=</span><span class="st">"gt_heading gt_subtitle gt_font_normal gt_bottom_border"</span> style<span class="sc">&gt;</span><span class="er">&lt;</span>small<span class="sc">&gt;</span>SECTION<span class="sc">:</span><span class="er">&lt;/</span>small<span class="sc">&gt;</span> <span class="er">&lt;</span>b<span class="sc">&gt;</span><span class="dv">0</span><span class="sc">&lt;</span><span class="er">/</span>b<span class="sc">&gt;</span> Medical and Surgical<span class="sc">&lt;</span>br<span class="sc">&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                          <span class="er">&lt;</span>small<span class="sc">&gt;</span>SYSTEM<span class="sc">:</span><span class="er">&lt;/</span>small<span class="sc">&gt;</span> <span class="er">&lt;</span>b<span class="sc">&gt;</span><span class="dv">0</span><span class="sc">&lt;</span><span class="er">/</span>b<span class="sc">&gt;</span> Central Nervous System and Cranial Nerves<span class="sc">&lt;</span>br<span class="sc">&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                          <span class="er">&lt;</span>small<span class="sc">&gt;</span>OPERATION<span class="sc">:</span><span class="er">&lt;/</span>small<span class="sc">&gt;</span> <span class="er">&lt;</span>b<span class="sc">&gt;</span><span class="dv">1</span><span class="sc">&lt;</span><span class="er">/</span>b<span class="sc">&gt;</span> Bypass<span class="sc">&lt;</span>br<span class="sc">&gt;</span><span class="er">&lt;</span>br<span class="sc">&gt;</span><span class="er">&lt;/</span>td<span class="sc">&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;/</span>tr<span class="sc">&gt;</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>tr class<span class="ot">=</span><span class="st">"gt_col_headings"</span><span class="sc">&gt;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>th class<span class="ot">=</span><span class="st">"gt_col_heading gt_columns_bottom_border gt_left"</span> rowspan<span class="ot">=</span><span class="st">"1"</span> colspan<span class="ot">=</span><span class="st">"1"</span> scope<span class="ot">=</span><span class="st">"col"</span> id<span class="ot">=</span><span class="st">""</span><span class="sc">&gt;</span><span class="er">&lt;/</span>th<span class="sc">&gt;</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>th class<span class="ot">=</span><span class="st">"gt_col_heading gt_columns_bottom_border gt_left"</span> rowspan<span class="ot">=</span><span class="st">"1"</span> colspan<span class="ot">=</span><span class="st">"1"</span> scope<span class="ot">=</span><span class="st">"col"</span> id<span class="ot">=</span><span class="st">"name"</span><span class="sc">&gt;</span>name<span class="sc">&lt;</span><span class="er">/</span>th<span class="sc">&gt;</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>th class<span class="ot">=</span><span class="st">"gt_col_heading gt_columns_bottom_border gt_center"</span> rowspan<span class="ot">=</span><span class="st">"1"</span> colspan<span class="ot">=</span><span class="st">"1"</span> scope<span class="ot">=</span><span class="st">"col"</span> id<span class="ot">=</span><span class="st">"code"</span><span class="sc">&gt;</span>code<span class="sc">&lt;</span><span class="er">/</span>th<span class="sc">&gt;</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>th class<span class="ot">=</span><span class="st">"gt_col_heading gt_columns_bottom_border gt_left"</span> rowspan<span class="ot">=</span><span class="st">"1"</span> colspan<span class="ot">=</span><span class="st">"1"</span> scope<span class="ot">=</span><span class="st">"col"</span> id<span class="ot">=</span><span class="st">"label"</span><span class="sc">&gt;</span>label<span class="sc">&lt;</span><span class="er">/</span>th<span class="sc">&gt;</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;/</span>tr<span class="sc">&gt;</span></span></code></pre></div>
-</tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">
-1
-</th>
-<td headers="stub_1_1 name" class="gt_row gt_left">
-Section
-</td>
-<td headers="stub_1_1 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-0
-</td>
-<td headers="stub_1_1 label" class="gt_row gt_left">
-Medical and Surgical
-</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">
-2
-</th>
-<td headers="stub_1_2 name" class="gt_row gt_left">
-Body System
-</td>
-<td headers="stub_1_2 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-0
-</td>
-<td headers="stub_1_2 label" class="gt_row gt_left">
-Central Nervous System and Cranial Nerves
-</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">
-3
-</th>
-<td headers="stub_1_3 name" class="gt_row gt_left">
-Root Operation
-</td>
-<td headers="stub_1_3 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-1
-</td>
-<td headers="stub_1_3 label" class="gt_row gt_left">
-Bypass
-</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">
-4
-</th>
-<td headers="stub_1_4 name" class="gt_row gt_left">
-Body Part
-</td>
-<td headers="stub_1_4 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-6
-</td>
-<td headers="stub_1_4 label" class="gt_row gt_left">
-Cerebral Ventricle
-</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">
-5
-</th>
-<td headers="stub_1_5 name" class="gt_row gt_left">
-Approach
-</td>
-<td headers="stub_1_5 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-0
-</td>
-<td headers="stub_1_5 label" class="gt_row gt_left">
-Open
-</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub">
-6
-</th>
-<td headers="stub_1_6 name" class="gt_row gt_left">
-Device
-</td>
-<td headers="stub_1_6 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-7
-</td>
-<td headers="stub_1_6 label" class="gt_row gt_left">
-Autologous Tissue Substitute
-</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub">
-7
-</th>
-<td headers="stub_1_7 name" class="gt_row gt_left">
-Qualifier
-</td>
-<td headers="stub_1_7 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">
-0
-</td>
-<td headers="stub_1_7 label" class="gt_row gt_left">
-Nasopharynx
-</td>
-</tr>
-</tbody>
-<br>
-</table>
-</div>
-<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 917 × 8</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    code  section           axis  axis_name label definition explanation includes</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;   </span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 0     Medical and Surg… 3     Operation Alte… Modifying… Principal … Face li…</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 0     Medical and Surg… 3     Operation Bypa… Altering … Rerouting … Coronar…</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 0     Medical and Surg… 3     Operation Chan… Taking ou… All CHANGE… Urinary…</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 0     Medical and Surg… 3     Operation Cont… Stopping,… &lt;NA&gt;        Control…</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 0     Medical and Surg… 3     Operation Crea… Putting i… Used for g… Creatio…</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 0     Medical and Surg… 3     Operation Dest… Physical … None of th… Fulgura…</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 0     Medical and Surg… 3     Operation Deta… Cutting o… The body p… Below k…</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 0     Medical and Surg… 3     Operation Dila… Expanding… The orific… Percuta…</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 0     Medical and Surg… 3     Operation Divi… Cutting i… All or a p… Spinal …</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 0     Medical and Surg… 3     Operation Drai… Taking or… The qualif… Thorace…</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 907 more rows</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="obstetrics">Obstetrics<a class="anchor" aria-label="anchor" href="#obstetrics"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"10D20ZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                          </span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                          </span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        1     Obstetrics                     </span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    0     Pregnancy                      </span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation D     Extraction                     </span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Part      2     Products of Conception, Ectopic</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       0     Open                           </span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device         Z     No Device                      </span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                          </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                          </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        1     Obstetrics                     </span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    0     Pregnancy                      </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation D     Extraction                     </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Part      2     Products of Conception, Ectopic</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       0     Open                           </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device         Z     No Device                      </span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="placement">Placement<a class="anchor" aria-label="anchor" href="#placement"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"2W0UX0Z"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label             </span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;             </span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        2     Placement         </span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Change            </span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    U     Toe, Right        </span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External          </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device         0     Traction Apparatus</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label             </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;             </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        2     Placement         </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Change            </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    U     Toe, Right        </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External          </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device         0     Traction Apparatus</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="administration">Administration<a class="anchor" aria-label="anchor" href="#administration"></a>
 </h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"3E1938X"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name                 code  label                                       </span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;                                       </span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section              3     Administration                              </span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System          E     Physiological Systems and Anatomical Regions</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation       1     Irrigation                                  </span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System / Region 9     Nose                                        </span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach             3     Percutaneous                                </span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Substance            8     Irrigating Substance                        </span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier            X     Diagnostic</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name                 code  label                                       </span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;                                       </span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section              3     Administration                              </span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System          E     Physiological Systems and Anatomical Regions</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation       1     Irrigation                                  </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System / Region 9     Nose                                        </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach             3     Percutaneous                                </span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Substance            8     Irrigating Substance                        </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier            X     Diagnostic</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="measurement-and-monitoring">Measurement and Monitoring<a class="anchor" aria-label="anchor" href="#measurement-and-monitoring"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"4B01XVZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name              code  label                     </span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;                     </span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section           4     Measurement and Monitoring</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System       B     Physiological Devices     </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation    0     Measurement               </span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System       1     Peripheral Nervous        </span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach          X     External                  </span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Function / Device V     Stimulator                </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier         Z     No Qualifier</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name              code  label                     </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;             &lt;chr&gt; &lt;chr&gt;                     </span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section           4     Measurement and Monitoring</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System       B     Physiological Devices     </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation    0     Measurement               </span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System       1     Peripheral Nervous        </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach          X     External                  </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Function / Device V     Stimulator                </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier         Z     No Qualifier</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="extracorporeal-or-systemic-assistance-and-performance">Extracorporeal or Systemic Assistance and Performance<a class="anchor" aria-label="anchor" href="#extracorporeal-or-systemic-assistance-and-performance"></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"5A02110"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                                              </span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                                              </span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        5     Extracorporeal or Systemic Assistance and Performa…</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    A     Physiological Systems                              </span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Assistance                                         </span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System    2     Cardiac                                            </span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Duration       1     Intermittent                                       </span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Function       1     Output                                             </span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      0     Balloon Pump</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                                              </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                                              </span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        5     Extracorporeal or Systemic Assistance and Performa…</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    A     Physiological Systems                              </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Assistance                                         </span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System    2     Cardiac                                            </span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Duration       1     Intermittent                                       </span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Function       1     Output                                             </span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      0     Balloon Pump</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="extracorporeal-or-systemic-therapies">Extracorporeal or Systemic Therapies<a class="anchor" aria-label="anchor" href="#extracorporeal-or-systemic-therapies"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"6A0Z0ZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                               </span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                               </span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        6     Extracorporeal or Systemic Therapies</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    A     Physiological Systems               </span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Atmospheric Control                 </span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System    Z     None                                </span></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Duration       0     Single                              </span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Qualifier      Z     No Qualifier                        </span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label                               </span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;                               </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        6     Extracorporeal or Systemic Therapies</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    A     Physiological Systems               </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Atmospheric Control                 </span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body System    Z     None                                </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Duration       0     Single                              </span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Qualifier      Z     No Qualifier                        </span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     No Qualifier</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="osteopathic">Osteopathic<a class="anchor" aria-label="anchor" href="#osteopathic"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"7W00X0Z"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label               </span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;               </span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        7     Osteopathic         </span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions  </span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Treatment           </span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    0     Head                </span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External            </span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         0     Articulatory-Raising</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     None</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label               </span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;               </span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        7     Osteopathic         </span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions  </span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Treatment           </span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    0     Head                </span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External            </span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         0     Articulatory-Raising</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     None</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-procedures">Other Procedures<a class="anchor" aria-label="anchor" href="#other-procedures"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"8C01X6J"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label              </span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;              </span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        8     Other Procedures   </span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    C     Indwelling Device  </span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Other Procedures   </span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    1     Nervous System     </span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External           </span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         6     Collection         </span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      J     Cerebrospinal Fluid</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label              </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;              </span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        8     Other Procedures   </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    C     Indwelling Device  </span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation 0     Other Procedures   </span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    1     Nervous System     </span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External           </span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         6     Collection         </span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      J     Cerebrospinal Fluid</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="chiropractic">Chiropractic<a class="anchor" aria-label="anchor" href="#chiropractic"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"9WB0XBZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label             </span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;             </span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        9     Chiropractic      </span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation B     Manipulation      </span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    0     Head              </span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External          </span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         B     Non-Manual        </span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     None</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name           code  label             </span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;             </span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section        9     Chiropractic      </span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System    W     Anatomical Regions</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation B     Manipulation      </span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Region    0     Head              </span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach       X     External          </span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Method         B     Non-Manual        </span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier      Z     None</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="imaging">Imaging<a class="anchor" aria-label="anchor" href="#imaging"></a>
 </h3>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"B00B0ZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="nuclear-medicine">Nuclear Medicine<a class="anchor" aria-label="anchor" href="#nuclear-medicine"></a>
 </h3>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"C0101ZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="radiation-therapy">Radiation Therapy<a class="anchor" aria-label="anchor" href="#radiation-therapy"></a>
 </h3>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"DG22DZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="physical-rehabilitation-and-diagnostic-audiology">Physical Rehabilitation and Diagnostic Audiology<a class="anchor" aria-label="anchor" href="#physical-rehabilitation-and-diagnostic-audiology"></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"F14Z01Z"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="mental-health">Mental Health<a class="anchor" aria-label="anchor" href="#mental-health"></a>
 </h3>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"GZ10ZZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="substance-abuse-treatment">Substance Abuse Treatment<a class="anchor" aria-label="anchor" href="#substance-abuse-treatment"></a>
 </h3>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"HZ96ZZZ"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `dplyr::tibble()`:</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! Tibble columns must have compatible sizes.</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 0: Existing data.</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; • Size 3: Column `name`.</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ℹ Only values of size one are recycled.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="new-technology">New Technology<a class="anchor" aria-label="anchor" href="#new-technology"></a>
 </h3>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"XY0YX37"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name                            code  label                   </span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                           &lt;chr&gt; &lt;chr&gt;                   </span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section                         X     New Technology          </span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System                     Y     Extracorporeal          </span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation                  0     Introduction            </span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Part                       Y     Extracorporeal          </span></span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach                        X     External                </span></span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device / Substance / Technology 3     Nafamostat Anticoagulant</span></span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier                       7     New Technology Group 7</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 4</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   axis  name                            code  label                   </span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                           &lt;chr&gt; &lt;chr&gt;                   </span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1     Section                         X     New Technology          </span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2     Body System                     Y     Extracorporeal          </span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 3     Root Operation                  0     Introduction            </span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 4     Body Part                       Y     Extracorporeal          </span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 5     Approach                        X     External                </span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 6     Device / Substance / Technology 3     Nafamostat Anticoagulant</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 7     Qualifier                       7     New Technology Group 7</span></span></code></pre></div>
 <p><br></p>
 <hr>
 </div>

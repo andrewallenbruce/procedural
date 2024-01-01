@@ -25,10 +25,19 @@
     <loc>https://andrewallenbruce.github.io/procedural/news/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/axes.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/definitions.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/index.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/long.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/operations.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/pcs.html</loc>
@@ -37,9 +46,12 @@
     <loc>https://andrewallenbruce.github.io/procedural/reference/procedural-package.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/section.html</loc>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/sections.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/table.html</loc>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/systems.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/tables.html</loc>
   </url>
 </urlset>
