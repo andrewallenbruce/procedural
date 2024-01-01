@@ -20,12 +20,11 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r setup}
+```{r setup, message=FALSE, warning=FALSE}
 library(procedural)
-library(icd10us)
-library(tidyverse)
-library(gt)
 library(janitor)
+library(dplyr)
+library(gt)
 ```
 
 
@@ -44,6 +43,7 @@ stringr::str_flatten_comma(c(0:9, LETTERS[c(1:8, 10:14, 16:26)]), last = ", and 
 ```
 
 ## Axes
+
 Each character is an axis of classification that specifies information about the procedure performed. 
 
 Within a defined code range, a character specifies the same type of information in that axis of classification.
@@ -62,8 +62,7 @@ tibble(
               'Device',
               'Qualifier')) |> 
   gt() |> 
-  #cols_align(align = 'center') |> 
-  opt_table_font(font = google_font(name = "Fira Code")) |> 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
   opt_table_lines(extent = "all") |> 
   opt_all_caps()
 ```
@@ -81,24 +80,92 @@ tibble(
   `7` = "Qualifier") |> 
   gt() |> 
   cols_align(align = 'center') |> 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
   opt_table_lines(extent = "all") |> 
   opt_all_caps()
 ```
 
-# Section
+
+# Sections
 
 ```{r}
-section() |> 
+sections()
+```
+
+
+```{r}
+sections()[c('code', 'label')] |> 
   gt() |> 
-  opt_table_lines(extent = "all") 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
+  cols_align(align = "center", columns = code) |>
+  tab_style(style = list(cell_fill(color = "lightgray", alpha = 0.5), 
+                         cell_text(weight = "bold")), 
+            locations = cells_body(columns = code)) |> 
+  opt_all_caps() |> 
+  opt_align_table_header(align = "left") |>
+  tab_header(title = md("**ICD-10-PCS** Sections"))
 ```
 
-
-# Axis
+# Systems
 
 ```{r}
-axis("0")
+systems()
+```
+
+# Tables
+
+```{r}
+tables()
 ```
 
 
+# Definitions
+
+```{r}
+definitions() |> 
+  summarise(n = n(), 
+            .by = c(code, section, axis, axis_name))
+```
+
+```{r}
+definitions() |>
+  filter(
+    code == "0" 
+    ,axis == "3" 
+    ,label == "Bypass"
+    )
+```
+
+
+
+## Medical and Surgical
+
+```{r echo=FALSE, eval=FALSE}
+bypass <- definitions() |>
+  dplyr::filter(code == "0", axis == "3", label == "Bypass") |>
+  dplyr::select(label, definition, explanation, includes)
+
+code <- pcs("0016070")
+
+x <- dplyr::left_join(code, bypass, by = dplyr::join_by(label))
+```
+
+
+```{r}
+pcs("0016070") |> 
+  gt(rowname_col = "axis") |> 
+  opt_table_font(font = google_font(name = "Rubik")) |> 
+  cols_align(align = "center", columns = c(axis, code)) |>
+  tab_style(style = list(cell_fill(color = "lightgray", 
+                                   alpha = 0.5), 
+                         cell_text(weight = "bold")), 
+            locations = cells_body(columns = code)) |> 
+  opt_all_caps() |> 
+  opt_align_table_header(align = "left") |>
+  tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
+             subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
+                              <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
+                              <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
+  sub_missing(missing_text = "")
+```
 

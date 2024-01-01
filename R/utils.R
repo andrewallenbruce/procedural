@@ -22,6 +22,12 @@ github_raw <- function(x) {
 }
 
 #' @noRd
+mount_board <- function() {
+  pins::board_url(github_raw(
+  "andrewallenbruce/procedural/main/pkgdown/assets/pins-board/"))
+}
+
+#' @noRd
 `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
 #' @noRd

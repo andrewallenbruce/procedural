@@ -17,6 +17,7 @@ Imports:
    tidyr,
    cli,
    pins,
+   purrr,
    rlang,
    vctrs,
    zeallot

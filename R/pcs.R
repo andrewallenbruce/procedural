@@ -19,17 +19,16 @@ pcs <- function(x) {
 
   # boards _______________________
 
-  url <- github_raw("andrewallenbruce/procedural/main/pkgdown/assets/pins-board/")
-  board <- pins::board_url(url)
-  tables <- pins::pin_read(board, "pcs_2024_tables")
-  pcs_2024 <- pins::pin_read(board, "pcs_2024")
+  tables <- pins::pin_read(mount_board(), "pcs_2024_tables")
+  pcs_2024 <- pins::pin_read(mount_board(), "pcs_2024")
 
   # search _______________________
 
   tables <- vctrs::vec_slice(tables, tables$sec_code == xs[1])
   tables <- vctrs::vec_slice(tables, tables$sys_code == xs[2])
   tables <- vctrs::vec_slice(tables, tables$op_code == xs[3])
-  pcs_2024 <- vctrs::vec_slice(pcs_2024, pcs_2024$rowid >= min(tables$rowid) & pcs_2024$rowid <= max(tables$rowid))
+  pcs_2024 <- vctrs::vec_slice(pcs_2024,
+            pcs_2024$rowid >= min(tables$rowid) & pcs_2024$rowid <= max(tables$rowid))
 
   # table _______________________
 
@@ -39,7 +38,7 @@ pcs <- function(x) {
 
   tables <- dplyr::tibble(
     axis = c(tables$sec_pos, tables$sys_pos, tables$op_pos),
-    name = unlist(axis(xs[1])[1:3, 2], use.names = FALSE),
+    name = unlist(axes(xs[1])[1:3, 2], use.names = FALSE),
     code = c(tables$sec_code, tables$sys_code, tables$op_code),
     label = c(tables$sec_lbl, tables$sys_lbl, tables$op_lbl))
 
@@ -124,9 +123,19 @@ prep <- function(x,
 
   xs <- splitter(x)
 
+  bsys <- collapser(xs[1:2])
+
   tbl <- collapser(xs[1:3])
 
-  return(list(code = x,
-              split = sp,
-              table = tbl))
+  if (nchar(x) <= 2L) tbl <- NULL
+  if (nchar(x) == 1L) bsys <- NULL
+
+  results <- purrr::compact(
+    list(code = x,
+         split = xs,
+         section = xs[1],
+         system = bsys,
+         table = tbl))
+
+  return(results)
 }
