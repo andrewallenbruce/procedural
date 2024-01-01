@@ -24,5 +24,6 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    gt
+    gt, 
+    qs
 VignetteBuilder: knitr
