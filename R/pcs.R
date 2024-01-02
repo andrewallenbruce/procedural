@@ -1,21 +1,24 @@
-#' Look up ICD-10-PCS Codes
-#' @param x ICD-10-PCS code, a __7-character__ alphanumeric code
+#' Look up ICD-10-PCS Codes or Tables
+#' @param x an alphanumeric character vector, can be 3 to 7 characters long.
 #' @return [tibble()]
 #' @examples
+#' pcs("0G9")
+#'
+#' pcs("0G90")
+#'
+#' pcs("0G900")
+#'
+#' pcs("0G9000")
+#'
 #' pcs("0G9000Z")
-#'
-#' pcs("0016070")
-#'
-#' pcs("2W0UX0Z")
-#'
-#' pcs("2W20X4Z")
-#'
-#' pcs("2W1HX7Z")
 #'
 #' @export
 pcs <- function(x) {
 
   # checks _______________________
+
+  if (nchar(x) < 3L || nchar(x) > 7L) {cli::cli_abort(
+    "{.fn pcs} only accepts a {.cls {class(x)}} vector 3-7 chars long.")}
 
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
   xs <- splitter(x)
@@ -30,8 +33,7 @@ pcs <- function(x) {
   tables <- vctrs::vec_slice(tables, tables$sec_code == xs[1])
   tables <- vctrs::vec_slice(tables, tables$sys_code == xs[2])
   tables <- vctrs::vec_slice(tables, tables$op_code == xs[3])
-  pcs_2024 <- vctrs::vec_slice(pcs_2024,
-            pcs_2024$rowid >= min(tables$rowid) & pcs_2024$rowid <= max(tables$rowid))
+  pcs_2024 <- vctrs::vec_slice(pcs_2024, pcs_2024$rowid >= min(tables$rowid) & pcs_2024$rowid <= max(tables$rowid))
 
   # table _______________________
 
@@ -50,6 +52,7 @@ pcs <- function(x) {
   ax4 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
   ax4 <- vctrs::vec_slice(ax4, ax4$axis_pos == "4")
   ax4 <- vctrs::vec_slice(ax4, ax4$axis_code == xs[4])
+  ax4 <- tidyr::drop_na(ax4)
   ax4$rowid <- NULL
   ax4 <- dplyr::distinct(ax4)
 
@@ -64,6 +67,7 @@ pcs <- function(x) {
   ax5 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
   ax5 <- vctrs::vec_slice(ax5, ax5$axis_pos == "5")
   ax5 <- vctrs::vec_slice(ax5, ax5$axis_code == xs[5])
+  ax5 <- tidyr::drop_na(ax5)
   ax5$rowid <- NULL
   ax5 <- dplyr::distinct(ax5)
 
@@ -78,6 +82,7 @@ pcs <- function(x) {
   ax6 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
   ax6 <- vctrs::vec_slice(ax6, ax6$axis_pos == "6")
   ax6 <- vctrs::vec_slice(ax6, ax6$axis_code == xs[6])
+  ax6 <- tidyr::drop_na(ax6)
   ax6$rowid <- NULL
   ax6 <- dplyr::distinct(ax6)
 
@@ -92,6 +97,7 @@ pcs <- function(x) {
   ax7 <- vctrs::vec_slice(pcs_2024, pcs_2024$code == xs[3])
   ax7 <- vctrs::vec_slice(ax7, ax7$axis_pos == "7")
   ax7 <- vctrs::vec_slice(ax7, ax7$axis_code == xs[7])
+  ax7 <- tidyr::drop_na(ax7)
   ax7$rowid <- NULL
   ax7 <- dplyr::distinct(ax7)
 

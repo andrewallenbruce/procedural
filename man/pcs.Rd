@@ -2,28 +2,28 @@
 % Please edit documentation in R/pcs.R
 \name{pcs}
 \alias{pcs}
-\title{Look up ICD-10-PCS Codes}
+\title{Look up ICD-10-PCS Codes or Tables}
 \usage{
 pcs(x)
 }
 \arguments{
-\item{x}{ICD-10-PCS code, a \strong{7-character} alphanumeric code}
+\item{x}{an alphanumeric character vector, can be 3 to 7 characters long.}
 }
 \value{
 \code{\link[=tibble]{tibble()}}
 }
 \description{
-Look up ICD-10-PCS Codes
+Look up ICD-10-PCS Codes or Tables
 }
 \examples{
+pcs("0G9")
+
+pcs("0G90")
+
+pcs("0G900")
+
+pcs("0G9000")
+
 pcs("0G9000Z")
-
-pcs("0016070")
-
-pcs("2W0UX0Z")
-
-pcs("2W20X4Z")
-
-pcs("2W1HX7Z")
 
 }
