@@ -4,9 +4,13 @@
 #' @return [tibble()]
 #' @examples
 #' systems()
+#'
 #' systems("0")
+#'
 #' systems("2")
+#'
 #' systems("X")
+#'
 #' @export
 systems <- function(x = NULL) {
 

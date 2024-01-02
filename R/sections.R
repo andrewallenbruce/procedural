@@ -4,9 +4,13 @@
 #' @return [tibble()]
 #' @examples
 #' sections()
+#'
 #' sections("0")
+#'
 #' sections("2")
+#'
 #' sections("X")
+#'
 #' @export
 sections <- function(x = NULL) {
 

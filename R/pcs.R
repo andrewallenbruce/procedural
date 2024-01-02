@@ -1,14 +1,17 @@
 #' Look up ICD-10-PCS Codes
 #' @param x ICD-10-PCS code, a __7-character__ alphanumeric code
 #' @return [tibble()]
-#' @examplesIf interactive()
+#' @examples
 #' pcs("0G9000Z")
+#'
 #' pcs("0016070")
+#'
 #' pcs("2W0UX0Z")
+#'
 #' pcs("2W20X4Z")
-#' pcs("2W10X7Z")
-#' pcs("2W10X6Z")
+#'
 #' pcs("2W1HX7Z")
+#'
 #' @export
 pcs <- function(x) {
 

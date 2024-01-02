@@ -1,12 +1,13 @@
-#' ICD-10-PCS Axes
+#' ICD-10-PCS Axes by Section
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
-#'    If `NULL` (default), returns all 17 sections.
 #' @return [tibble()]
 #' @examplesIf interactive()
-#' axes()
 #' axes("0")
+#'
 #' axes("2")
+#'
 #' axes("X")
+#'
 #' @export
 axes <- function(x) {
 

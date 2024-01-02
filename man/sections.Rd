@@ -18,7 +18,11 @@ ICD-10-PCS Sections
 }
 \examples{
 sections()
+
 sections("0")
+
 sections("2")
+
 sections("X")
+
 }

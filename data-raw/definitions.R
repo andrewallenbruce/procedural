@@ -381,7 +381,8 @@ newtech <- vctrs::vec_rbind(tech_op, tech_dev, tech_app)
 
 ####################################################################
 
-definitions <- vctrs::vec_rbind(medical,
+definitions <- vctrs::vec_rbind(
+                 medical,
                  obstetrics,
                  placement,
                  administration,
@@ -407,3 +408,327 @@ board |> pins::pin_write(definitions,
                          type = "qs")
 
 board |> pins::write_board_manifest()
+
+
+## Root Operation Codes ##############
+r0 <- vctrs::vec_c(
+  "0" = "Alteration",
+  "1" = "Bypass",
+  "2" = "Change",
+  "3" = "Control",
+  "4" = "Creation",
+  "5" = "Destruction",
+  "6" = "Detachment",
+  "7" = "Dilation",
+  "8" = "Division",
+  "9" = "Drainage",
+  "B" = "Excision",
+  "C" = "Extirpation",
+  "D" = "Extraction",
+  "F" = "Fragmentation",
+  "G" = "Fusion",
+  "H" = "Insertion",
+  "J" = "Inspection",
+  "K" = "Map",
+  "L" = "Occlusion",
+  "M" = "Reattachment",
+  "N" = "Release",
+  "P" = "Removal",
+  "Q" = "Repair",
+  "R" = "Replacement",
+  "S" = "Reposition",
+  "T" = "Resection",
+  "U" = "Supplement",
+  "V" = "Restriction",
+  "W" = "Revision",
+  "X" = "Transfer",
+  "Y" = "Transplantation"
+)
+
+
+t0 <- dplyr::tibble(
+  code = "0",
+  section = "Medical and Surgical",
+  axis = "3",
+  axis_code = names(r0),
+  label = r0
+)
+
+r1 <- vctrs::vec_c(
+  "2" = "Change",
+  "9" = "Drainage",
+  "A" = "Abortion",
+  "D" = "Extraction",
+  "E" = "Delivery",
+  "H" = "Insertion",
+  "J" = "Inspection",
+  "P" = "Removal",
+  "Q" = "Repair",
+  "S" = "Reposition",
+  "T" = "Resection",
+  "Y" = "Transplantation"
+)
+
+t1 <- dplyr::tibble(
+  code = "1",
+  section = "Obstetrics",
+  axis = "3",
+  axis_code = names(r1),
+  label = r1
+)
+
+r2 <- vctrs::vec_c(
+  "0" = "Change",
+  "1" = "Compression",
+  "2" = "Dressing",
+  "3" = "Immobilization",
+  "4" = "Packing",
+  "5" = "Removal",
+  "6" = "Traction"
+)
+
+t2 <- dplyr::tibble(
+  code = "2",
+  section = "Placement",
+  axis = "3",
+  axis_code = names(r2),
+  label = r2
+)
+
+r3 <- vctrs::vec_c(
+  "0" = "Introduction",
+  "1" = "Irrigation",
+  "2" = "Transfusion"
+)
+
+t3 <- dplyr::tibble(
+  code = "3",
+  section = "Administration",
+  axis = "3",
+  axis_code = names(r3),
+  label = r3
+)
+
+r4 <- vctrs::vec_c(
+  "0" = "Measurement",
+  "1" = "Monitoring"
+)
+
+t4 <- dplyr::tibble(
+  code = "4",
+  section = "Measurement and Monitoring",
+  axis = "3",
+  axis_code = names(r4),
+  label = r4
+)
+
+r5 <- vctrs::vec_c(
+  "0" = "Assistance",
+  "1" = "Performance",
+  "2" = "Restoration"
+)
+
+t5 <- dplyr::tibble(
+  code = "5",
+  section = "Extracorporeal or Systemic Assistance and Performance",
+  axis = "3",
+  axis_code = names(r5),
+  label = r5
+)
+
+r6 <- vctrs::vec_c(
+  "0" = "Atmospheric Control",
+  "1" = "Decompression",
+  "2" = "Electromagnetic Therapy",
+  "3" = "Hyperthermia",
+  "4" = "Hypothermia",
+  "5" = "Pheresis",
+  "6" = "Phototherapy",
+  "7" = "Ultrasound Therapy",
+  "8" = "Ultraviolet Light Therapy",
+  "9" = "Shockwave Therapy",
+  "B" = "Perfusion"
+)
+
+t6 <- dplyr::tibble(
+  code = "6",
+  section = "Extracorporeal or Systemic Therapies",
+  axis = "3",
+  axis_code = names(r6),
+  label = r6
+)
+
+t7 <- dplyr::tibble(
+  code = "7",
+  section = "Osteopathic",
+  axis = "3",
+  axis_code = "0",
+  label = "Treatment"
+)
+
+t8 <- dplyr::tibble(
+  code = "8",
+  section = "Other Procedures",
+  axis = "3",
+  axis_code = "0",
+  label = "Other Procedures"
+)
+
+t9 <- dplyr::tibble(
+  code = "9",
+  section = "Chiropractic",
+  axis = "3",
+  axis_code = "B",
+  label = "Manipulation"
+)
+
+rB <- vctrs::vec_c(
+  "0" = "Plain Radiography",
+  "1" = "Fluoroscopy",
+  "2" = "Computerized Tomography (CT Scan)",
+  "3" = "Magnetic Resonance Imaging (MRI)",
+  "4" = "Ultrasonography",
+  "5" = "Other Imaging"
+)
+
+tB <- dplyr::tibble(
+  code = "B",
+  section = "Imaging",
+  axis = "3",
+  axis_code = names(rB),
+  label = rB
+)
+
+rC <- vctrs::vec_c(
+  "1" = "Planar Nuclear Medicine Imaging",
+  "2" = "Tomographic (Tomo) Nuclear Medicine Imaging",
+  "3" = "Positron Emission Tomographic (PET) Imaging",
+  "4" = "Nonimaging Nuclear Medicine Uptake",
+  "5" = "Nonimaging Nuclear Medicine Probe",
+  "6" = "Nonimaging Nuclear Medicine Assay",
+  "7" = "Systemic Nuclear Medicine Therapy",
+)
+
+tC <- dplyr::tibble(
+  code = "C",
+  section = "Nuclear Medicine",
+  axis = "3",
+  axis_code = names(rC),
+  label = rC
+)
+
+rF <- vctrs::vec_c(
+  "0" = "Speech Assessment",
+  "1" = "Motor and/or Nerve Function Assessment",
+  "2" = "Activities of Daily Living Assessment",
+  "3" = "Hearing Assessment",
+  "4" = "Hearing Aid Assessment",
+  "5" = "Vestibular Assessment",
+  "6" = "Speech Treatment",
+  "7" = "Motor Treatment",
+  "8" = "Activities of Daily Living Treatment",
+  "9" = "Hearing Treatment",
+  "B" = "Cochlear Implant Treatment",
+  "C" = "Vestibular Treatment",
+  "D" = "Device Fitting",
+  "F" = "Caregiver Training"
+)
+
+tF <- dplyr::tibble(
+  code = "F",
+  section = "Physical Rehabilitation and Diagnostic Audiology",
+  axis = "3",
+  axis_code = names(rF),
+  label = rF
+)
+
+rG <- vctrs::vec_c(
+  "1" = "Psychological Tests",
+  "2" = "Crisis Intervention",
+  "3" = "Medication Management",
+  "5" = "Individual Psychotherapy",
+  "6" = "Counseling",
+  "7" = "Family Psychotherapy",
+  "B" = "Electroconvulsive Therapy",
+  "C" = "Biofeedback",
+  "F" = "Hypnosis",
+  "G" = "Narcosynthesis",
+  "H" = "Group Psychotherapy",
+  "J" = "Light Therapy",
+)
+
+tG <- dplyr::tibble(
+  code = "G",
+  section = "Mental Health",
+  axis = "3",
+  axis_code = names(rG),
+  label = rG
+)
+
+rH <- vctrs::vec_c(
+  "2" = "Detoxification Services",
+  "3" = "Individual Counseling",
+  "4" = "Group Counseling",
+  "5" = "Individual Psychotherapy",
+  "6" = "Family Counseling",
+  "8" = "Medication Management",
+  "9" = "Pharmacotherapy"
+)
+
+tH <- dplyr::tibble(
+  code = "H",
+  section = "Substance Abuse Treatment",
+  axis = "3",
+  axis_code = names(rH),
+  label = rH
+)
+
+rX <- length(vctrs::vec_c(
+  "0" = "Introduction",
+  "1" = "Transfusion",
+  "2" = "Monitoring",
+  "5" = "Destruction",
+  "7" = "Dilation",
+  "A" = "Assistance",
+  "C" = "Extirpation",
+  "E" = "Measurement",
+  "G" = "Fusion",
+  "H" = "Insertion",
+  "J" = "Inspection",
+  "K" = "Bypass",
+  "P" = "Irrigation",
+  "R" = "Replacement",
+  "S" = "Reposition",
+  "U" = "Supplement",
+  "V" = "Restriction"
+))
+
+tX <- dplyr::tibble(
+  code = "H",
+  section = "New Technology",
+  axis = "3",
+  axis_code = names(rH),
+  label = rH
+)
+
+root_ops <- vctrs::vec_rbind(t0, t1, t2, t3, t4, t5,
+                             t6, t7, t8, t9, tB, tC,
+                             tF, tG, tH, tX)
+
+definitions <- dplyr::left_join(definitions(), root_ops) |>
+  dplyr::select(code,
+                section,
+                axis,
+                axis_name,
+                axis_code,
+                dplyr::everything())
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(definitions,
+                         name = "pcs_definitions_v2",
+                         description = "ICD-10-PCS 2024 Definitions",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
+

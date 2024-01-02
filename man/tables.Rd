@@ -18,7 +18,11 @@ ICD-10-PCS Tables
 }
 \examples{
 tables()
+
 tables("0")
+
 tables("00")
+
 tables("00X")
+
 }

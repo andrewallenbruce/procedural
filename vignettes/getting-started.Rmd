@@ -65,7 +65,7 @@ tibble(
 ```
 
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 tibble(
   AXIS = "Name",
   `1` = "Section",

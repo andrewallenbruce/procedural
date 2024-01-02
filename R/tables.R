@@ -4,9 +4,13 @@
 #' @return [tibble()]
 #' @examples
 #' tables()
+#'
 #' tables("0")
+#'
 #' tables("00")
+#'
 #' tables("00X")
+#'
 #' @export
 tables <- function(x = NULL) {
 

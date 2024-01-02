@@ -16,13 +16,14 @@ pcs(x)
 Look up ICD-10-PCS Codes
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pcs("0G9000Z")
+
 pcs("0016070")
+
 pcs("2W0UX0Z")
+
 pcs("2W20X4Z")
-pcs("2W10X7Z")
-pcs("2W10X6Z")
+
 pcs("2W1HX7Z")
-\dontshow{\}) # examplesIf}
+
 }

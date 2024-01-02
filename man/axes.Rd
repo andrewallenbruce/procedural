@@ -2,25 +2,25 @@
 % Please edit documentation in R/axes.R
 \name{axes}
 \alias{axes}
-\title{ICD-10-PCS Axes}
+\title{ICD-10-PCS Axes by Section}
 \usage{
 axes(x)
 }
 \arguments{
-\item{x}{ICD-10-PCS section character, an alphanumeric code of length 1.
-If \code{NULL} (default), returns all 17 sections.}
+\item{x}{ICD-10-PCS section character, an alphanumeric code of length 1.}
 }
 \value{
 \code{\link[=tibble]{tibble()}}
 }
 \description{
-ICD-10-PCS Axes
+ICD-10-PCS Axes by Section
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-axes()
 axes("0")
+
 axes("2")
+
 axes("X")
 \dontshow{\}) # examplesIf}
 }
