@@ -261,35 +261,9 @@ pcs_tbl |>
   print(n = 150)
 
 
+  group_by(label) |>
+   fill(axis_title, axis_pos) |> print(n = 150)
 
-
-
-pcs_tbl |>
-  pivot_wider(names_from = columns, values_from = value) |>
-  mutate(
-     pcsTable_axis_title = lead(pcsTable_axis_title, 2),
-     pcsTable_axis_label = lead(pcsTable_axis_label, 3),
-     code_pcsTable_axis_label = lead(code_pcsTable_axis_label, 4),
-     pcsTable_axis_definition = lead(pcsTable_axis_definition, 5),
-     pos_pcsTable_pcsRow_axis = lead(pos_pcsTable_pcsRow_axis, 9),
-     pcsTable_pcsRow_axis_title = lead(pcsTable_pcsRow_axis_title, 11),
-     pcsTable_pcsRow_axis_label = lead(pcsTable_pcsRow_axis_label, 12),
-     code_pcsTable_pcsRow_axis_label = lead(code_pcsTable_pcsRow_axis_label, 13)) |>
-   select(
-     pos = pos_pcsTable_axis,
-     code = code_pcsTable_axis_label,
-     title = pcsTable_axis_title,
-     label = pcsTable_axis_label,
-     definition = pcsTable_axis_definition,
-     axis_pos = pos_pcsTable_pcsRow_axis,
-     axis_title = pcsTable_pcsRow_axis_title,
-     axis_code = code_pcsTable_pcsRow_axis_label,
-     axis_label = pcsTable_pcsRow_axis_label) |>
-   unite('check', c(code, axis_code), na.rm = TRUE, sep = "", remove = FALSE) |>
-   mutate(check = na_if(check, "")) |>
-   filter(!is.na(check)) |>
-   select(-check) |>
-   fill(pos, code, title, label) |>
    group_by(label) |>
    fill(definition) |>
    ungroup() |>
