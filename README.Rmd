@@ -56,7 +56,9 @@ systems()
 ## Tables
 
 ```{r}
-tables("00X")
+tables("0")
+tables("00")
+tables("00F")
 ```
 
 ## Definitions

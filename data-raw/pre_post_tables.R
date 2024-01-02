@@ -102,7 +102,8 @@ pre_table <- pcs_tbl2 |>
 
 post_table <- pcs_tbl2 |>
   select(table:axis_label) |>
-  mutate(row = if_else(axis_pos == "4", glue::glue("{table}{axis_code}"), NA_character_)) # 4 is the row position for body part
+  mutate(row = if_else(axis_pos == "4",
+                       glue::glue("{table}{axis_code}"), NA_character_))
 
 ########________________________________________
 

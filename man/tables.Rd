@@ -17,8 +17,6 @@ If \code{NULL} (default), returns all 895 tables.}
 ICD-10-PCS Tables
 }
 \examples{
-tables()
-
 tables("0")
 
 tables("00")

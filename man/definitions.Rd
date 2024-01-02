@@ -4,7 +4,10 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions()
+definitions(section = NULL)
+}
+\arguments{
+\item{section}{PCS section character.}
 }
 \value{
 \code{\link[=tibble]{tibble()}}
@@ -13,7 +16,8 @@ definitions()
 ICD-10-PCS Definitions
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-definitions()
-\dontshow{\}) # examplesIf}
+definitions(section = "2")
+
+definitions(section = "4")
+
 }

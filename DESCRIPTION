@@ -20,7 +20,8 @@ Imports:
    purrr,
    rlang,
    vctrs,
-   zeallot
+   zeallot,
+   janitor
 Suggests: 
     knitr,
     rmarkdown,

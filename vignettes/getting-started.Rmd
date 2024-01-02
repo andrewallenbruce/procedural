@@ -85,11 +85,6 @@ tibble(
 
 # Sections
 
-```{r}
-sections()
-```
-
-
 ```{r echo=FALSE}
 sections()[c('code', 'label')] |> 
   mutate(id = row_number(), .before = 1) |>
@@ -105,11 +100,6 @@ sections()[c('code', 'label')] |>
 ```
 
 # Systems
-
-```{r}
-systems()
-```
-
 
 ```{r}
 joined <- systems() |> 
@@ -162,7 +152,7 @@ joined |>
 # Tables
 
 ```{r}
-prp <- procedural:::prep("001")
+prp <- procedural:::prep("0016")
 prp
 ```
 
@@ -171,20 +161,9 @@ prp
 prp$section <- sections(prp$section)[c('code', 'label')]
 prp$system <- systems(prp$system)[c('code', 'label')]
 prp$table <- tables(prp$table)[c('table', 'description', 'codes')]
+prp$row <- rows(prp$row)[c('row', 'axis_title', 'axis_code', 'axis_label')]
 prp
 ```
-
-
-```{r}
-# BR Imaging, Axial Skeleton, Except Skull and Facial Bones
-# C9 Nuclear Medicine Ear, Nose, Mouth and Throat
-# D9 Radiation Therapy Ear, Nose, Mouth and Throat
-# G Mental Health
-# H Substance Abuse Treatment
-
-tables("dg2")
-```
-
 
 # Definitions
 
@@ -194,29 +173,7 @@ definitions() |>
             .by = c(code, section, axis, axis_name))
 ```
 
-```{r}
-definitions() |>
-  filter(
-    code == "0" 
-    ,axis == "3" 
-    ,label == "Bypass"
-    )
-```
-
-
-
 ## Medical and Surgical
-
-```{r echo=FALSE, eval=FALSE}
-bypass <- definitions() |>
-  dplyr::filter(code == "0", axis == "3", label == "Bypass") |>
-  dplyr::select(label, definition, explanation, includes)
-
-code <- pcs("0016070")
-
-x <- dplyr::left_join(code, bypass, by = dplyr::join_by(label))
-```
-
 
 ```{r}
 pcs("0016070") |> 
@@ -235,3 +192,29 @@ pcs("0016070") |>
                               <small>OPERATION:</small> <b>1</b> Bypass<br><br>"))
 ```
 
+```{r}
+definitions() |> 
+  dplyr::filter(code == '0', 
+                axis == '3', 
+                axis_code == '1') |> 
+  dplyr::select(definition, explanation, includes) |> 
+  unlist()
+```
+
+
+```{r}
+definitions() |> 
+  dplyr::filter(code == '0', 
+                axis == '5',
+                label == 'Open') |> 
+  dplyr::pull(definition)
+```
+
+
+```{r}
+definitions() |> 
+  dplyr::filter(code == '0', 
+                axis == '6',
+                label == 'Autologous Tissue Substitute') |> 
+  dplyr::pull(includes)
+```

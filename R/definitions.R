@@ -1,11 +1,21 @@
 #' ICD-10-PCS Definitions
+#' @param section PCS section character.
 #' @return [tibble()]
-#' @examplesIf interactive()
-#' definitions()
+#' @examples
+#' definitions(section = "2")
+#'
+#' definitions(section = "4")
+#'
 #' @export
-definitions <- function() {
+definitions <- function(section = NULL) {
 
-  definition <- pins::pin_read(mount_board(), "pcs_definitions_v2")
+  def <- pins::pin_read(mount_board(), "pcs_definitions_v2")
 
-  return(definition)
+  if (!is.null(section)) {
+    if (is.numeric(section)) section <- as.character(section)
+    if (grepl("[[:lower:]]*", section)) {section <- toupper(section)}
+    def <- vctrs::vec_slice(def, def$code == section)
+    def <- janitor::remove_empty(def, which = "cols")
+  }
+  return(def)
 }
