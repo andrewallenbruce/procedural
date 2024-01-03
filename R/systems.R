@@ -1,7 +1,7 @@
 #' ICD-10-PCS Body Systems
 #' @param x ICD-10-PCS body systems character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 114 systems.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' systems()
 #'

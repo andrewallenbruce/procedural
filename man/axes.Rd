@@ -10,7 +10,7 @@ axes(x)
 \item{x}{ICD-10-PCS section character, an alphanumeric code of length 1.}
 }
 \value{
-\code{\link[=tibble]{tibble()}}
+a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
 ICD-10-PCS Axes by Section

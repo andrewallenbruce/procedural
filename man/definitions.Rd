@@ -10,7 +10,7 @@ definitions(section = NULL)
 \item{section}{PCS section character.}
 }
 \value{
-\code{\link[=tibble]{tibble()}}
+a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
 ICD-10-PCS Definitions

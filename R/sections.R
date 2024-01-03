@@ -1,7 +1,7 @@
 #' ICD-10-PCS Sections
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 17 sections.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' sections()
 #'
@@ -37,17 +37,11 @@ sections <- function(x = NULL) {
               "New Technology"))
 
   if (!is.null(x)) {
-
     if (is.numeric(x)) x <- as.character(x)
-
     if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
-
     x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
-
     if (nchar(x) > 1L) x <- splitter(x)[1]
-
     sec <- vctrs::vec_slice(sec, sec$code == x)
-
   }
   return(sec)
 }

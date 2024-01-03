@@ -10,7 +10,7 @@ pcs(x)
 \item{x}{an alphanumeric character vector, can be 3 to 7 characters long.}
 }
 \value{
-\code{\link[=tibble]{tibble()}}
+a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
 Look up ICD-10-PCS Codes or Tables

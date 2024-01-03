@@ -1,6 +1,6 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' definitions(section = "2")
 #'

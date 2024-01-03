@@ -11,7 +11,7 @@ tables(x = NULL)
 If \code{NULL} (default), returns all 895 tables.}
 }
 \value{
-\code{\link[=tibble]{tibble()}}
+a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
 ICD-10-PCS Tables

@@ -1,6 +1,6 @@
 #' Look up ICD-10-PCS Codes or Tables
 #' @param x an alphanumeric character vector, can be 3 to 7 characters long.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' pcs("0G9")
 #'
@@ -15,95 +15,48 @@
 #' @export
 pcs <- function(x) {
 
-  # checks _______________________
-
   if (nchar(x) < 3L || nchar(x) > 7L) {cli::cli_abort(
     "{.fn pcs} only accepts a {.cls {class(x)}} vector 3-7 chars long.")}
 
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
+
   xs <- splitter(x)
 
-  # boards _______________________
+  pre <- pins::pin_read(mount_board(), "pre_table")
+  pre <- dplyr::distinct(
+    vctrs::vec_slice(pre, pre$code_1 == xs[1] & pre$code_2 == xs[2] & pre$code_3 == xs[3]))
 
-  pre_table <- pins::pin_read(mount_board(), "pre_table")
-
-  post_table <- pins::pin_read(mount_board(), "post_table") |>
-    dplyr::mutate(row = as.character(row)) |>
+  post <- pins::pin_read(mount_board(), "post_table") |>
     tidyr::fill(axis_pos, axis_title, row)
-
-  # search _______________________
-
-  pre_table <- vctrs::vec_slice(pre_table, pre_table$code_1 == xs[1])
-  pre_table <- vctrs::vec_slice(pre_table, pre_table$code_2 == xs[2])
-  pre_table <- vctrs::vec_slice(pre_table, pre_table$code_3 == xs[3])
-  post_table <- vctrs::vec_slice(post_table, post_table$table == pre_table$table)
+  post <- vctrs::vec_slice(post, post$table == pre$table)
 
   # table _______________________
-  pre_table <- dplyr::distinct(pre_table)
-
   tbl <- dplyr::tibble(
-    axis = c("1", "2", "3"),
-    name = c(pre_table$title_1, pre_table$title_2, pre_table$title_3),
-    code = c(pre_table$code_1, pre_table$code_2, pre_table$code_3),
-    label = c(pre_table$label_1, pre_table$label_2, pre_table$label_3))
+    axis  = as.character(1:3),
+    name  = unlist(pre[c("title_1", "title_2", "title_3")], use.names = FALSE),
+    code  = unlist(pre[c("code_1", "code_2", "code_3")], use.names = FALSE),
+    label = unlist(pre[c("label_1", "label_2", "label_3")], use.names = FALSE))
 
   # axis 4 _______________________
-
-  x4 <- vctrs::vec_slice(post_table, post_table$axis_pos == "4")
-  x4 <- vctrs::vec_slice(x4, x4$axis_code == xs[4])
-  x4 <- dplyr::distinct(x4)
-
-  x4 <- dplyr::tibble(
-    axis = x4$axis_pos,
-    name = x4$axis_title,
-    code = x4$axis_code,
-    label = x4$axis_label)
+  x4 <- dplyr::distinct(vctrs::vec_slice(post, post$axis_pos == "4" & post$axis_code == xs[4]))
 
   # axis 5 _______________________
-
-  x5 <- vctrs::vec_slice(post_table, post_table$axis_pos == "5")
-  x5 <- vctrs::vec_slice(x5, x5$axis_code == xs[5])
-  x5 <- dplyr::distinct(x5)
-
-  x5 <- dplyr::tibble(
-    axis = x5$axis_pos,
-    name = x5$axis_title,
-    code = x5$axis_code,
-    label = x5$axis_label)
+  x5 <- dplyr::distinct(vctrs::vec_slice(post, post$axis_pos == "5" & post$axis_code == xs[5]))
 
   # axis 6 _______________________
-
-  x6 <- vctrs::vec_slice(post_table, post_table$axis_pos == "6")
-  x6 <- vctrs::vec_slice(x6, x6$axis_code == xs[6])
-  x6 <- dplyr::distinct(x6)
-
-  x6 <- dplyr::tibble(
-    axis = x6$axis_pos,
-    name = x6$axis_title,
-    code = x6$axis_code,
-    label = x6$axis_label)
+  x6 <- dplyr::distinct(vctrs::vec_slice(post, post$axis_pos == "6" & post$axis_code == xs[6]))
 
   # axis 7 _______________________
+  x7 <- dplyr::distinct(vctrs::vec_slice(post, post$axis_pos == "7" & post$axis_code == xs[7]))
 
-  x7 <- vctrs::vec_slice(post_table, post_table$axis_pos == "7")
-  x7 <- vctrs::vec_slice(x7, x7$axis_code == xs[7])
-  x7 <- dplyr::distinct(x7)
-
-  x7 <- dplyr::tibble(
-    axis = x7$axis_pos,
-    name = x7$axis_title,
-    code = x7$axis_code,
-    label = x7$axis_label)
-
-  vctrs::vec_rbind(tbl, x4, x5, x6, x7) |>
-    dplyr::distinct() |>
-    janitor::remove_empty("rows")
+  axes <- vctrs::vec_rbind(x4, x5, x6, x7)
+  axes[c('table', 'row')] <- NULL
+  colnames(axes) <- c("axis", "name", "code", "label")
+  na.omit(vctrs::vec_rbind(tbl, axes))
 }
 
 #' @noRd
-prep <- function(x,
-                 arg = rlang::caller_arg(x),
-                 call = rlang::caller_env()) {
+prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
 
   if (!nzchar(x)) {cli::cli_abort("x" = "{.strong x} cannot be an {.emph empty} string.", call = call)}
 
@@ -120,30 +73,23 @@ prep <- function(x,
   # If any chars are lowercase, capitalize
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
-  xs <- splitter(x)
-
-  bsys <- collapser(xs[1:2])
-
+  xs  <- splitter(x)
+  sys <- collapser(xs[1:2])
   tbl <- collapser(xs[1:3])
+  rw  <- collapser(xs[1:4])
 
-  rw <- collapser(xs[1:4])
-
-  if (nchar(x) <= 2L) {
-    tbl <- NULL
-    rw <- NULL
-  }
-
-  if (nchar(x) == 3L) rw <- NULL
-  if (nchar(x) == 1L) bsys <- NULL
-  if (nchar(x) != 7L) x <- NULL
+  if (nchar(x) <= 2L) tbl <- rw <- NULL
+  if (nchar(x) == 3L) rw  <- NULL
+  if (nchar(x) == 1L) sys <- NULL
+  if (nchar(x) != 7L) x   <- NULL
 
   results <- purrr::compact(
-    list(split = xs,
+    list(split   = xs,
          section = xs[1],
-         system = bsys,
-         table = tbl,
-         row = rw,
-         code = x))
+         system  = bsys,
+         table   = tbl,
+         row     = rw,
+         code    = x))
 
   return(results)
 }

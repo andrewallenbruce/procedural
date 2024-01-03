@@ -1,6 +1,6 @@
 #' ICD-10-PCS Axes by Section
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' axes("0")
 #'

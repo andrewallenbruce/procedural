@@ -1,7 +1,7 @@
 #' ICD-10-PCS Tables
 #' @param x 1 to 3-character string representing an ICD-10-PCS table.
 #'    If `NULL` (default), returns all 895 tables.
-#' @return [tibble()]
+#' @return a [dplyr::tibble()]
 #' @examples
 #' tables("0")
 #'

@@ -8,6 +8,8 @@ pcs_definitions:
 - pcs_definitions/20231229T030942Z-916c2/
 pcs_definitions_v2:
 - pcs_definitions_v2/20240102T040741Z-81630/
+pcs_tbl2:
+- pcs_tbl2/20240103T114846Z-1531e/
 post_table:
 - post_table/20240102T082010Z-efbd5/
 pre_table:
