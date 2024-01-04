@@ -615,8 +615,6 @@
 #   filter(!is.na(op_lbl)) |> print(n = 200) |>
 #   fill(sec_pos, sys_pos, sec_code, sys_code, sec_lbl, sys_lbl)
 
-
-
 # sec_sys <- qs::qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\pcs_sec_sys")
 # sec_sys_op <- qs::qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\pcs_sec_sys_op")
 #

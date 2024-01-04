@@ -28,7 +28,6 @@ tables <- function(x = NULL) {
   return(table)
 }
 
-
 #' ICD-10-PCS Rows
 #' @param x 3 to 4-character string representing an ICD-10-PCS row within a table.
 #'    If `NULL` (default), returns all ~ 29k rows.
