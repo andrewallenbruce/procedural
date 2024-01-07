@@ -40,25 +40,13 @@ pak::pak("andrewallenbruce/procedural")
 library(procedural)
 ```
 
-## Sections
-
-```{r}
-sections()
-```
-
-
-## Systems
-
-```{r}
-systems()
-```
 
 ## Tables
 
 ```{r}
 tables("0")
 tables("00")
-tables("00F")
+tables("00F")$codes
 ```
 
 ## Definitions
@@ -67,114 +55,26 @@ tables("00F")
 definitions()
 ```
 
-### Obstetrics
+## `pcs()`
 
 ```{r}
-pcs("10D20ZZ")
-```
-
-### Placement
-
-```{r}
-pcs("2W0UX0Z")
-```
-
-
-### Administration
-
-```{r}
-pcs("3E1938X")
-```
-
-
-### Measurement and Monitoring
-
-```{r}
-pcs("4B01XVZ")
-```
-
-
-### Extracorporeal or Systemic Assistance and Performance
-
-```{r}
-pcs("5A02110")
-```
-
-
-### Extracorporeal or Systemic Therapies
-
-```{r}
-pcs("6A0Z0ZZ")
-```
-
-
-### Osteopathic
-
-```{r}
-pcs("7W00X0Z")
-```
-
-
-### Other Procedures
-
-```{r}
-pcs("8C01X6J")
-```
-
-
-### Chiropractic
-
-```{r}
-pcs("9WB0XBZ")
-```
-
-
-### Imaging
-
-```{r}
-pcs("B00B0ZZ")
-```
-
-
-### Nuclear Medicine
-
-```{r}
-pcs("C0101ZZ")
-```
-
-### Radiation Therapy
-
-```{r}
-pcs("DG22DZZ")
-```
-
-
-
-### Physical Rehabilitation and Diagnostic Audiology
-
-```{r}
-pcs("F14Z01Z")
-```
-
-
-### Mental Health
-
-```{r}
-pcs("GZ10ZZZ")
-```
-
-
-### Substance Abuse Treatment
-
-```{r}
-pcs("HZ96ZZZ")
-```
-
-
-### New Technology
-
-```{r}
-pcs("XY0YX37")
+pcs("0G9000Z") # Medical and Surgical
+pcs("10D20ZZ") # Obstetrics
+pcs("2W0UX0Z") # Placement
+pcs("3E1938X") # Administration
+pcs("4B01XVZ") # Measurement and Monitoring
+pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
+pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
+pcs("7W00X0Z") # Osteopathic
+pcs("8C01X6J") # Other Procedures
+pcs("9WB0XBZ") # Chiropractic
+pcs("B00B0ZZ") # Imaging
+pcs("C0101ZZ") # Nuclear Medicine
+pcs("DG22DZZ") # Radiation Therapy
+pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
+pcs("GZ10ZZZ") # Mental Health
+pcs("HZ96ZZZ") # Substance Abuse Treatment
+pcs("XY0YX37") # New Technology
 ```
 
 <br>

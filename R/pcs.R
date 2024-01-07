@@ -21,10 +21,12 @@ pcs <- function(x) {
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
   xs <- splitter(x)
-
   pin <- pins::pin_read(mount_board(), "pcs_tbl2")
-  pin <- dplyr::distinct(
-    vctrs::vec_slice(pin, pin$code_1 == xs[1] & pin$code_2 == xs[2] & pin$code_3 == xs[3]))
+  pin <- dplyr::filter(pin,
+                       code_1 == xs[1],
+                       code_2 == xs[2],
+                       code_3 == xs[3])
+
 
   # table _______________________
   tbl <- dplyr::tibble(
@@ -32,45 +34,76 @@ pcs <- function(x) {
     name  = unlist(pin[c("name_1", "name_2", "name_3")], use.names = FALSE),
     code  = unlist(pin[c("code_1", "code_2", "code_3")], use.names = FALSE),
     label = unlist(pin[c("label_1", "label_2", "label_3")], use.names = FALSE),
-    table = pin$code_table)
+    table = c(xs[1], collapser(xs[1:2]), collapser(xs[1:3])))
 
   pin <- pin[c("code_table", "rows")] |> tidyr::unnest(rows)
 
-  tbl$row <- list(unique(pin$row_id))
+  pos <- list(
+    `4` = glue::glue_col("{silver {green {pin[pin$row_pos == '4', ]$row_code}}|--[{italic {pin[pin$row_pos == '4', ]$row_id}}]-->}"),
+    `5` = glue::glue_col("{silver {green {pin[pin$row_pos == '5', ]$row_code}}|--[{italic {pin[pin$row_pos == '5', ]$row_id}}]-->}"),
+    `6` = glue::glue_col("{silver {green {pin[pin$row_pos == '6', ]$row_code}}|--[{italic {pin[pin$row_pos == '6', ]$row_id}}]-->}"),
+    `7` = glue::glue_col("{silver {green {pin[pin$row_pos == '7', ]$row_code}}|--[{italic {pin[pin$row_pos == '7', ]$row_id}}]}"))
 
   # axis 4 _______________________
-  x4 <- dplyr::distinct(vctrs::vec_slice(pin, pin$row_pos == "4" & pin$row_code == xs[4]))
+  x4 <- pin |>
+    dplyr::filter(row_pos == "4",
+                  row_code == xs[4]) |>
+    dplyr::mutate(code_table = glue::glue("{code_table}{row_code}"))
 
   # axis 5 _______________________
-  x5 <- dplyr::distinct(vctrs::vec_slice(pin, pin$row_pos == "5" & pin$row_code == xs[5]))
+  x5 <- pin |>
+    dplyr::filter(row_pos == "5",
+                  row_code == xs[5],
+                  row_id %in% c(x4$row_id))
+
+  x5 <- dplyr::mutate(x5,
+        code_table = glue::glue("{dplyr::filter(x4, row_id %in% c(x5$row_id))$code_table}{row_code}"))
 
   # axis 6 _______________________
-  x6 <- dplyr::distinct(vctrs::vec_slice(pin, pin$row_pos == "6" & pin$row_code == xs[6]))
+  x6 <- pin |>
+    dplyr::filter(row_pos == "6",
+                  row_code == xs[6],
+                  row_id %in% c(x5$row_id))
+
+  x6 <- dplyr::mutate(x6,
+        code_table = glue::glue("{dplyr::filter(x5, row_id %in% c(x6$row_id))$code_table}{row_code}"))
 
   # axis 7 _______________________
-  x7 <- dplyr::distinct(vctrs::vec_slice(pin, pin$row_pos == "7" & pin$row_code == xs[7]))
+  x7 <- pin |>
+    dplyr::filter(row_pos == "7",
+                  row_code == xs[7],
+                  row_id %in% c(x6$row_id))
 
-  # determine valid code from table row _______________________
-  axes <- vctrs::vec_rbind(x4, x5, x6, x7)
-  rw <- dplyr::count(axes, row_pos)
-  rw <- vctrs::vec_slice(rw, rw$n == 1) |> dplyr::pull(row_pos)
-
-  if (!vctrs::vec_is_empty(rw)) {
-    id <- vctrs::vec_slice(axes, axes$row_pos == rw[!is.na(rw)]) |>
-      dplyr::pull(row_id)
-    axes <- vctrs::vec_slice(axes, axes$row_id == id[!is.na(id)])
-    }
+  x7 <- dplyr::mutate(x7,
+        code_table = glue::glue("{dplyr::filter(x6, row_id %in% c(x7$row_id))$code_table}{row_code}"))
 
   # clean up for return _______________________
-  axes <- axes[c('row_pos', 'row_name', 'row_code', 'row_label', 'code_table', 'row_id')]
+  axes <- vctrs::vec_rbind(x4, x5, x6, x7)[c('row_pos',
+                                             'row_name',
+                                             'row_code',
+                                             'row_label',
+                                             'code_table',
+                                             'row_id')]
 
   colnames(axes) <- c("axis", "name", "code", "label", "table", "row")
 
-  axes$row <- as.list(axes$row)
+  if (nchar(x) > 3L) {
+    key <- vctrs::vec_count(axes$row) |>
+      dplyr::filter(count == max(count)) |>
+      dplyr::pull(key)
 
-  results <- na.omit(vctrs::vec_rbind(tbl, axes))
+    results <- axes |>
+      dplyr::filter(row == key) |>
+      dplyr::select(-row) |>
+      dplyr::bind_rows(tbl) |>
+      dplyr::arrange(axis)
+  }
 
-  dplyr::distinct(results, axis, .keep_all = TRUE)
+  if (nchar(x) == 3L) results <- tbl
+
+  attr(results, "pos") <- pos
+
+  return(results)
 }
 
 #' @noRd
@@ -231,9 +264,9 @@ pcs.old2 <- function(x) {
   # table _______________________
   tbl <- dplyr::tibble(
     axis  = as.character(1:3),
-    name  = unlist(pre[c("title_1", "title_2", "title_3")], use.names = FALSE),
-    code  = unlist(pre[c("code_1", "code_2", "code_3")], use.names = FALSE),
-    label = unlist(pre[c("label_1", "label_2", "label_3")], use.names = FALSE))
+    name  = delister(pre[c("title_1", "title_2", "title_3")]),
+    code  = delister(pre[c("code_1", "code_2", "code_3")]),
+    label = delister(pre[c("label_1", "label_2", "label_3")]))
 
   # axis 4 _______________________
   x4 <- dplyr::distinct(vctrs::vec_slice(post, post$axis_pos == "4" & post$axis_code == xs[4]))

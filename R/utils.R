@@ -21,6 +21,7 @@ github_raw <- function(x) {
   paste0("https://raw.githubusercontent.com/", x)
 }
 
+#' Wrapper to mount package's [pins::board_url()]
 #' @noRd
 mount_board <- function() {
   pins::board_url(github_raw(
@@ -29,6 +30,15 @@ mount_board <- function() {
 
 #' @noRd
 `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
+
+#' Wrapper for [unlist()], with `use.names` set to `FALSE`
+#' @param x character vector
+#' @return split character vector
+#' @export
+#' @keywords internal
+delister <- function(x) {
+  unlist(x, use.names = FALSE)
+}
 
 #' Wrapper for [strsplit()] that unlists result
 #' @param x character vector

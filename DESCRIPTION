@@ -21,7 +21,8 @@ Imports:
    rlang,
    vctrs,
    zeallot,
-   janitor
+   janitor,
+   glue
 Suggests: 
     knitr,
     rmarkdown,
