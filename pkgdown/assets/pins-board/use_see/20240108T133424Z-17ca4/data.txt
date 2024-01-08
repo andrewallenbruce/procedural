@@ -1,0 +1,10 @@
+file: use_see.qs
+file_size: 37897
+pin_hash: 17ca48a8a2e9b157
+type: qs
+title: 'use_see: a pinned 2825 x 6 data frame'
+description: ICD-10-PCS 2024 Index (Use/See)
+tags: ~
+urls: ~
+created: 20240108T133424Z
+api_version: 1

@@ -160,8 +160,7 @@ systems() |>
 
 ```{r}
 tables() |> 
-  mutate(n = purrr::map_dbl(codes, nrow)) |> 
-  arrange(desc(n))
+  arrange(desc(n_codes))
 ```
 
 # Definitions

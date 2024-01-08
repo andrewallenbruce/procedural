@@ -10,9 +10,9 @@
 #' @export
 definitions <- function(section = NULL, axis = NULL) {
 
-  # def <- pins::pin_read(mount_board(), "pcs_definitions_v3")
+  def <- pins::pin_read(mount_board(), "pcs_definitions_v3")
 
-  def <- pins::pin_read(mount_board(), "pcs_definitions_v2")
+  # def <- pins::pin_read(mount_board(), "pcs_definitions_v2")
 
   if (!is.null(section)) {
     if (is.numeric(section)) section <- as.character(section)

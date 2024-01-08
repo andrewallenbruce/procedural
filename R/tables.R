@@ -12,13 +12,13 @@
 #' @export
 tables <- function(x = NULL) {
 
-  # table <- pins::pin_read(mount_board(), "pcs_by_table_v2")
+  table <- pins::pin_read(mount_board(), "pcs_by_table_v2")
 
-  table <- pins::pin_read(mount_board(), "pcs_by_table") |>
-    tidyr::nest(codes = c(code, label)) |>
-    tidyr::separate_wider_position(table, c(section = 1, system = 1, operation = 1), cols_remove = FALSE) |>
-    tidyr::unite('system', section:system, remove = FALSE, sep = "") |>
-    dplyr::select(section, system, table, description, codes)
+  # table <- pins::pin_read(mount_board(), "pcs_by_table") |>
+  #   tidyr::nest(codes = c(code, label)) |>
+  #   tidyr::separate_wider_position(table, c(section = 1, system = 1, operation = 1), cols_remove = FALSE) |>
+  #   tidyr::unite('system', section:system, remove = FALSE, sep = "") |>
+  #   dplyr::select(section, system, table, description, codes)
 
   if (!is.null(x)) {
     x <- checks(x)
