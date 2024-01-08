@@ -42,22 +42,21 @@ pcs_index <- left_join(pcs_index, idx_term) |>
   fill(term, term_id) |>
   filter(level4 != "title")
 
-idx_lvl1 <- pcs_index |>
-  filter(attr == "level", value == "1") |>
-  mutate(level = value,
-         lvl1_id = row_number())
+# idx_lvl1 <- pcs_index |>
+#   filter(attr == "level", value == "1") |>
+#   mutate(level = value,
+#          lvl1_id = row_number())
+#
+# pcs_index <- left_join(pcs_index, idx_lvl1) |>
+#   fill(level, lvl1_id) |>
+#   mutate(level = NULL,
+#          letter_id = NULL) |>
+#   mutate(attr = case_when(attr == "level" ~ value, .default = attr)) |>
+#   rename(level = attr, lvl_1 = lvl1_id) |>
+#   filter(level %in% c(as.character(2:5), NA))
 
-pcs_index <- left_join(pcs_index, idx_lvl1) |>
-  fill(level, lvl1_id) |>
-  mutate(level = NULL,
-         letter_id = NULL) |>
-  mutate(attr = case_when(attr == "level" ~ value, .default = attr)) |>
-  rename(level = attr, lvl_1 = lvl1_id) |>
-  filter(level %in% c(as.character(2:5), NA))
-
-
-
-pcs_level <- pcs_index |>
+#-------------------------------------------
+pcs_index <- pcs_index |>
   mutate(level = case_when(
     attr == "level" & value == "1" ~ "1",
     attr == "level" & value == "2" ~ "2",
@@ -67,7 +66,26 @@ pcs_level <- pcs_index |>
     level = lag(level)) |>
   filter(is.na(attr)) |>
   mutate(attr = NULL,
-         letter_id = NULL) |>
+         letter_id = NULL)
+
+pcs_index <- pcs_index |>
+  mutate(code = case_when(elem %in% c("code", "codes", "tab") ~ value),
+         code = lead(code)) |>
+  filter(elem %nin% c("code", "codes", "tab")) |>
+  select(letter, term, elem, value, code, level, term_id)
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(pcs_index,
+                         name = "index_v1",
+                         description = "ICD-10-PCS 2024 Index v1",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
+
+#-------------------------------------------
+
+pcs_level <- pcs_index |>
   filter(level4 == "term", level5 %in% c("title", "term")) |>
   unite("level_label", level4:level9, na.rm = TRUE, sep = "_") |>
   fill(level)
