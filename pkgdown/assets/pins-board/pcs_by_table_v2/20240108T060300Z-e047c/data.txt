@@ -1,0 +1,10 @@
+file: pcs_by_table_v2.qs
+file_size: 668642
+pin_hash: e047cfa4f75ecea1
+type: qs
+title: 'pcs_by_table_v2: a pinned 895 x 5 data frame'
+description: ICD-10-PCS 2024 Tables and Codes
+tags: ~
+urls: ~
+created: 20240108T060300Z
+api_version: 1

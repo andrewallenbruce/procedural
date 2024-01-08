@@ -732,3 +732,29 @@ board |> pins::pin_write(definitions,
 
 board |> pins::write_board_manifest()
 
+## Approach Codes ##############
+# Sections 0-4, 7-9, X
+approach <- vctrs::vec_c(
+  "Open" = "0",
+  "Percutaneous" = "3",
+  "Percutaneous Endoscopic" = "4",
+  "Via Natural or Artificial Opening" = "7",
+  "Via Natural or Artificial Opening Endoscopic" = "8",
+  "Via Natural or Artificial Opening With Percutaneous Endoscopic Assistance" = "F",
+  "External" = "X"
+)
+
+sections <- c("0", "1", "2", "3", "4", "7", "8", "9", "X")
+
+definitions <- definitions() |>
+  mutate(axis_code = case_when(
+    axis == "5" & code %in% sections ~ approach[label], .default = axis_code))
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(definitions,
+                         name = "pcs_definitions_v3",
+                         description = "ICD-10-PCS 2024 Definitions",
+                         type = "qs")
+
+board |> pins::write_board_manifest()

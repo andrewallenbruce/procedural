@@ -2,6 +2,7 @@
 
 export(approaches)
 export(axes)
+export(code_range)
 export(collapser)
 export(definitions)
 export(delister)

@@ -12,6 +12,8 @@
 #' @export
 tables <- function(x = NULL) {
 
+  # table <- pins::pin_read(mount_board(), "pcs_by_table_v2")
+
   table <- pins::pin_read(mount_board(), "pcs_by_table") |>
     tidyr::nest(codes = c(code, label)) |>
     tidyr::separate_wider_position(table, c(section = 1, system = 1, operation = 1), cols_remove = FALSE) |>
@@ -19,12 +21,15 @@ tables <- function(x = NULL) {
     dplyr::select(section, system, table, description, codes)
 
   if (!is.null(x)) {
-    if (is.numeric(x)) x <- as.character(x)
-    if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
+    x <- checks(x)
+    if (nchar(x) > 3L)  {x <- collapser(splitter(x)[1:3])}
     if (nchar(x) == 1L) {table <- vctrs::vec_slice(table, table$section == x)}
     if (nchar(x) == 2L) {table <- vctrs::vec_slice(table, table$system == x)}
     if (nchar(x) == 3L) {table <- vctrs::vec_slice(table, table$table == x)}
   }
+
+  table <- dplyr::mutate(table, n_codes = purrr::map_dbl(codes, nrow))
+
   return(table)
 }
 

@@ -15,10 +15,10 @@
 #' @export
 pcs <- function(x) {
 
+  x <- checks(x)
+
   if (nchar(x) < 3L || nchar(x) > 7L) {cli::cli_abort(
     "{.fn pcs} only accepts a {.cls {class(x)}} vector 3-7 chars long.")}
-
-  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
   xs <- splitter(x)
   pin <- pins::pin_read(mount_board(), "pcs_tbl2")
@@ -38,11 +38,11 @@ pcs <- function(x) {
 
   pin <- pin[c("code_table", "rows")] |> tidyr::unnest(rows)
 
-  pos <- list(
-    `4` = glue::glue_col("{silver {green {pin[pin$row_pos == '4', ]$row_code}}|--[{italic {pin[pin$row_pos == '4', ]$row_id}}]-->}"),
-    `5` = glue::glue_col("{silver {green {pin[pin$row_pos == '5', ]$row_code}}|--[{italic {pin[pin$row_pos == '5', ]$row_id}}]-->}"),
-    `6` = glue::glue_col("{silver {green {pin[pin$row_pos == '6', ]$row_code}}|--[{italic {pin[pin$row_pos == '6', ]$row_id}}]-->}"),
-    `7` = glue::glue_col("{silver {green {pin[pin$row_pos == '7', ]$row_code}}|--[{italic {pin[pin$row_pos == '7', ]$row_id}}]}"))
+  # pos <- list(
+  #   `4` = glue::glue_col("{silver {green {pin[pin$row_pos == '4', ]$row_code}}|--[{italic {pin[pin$row_pos == '4', ]$row_id}}]-->}"),
+  #   `5` = glue::glue_col("{silver {green {pin[pin$row_pos == '5', ]$row_code}}|--[{italic {pin[pin$row_pos == '5', ]$row_id}}]-->}"),
+  #   `6` = glue::glue_col("{silver {green {pin[pin$row_pos == '6', ]$row_code}}|--[{italic {pin[pin$row_pos == '6', ]$row_id}}]-->}"),
+  #   `7` = glue::glue_col("{silver {green {pin[pin$row_pos == '7', ]$row_code}}|--[{italic {pin[pin$row_pos == '7', ]$row_id}}]}"))
 
   # axis 4 _______________________
   x4 <- pin |>
@@ -101,15 +101,40 @@ pcs <- function(x) {
 
   if (nchar(x) == 3L) results <- tbl
 
-  attr(results, "pos") <- pos
+  # attr(results, "pos") <- pos
 
   return(results)
 }
 
 #' @noRd
+checks <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
+
+  if (!nzchar(x)) {cli::cli_abort(
+    "x" = "{.strong x} cannot be an {.emph empty} string.",
+    call = call)}
+
+  if (nchar(x) > 7L) {cli::cli_abort(c(
+    "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
+    "x" = "{.strong {.val {x}}} is {.strong {.val {nchar(x)}}} characters long."),
+    call = call)}
+
+  if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
+    "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."),
+    call = call)}
+
+  if (is.numeric(x)) x <- as.character(x)
+
+  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
+
+  return(x)
+}
+
+#' @noRd
 prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
 
-  if (!nzchar(x)) {cli::cli_abort("x" = "{.strong x} cannot be an {.emph empty} string.", call = call)}
+  if (!nzchar(x)) {cli::cli_abort(
+    "x" = "{.strong x} cannot be an {.emph empty} string.",
+    call = call)}
 
   if (nchar(x) > 7L) {cli::cli_abort(c(
       "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
@@ -117,7 +142,8 @@ prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
       call = call)}
 
   if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
-      "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."), call = call)}
+      "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."),
+      call = call)}
 
   if (is.numeric(x)) x <- as.character(x)
 

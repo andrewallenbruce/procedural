@@ -71,7 +71,7 @@ pcs("0016070")
 
 ```{r echo=FALSE, eval=FALSE}
 tibble(
-  Position = c("Label", " ", "Meaning"),
+  Position = c("Label", "Code", "Meaning"),
   `1` = c("Section", "0", "Medical and Surgical"),
   `2` = c("Body System", "0", "Central Nervous System and Cranial Nerves"),
   `3` = c("Operation", "1", "Bypass"),
@@ -85,7 +85,7 @@ tibble(
   tab_spanner(label = "Code", columns = c(`1`, `2`, `3`, `4`, `5`, `6`, `7`)) |>
   cols_align(align = 'center') |> 
   opt_table_font(font = google_font(name = "Rubik")) |> 
-  opt_table_outline() |> 
+  #opt_table_outline() |> 
   opt_table_lines(extent = "all") |> 
   tab_options(
     column_labels.vlines.style = "solid",
@@ -164,27 +164,23 @@ tables() |>
   arrange(desc(n))
 ```
 
-```{r}
-prp <- procedural:::prep("0016")
-prp
-```
-
-
-```{r}
-prp$section <- sections(prp$section)[c('code', 'label')]
-prp$system <- systems(prp$system)[c('code', 'label')]
-prp$table <- tables(prp$table)[c('table', 'description', 'codes')]
-prp$row <- rows(prp$row)[c('row', 'axis_title', 'axis_code', 'axis_label')]
-prp
-```
-
 # Definitions
 
 ```{r}
 definitions() |> 
   summarise(n = n(), 
-            .by = c(code, section, axis, axis_name))
+            .by = c(code, section, axis, axis_name)) |> 
+  arrange(axis)
 ```
+
+
+```{r}
+definitions(section = "F") |> 
+  filter(axis == "5") |> 
+  select(label) |> 
+  mutate(axis_code = row_number(), .before = 1)
+```
+
 
 ## Medical and Surgical
 
@@ -210,7 +206,7 @@ pcs("0016070") |>
   )
 ```
 
-```{r}
+```{r echo=FALSE, eval=FALSE}
 "#0B3D45"
 
 "#3D0B45"
