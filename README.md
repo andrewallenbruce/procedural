@@ -12,7 +12,10 @@ coverage](https://codecov.io/gh/andrewallenbruce/procedural/branch/main/graph/ba
 [![R-CMD-check](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-## :package: Installation
+The goal of **`procedural`** is to provide a set of tools for working
+with the **2024 ICD-10-PCS** procedure classification system.
+
+# :package: Installation
 
 You can install **`procedural`** from [GitHub](https://github.com/)
 with:
@@ -22,103 +25,161 @@ with:
 pak::pak("andrewallenbruce/procedural")
 ```
 
-## :beginner: Usage
+# :beginner: Usage
 
 ``` r
 library(procedural)
 ```
 
+**ICD-10-PCS**, or **the International Classification of Diseases, 10th
+Revision, Procedure Coding System**, is a procedure classification
+system used to code procedures performed in hospital inpatient health
+care settings.
+
+## Index
+
+``` r
+index(search = "Achillorrhaphy")
+```
+
+    #> # A tibble: 1 × 5
+    #>   letter term           verb  pcs_value       table
+    #>   <chr>  <chr>          <chr> <chr>           <chr>
+    #> 1 A      Achillorrhaphy See   Repair, Tendons 0LQ
+
 ## Tables
 
 ``` r
-tables("0")
+tables("0L")
 ```
 
-    #> # A tibble: 601 × 5
-    #>    section system table description                                   codes     
-    #>    <chr>   <chr>  <chr> <chr>                                         <list>    
-    #>  1 0       00     001   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  2 0       00     002   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  3 0       00     005   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  4 0       00     007   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  5 0       00     008   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  6 0       00     009   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  7 0       00     00B   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  8 0       00     00C   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  9 0       00     00D   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #> 10 0       00     00F   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #> # ℹ 591 more rows
+    #> # A tibble: 19 × 6
+    #>    section system table description                             codes    n_codes
+    #>    <chr>   <chr>  <chr> <chr>                                   <list>     <dbl>
+    #>  1 0       0L     0L2   Medical and Surgical, Tendons, Change   <tibble>       4
+    #>  2 0       0L     0L5   Medical and Surgical, Tendons, Destruc… <tibble>      84
+    #>  3 0       0L     0L8   Medical and Surgical, Tendons, Division <tibble>      84
+    #>  4 0       0L     0L9   Medical and Surgical, Tendons, Drainage <tibble>     252
+    #>  5 0       0L     0LB   Medical and Surgical, Tendons, Excision <tibble>     168
+    #>  6 0       0L     0LC   Medical and Surgical, Tendons, Extirpa… <tibble>      84
+    #>  7 0       0L     0LD   Medical and Surgical, Tendons, Extract… <tibble>      28
+    #>  8 0       0L     0LH   Medical and Surgical, Tendons, Inserti… <tibble>       6
+    #>  9 0       0L     0LJ   Medical and Surgical, Tendons, Inspect… <tibble>       8
+    #> 10 0       0L     0LM   Medical and Surgical, Tendons, Reattac… <tibble>      56
+    #> 11 0       0L     0LN   Medical and Surgical, Tendons, Release  <tibble>     112
+    #> 12 0       0L     0LP   Medical and Surgical, Tendons, Removal  <tibble>      32
+    #> 13 0       0L     0LQ   Medical and Surgical, Tendons, Repair   <tibble>      84
+    #> 14 0       0L     0LR   Medical and Surgical, Tendons, Replace… <tibble>     168
+    #> 15 0       0L     0LS   Medical and Surgical, Tendons, Reposit… <tibble>      56
+    #> 16 0       0L     0LT   Medical and Surgical, Tendons, Resecti… <tibble>      56
+    #> 17 0       0L     0LU   Medical and Surgical, Tendons, Supplem… <tibble>     168
+    #> 18 0       0L     0LW   Medical and Surgical, Tendons, Revision <tibble>      38
+    #> 19 0       0L     0LX   Medical and Surgical, Tendons, Transfer <tibble>      56
 
 ``` r
-tables("00")
+tables("0LQ")
 ```
 
-    #> # A tibble: 22 × 5
-    #>    section system table description                                   codes     
-    #>    <chr>   <chr>  <chr> <chr>                                         <list>    
-    #>  1 0       00     001   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  2 0       00     002   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  3 0       00     005   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  4 0       00     007   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  5 0       00     008   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  6 0       00     009   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  7 0       00     00B   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  8 0       00     00C   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #>  9 0       00     00D   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #> 10 0       00     00F   Medical and Surgical, Central Nervous System… <spc_tbl_>
-    #> # ℹ 12 more rows
+    #> # A tibble: 1 × 6
+    #>   section system table description                           codes    n_codes
+    #>   <chr>   <chr>  <chr> <chr>                                 <list>     <dbl>
+    #> 1 0       0L     0LQ   Medical and Surgical, Tendons, Repair <tibble>      84
 
 ``` r
-tables("00F")$codes
+tables("0LQ")$codes
 ```
 
     #> [[1]]
-    #> # A tibble: 20 × 2
-    #>    code    label                                                                
-    #>    <chr>   <chr>                                                                
-    #>  1 00F30ZZ Fragmentation in Intracranial Epidural Space, Open Approach          
-    #>  2 00F33ZZ Fragmentation in Intracranial Epidural Space, Percutaneous Approach  
-    #>  3 00F34ZZ Fragmentation in Intracranial Epidural Space, Percutaneous Endoscopi…
-    #>  4 00F3XZZ Fragmentation in Intracranial Epidural Space, External Approach      
-    #>  5 00F40ZZ Fragmentation in Intracranial Subdural Space, Open Approach          
-    #>  6 00F43ZZ Fragmentation in Intracranial Subdural Space, Percutaneous Approach  
-    #>  7 00F44ZZ Fragmentation in Intracranial Subdural Space, Percutaneous Endoscopi…
-    #>  8 00F4XZZ Fragmentation in Intracranial Subdural Space, External Approach      
-    #>  9 00F50ZZ Fragmentation in Intracranial Subarachnoid Space, Open Approach      
-    #> 10 00F53ZZ Fragmentation in Intracranial Subarachnoid Space, Percutaneous Appro…
-    #> 11 00F54ZZ Fragmentation in Intracranial Subarachnoid Space, Percutaneous Endos…
-    #> 12 00F5XZZ Fragmentation in Intracranial Subarachnoid Space, External Approach  
-    #> 13 00F60ZZ Fragmentation in Cerebral Ventricle, Open Approach                   
-    #> 14 00F63ZZ Fragmentation in Cerebral Ventricle, Percutaneous Approach           
-    #> 15 00F64ZZ Fragmentation in Cerebral Ventricle, Percutaneous Endoscopic Approach
-    #> 16 00F6XZZ Fragmentation in Cerebral Ventricle, External Approach               
-    #> 17 00FU0ZZ Fragmentation in Spinal Canal, Open Approach                         
-    #> 18 00FU3ZZ Fragmentation in Spinal Canal, Percutaneous Approach                 
-    #> 19 00FU4ZZ Fragmentation in Spinal Canal, Percutaneous Endoscopic Approach      
-    #> 20 00FUXZZ Fragmentation in Spinal Canal, External Approach
+    #> # A tibble: 84 × 2
+    #>    code    label                                                         
+    #>    <chr>   <chr>                                                         
+    #>  1 0LQ00ZZ Repair Head and Neck Tendon, Open Approach                    
+    #>  2 0LQ03ZZ Repair Head and Neck Tendon, Percutaneous Approach            
+    #>  3 0LQ04ZZ Repair Head and Neck Tendon, Percutaneous Endoscopic Approach 
+    #>  4 0LQ10ZZ Repair Right Shoulder Tendon, Open Approach                   
+    #>  5 0LQ13ZZ Repair Right Shoulder Tendon, Percutaneous Approach           
+    #>  6 0LQ14ZZ Repair Right Shoulder Tendon, Percutaneous Endoscopic Approach
+    #>  7 0LQ20ZZ Repair Left Shoulder Tendon, Open Approach                    
+    #>  8 0LQ23ZZ Repair Left Shoulder Tendon, Percutaneous Approach            
+    #>  9 0LQ24ZZ Repair Left Shoulder Tendon, Percutaneous Endoscopic Approach 
+    #> 10 0LQ30ZZ Repair Right Upper Arm Tendon, Open Approach                  
+    #> # ℹ 74 more rows
+
+## Rows
+
+``` r
+rows("0LQ")
+```
+
+    #> # A tibble: 28 × 6
+    #>    table row   description                                 rowid axes     n_axes
+    #>    <chr> <chr> <chr>                                       <int> <list>    <int>
+    #>  1 0LQ   0LQ0  Body Part, Head and Neck Tendon               983 <tibble>      5
+    #>  2 0LQ   0LQ1  Body Part, Shoulder Tendon, Right             983 <tibble>      5
+    #>  3 0LQ   0LQ2  Body Part, Shoulder Tendon, Left              983 <tibble>      5
+    #>  4 0LQ   0LQ3  Body Part, Upper Arm Tendon, Right            983 <tibble>      5
+    #>  5 0LQ   0LQ4  Body Part, Upper Arm Tendon, Left             983 <tibble>      5
+    #>  6 0LQ   0LQ5  Body Part, Lower Arm and Wrist Tendon, Rig…   983 <tibble>      5
+    #>  7 0LQ   0LQ6  Body Part, Lower Arm and Wrist Tendon, Left   983 <tibble>      5
+    #>  8 0LQ   0LQ7  Body Part, Hand Tendon, Right                 983 <tibble>      5
+    #>  9 0LQ   0LQ8  Body Part, Hand Tendon, Left                  983 <tibble>      5
+    #> 10 0LQ   0LQ9  Body Part, Trunk Tendon, Right                983 <tibble>      5
+    #> # ℹ 18 more rows
+
+``` r
+rows("0LQ0")
+```
+
+    #> # A tibble: 1 × 6
+    #>   table row   description                     rowid axes             n_axes
+    #>   <chr> <chr> <chr>                           <int> <list>            <int>
+    #> 1 0LQ   0LQ0  Body Part, Head and Neck Tendon   983 <tibble [5 × 4]>      5
+
+``` r
+rows("0LQ0")$axes
+```
+
+    #> [[1]]
+    #> # A tibble: 5 × 4
+    #>   axis  title     code  label                  
+    #>   <chr> <chr>     <chr> <chr>                  
+    #> 1 5     Approach  0     Open                   
+    #> 2 5     Approach  3     Percutaneous           
+    #> 3 5     Approach  4     Percutaneous Endoscopic
+    #> 4 6     Device    Z     No Device              
+    #> 5 7     Qualifier Z     No Qualifier
 
 ## Definitions
 
 ``` r
-definitions()
+definitions(section = "0", axis = "5") |> 
+  dplyr::filter(axis_code %in% c("0", "3", "4")) |> 
+  dplyr::select(label, definition)
 ```
 
-    #> # A tibble: 917 × 9
-    #>    code  section axis  axis_name axis_code label definition explanation includes
-    #>    <chr> <chr>   <chr> <chr>     <chr>     <chr> <chr>      <chr>       <chr>   
-    #>  1 0     Medica… 3     Operation 0         Alte… Modifying… Principal … Face li…
-    #>  2 0     Medica… 3     Operation 1         Bypa… Altering … Rerouting … Coronar…
-    #>  3 0     Medica… 3     Operation 2         Chan… Taking ou… All CHANGE… Urinary…
-    #>  4 0     Medica… 3     Operation 3         Cont… Stopping,… <NA>        Control…
-    #>  5 0     Medica… 3     Operation 4         Crea… Putting i… Used for g… Creatio…
-    #>  6 0     Medica… 3     Operation 5         Dest… Physical … None of th… Fulgura…
-    #>  7 0     Medica… 3     Operation 6         Deta… Cutting o… The body p… Below k…
-    #>  8 0     Medica… 3     Operation 7         Dila… Expanding… The orific… Percuta…
-    #>  9 0     Medica… 3     Operation 8         Divi… Cutting i… All or a p… Spinal …
-    #> 10 0     Medica… 3     Operation 9         Drai… Taking or… The qualif… Thorace…
-    #> # ℹ 907 more rows
+    #> # A tibble: 3 × 2
+    #>   label                   definition                                            
+    #>   <chr>                   <chr>                                                 
+    #> 1 Open                    Cutting through the skin or mucous membrane and any o…
+    #> 2 Percutaneous            Entry, by puncture or minor incision, of instrumentat…
+    #> 3 Percutaneous Endoscopic Entry, by puncture or minor incision, of instrumentat…
 
-## `pcs()`
+``` r
+pcs("0LQV3ZZ")
+```
+
+    #> # A tibble: 7 × 5
+    #>   axis  name        code  label                table  
+    #>   <chr> <chr>       <chr> <chr>                <chr>  
+    #> 1 1     Section     0     Medical and Surgical 0      
+    #> 2 2     Body System L     Tendons              0L     
+    #> 3 3     Operation   Q     Repair               0LQ    
+    #> 4 4     Body Part   V     Foot Tendon, Right   0LQV   
+    #> 5 5     Approach    3     Percutaneous         0LQV3  
+    #> 6 6     Device      Z     No Device            0LQV3Z 
+    #> 7 7     Qualifier   Z     No Qualifier         0LQV3ZZ
+
+## Codes
 
 ``` r
 pcs("0G9000Z") # Medical and Surgical
@@ -126,7 +187,7 @@ pcs("0G9000Z") # Medical and Surgical
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                table  
-    #>   <chr> <chr>       <chr> <chr>                <glue> 
+    #>   <chr> <chr>       <chr> <chr>                <chr>  
     #> 1 1     Section     0     Medical and Surgical 0      
     #> 2 2     Body System G     Endocrine System     0G     
     #> 3 3     Operation   9     Drainage             0G9    
@@ -141,7 +202,7 @@ pcs("10D20ZZ") # Obstetrics
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                           table  
-    #>   <chr> <chr>       <chr> <chr>                           <glue> 
+    #>   <chr> <chr>       <chr> <chr>                           <chr>  
     #> 1 1     Section     1     Obstetrics                      1      
     #> 2 2     Body System 0     Pregnancy                       10     
     #> 3 3     Operation   D     Extraction                      10D    
@@ -156,7 +217,7 @@ pcs("2W0UX0Z") # Placement
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label              table  
-    #>   <chr> <chr>       <chr> <chr>              <glue> 
+    #>   <chr> <chr>       <chr> <chr>              <chr>  
     #> 1 1     Section     2     Placement          2      
     #> 2 2     Body System W     Anatomical Regions 2W     
     #> 3 3     Operation   0     Change             2W0    
@@ -171,7 +232,7 @@ pcs("3E1938X") # Administration
 
     #> # A tibble: 7 × 5
     #>   axis  name                 code  label                                   table
-    #>   <chr> <chr>                <chr> <chr>                                   <glu>
+    #>   <chr> <chr>                <chr> <chr>                                   <chr>
     #> 1 1     Section              3     Administration                          3    
     #> 2 2     Body System          E     Physiological Systems and Anatomical R… 3E   
     #> 3 3     Operation            1     Irrigation                              3E1  
@@ -186,7 +247,7 @@ pcs("4B01XVZ") # Measurement and Monitoring
 
     #> # A tibble: 7 × 5
     #>   axis  name              code  label                      table  
-    #>   <chr> <chr>             <chr> <chr>                      <glue> 
+    #>   <chr> <chr>             <chr> <chr>                      <chr>  
     #> 1 1     Section           4     Measurement and Monitoring 4      
     #> 2 2     Body System       B     Physiological Devices      4B     
     #> 3 3     Operation         0     Measurement                4B0    
@@ -201,7 +262,7 @@ pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                                            table
-    #>   <chr> <chr>       <chr> <chr>                                            <glu>
+    #>   <chr> <chr>       <chr> <chr>                                            <chr>
     #> 1 1     Section     5     Extracorporeal or Systemic Assistance and Perfo… 5    
     #> 2 2     Body System A     Physiological Systems                            5A   
     #> 3 3     Operation   0     Assistance                                       5A0  
@@ -216,7 +277,7 @@ pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                                table  
-    #>   <chr> <chr>       <chr> <chr>                                <glue> 
+    #>   <chr> <chr>       <chr> <chr>                                <chr>  
     #> 1 1     Section     6     Extracorporeal or Systemic Therapies 6      
     #> 2 2     Body System A     Physiological Systems                6A     
     #> 3 3     Operation   0     Atmospheric Control                  6A0    
@@ -231,7 +292,7 @@ pcs("7W00X0Z") # Osteopathic
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                table  
-    #>   <chr> <chr>       <chr> <chr>                <glue> 
+    #>   <chr> <chr>       <chr> <chr>                <chr>  
     #> 1 1     Section     7     Osteopathic          7      
     #> 2 2     Body System W     Anatomical Regions   7W     
     #> 3 3     Operation   0     Treatment            7W0    
@@ -246,7 +307,7 @@ pcs("8C01X6J") # Other Procedures
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label               table  
-    #>   <chr> <chr>       <chr> <chr>               <glue> 
+    #>   <chr> <chr>       <chr> <chr>               <chr>  
     #> 1 1     Section     8     Other Procedures    8      
     #> 2 2     Body System C     Indwelling Device   8C     
     #> 3 3     Operation   0     Other Procedures    8C0    
@@ -261,7 +322,7 @@ pcs("9WB0XBZ") # Chiropractic
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label              table  
-    #>   <chr> <chr>       <chr> <chr>              <glue> 
+    #>   <chr> <chr>       <chr> <chr>              <chr>  
     #> 1 1     Section     9     Chiropractic       9      
     #> 2 2     Body System W     Anatomical Regions 9W     
     #> 3 3     Operation   B     Manipulation       9WB    
@@ -276,7 +337,7 @@ pcs("B00B0ZZ") # Imaging
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                  table  
-    #>   <chr> <chr>       <chr> <chr>                  <glue> 
+    #>   <chr> <chr>       <chr> <chr>                  <chr>  
     #> 1 1     Section     B     Imaging                B      
     #> 2 2     Body System 0     Central Nervous System B0     
     #> 3 3     Type        0     Plain Radiography      B00    
@@ -291,7 +352,7 @@ pcs("C0101ZZ") # Nuclear Medicine
 
     #> # A tibble: 7 × 5
     #>   axis  name         code  label                           table  
-    #>   <chr> <chr>        <chr> <chr>                           <glue> 
+    #>   <chr> <chr>        <chr> <chr>                           <chr>  
     #> 1 1     Section      C     Nuclear Medicine                C      
     #> 2 2     Body System  0     Central Nervous System          C0     
     #> 3 3     Type         1     Planar Nuclear Medicine Imaging C01    
@@ -306,7 +367,7 @@ pcs("DG22DZZ") # Radiation Therapy
 
     #> # A tibble: 7 × 5
     #>   axis  name               code  label                                  table  
-    #>   <chr> <chr>              <chr> <chr>                                  <glue> 
+    #>   <chr> <chr>              <chr> <chr>                                  <chr>  
     #> 1 1     Section            D     Radiation Therapy                      D      
     #> 2 2     Body System        G     Endocrine System                       DG     
     #> 3 3     Modality           2     Stereotactic Radiosurgery              DG2    
@@ -321,7 +382,7 @@ pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
 
     #> # A tibble: 7 × 5
     #>   axis  name                 code  label                                   table
-    #>   <chr> <chr>                <chr> <chr>                                   <glu>
+    #>   <chr> <chr>                <chr> <chr>                                   <chr>
     #> 1 1     Section              F     Physical Rehabilitation and Diagnostic… F    
     #> 2 2     Section Qualifier    1     Diagnostic Audiology                    F1   
     #> 3 3     Type                 4     Hearing Aid Assessment                  F14  
@@ -336,7 +397,7 @@ pcs("GZ10ZZZ") # Mental Health
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label               table  
-    #>   <chr> <chr>       <chr> <chr>               <glue> 
+    #>   <chr> <chr>       <chr> <chr>               <chr>  
     #> 1 1     Section     G     Mental Health       G      
     #> 2 2     Body System Z     None                GZ     
     #> 3 3     Type        1     Psychological Tests GZ1    
@@ -351,7 +412,7 @@ pcs("HZ96ZZZ") # Substance Abuse Treatment
 
     #> # A tibble: 7 × 5
     #>   axis  name        code  label                     table  
-    #>   <chr> <chr>       <chr> <chr>                     <glue> 
+    #>   <chr> <chr>       <chr> <chr>                     <chr>  
     #> 1 1     Section     H     Substance Abuse Treatment H      
     #> 2 2     Body System Z     None                      HZ     
     #> 3 3     Type        9     Pharmacotherapy           HZ9    
@@ -366,7 +427,7 @@ pcs("XY0YX37") # New Technology
 
     #> # A tibble: 7 × 5
     #>   axis  name                            code  label                    table  
-    #>   <chr> <chr>                           <chr> <chr>                    <glue> 
+    #>   <chr> <chr>                           <chr> <chr>                    <chr>  
     #> 1 1     Section                         X     New Technology           X      
     #> 2 2     Body System                     Y     Extracorporeal           XY     
     #> 3 3     Operation                       0     Introduction             XY0    

@@ -69,7 +69,7 @@ pcs("0016070")
 ```
 
 
-```{r echo=FALSE, eval=FALSE}
+```{r}
 tibble(
   Position = c("Label", "Code", "Meaning"),
   `1` = c("Section", "0", "Medical and Surgical"),
@@ -100,9 +100,17 @@ tibble(
 # Sections
 
 ```{r echo=FALSE}
-sections()[c('code', 'label')] |> 
+tables() |> 
+  group_by(section) |>
+  summarise(codes = sum(n_codes),
+            prop = codes / 78220) |>
+  rename(code = section) |> 
+  left_join(sections()[c('code', 'label')], by = join_by(code)) |> 
+  select(code, label, codes, prop) |> 
   mutate(id = row_number(), .before = 1) |>
   gt(rowname_col = "id") |> 
+  fmt_percent(columns = prop, decimals = 1) |>
+  fmt_number(columns = codes, decimals = 0) |>
   opt_table_font(font = google_font(name = "Rubik")) |> 
   cols_align(align = "center", columns = code) |>
   tab_style(style = list(cell_fill(color = "lightgray", alpha = 0.5), 
@@ -116,25 +124,23 @@ sections()[c('code', 'label')] |>
 # Systems
 
 ```{r}
-systems() |> 
-  select(sys.axis = name,
-         sys.code = code, 
-         sys.label = label) |>
-  rowwise() |> 
-  mutate(code = splitter(sys.code)[1]) |> 
-  ungroup() |>
-  left_join(sections(), by = join_by(code)) |> 
-  select(axis = name, 
-         code, 
-         label, 
-         sys.axis, 
-         sys.code, 
-         sys.label) |> 
-  select(section = label, 
-         code = sys.code, 
-         system = sys.label) |> 
+tables() |> 
+  summarise(codes = sum(n_codes),
+            prop = codes / 78220, 
+            .by = c(section, system)) |>
+  left_join(sections()[c('code', 'label')], 
+            by = join_by(section == code)) |> 
+  left_join(systems()[c('code', 'label')], 
+            by = join_by(system == code)) |> 
+  select(section = label.x, 
+         code = system, 
+         system = label.y, 
+         codes, 
+         prop) |> 
   gt(groupname_col = "section", 
      rowname_col = "system") |>
+  fmt_percent(columns = prop, decimals = 2) |>
+  fmt_number(columns = codes, decimals = 0) |>
   opt_table_font(font = google_font(name = "Rubik")) |> 
   cols_align(align = "center", columns = code) |>
   cols_label(code = "") |> 
@@ -151,8 +157,7 @@ systems() |>
     table.font.size = px(14),
     column_labels.border.bottom.width = px(0),
     column_labels.border.top.width = px(0),
-    row_group.font.size = px(16),
-    )
+    row_group.font.size = px(16))
 ```
 
 
@@ -162,6 +167,11 @@ systems() |>
 tables() |> 
   arrange(desc(n_codes))
 ```
+
+```{r}
+rows("041L")$axes
+```
+
 
 # Definitions
 

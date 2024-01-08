@@ -45,15 +45,56 @@ tables <- function(x = NULL) {
 #' @export
 rows <- function(x = NULL) {
 
-  rw <- pins::pin_read(mount_board(), "post_table") |>
-    dplyr::mutate(row = as.character(row)) |>
-    tidyr::fill(axis_pos, axis_title, row)
+  tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
+    tidyr::unnest(rows) |>
+    dplyr::select(table = code_table,
+                  axis = row_pos,
+                  title = row_name,
+                  code = row_code,
+                  label = row_label,
+                  rowid = row_id)
+
+  row_idx <- tbl |>
+    dplyr::filter(axis == "4") |>
+    tidyr::unite("row",
+                 table,
+                 code,
+                 sep = "",
+                 remove = FALSE,
+                 na.rm = TRUE) |>
+    dplyr::mutate(row_title = title,
+                  row_label = label)
+
+  tbl <- dplyr::left_join(tbl,
+                          row_idx,
+      by = dplyr::join_by(table, axis, title, code, label, rowid)) |>
+    tidyr::fill(row, row_title, row_label)
+
+  row_axes <- tbl |>
+    dplyr::filter(axis != "4") |>
+    dplyr::select(rowid,
+                  axis,
+                  title,
+                  code,
+                  label) |>
+    tidyr::nest(axes = c(axis, title, code, label))
+
+  tbl <- tbl |>
+    dplyr::left_join(row_axes, by = "rowid") |>
+    tidyr::unite("description",
+                 row_title,
+                 row_label,
+                 sep = ", ",
+                 remove = TRUE,
+                 na.rm = TRUE) |>
+    dplyr::select(table, row, description, rowid, axes) |>
+    dplyr::distinct()
+
+  tbl <- dplyr::mutate(tbl, n_axes = purrr::map_int(axes, nrow))
 
   if (!is.null(x)) {
-    if (is.numeric(x)) x <- as.character(x)
-    if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
-    if (nchar(x) == 3L) {rw <- vctrs::vec_slice(rw, rw$table == x)}
-    if (nchar(x) == 4L) {rw <- vctrs::vec_slice(rw, rw$row == x)}
+    if (nchar(x) == 3L) tbl <- dplyr::filter(tbl, table == x)
+    if (nchar(x) > 3L) tbl <- dplyr::filter(tbl, row == substr(x, 1, 4))
   }
-  return(rw)
+  return(tbl)
 }

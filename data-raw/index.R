@@ -10,6 +10,7 @@ library(janitor)
 #   clean_names()
 #
 # qs::qsave(pcs_index, "E:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
+`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
 pcs_index <- qs::qread("F:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
 
@@ -55,7 +56,84 @@ pcs_index <- left_join(pcs_index, idx_lvl1) |>
   filter(level %in% c(as.character(2:5), NA))
 
 
-########### Term Use / Table
+
+pcs_level <- pcs_index |>
+  mutate(level = case_when(
+    attr == "level" & value == "1" ~ "1",
+    attr == "level" & value == "2" ~ "2",
+    attr == "level" & value == "3" ~ "3",
+    attr == "level" & value == "4" ~ "4",
+    attr == "level" & value == "5" ~ "5"),
+    level = lag(level)) |>
+  filter(is.na(attr)) |>
+  mutate(attr = NULL,
+         letter_id = NULL) |>
+  filter(level4 == "term", level5 %in% c("title", "term")) |>
+  unite("level_label", level4:level9, na.rm = TRUE, sep = "_") |>
+  fill(level)
+
+lvl_ids <- pcs_level |>
+  filter(level_label %nin% c("term_term_see", "term_term_see_codes", "term_term_see_tab")) |>
+  count(term_id, level) |>
+  select(-n) |>
+  filter(level == "2") |>
+  pull(term_id)
+
+pcs_level <- pcs_level |>
+  filter(term_id %in% lvl_ids) |>
+  filter(level_label %nin% c("term_term_see", "term_term_see_codes", "term_term_see_tab"))
+
+lvl_grp_ids <- pcs_level |>
+  filter(level == "1") |>
+  mutate(level_group = row_number())
+
+pcs_level <- left_join(pcs_level, lvl_grp_ids) |> fill(level_group)
+
+sub_ids <- pcs_level |>
+  filter(level_label == "term_title") |>
+  mutate(subterm = value)
+
+pcs_level <- left_join(pcs_level, sub_ids) |>
+  fill(subterm) |>
+  rename(subgroup = level_group) |>
+  filter(level_label != "term_title")
+
+lvl_345 <- pcs_level |>
+  filter(level %in% c(as.character(3:5))) |>
+  pull(term_id) |>
+  unique()
+
+level_2 <- pcs_level |>
+  filter(term_id %nin% lvl_345) |>
+  mutate(elem = if_else(elem == "codes", "code", elem)) |>
+  select(elem, value, letter, term, term_id, subterm) |>
+  pivot_wider(names_from = elem, values_from = value) |>
+  unnest(cols = c(code, title)) |>
+  select(letter, term, subterm, title, code, term_id)
+
+lvl_245 <- pcs_level |>
+  filter(level %in% c('2', 4:5)) |>
+  pull(term_id) |>
+  unique()
+
+pcs_level |>
+  filter(term_id %in% lvl_345) |>
+  mutate(elem = if_else(elem == "codes", "code", elem),
+         level_label = str_remove(level_label, "term_term_"),
+         level_label = case_when(
+           level_label == "codes" ~ "code",
+           level_label == "term_codes" ~ "term_code",
+           level_label == "term_term_codes" ~ "term_term_code",
+           level_label == "term_term_term_codes" ~ "term_term_term_code",
+           .default = level_label)) |>
+  select(letter, term, subterm, value, level_label, term_id) |>
+  pivot_wider(names_from = level_label, values_from = value) |>
+  unnest(cols = c(title), keep_empty = TRUE) |>
+  unnest(cols = c(code), keep_empty = TRUE) |>
+  unnest(cols = c(term_title), keep_empty = TRUE) |>
+  unnest(cols = c(term_code), keep_empty = TRUE)
+
+###########-------------- Term Use / Table
 term_use <- pcs_index |>
   filter(level4 == "term", level5 == "use") |>
   select(term, value, level4:level9, letter, term_id) |>

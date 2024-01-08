@@ -44,6 +44,8 @@ pcs <- function(x) {
   #   `6` = glue::glue_col("{silver {green {pin[pin$row_pos == '6', ]$row_code}}|--[{italic {pin[pin$row_pos == '6', ]$row_id}}]-->}"),
   #   `7` = glue::glue_col("{silver {green {pin[pin$row_pos == '7', ]$row_code}}|--[{italic {pin[pin$row_pos == '7', ]$row_id}}]}"))
 
+  # attr(results, "pos") <- pos
+
   # axis 4 _______________________
   x4 <- pin |>
     dplyr::filter(row_pos == "4",
@@ -101,9 +103,9 @@ pcs <- function(x) {
 
   if (nchar(x) == 3L) results <- tbl
 
-  # attr(results, "pos") <- pos
+  results$table <- as.character(results$table)
 
-  return(results)
+  return(dplyr::distinct(results, .keep_all = TRUE))
 }
 
 #' @noRd

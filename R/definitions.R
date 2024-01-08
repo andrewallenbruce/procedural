@@ -28,3 +28,26 @@ definitions <- function(section = NULL, axis = NULL) {
     }
   return(def)
 }
+
+#' ICD-10-PCS Index
+#' @param search Search term
+#' @return a [dplyr::tibble()]
+#' @examples
+#' index(search = "Abdominohysterectomy")
+#'
+#' index(search = "Attain Ability(R) lead")
+#'
+#' @export
+index <- function(search = NULL) {
+
+  ind <- pins::pin_read(mount_board(), "use_see") |>
+    dplyr::select(letter, term, verb = type, pcs_value, table)
+
+  ind$verb <- stringr::str_to_sentence(ind$verb)
+
+  # ind |> dplyr::filter(verb == "Use")
+  # ind |> dplyr::filter(verb == "See")
+
+  if (!is.null(search)) ind <- vctrs::vec_slice(ind, ind$term == search)
+  return(ind)
+}

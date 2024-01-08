@@ -25,7 +25,9 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-## :package: Installation
+The goal of __`procedural`__ is to provide a set of tools for working with the __2024 ICD-10-PCS__ procedure classification system.
+
+# :package: Installation
 
 You can install __`procedural`__ from [GitHub](https://github.com/) with:
 
@@ -34,28 +36,54 @@ You can install __`procedural`__ from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/procedural")
 ```
 
-## :beginner: Usage
+# :beginner: Usage
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
 library(procedural)
 ```
 
 
+__ICD-10-PCS__, or __the International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system used to code procedures performed in hospital inpatient health care settings.
+
+
+## Index
+
+```{r}
+index(search = "Achillorrhaphy")
+```
+
 ## Tables
 
 ```{r}
-tables("0")
-tables("00")
-tables("00F")$codes
+tables("0L")
+tables("0LQ")
+tables("0LQ")$codes
 ```
+
+## Rows
+
+```{r}
+rows("0LQ")
+rows("0LQ0")
+rows("0LQ0")$axes
+```
+
 
 ## Definitions
 
 ```{r}
-definitions()
+definitions(section = "0", axis = "5") |> 
+  dplyr::filter(axis_code %in% c("0", "3", "4")) |> 
+  dplyr::select(label, definition)
 ```
 
-## `pcs()`
+
+```{r}
+pcs("0LQV3ZZ")
+```
+
+
+## Codes
 
 ```{r}
 pcs("0G9000Z") # Medical and Surgical
