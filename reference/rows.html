@@ -73,36 +73,27 @@ If <code>NULL</code> (default), returns all ~ 29k rows.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">rows</span><span class="op">(</span><span class="st">"00X"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    table axis_pos axis_title axis_code axis_label             row  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 00X   4        Body Part  F         Olfactory Nerve        00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 00X   4        Body Part  G         Optic Nerve            00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 00X   4        Body Part  H         Oculomotor Nerve       00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 00X   4        Body Part  J         Trochlear Nerve        00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 00X   4        Body Part  K         Trigeminal Nerve       00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 00X   4        Body Part  L         Abducens Nerve         00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 00X   4        Body Part  M         Facial Nerve           00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 00X   4        Body Part  N         Acoustic Nerve         00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 00X   4        Body Part  P         Glossopharyngeal Nerve 00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 00X   4        Body Part  Q         Vagus Nerve            00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    table row   description                       rowid axes              n_axes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 00X   00XF  Body Part, Olfactory Nerve           38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 00X   00XG  Body Part, Optic Nerve               38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 00X   00XH  Body Part, Oculomotor Nerve          38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 00X   00XJ  Body Part, Trochlear Nerve           38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 00X   00XK  Body Part, Trigeminal Nerve          38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 00X   00XL  Body Part, Abducens Nerve            38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 00X   00XM  Body Part, Facial Nerve              38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 00X   00XN  Body Part, Acoustic Nerve            38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 00X   00XP  Body Part, Glossopharyngeal Nerve    38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 00X   00XQ  Body Part, Vagus Nerve               38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 00X   00XR  Body Part, Accessory Nerve           38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 00X   00XS  Body Part, Hypoglossal Nerve         38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">rows</span><span class="op">(</span><span class="st">"00XF"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 27 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    table axis_pos axis_title axis_code axis_label             row  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 00X   4        Body Part  F         Olfactory Nerve        00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 00X   4        Body Part  G         Optic Nerve            00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 00X   4        Body Part  H         Oculomotor Nerve       00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 00X   4        Body Part  J         Trochlear Nerve        00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 00X   4        Body Part  K         Trigeminal Nerve       00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 00X   4        Body Part  L         Abducens Nerve         00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 00X   4        Body Part  M         Facial Nerve           00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 00X   4        Body Part  N         Acoustic Nerve         00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 00X   4        Body Part  P         Glossopharyngeal Nerve 00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 00X   4        Body Part  Q         Vagus Nerve            00XF </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   table row   description                rowid axes              n_axes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 00X   00XF  Body Part, Olfactory Nerve    38 <span style="color: #949494;">&lt;tibble [15 × 4]&gt;</span>     15</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
