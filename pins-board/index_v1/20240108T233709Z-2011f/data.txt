@@ -1,0 +1,10 @@
+file: index_v1.qs
+file_size: 115065
+pin_hash: 2011f6e8a7bc6652
+type: qs
+title: 'index_v1: a pinned 23027 x 7 data frame'
+description: ICD-10-PCS 2024 Index v1
+tags: ~
+urls: ~
+created: 20240108T233709Z
+api_version: 1
