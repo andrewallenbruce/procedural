@@ -8,10 +8,14 @@ pcs_2024_tables:
 - pcs_2024_tables/20231226T020115Z-9ab32/
 pcs_by_table:
 - pcs_by_table/20231228T202032Z-13cbe/
+pcs_by_table_v2:
+- pcs_by_table_v2/20240108T060300Z-e047c/
 pcs_definitions:
 - pcs_definitions/20231229T030942Z-916c2/
 pcs_definitions_v2:
 - pcs_definitions_v2/20240102T040741Z-81630/
+pcs_definitions_v3:
+- pcs_definitions_v3/20240108T054758Z-761d1/
 pcs_tbl2:
 - pcs_tbl2/20240103T114846Z-1531e/
 post_table:
