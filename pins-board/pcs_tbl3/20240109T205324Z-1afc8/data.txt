@@ -1,0 +1,10 @@
+file: pcs_tbl3.qs
+file_size: 124179
+pin_hash: 1afc8212ed2859dc
+type: qs
+title: 'pcs_tbl3: a pinned 14402 x 5 data frame'
+description: ICD-10-PCS Tables & Rows
+tags: ~
+urls: ~
+created: 20240109T205324Z
+api_version: 1

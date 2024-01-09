@@ -22,6 +22,8 @@ pcs_definitions_v3:
 - pcs_definitions_v3/20240108T054758Z-761d1/
 pcs_tbl2:
 - pcs_tbl2/20240103T114846Z-1531e/
+pcs_tbl3:
+- pcs_tbl3/20240109T205324Z-1afc8/
 post_table:
 - post_table/20240102T082010Z-efbd5/
 pre_table:
