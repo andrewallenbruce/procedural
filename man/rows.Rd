@@ -16,9 +16,3 @@ If \code{NULL} (default), returns all ~ 29k rows.}
 \description{
 ICD-10-PCS Rows
 }
-\examples{
-rows("00X")
-
-rows("00XF")
-
-}

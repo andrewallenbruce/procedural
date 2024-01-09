@@ -21,11 +21,12 @@ Imports:
    rlang,
    vctrs,
    zeallot,
-   glue,
-   stringr
+   glue
 Suggests: 
     knitr,
     rmarkdown,
     gt, 
     qs
 VignetteBuilder: knitr
+Remotes: 
+    github::rstudio/gt

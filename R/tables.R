@@ -37,7 +37,7 @@ tables <- function(x = NULL) {
 #' @param x 3 to 4-character string representing an ICD-10-PCS row within a table.
 #'    If `NULL` (default), returns all ~ 29k rows.
 #' @return [tibble()]
-#' @examples
+#' @examplesif interactive()
 #' rows("00X")
 #'
 #' rows("00XF")
@@ -45,6 +45,7 @@ tables <- function(x = NULL) {
 #' @export
 rows <- function(x = NULL) {
 
+  # ttbl <- pins::pin_read(mount_board(), "pcs_tbl3")
   tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
     tidyr::unnest(rows) |>
     dplyr::select(table = code_table,
@@ -77,7 +78,7 @@ rows <- function(x = NULL) {
                   title,
                   code,
                   label) |>
-    tidyr::nest(axes = c(axis, title, code, label))
+    tidyr::nest(.by = rowid, .key = "axes")
 
   tbl <- tbl |>
     dplyr::left_join(row_axes, by = "rowid") |>
@@ -88,9 +89,10 @@ rows <- function(x = NULL) {
                  remove = TRUE,
                  na.rm = TRUE) |>
     dplyr::select(table, row, description, rowid, axes) |>
+    dplyr::rowwise() |>
+    dplyr::mutate(axes = rlang::list2("row_{row}.{rowid}" := axes)) |>
+    dplyr::ungroup() |>
     dplyr::distinct()
-
-  tbl <- dplyr::mutate(tbl, n_axes = purrr::map_int(axes, nrow))
 
   if (!is.null(x)) {
     if (nchar(x) == 3L) tbl <- dplyr::filter(tbl, table == x)

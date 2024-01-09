@@ -143,3 +143,59 @@ board |> pins::pin_write(pcs_tbl2,
 
 board |> pins::write_board_manifest()
 
+########________________________________________
+tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
+  tidyr::unnest(rows) |>
+  dplyr::select(table = code_table,
+                axis = row_pos,
+                title = row_name,
+                code = row_code,
+                label = row_label,
+                rowid = row_id)
+
+row_idx <- tbl |>
+  dplyr::filter(axis == "4") |>
+  tidyr::unite("row",
+               table,
+               code,
+               sep = "",
+               remove = FALSE,
+               na.rm = TRUE) |>
+  dplyr::mutate(row_title = title,
+                row_label = label)
+
+tbl <- dplyr::left_join(tbl, row_idx,
+       by = dplyr::join_by(table, axis, title, code, label, rowid)) |>
+       tidyr::fill(row, row_title, row_label)
+
+row_axes <- tbl |>
+  dplyr::filter(axis != "4") |>
+  dplyr::select(rowid,
+                axis,
+                title,
+                code,
+                label) |>
+  tidyr::nest(.by = rowid, .key = "axes")
+
+ttbl <- tbl |>
+  dplyr::left_join(row_axes, by = "rowid") |>
+  tidyr::unite("description",
+               row_title,
+               row_label,
+               sep = ", ",
+               remove = TRUE,
+               na.rm = TRUE) |>
+  dplyr::select(table, row, description, rowid, axes) |>
+  dplyr::rowwise() |>
+  dplyr::mutate(axes = rlang::list2("row_{rowid}.{row}" := axes)) |>
+  dplyr::ungroup() |>
+  dplyr::distinct()
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(ttbl,
+                         name = "pcs_tbl3",
+                         description = "ICD-10-PCS Tables & Rows",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
