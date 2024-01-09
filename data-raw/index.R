@@ -309,3 +309,119 @@ pivot_wider(names_from = elem, values_from = value) |>
   mutate(codes = lead(codes)) |>
   print(n = 200)
 
+###--------------------------------------------------
+library(tidyverse)
+
+ind <- pins::pin_read(mount_board(), "index_v1")
+
+use_ids <- ind |>
+  filter(elem == "use") |>
+  pull(term_id) |>
+  unique()
+
+see_ids <- ind |>
+  filter(elem == "see") |>
+  pull(term_id) |>
+  unique()
+
+tlt_ids <- ind |>
+  filter(elem == "title") |>
+  pull(term_id) |>
+  unique()
+
+title <- ind |>
+  filter(term_id %in% as.character(tlt_ids)) |>
+  mutate(rowid = row_number())
+
+title_complete <- title |>
+  filter(!is.na(code), level == "1") |>
+  filter(term_id %nin% as.character(see_ids)) |>
+  filter(term_id %nin% as.character(use_ids)) |>
+  select(-elem, -level)
+
+title_incomplete <- title |>
+  filter(rowid %nin% as.character(title_complete$rowid)) |>
+  filter(term_id %nin% as.character(see_ids)) |>
+  select(-elem) |>
+  mutate(sub1 = case_when(is.na(code) & level == "1" ~ value, .default = NA_character_), .after = "term") |>
+  mutate(sub2 = case_when(is.na(code) & level == "2" ~ value, .default = NA_character_), .after = "sub1") |>
+  mutate(sub3 = case_when(is.na(code) & level == "3" ~ value, .default = NA_character_), .after = "sub2") |>
+  mutate(sub4 = case_when(is.na(code) & level == "4" ~ value, .default = NA_character_), .after = "sub3")
+
+sub1_grp <- title_incomplete |>
+  filter(!is.na(sub1)) |>
+  mutate(start = rowid,
+         end = dplyr::lead(start) - 1,
+         end = dplyr::case_when(start == max(start) ~ {dplyr::slice_tail(title_incomplete) |> dplyr::pull(rowid)}, .default = end)) |>
+  select(term, sub1, rowid, start)
+
+sub2_grp <- title_incomplete |>
+  filter(!is.na(sub2)) |>
+  mutate(start = rowid,
+         end = dplyr::lead(start) - 1,
+         end = dplyr::case_when(start == max(start) ~ {dplyr::slice_tail(title_incomplete) |> dplyr::pull(rowid)}, .default = end)) |>
+  select(term, sub2, rowid, start)
+
+sub3_grp <- title_incomplete |>
+  filter(!is.na(sub3)) |>
+  mutate(start = rowid,
+         end = dplyr::lead(start) - 1,
+         end = dplyr::case_when(start == max(start) ~ {dplyr::slice_tail(title_incomplete) |> dplyr::pull(rowid)}, .default = end)) |>
+  select(term, sub3, rowid, start)
+
+title_incomplete <- left_join(title_incomplete, sub1_grp) |>
+  fill(start) |>
+  group_by(start) |>
+  fill(sub1) |>
+  ungroup() |>
+  select(-start) |>
+  left_join(sub2_grp) |>
+  fill(start) |>
+  group_by(start, sub1) |>
+  fill(sub2) |>
+  ungroup() |>
+  select(-start) |>
+  left_join(sub3_grp) |>
+  fill(start) |>
+  group_by(start, sub2) |>
+  fill(sub3) |>
+  ungroup() |>
+  select(-start, -sub4, -level) |>
+  filter(!is.na(code))
+
+title_unite <- bind_rows(title_complete, title_incomplete) |>
+  arrange(rowid) |>
+  select(letter, term, sub1, sub2, sub3, value, code, term_id) |>
+  unite("sub2", sub2, sub3, sep = " ", remove = TRUE, na.rm = TRUE) |>
+  mutate(sub2 = na_if(sub2, "")) |>
+  unite("subterm", sub1, sub2, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(subterm = na_if(subterm, "")) |>
+  unite("value", subterm, value, sep = ", ", remove = TRUE, na.rm = TRUE) |>
+  mutate(value = na_if(value, ""))
+
+
+use <- ind |> filter(term_id %in% as.character(use_ids)) |>
+  select(letter, term, verb = elem, value, code, term_id)
+
+see <- ind |> filter(term_id %in% as.character(see_ids)) |>
+  mutate(subterm = case_when(elem == "title" ~ value, .default = NA_character_)) |>
+  group_by(term_id) |>
+  fill(subterm) |>
+  ungroup() |>
+  filter(elem == "see") |>
+  select(letter, term, subterm, verb = elem, value, code, term_id)
+
+index <- bind_rows(title_unite, see, use) |>
+  arrange(term_id) |>
+  select(letter, term, subterm, verb, value, code, term_id) |>
+  mutate(verb = str_to_sentence(verb))
+
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(index,
+                         name = "index_v2",
+                         description = "ICD-10-PCS 2024 Index v2",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
