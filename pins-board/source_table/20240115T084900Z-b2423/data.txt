@@ -1,0 +1,10 @@
+file: source_table.qs
+file_size: 177680
+pin_hash: b2423c914739f068
+type: qs
+title: 'source_table: a pinned 124533 x 9 data frame'
+description: ICD-10-PCS Tables & Rows-Source
+tags: ~
+urls: ~
+created: 20240115T084900Z
+api_version: 1

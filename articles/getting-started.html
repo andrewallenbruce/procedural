@@ -83,51 +83,81 @@ System</strong>, is a procedure classification system developed by <a href="http
 Health Information Systems</a> and adopted under <a href="https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act" class="external-link">HIPAA</a>
 for classifying procedures performed in hospital inpatient health care
 settings.</p>
-<p><br></p>
 <div class="section level2">
-<h2 id="coding-conventions">Coding Conventions<a class="anchor" aria-label="anchor" href="#coding-conventions"></a>
+<h2 id="history-structure-tables-and-organization">History, Structure, Tables, and Organization<a class="anchor" aria-label="anchor" href="#history-structure-tables-and-organization"></a>
 </h2>
-<p>PCS codes are composed of <strong>seven</strong> alphanumeric
-characters. Each character contains up to <strong>34</strong> possible
-values. The seven characters that make up a complete code have specific
-meanings that vary for each of the <strong>17</strong> sections of the
-manual.</p>
-<p>Each value represents a specific option for the general character
-definition. 10 digits (<code>0-9</code>) and 24 letters
-(<code>A-H</code>, <code>J-N</code>, and <code>P-Z</code>) may be used
-in each character.</p>
-<blockquote>
-<p>The letters <code>O</code> and <code>I</code> are not used so as to
-avoid confusion with the digits <code>0</code> and <code>1</code>.</p>
-</blockquote>
+<p>The World Health Organization has maintained the International
+Classification of Diseases (ICD) for recording cause of death since
+1893. It has updated the ICD periodically to reflect new discoveries in
+epidemiology and changes in medical understanding of disease.</p>
+<p>The Centers for Medicare &amp; Medicaid Services (CMS), the agency
+responsible for maintaining the inpatient procedure code set in the
+U.S., contracted with 3M Health Information Systems in 1993 to design
+and develop a procedural classification system that would replace Volume
+3 of ICD-9-CM.</p>
+<p>ICD-10-PCS was initially released in 1998. It has been updated
+annually since that time although not in use the entire time.</p>
+<p>The ICD-10-PCS code set has a logical, consistent structure that
+follows a logical, consistent process down to the individual character
+level. This means that the process of constructing codes in ICD-10-PCS
+is also logical and consistent. Individual letters and numbers, called
+“values,” are selected in sequence to occupy the seven spaces of the
+code, called “characters.” Once the coding system is learned, the
+process is simplified.</p>
 <div class="section level3">
-<h3 id="axes">Axes<a class="anchor" aria-label="anchor" href="#axes"></a>
+<h3 id="characters">Characters<a class="anchor" aria-label="anchor" href="#characters"></a>
 </h3>
-<p>Each character is an axis of classification that specifies
-information about the procedure performed.</p>
-<p>Within a defined code range, a character specifies the same type of
-information in that axis of classification.</p>
-<p>For example, The <strong>fifth</strong> axis of classification
-specifies the <em>Approach</em> in sections 0 through 4 and 7 through 9
-of the system.</p>
-<div id="czfeccrwig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<p>All codes in ICD-10-PCS are seven characters long. Each character in
+the seven-character code represents an aspect of the procedure, as shown
+in the following diagram of characters from the main section of
+ICD-10-PCS, called medical and surgical.</p>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="16%">
+<col width="20%">
+<col width="14%">
+<col width="12%">
+<col width="10%">
+<col width="14%">
+</colgroup>
+<thead><tr class="header">
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>Section</td>
+<td>Body System</td>
+<td>Root Operation</td>
+<td>Body Part</td>
+<td>Approach</td>
+<td>Device</td>
+<td>Qualifier</td>
+</tr></tbody>
+</table>
+<div id="cjwpkvpkqa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#czfeccrwig table {
+#cjwpkvpkqa table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#czfeccrwig thead, #czfeccrwig tbody, #czfeccrwig tfoot, #czfeccrwig tr, #czfeccrwig td, #czfeccrwig th {
+#cjwpkvpkqa thead, #cjwpkvpkqa tbody, #cjwpkvpkqa tfoot, #cjwpkvpkqa tr, #cjwpkvpkqa td, #cjwpkvpkqa th {
   border-style: none;
 }
 
-#czfeccrwig p {
+#cjwpkvpkqa p {
   margin: 0;
   padding: 0;
 }
 
-#czfeccrwig .gt_table {
+#cjwpkvpkqa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -153,12 +183,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_caption {
+#cjwpkvpkqa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#czfeccrwig .gt_title {
+#cjwpkvpkqa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -170,7 +200,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#czfeccrwig .gt_subtitle {
+#cjwpkvpkqa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -182,7 +212,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#czfeccrwig .gt_heading {
+#cjwpkvpkqa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -194,13 +224,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_bottom_border {
+#cjwpkvpkqa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_col_headings {
+#cjwpkvpkqa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -215,7 +245,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_col_heading {
+#cjwpkvpkqa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -235,7 +265,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#czfeccrwig .gt_column_spanner_outer {
+#cjwpkvpkqa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -247,15 +277,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#czfeccrwig .gt_column_spanner_outer:first-child {
+#cjwpkvpkqa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#czfeccrwig .gt_column_spanner_outer:last-child {
+#cjwpkvpkqa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#czfeccrwig .gt_column_spanner {
+#cjwpkvpkqa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -267,11 +297,11 @@ of the system.</p>
   width: 100%;
 }
 
-#czfeccrwig .gt_spanner_row {
+#cjwpkvpkqa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#czfeccrwig .gt_group_heading {
+#cjwpkvpkqa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -297,7 +327,7 @@ of the system.</p>
   text-align: left;
 }
 
-#czfeccrwig .gt_empty_group_heading {
+#cjwpkvpkqa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -312,15 +342,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#czfeccrwig .gt_from_md > :first-child {
+#cjwpkvpkqa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#czfeccrwig .gt_from_md > :last-child {
+#cjwpkvpkqa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#czfeccrwig .gt_row {
+#cjwpkvpkqa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -339,7 +369,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#czfeccrwig .gt_stub {
+#cjwpkvpkqa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -352,7 +382,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#czfeccrwig .gt_stub_row_group {
+#cjwpkvpkqa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -366,15 +396,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#czfeccrwig .gt_row_group_first td {
+#cjwpkvpkqa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#czfeccrwig .gt_row_group_first th {
+#cjwpkvpkqa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#czfeccrwig .gt_summary_row {
+#cjwpkvpkqa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -384,16 +414,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#czfeccrwig .gt_first_summary_row {
+#cjwpkvpkqa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_first_summary_row.thick {
+#cjwpkvpkqa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#czfeccrwig .gt_last_summary_row {
+#cjwpkvpkqa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -403,7 +433,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_grand_summary_row {
+#cjwpkvpkqa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -413,7 +443,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#czfeccrwig .gt_first_grand_summary_row {
+#cjwpkvpkqa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -423,7 +453,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_last_grand_summary_row_top {
+#cjwpkvpkqa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -433,11 +463,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_striped {
+#cjwpkvpkqa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#czfeccrwig .gt_table_body {
+#cjwpkvpkqa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -446,7 +476,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_footnotes {
+#cjwpkvpkqa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -460,7 +490,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_footnote {
+#cjwpkvpkqa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -469,7 +499,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#czfeccrwig .gt_sourcenotes {
+#cjwpkvpkqa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -483,7 +513,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#czfeccrwig .gt_sourcenote {
+#cjwpkvpkqa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -491,63 +521,63 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#czfeccrwig .gt_left {
+#cjwpkvpkqa .gt_left {
   text-align: left;
 }
 
-#czfeccrwig .gt_center {
+#cjwpkvpkqa .gt_center {
   text-align: center;
 }
 
-#czfeccrwig .gt_right {
+#cjwpkvpkqa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#czfeccrwig .gt_font_normal {
+#cjwpkvpkqa .gt_font_normal {
   font-weight: normal;
 }
 
-#czfeccrwig .gt_font_bold {
+#cjwpkvpkqa .gt_font_bold {
   font-weight: bold;
 }
 
-#czfeccrwig .gt_font_italic {
+#cjwpkvpkqa .gt_font_italic {
   font-style: italic;
 }
 
-#czfeccrwig .gt_super {
+#cjwpkvpkqa .gt_super {
   font-size: 65%;
 }
 
-#czfeccrwig .gt_footnote_marks {
+#cjwpkvpkqa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#czfeccrwig .gt_asterisk {
+#cjwpkvpkqa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#czfeccrwig .gt_indent_1 {
+#cjwpkvpkqa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#czfeccrwig .gt_indent_2 {
+#cjwpkvpkqa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#czfeccrwig .gt_indent_3 {
+#cjwpkvpkqa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#czfeccrwig .gt_indent_4 {
+#cjwpkvpkqa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#czfeccrwig .gt_indent_5 {
+#cjwpkvpkqa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -588,7 +618,537 @@ of the system.</p>
 </tbody>
 </table>
 </div>
+<p>An ICD-10-PCS code is best understood as the result of a process
+rather than as an assigned number. The coding process consists of
+assigning values from among the valid choices for that part of the
+system, following the rules governing the construction of codes. It is
+logical and systematic in its coding approach.</p>
+</div>
+<div class="section level3">
+<h3 id="values">Values<a class="anchor" aria-label="anchor" href="#values"></a>
+</h3>
+<p>One of 34 possible values can be assigned to each character in a
+code: the numbers 0–9 and the alphabet (except I and O, because they are
+easily confused with the numbers 1 and 0). A finished code looks like
+the example below.</p>
+<blockquote>
+<p><strong>02103D4</strong> <em>Bypass coronary artery, one artery from
+coronary vein with intraluminal device, percutaneous approach</em></p>
+</blockquote>
+<p>Choosing a specific value for each of the seven characters derives
+this code. Based on details about the procedure performed, values for
+each character specifying the section, body system, root operation, body
+part, approach, device, and qualifier are assigned.</p>
+<p>Because the definition of each character is a function of its actual
+physical position in the code, the same value placed in a different
+position in the code means something totally different. The value 0 in
+the 1st character means something different than 0 in the 2nd character,
+or 0 in the 3rd character, and so on.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="icd-10-pcs-system-organization">ICD-10-PCS System Organization<a class="anchor" aria-label="anchor" href="#icd-10-pcs-system-organization"></a>
+</h2>
+<p>ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9
+and the letters B-D, F-H and X. The broad procedure categories contained
+in these sections range from surgical procedures to substance abuse
+treatment and new technology. The complete ICD-10-PCS is presented in
+three parts: the Index, the Tables, and the List of Codes. There is also
+a list of guidelines in the ICD-10-PCS code book that instruct you on
+how to use the PCS code set.</p>
+<div class="section level3">
+<h3 id="medical-and-surgical-section">Medical and Surgical Section<a class="anchor" aria-label="anchor" href="#medical-and-surgical-section"></a>
+</h3>
+<p>The first section, Medical and Surgical, contains the great majority
+of procedures typically reported in an inpatient setting. As shown in
+the previous section discussing ICD-10-PCS code structure, all procedure
+codes in the Medical and Surgical section begin with the section value
+0.</p>
+<p><strong>Coding Example</strong></p>
+<p>Let’s take a look at an example. The below operative report will
+describe the excision of a dorsal ganglion located at the wrist level.
+When coding ICD-10-PCS, the code is built by selecting the appropriate
+characters to describe the intent, the approach, and other qualifying
+information on how the procedure is performed.</p>
+<p><strong>Operative Report:</strong> <em>Excision of dorsal ganglion,
+right wrist</em> With the patient under adequate anesthesia, the right
+upper extremity was prepped and draped in a sterile manner. The arm was
+exsanguinated and the tourniquet was elevated to 290 mm/Hg. A transverse
+incision was made over the dorsal ganglion. Using blunt dissection the
+dorsal ulnar sensory nerve branches and radial sensory nerve branches
+were dissected and retracted out of the operative field. The extensor
+tendon was then incised, dissected, and retracted out of the operative
+field. The ganglion was then further dissected to its origin from the
+dorsal distal scapholunate interosseus ligament and excised. Care was
+taken to protect ligament integrity The wound was then infiltrated with
+0.25% Marcaine. The tendons were allowed to resume their normal
+anatomical position. The skin was closed with 3-0 Prolene subcuticular
+stitch. Sterile dressings were applied. The tourniquet was deflated.</p>
+<ul>
+<li>Section 0 – Medical and Surgical</li>
+<li>Body System L – Tendons (Extensor tendon)</li>
+<li>Root Operation B – Excision (The tendon was excised and
+removed)</li>
+<li>Body Part 5 – Lower Arm, and Wrist, Right (The extensor tendon is
+located at the wrist level)</li>
+<li>Approach 0 – Open (An incision was performed and blunt dissection
+carried out through layers of tissue to expose site)</li>
+<li>Device Z – No Device</li>
+<li>Qualifier Z – No Device</li>
+</ul>
+<blockquote>
+<p>Coding Note: The purpose of the ICD-10-PCS code is to explain the
+purpose of the procedure by using every character to describe the way
+the procedure was performed.</p>
+</blockquote>
+<table class="table">
+<colgroup>
+<col width="17%">
+<col width="11%">
+<col width="14%">
+<col width="25%">
+<col width="8%">
+<col width="9%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Section</td>
+<td>Body System</td>
+<td>Root Operation</td>
+<td>Body Part</td>
+<td>Approach</td>
+<td>Device</td>
+<td>Qualifier</td>
+</tr>
+<tr class="even">
+<td>Medical &amp; Surgical</td>
+<td>Tendons</td>
+<td>Excision</td>
+<td>Lower Arm and Wrist, Right</td>
+<td>Open</td>
+<td>No Device</td>
+<td>No Qualifier</td>
+</tr>
+<tr class="odd">
+<td>0</td>
+<td>L</td>
+<td>B</td>
+<td>5</td>
+<td>0</td>
+<td>Z</td>
+<td>Z</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="medical-and-surgical-related-sections">Medical and Surgical Related Sections<a class="anchor" aria-label="anchor" href="#medical-and-surgical-related-sections"></a>
+</h3>
+<p>Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related
+sections. These sections include obstetrical procedures, administration
+of substances, measurement and monitoring of body functions, and
+extracorporeal therapies, as listed in the table below.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">code</span>, description <span class="op">=</span> <span class="va">label</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 2</span></span></span>
+<span><span class="co">#&gt;    value description                                          </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 0     Medical and Surgical                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1     Obstetrics                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2     Placement                                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 3     Administration                                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 4     Measurement and Monitoring                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 5     Extracorporeal or Systemic Assistance and Performance</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 6     Extracorporeal or Systemic Therapies                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 7     Osteopathic                                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 8     Other Procedures                                     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 9     Chiropractic</span></span></code></pre>
+<p>In sections 1 and 2, all seven characters define the same aspects of
+the procedure as in the Medical and Surgical section.</p>
+<p>Codes in sections 3-9 are structured for the most part like their
+counterparts in the Medical and Surgical section, with a few
+exceptions.</p>
+<p>For example, in sections 5 and 6, the 5th character is defined as
+duration instead of approach, as in this code for intra-aortic balloon
+pump (IABP):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"5A02210"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 5</span></span></span>
+<span><span class="co">#&gt;   axis  name        value label                                            table</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     Section     5     Extracorporeal or Systemic Assistance and Perfo… 5    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     Body System A     Physiological Systems                            5A   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     Operation   0     Assistance                                       5A0  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     Body System 2     Cardiac                                          5A02 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5     Duration    2     Continuous                                       5A022</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 6     Function    1     Output                                           5A02…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 7     Qualifier   0     Balloon Pump                                     5A02…</span></span></code></pre>
+<p>Additional differences include these uses of the 6th character:</p>
+<ul>
+<li>Section 3 defines the 6th character as substance.</li>
+<li>Sections 4 and 5 define the 6th character as function.</li>
+<li>Sections 7 through 9 define the 6th character as method.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="ancillary-sections">Ancillary Sections<a class="anchor" aria-label="anchor" href="#ancillary-sections"></a>
+</h3>
+<p>Sections B-D and F-H comprise the ancillary sections of ICD-10-PCS.
+These six sections include imaging procedures, nuclear medicine, and
+substance abuse treatment, as listed in table 2.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/sections.html">sections</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">code</span>, description <span class="op">=</span> <span class="va">label</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">value</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span>, <span class="st">"X"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
+<span><span class="co">#&gt;   value description                                     </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> B     Imaging                                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> C     Nuclear Medicine                                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> D     Radiation Therapy                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> F     Physical Rehabilitation and Diagnostic Audiology</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> G     Mental Health                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> H     Substance Abuse Treatment                       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> X     New Technology</span></span></code></pre>
+<p>The definitions of some characters in the ancillary sections differ
+from that seen in previous sections. In the Imaging section, the 3rd
+character is defined as root type, and the 5th and 6th characters define
+contrast and contrast/qualifier respectively, as in the CT scan example
+below.</p>
+<p>When coding for CT scans, the documentation must support all
+components for proper selection of the ICD-10-PCS code. The section for
+the first character will come from the Imaging section. The body system
+will be based on the area that is examined. The root type will be
+determined by the type of imaging (CT, MRI, X-ray). The body part is
+selected by determining the specific body area that was analyzed during
+the procedure. The contrast character is used to determine if high
+osmolar, low osmolar, or other type of contrast was used, if applicable.
+The qualifier character will be used to specify if enhanced or
+unenhanced images were taken.</p>
+<p>Example: CT scan of brain Technique: 2.5 mm thick axial images were
+obtained through the head with diatrizoate (high osmolar contrast).
+0.625 mm thick axial images as well as coronal and sagittal enhanced
+images were also submitted for interpretation.</p>
+<p>Findings: No intra- or extra-axial blood or fluid collection is
+present. There is no mass or shift of midline. Brain densities are
+normal. The ventricles and sulci are normal in size and configuration.
+Vascular structures are normal in appearance. The pituitary, orbits, and
+paranasal sinuses are unremarkable. The calvarium is intact.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"B02000Z"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 5</span></span></span>
+<span><span class="co">#&gt;   axis  name        value label                             table  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     Section     B     Imaging                           B      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     Body System 0     Central Nervous System            B0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     Type        2     Computerized Tomography (CT Scan) B02    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     Body Part   0     Brain                             B020   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5     Contrast    0     High Osmolar                      B0200  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 6     Qualifier   0     Unenhanced and Enhanced           B02000 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 7     Qualifier   Z     None                              B02000Z</span></span></code></pre>
+<p>Additional differences include:</p>
+<ul>
+<li>Section C defines the 5th character as radionuclide.</li>
+<li>Section D defines the 5th character as modality qualifier and the
+6th character as isotope.</li>
+<li>Section F defines the 5th character as type qualifier and the 6th
+character as equipment.</li>
+<li>Sections G and H define the 3rd character as a root type
+qualifier.</li>
+<li>Section X defines the 7th character as the new technology group.
+This letter changes each year that new technology codes are added to the
+system. For example, Section X codes added for the first year have the
+7th character value 1, New Technology Group 1. The next year that
+contains new Section X codes the 7th character value is 2, for New
+Technology Group 2, etc.</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2 id="index">Index<a class="anchor" aria-label="anchor" href="#index"></a>
+</h2>
+<p>Main terms</p>
+<p>The ICD-10-PCS Index can be used to access the Tables. The Index
+mirrors the structure of the Tables, so it follows a consistent pattern
+of organization and use of hierarchies.</p>
+<p>The Index is organized as an alphabetic lookup. Two types of main
+terms are listed in the Index:</p>
+<ul>
+<li>Based on the value of the 3rd character</li>
+<li>Common procedure terms</li>
+</ul>
+<p>For the Medical and Surgical and Related sections, the root operation
+values are used as main terms in the Index. In other sections, the
+values representing the general type of procedure performed, such as
+nuclear medicine or imaging type, are listed as main terms.</p>
+<p>For the Medical and Surgical and Related sections, values such as
+excision, bypass, and transplantation are included as main terms in the
+index. The applicable body system entries are listed beneath the main
+term and refer to a specific table. For the ancillary sections, values
+such as fluoroscopy and positron emission tomography are listed as main
+terms.</p>
+<p>In the example below, the index entry “bypass” refers to the Medical
+and Surgical section tables for all applicable body systems, including
+anatomical regions and central nervous system.</p>
+<p>Bypass by Body System Peritoneal Cavity 0W1G Spinal Canal 001U</p>
+<p>The body system listings may be followed by entries for specific body
+parts, as in the excerpt below.</p>
+<p>by Body Part Artery Anterior Chamber Left 08133 Right 08123 Axillary
+Left 03160 Right 03150 Brachial Left 03180 Right 03170 Common Carotid
+Left 031J0 Right 031H0</p>
+<p>In the root operations change, insertion, removal, and revision, the
+device entries are further defined by the body part the device is
+inserted into/or on.</p>
+<div class="section level3">
+<h3 id="common-procedure-terms">Common Procedure Terms<a class="anchor" aria-label="anchor" href="#common-procedure-terms"></a>
+</h3>
+<p>The second type of term listed in the Index uses procedure names,
+such as “appendectomy” or “fundoplication.” These entries are listed as
+main terms, and refer to a table or tables from which a valid code can
+be constructed, as shown in the following example:</p>
+<blockquote>
+<p>Cholecystectomy see Excision, Gallbladder 0FB4 see Resection,
+Gallbladder 0FT4</p>
+</blockquote>
+<p>When two or more root operations are listed for a procedure, you must
+study the operative report to determine which root operation was
+documented as the purpose of the procedure. For example, excision means
+to cut out or off a portion of a body part, while resection means to cut
+out or off ALL of the body part. If all of the gallbladder is removed,
+code to resection of gallbladder.</p>
+<p>Tables Tables are organized in a series, beginning with section 0,
+medical and surgical, and body system 0, central nervous, and proceeding
+in numerical order. Sections 0-9 are followed by sections B-D and F-H.
+The same convention is followed within each table for the second through
+the 7th characters — numeric values in order first, followed by
+alphabetical values in order.</p>
+<p>The following examples use the Medical and Surgical section to
+describe the organization and format of the ICD-10-PCS tables.</p>
+<p>The Medical and Surgical section (1st character 0) is organized by
+its 31 body system values. Each body system subdivision in the Medical
+and Surgical section contains an introductory table that lists the
+possible values for the remaining characters, given that body
+system.</p>
+<p>The Tables section is what is used to construct complete and valid
+codes. Based on the first three values of the code provided in the
+Index, the corresponding table can be located. The tables and characters
+are arranged by number, then by letter for each character.</p>
+<p>The root operation tables consist of four columns and a varying
+number of rows, as in the following example of the root operation
+Bypass, in the Central Nervous body system. Section Body System Root
+Operation The below operative report will describe ventriculoperitoneal
+(VP) shunt placement. The purpose of a VP shunt is for a valve to be
+placed into your head, with one catheter being placed in the cerebral
+ventricle and the other end in the peritoneal cavity, hence the
+ventriculoperitoneal procedure name. Patients who require a VP shunt
+tend to be diagnosed with hydrocephalus, which is a condition where
+there is an accumulation of cerebrospinal fluid (CSF) in the ventricles.
+The shunt removes the accumulated fluid from the brain into the
+peritoneal cavity.</p>
+<p>Operative Report: VP shunt placement The first incision was made at
+the level of the frontal area, and coagulation was used to control
+bleeding. Then, another incision was made at the level of the abdominal
+wall, and by using a tunneler, the peritoneal catheter was passed from
+the abdominal wall to the posterior parietal, where a small incision was
+also made and then up to the right frontal area. The catheter was
+primed, and the catheter used was a Bactiseal. Then, the programmable
+valve was set at 180 mm of water and was connected to the peritoneal
+catheter. At this point, using a previous bur hole, the Bactiseal
+ventricular catheter was soft passed into the ventricle and connected to
+the programmable valve. All of these areas of connection were then
+verified. Then, the peritoneal catheter was inserted into the peritoneal
+cavity, which was dissected in layers starting from the rectus muscle
+and then to the peritoneum. The catheter was introduced into the
+peritoneal cavity after verification of the dripping of CSF.</p>
+<p>00160J6 Bypass cerebral ventricle to peritoneal cavity with synthetic
+substitute, open approach</p>
+<p>When reviewing the description of the ICD-10-PCS code, you will
+notice the intent of the procedure is described with the root operation
+bypass, which is defined as altering the route of passage of the
+contents of a tubular body part. The highlighted keywords help determine
+the proper selection of the code, for example, the procedure required an
+incision in the frontal area and the abdominal wall to be able to insert
+the catheter. This will justify the character of “open” approach.</p>
+<p>(see table on page 152)</p>
+<p>The values for characters 1-3 are provided at the top of each table.
+Four columns contain the applicable values for characters 4-7, given the
+values in characters 1-3.</p>
+<p>A table may be separated into rows to specify the valid choices of
+values in characters 4-7. A code built using values from more than one
+row of a table is not a valid code. In the table above, there are only
+five choices for the 7th character of Body Part, U, Spinal Canal. You
+can’t cross the line to choose a 7th character from the row above.</p>
+<p>There are many tables in ICD-10-PCS besides the tables used to
+construct the codes. The appendices in the ICD-10-PCS code book contain
+many helpful tables.</p>
+<p>Appendix A contains a table that defines all root operations in the
+ICD-10-PCS code book. It lists not only the definition, but also an
+explanation and example(s) for each root operation. The root operations
+are listed by character value, in numeric order, followed by
+alphabetical order. For example, Root Operations - Alteration is listed
+with Definition, Explanation, and Examples such as face lift and breast
+augmentation.</p>
+<p>Appendix B is a Body Part Key. This is a very helpful tool to help
+match a specific body part to a descriptor in ICD-10-PCS. It is listed
+in alphabetic order.</p>
+<p>Appendix C is a Device Key. Similar to the body part key, it matches
+a device to a descriptor in ICD-10-PCS. For example, Brachytherapy seeds
+leads to Radioactive Element.</p>
+<p>Appendix D is the Device Aggregation Table. This table crosswalks
+specific device character value definitions for specific root operation
+in a specific body system to the more general device character value to
+be used. For example, the specific device Autologous Arterial Tissue,
+for all applicable operations in the heart and great vessels, lower
+arteries, lower veins, upper arteries, and upper veins leads to a
+General Device of 7 Autologous Tissue Substitute.</p>
+<p>Appendix E contains the Character Meanings tables. This gives an
+overview of the codes for an entire system in one place. The following
+example shows the introductory table for the Urinary system.</p>
+<p>The following example shows the introductory table for the urinary
+system.</p>
+<p>Table 3. Introductory table of values for the Medical and Surgical
+section urinary body system (characters 3-7) 0: Medical and Surgical T:
+Urinary System</p>
+<p>(see table on page 153)</p>
+<p>Appendix F contains the Substance Key. This table provides the
+substance term and then the corresponding ICD-10-PCS Value. For example,
+Seprafilm® has an ICD-10-PCS Value as an adhesion barrier.</p>
+<p>Appendix G contains Combination Clusters. This table is used for
+codes that require more than one ICD-10-PCS procedure code for correct
+reporting. An example is provided for insertion of a cardiac pacemaker
+lead into a coronary vein. The additional procedures describe the exact
+location of where the lead is inserted, which is required for correct
+reporting. The instructions in the Appendix specify that the first code
+in the cluster needs to be reported with one or more of the additional
+codes listed for all codes to be considered valid. In the example listed
+below, the codes are listed for the insertion of a cardiac
+resynchronization pacemaker pulse generator with the insertion of three
+leads. Code as many of the additional codes as are documented in the
+operative report.</p>
+<p>02H40JZ Insertion of pacemaker lead into coronary vein, open
+approach</p>
+<p>and</p>
+<p>02H60JZ Insertion of pacemaker lead into right atrium, open
+approach</p>
+<p>and</p>
+<p>02HK0JZ Insertion of pacemaker lead into right ventricle, open
+approach</p>
+<p>and</p>
+<p>0JH607Z Insertion of cardiac resynchronization pacemaker pulse
+generator into chest subcutaneous tissue and fascia, open approach</p>
+<p>Appendix H contains Non-OR Not Affecting MS-DRG Assignment codes.</p>
+<p>ICD-10-PCS Fundamentals ICD-10-PCS was designed and developed to
+adhere to recommendations made by the National Committee on Vital and
+Health Statistics (NCVHS). It also incorporates input from a wide range
+of organizations, individual physicians, healthcare professionals, and
+researchers.</p>
+<p>Several structural attributes were recommended for a new procedure
+coding system. These attributes include the following:</p>
+<p>Multiaxial structure Completeness Expandability Multiaxial structure
+The key attribute that provides the framework for all other structural
+attributes is multiaxial code structure. Multiaxial code structure makes
+it possible for the ICD-10-PCS to be complete, expandable, and to
+provide a high degree of flexibility and functionality.</p>
+<p>CODING TIP Multiaxial refers to “more than one axis” or developing on
+more than a single line.</p>
+<p>ICD-10-PCS codes are composed of seven characters. Each character can
+be considered an axis. Thus, the structure of the code is “multiaxial.”
+Each character represents a category of information that can be
+specified about the procedure performed. A character defines both the
+category of information and its physical position in the code.</p>
+<p>1 2 3 4 5 6 7 Section Body System Root Operation Body Part Approach
+Device Qualifier A character’s position can be understood as a
+semi-independent axis of classification that allows different specific
+values to be inserted into that space, and whose physical position
+remains stable. Within a defined code range, a character retains the
+general meaning that it confers on any value in that position. For
+example, the 5th character retains the general meaning “approach” in
+sections 0-4 and 7-9 of the system. Any specific value in the 5th
+character will define a specific approach, such as Open.</p>
+<p>Each group of values for a character contains all of the valid
+choices in relation to the other characters of the code, giving the
+system completeness. In the 5th character, for example, each
+significantly distinct approach is assigned its own approach value and
+all applicable approach values are included to represent the possible
+versions of a procedure.</p>
+<p>Each group of values for a character can be added to as needed,
+giving the system expandability. If a significantly new distinct
+approach is used to perform procedures, a new approach value can be
+added to the system in upcoming years.</p>
+<p>Each group of values is confined to its own character, giving
+ICD-10-PCS a stable, predictable readability across a wide range of
+codes. In sections 0-4 and 7-9 of the system, for example, the 5th
+character always represents the approach.</p>
+<p>ICD-10-PCS’ multiaxial structure houses its capacity for
+completeness, expandability, and flexibility, giving it a high degree of
+functionality for multiple uses.</p>
+<p>Completeness Completeness is considered a key structural attribute
+for a new procedure coding system. The specific recommendation for
+completeness includes these characteristics:</p>
+<p>A unique code is available for each significantly different
+procedure. Each code retains its unique definition. Codes are not
+reused. A unique code can be constructed for every significantly
+different procedure. This vastly enhances the data capturing
+process.</p>
+<p>Within each section, a character defines a consistent component of a
+code, and contains all applicable values for that character. The values
+define individual expressions (open, percutaneous) of the character’s
+general meaning (approach) that are then used to construct unique
+procedure codes.</p>
+<p>Because all approaches by which a procedure is performed are assigned
+a separate approach value in the system, every procedure which uses a
+different approach will have its own unique code. This is true of the
+other characters as well. The same procedure performed on a different
+body part has its own unique code; the same procedure performed using a
+different device has its own unique code; and so on.</p>
+<p>Unique Definitions Because ICD-10-PCS codes are constructed of
+individual values rather than lists of fixed codes and text
+descriptions, the unique, stable definition of a code in the system is
+retained. New values may be added to the system to represent a specific
+new approach or device or qualifier, but whole codes by design cannot be
+given new meanings and reused.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="coding-conventions">Coding Conventions<a class="anchor" aria-label="anchor" href="#coding-conventions"></a>
+</h2>
+<p>PCS codes are composed of <strong>seven</strong> alphanumeric
+characters. Each character contains up to <strong>34</strong> possible
+values. The seven characters that make up a complete code have specific
+meanings that vary for each of the <strong>17</strong> sections of the
+manual.</p>
+<p>Each value represents a specific option for the general character
+definition. 10 digits (<code>0-9</code>) and 24 letters
+(<code>A-H</code>, <code>J-N</code>, and <code>P-Z</code>) may be used
+in each character.</p>
+<blockquote>
+<p>The letters <code>O</code> and <code>I</code> are not used so as to
+avoid confusion with the digits <code>0</code> and <code>1</code>.</p>
+</blockquote>
+<div class="section level3">
+<h3 id="axes">Axes<a class="anchor" aria-label="anchor" href="#axes"></a>
+</h3>
+<p>Each character is an axis of classification that specifies
+information about the procedure performed.</p>
+<p>Within a defined code range, a character specifies the same type of
+information in that axis of classification.</p>
+<p>For example, The <strong>fifth</strong> axis of classification
+specifies the <em>Approach</em> in sections 0 through 4 and 7 through 9
+of the system.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  Position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Label"</span>, <span class="st">"Code"</span>, <span class="st">"Meaning"</span><span class="op">)</span>,</span>
 <span>  `1` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Section"</span>, <span class="st">"0"</span>, <span class="st">"Medical and Surgical"</span><span class="op">)</span>,</span>
@@ -613,24 +1173,24 @@ of the system.</p>
 <span>    heading.align <span class="op">=</span> <span class="st">"left"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**ICD-10-PCS** Code Structure"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="ensvgkslzb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="amekmtmons" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ensvgkslzb table {
+#amekmtmons table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ensvgkslzb thead, #ensvgkslzb tbody, #ensvgkslzb tfoot, #ensvgkslzb tr, #ensvgkslzb td, #ensvgkslzb th {
+#amekmtmons thead, #amekmtmons tbody, #amekmtmons tfoot, #amekmtmons tr, #amekmtmons td, #amekmtmons th {
   border-style: none;
 }
 
-#ensvgkslzb p {
+#amekmtmons p {
   margin: 0;
   padding: 0;
 }
 
-#ensvgkslzb .gt_table {
+#amekmtmons .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -656,12 +1216,12 @@ of the system.</p>
   border-left-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_caption {
+#amekmtmons .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ensvgkslzb .gt_title {
+#amekmtmons .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -673,7 +1233,7 @@ of the system.</p>
   border-bottom-width: 0;
 }
 
-#ensvgkslzb .gt_subtitle {
+#amekmtmons .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -685,7 +1245,7 @@ of the system.</p>
   border-top-width: 0;
 }
 
-#ensvgkslzb .gt_heading {
+#amekmtmons .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -697,13 +1257,13 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_bottom_border {
+#amekmtmons .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_col_headings {
+#amekmtmons .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -718,7 +1278,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_col_heading {
+#amekmtmons .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -738,7 +1298,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#ensvgkslzb .gt_column_spanner_outer {
+#amekmtmons .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -750,15 +1310,15 @@ of the system.</p>
   padding-right: 4px;
 }
 
-#ensvgkslzb .gt_column_spanner_outer:first-child {
+#amekmtmons .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ensvgkslzb .gt_column_spanner_outer:last-child {
+#amekmtmons .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ensvgkslzb .gt_column_spanner {
+#amekmtmons .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -770,11 +1330,11 @@ of the system.</p>
   width: 100%;
 }
 
-#ensvgkslzb .gt_spanner_row {
+#amekmtmons .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ensvgkslzb .gt_group_heading {
+#amekmtmons .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -800,7 +1360,7 @@ of the system.</p>
   text-align: left;
 }
 
-#ensvgkslzb .gt_empty_group_heading {
+#amekmtmons .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -815,15 +1375,15 @@ of the system.</p>
   vertical-align: middle;
 }
 
-#ensvgkslzb .gt_from_md > :first-child {
+#amekmtmons .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ensvgkslzb .gt_from_md > :last-child {
+#amekmtmons .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ensvgkslzb .gt_row {
+#amekmtmons .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -842,7 +1402,7 @@ of the system.</p>
   overflow-x: hidden;
 }
 
-#ensvgkslzb .gt_stub {
+#amekmtmons .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -855,7 +1415,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#ensvgkslzb .gt_stub_row_group {
+#amekmtmons .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -869,15 +1429,15 @@ of the system.</p>
   vertical-align: top;
 }
 
-#ensvgkslzb .gt_row_group_first td {
+#amekmtmons .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ensvgkslzb .gt_row_group_first th {
+#amekmtmons .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ensvgkslzb .gt_summary_row {
+#amekmtmons .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -887,16 +1447,16 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#ensvgkslzb .gt_first_summary_row {
+#amekmtmons .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_first_summary_row.thick {
+#amekmtmons .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ensvgkslzb .gt_last_summary_row {
+#amekmtmons .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -906,7 +1466,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_grand_summary_row {
+#amekmtmons .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -916,7 +1476,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#ensvgkslzb .gt_first_grand_summary_row {
+#amekmtmons .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -926,7 +1486,7 @@ of the system.</p>
   border-top-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_last_grand_summary_row_top {
+#amekmtmons .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -936,11 +1496,11 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_striped {
+#amekmtmons .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ensvgkslzb .gt_table_body {
+#amekmtmons .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -949,7 +1509,7 @@ of the system.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_footnotes {
+#amekmtmons .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -963,7 +1523,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_footnote {
+#amekmtmons .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -972,7 +1532,7 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#ensvgkslzb .gt_sourcenotes {
+#amekmtmons .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: solid;
@@ -986,7 +1546,7 @@ of the system.</p>
   border-right-color: #D3D3D3;
 }
 
-#ensvgkslzb .gt_sourcenote {
+#amekmtmons .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -994,63 +1554,63 @@ of the system.</p>
   padding-right: 5px;
 }
 
-#ensvgkslzb .gt_left {
+#amekmtmons .gt_left {
   text-align: left;
 }
 
-#ensvgkslzb .gt_center {
+#amekmtmons .gt_center {
   text-align: center;
 }
 
-#ensvgkslzb .gt_right {
+#amekmtmons .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ensvgkslzb .gt_font_normal {
+#amekmtmons .gt_font_normal {
   font-weight: normal;
 }
 
-#ensvgkslzb .gt_font_bold {
+#amekmtmons .gt_font_bold {
   font-weight: bold;
 }
 
-#ensvgkslzb .gt_font_italic {
+#amekmtmons .gt_font_italic {
   font-style: italic;
 }
 
-#ensvgkslzb .gt_super {
+#amekmtmons .gt_super {
   font-size: 65%;
 }
 
-#ensvgkslzb .gt_footnote_marks {
+#amekmtmons .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ensvgkslzb .gt_asterisk {
+#amekmtmons .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ensvgkslzb .gt_indent_1 {
+#amekmtmons .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ensvgkslzb .gt_indent_2 {
+#amekmtmons .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ensvgkslzb .gt_indent_3 {
+#amekmtmons .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ensvgkslzb .gt_indent_4 {
+#amekmtmons .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ensvgkslzb .gt_indent_5 {
+#amekmtmons .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1128,741 +1688,11 @@ of the system.</p>
 <div class="section level2">
 <h2 id="sections">Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
 </h2>
-<div id="hhelroxrjn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#hhelroxrjn table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#hhelroxrjn thead, #hhelroxrjn tbody, #hhelroxrjn tfoot, #hhelroxrjn tr, #hhelroxrjn td, #hhelroxrjn th {
-  border-style: none;
-}
-
-#hhelroxrjn p {
-  margin: 0;
-  padding: 0;
-}
-
-#hhelroxrjn .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#hhelroxrjn .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#hhelroxrjn .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#hhelroxrjn .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#hhelroxrjn .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#hhelroxrjn .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#hhelroxrjn .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#hhelroxrjn .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#hhelroxrjn .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#hhelroxrjn .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#hhelroxrjn .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#hhelroxrjn .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#hhelroxrjn .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#hhelroxrjn .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#hhelroxrjn .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hhelroxrjn .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#hhelroxrjn .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#hhelroxrjn .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#hhelroxrjn .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hhelroxrjn .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#hhelroxrjn .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hhelroxrjn .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#hhelroxrjn .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hhelroxrjn .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#hhelroxrjn .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#hhelroxrjn .gt_left {
-  text-align: left;
-}
-
-#hhelroxrjn .gt_center {
-  text-align: center;
-}
-
-#hhelroxrjn .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#hhelroxrjn .gt_font_normal {
-  font-weight: normal;
-}
-
-#hhelroxrjn .gt_font_bold {
-  font-weight: bold;
-}
-
-#hhelroxrjn .gt_font_italic {
-  font-style: italic;
-}
-
-#hhelroxrjn .gt_super {
-  font-size: 65%;
-}
-
-#hhelroxrjn .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#hhelroxrjn .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#hhelroxrjn .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#hhelroxrjn .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#hhelroxrjn .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#hhelroxrjn .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#hhelroxrjn .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>ICD-10-PCS 2024</strong> Sections</td>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="code">code</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label">label</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="# of Codes"># of Codes</th>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub">1</th>
-<td headers="stub_1_1 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_1 label" class="gt_row gt_left">Medical and Surgical</td>
-<td headers="stub_1_1 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="600" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">67.8K</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub">2</th>
-<td headers="stub_1_2 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">1</td>
-<td headers="stub_1_2 label" class="gt_row gt_left">Obstetrics</td>
-<td headers="stub_1_2 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="2.69209197980931" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">304</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub">3</th>
-<td headers="stub_1_3 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">2</td>
-<td headers="stub_1_3 label" class="gt_row gt_left">Placement</td>
-<td headers="stub_1_3 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="7.62464208755203" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">861</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub">4</th>
-<td headers="stub_1_4 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">3</td>
-<td headers="stub_1_4 label" class="gt_row gt_left">Administration</td>
-<td headers="stub_1_4 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="11.0960238509903" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">1.25K</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub">5</th>
-<td headers="stub_1_5 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">4</td>
-<td headers="stub_1_5 label" class="gt_row gt_left">Measurement and Monitoring</td>
-<td headers="stub_1_5 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="3.73704873513003" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">422</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub">6</th>
-<td headers="stub_1_6 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">5</td>
-<td headers="stub_1_6 label" class="gt_row gt_left">Extracorporeal or Systemic Assistance and Performance</td>
-<td headers="stub_1_6 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.460489417598961" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">52</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub">7</th>
-<td headers="stub_1_7 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">6</td>
-<td headers="stub_1_7 label" class="gt_row gt_left">Extracorporeal or Systemic Therapies</td>
-<td headers="stub_1_7 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.407356023260619" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">46</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub">8</th>
-<td headers="stub_1_8 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">7</td>
-<td headers="stub_1_8 label" class="gt_row gt_left">Osteopathic</td>
-<td headers="stub_1_8 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.885556572305694" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">100</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub">9</th>
-<td headers="stub_1_9 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">8</td>
-<td headers="stub_1_9 label" class="gt_row gt_left">Other Procedures</td>
-<td headers="stub_1_9 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.690734126398441" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">78</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub">10</th>
-<td headers="stub_1_10 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">9</td>
-<td headers="stub_1_10 label" class="gt_row gt_left">Chiropractic</td>
-<td headers="stub_1_10 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.797000915075125" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">90</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub">11</th>
-<td headers="stub_1_11 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">B</td>
-<td headers="stub_1_11 label" class="gt_row gt_left">Imaging</td>
-<td headers="stub_1_11 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="26.3630191575405" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">2.98K</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub">12</th>
-<td headers="stub_1_12 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">C</td>
-<td headers="stub_1_12 label" class="gt_row gt_left">Nuclear Medicine</td>
-<td headers="stub_1_12 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="4.10012692977536" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">463</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub">13</th>
-<td headers="stub_1_13 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">D</td>
-<td headers="stub_1_13 label" class="gt_row gt_left">Radiation Therapy</td>
-<td headers="stub_1_13 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="18.4815656640198" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">2.09K</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub">14</th>
-<td headers="stub_1_14 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">F</td>
-<td headers="stub_1_14 label" class="gt_row gt_left">Physical Rehabilitation and Diagnostic Audiology</td>
-<td headers="stub_1_14 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="12.2206806978186" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">1.38K</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub">15</th>
-<td headers="stub_1_15 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">G</td>
-<td headers="stub_1_15 label" class="gt_row gt_left">Mental Health</td>
-<td headers="stub_1_15 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.265666971691708" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">30</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub">16</th>
-<td headers="stub_1_16 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">H</td>
-<td headers="stub_1_16 label" class="gt_row gt_left">Substance Abuse Treatment</td>
-<td headers="stub_1_16 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="0.52247837766036" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">59</text></g></svg>
-</div></td>
-</tr>
-<tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub">17</th>
-<td headers="stub_1_17 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">X</td>
-<td headers="stub_1_17 label" class="gt_row gt_left">New Technology</td>
-<td headers="stub_1_17 nanoplots" class="gt_row gt_left" style="padding-top:0; padding-bottom:0; vertical-align: middle; overflow-x: visible; border-left-width: 5px; border-left-style: solid; border-left-color: lightgray;"><div>
-<svg role="img" viewbox="0 0 600 130" style="
-height:2em;
-margin-left:auto;
-margin-right:auto;
-font-size:inherit;
-overflow:visible;
-vertical-align:middle;
-position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patternunits="userSpaceOnUse"><path class="pattern-line" d="M 0,8 l 8,-8 M -1,1 l 4,-4 M 6,10 l 4,-4" stroke="red" stroke-width="1.5" stroke-linecap="round" shape-rendering="geometricPrecision"></path></pattern></defs><style>text { font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace; stroke-width: 0.15em; paint-order: stroke; stroke-linejoin: round; cursor: default; } .vert-line:hover rect { fill: #911EB4; fill-opacity: 40%; stroke: #FFFFFF60; color: red; } .vert-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover text { stroke: white; fill: #212427; } .horizontal-line:hover rect { fill: transparent; stroke: transparent; color: blue; } .boxplot-line:hover text { stroke: white; fill: #212427; } .boxplot-line:hover rect { fill: transparent; stroke: transparent; } .horizontal-line text { stroke: white; fill: #212427; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; } .y-axis-line:hover rect { fill: #EDEDED; fill-opacity: 60%; stroke: #FFFFFF60; color: red; } .y-axis-line:hover text { stroke: white; stroke-width: 0.20em; fill: #1A1C1F; } .ref-line:hover rect { stroke: #FFFFFF60; } .ref-line:hover line { stroke: #FF0000; } .ref-line:hover text { stroke: white; fill: #212427; }</style>
-<line x1="0" y1="5" x2="0" y2="125" stroke="#BFBFBF" stroke-width="5"></line><rect x="0" y="45" width="2.33786935088703" height="40" stroke="#0B0B45" stroke-width="4" fill="#0B0B45"></rect><g class="horizontal-line"><rect x="0" y="45" width="600" height="40" stroke="transparent" stroke-width="12" fill="transparent"></rect><text x="10" y="25" fill="transparent" stroke="transparent" font-size="30px">264</text></g></svg>
-</div></td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div class="section level2">
 <h2 id="systems">Systems<a class="anchor" aria-label="anchor" href="#systems"></a>
 </h2>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tables.html">tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n_codes</span><span class="op">)</span>,</span>
 <span>            prop <span class="op">=</span> <span class="va">codes</span> <span class="op">/</span> <span class="fl">78220</span>, </span>
@@ -1897,24 +1727,24 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span>    column_labels.border.bottom.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>    column_labels.border.top.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
 <span>    row_group.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="llxfcshjcq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="osgadpmbwk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#llxfcshjcq table {
+#osgadpmbwk table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#llxfcshjcq thead, #llxfcshjcq tbody, #llxfcshjcq tfoot, #llxfcshjcq tr, #llxfcshjcq td, #llxfcshjcq th {
+#osgadpmbwk thead, #osgadpmbwk tbody, #osgadpmbwk tfoot, #osgadpmbwk tr, #osgadpmbwk td, #osgadpmbwk th {
   border-style: none;
 }
 
-#llxfcshjcq p {
+#osgadpmbwk p {
   margin: 0;
   padding: 0;
 }
 
-#llxfcshjcq .gt_table {
+#osgadpmbwk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1940,12 +1770,12 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-left-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_caption {
+#osgadpmbwk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#llxfcshjcq .gt_title {
+#osgadpmbwk .gt_title {
   color: #333333;
   font-size: 22px;
   font-weight: initial;
@@ -1957,7 +1787,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-bottom-width: 0;
 }
 
-#llxfcshjcq .gt_subtitle {
+#osgadpmbwk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1969,7 +1799,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-top-width: 0;
 }
 
-#llxfcshjcq .gt_heading {
+#osgadpmbwk .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1981,13 +1811,13 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-right-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_bottom_border {
+#osgadpmbwk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_col_headings {
+#osgadpmbwk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 0px;
   border-top-color: #D3D3D3;
@@ -2002,7 +1832,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-right-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_col_heading {
+#osgadpmbwk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2022,7 +1852,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   overflow-x: hidden;
 }
 
-#llxfcshjcq .gt_column_spanner_outer {
+#osgadpmbwk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2034,15 +1864,15 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 4px;
 }
 
-#llxfcshjcq .gt_column_spanner_outer:first-child {
+#osgadpmbwk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#llxfcshjcq .gt_column_spanner_outer:last-child {
+#osgadpmbwk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#llxfcshjcq .gt_column_spanner {
+#osgadpmbwk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 0px;
   border-bottom-color: #D3D3D3;
@@ -2054,11 +1884,11 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   width: 100%;
 }
 
-#llxfcshjcq .gt_spanner_row {
+#osgadpmbwk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#llxfcshjcq .gt_group_heading {
+#osgadpmbwk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2084,7 +1914,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   text-align: left;
 }
 
-#llxfcshjcq .gt_empty_group_heading {
+#osgadpmbwk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2099,15 +1929,15 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   vertical-align: middle;
 }
 
-#llxfcshjcq .gt_from_md > :first-child {
+#osgadpmbwk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#llxfcshjcq .gt_from_md > :last-child {
+#osgadpmbwk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#llxfcshjcq .gt_row {
+#osgadpmbwk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2126,7 +1956,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   overflow-x: hidden;
 }
 
-#llxfcshjcq .gt_stub {
+#osgadpmbwk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2139,7 +1969,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 5px;
 }
 
-#llxfcshjcq .gt_stub_row_group {
+#osgadpmbwk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2153,15 +1983,15 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   vertical-align: top;
 }
 
-#llxfcshjcq .gt_row_group_first td {
+#osgadpmbwk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#llxfcshjcq .gt_row_group_first th {
+#osgadpmbwk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#llxfcshjcq .gt_summary_row {
+#osgadpmbwk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2171,16 +2001,16 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 5px;
 }
 
-#llxfcshjcq .gt_first_summary_row {
+#osgadpmbwk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_first_summary_row.thick {
+#osgadpmbwk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#llxfcshjcq .gt_last_summary_row {
+#osgadpmbwk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2190,7 +2020,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-bottom-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_grand_summary_row {
+#osgadpmbwk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2200,7 +2030,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 5px;
 }
 
-#llxfcshjcq .gt_first_grand_summary_row {
+#osgadpmbwk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2210,7 +2040,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-top-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_last_grand_summary_row_top {
+#osgadpmbwk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2220,11 +2050,11 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-bottom-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_striped {
+#osgadpmbwk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#llxfcshjcq .gt_table_body {
+#osgadpmbwk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2233,7 +2063,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-bottom-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_footnotes {
+#osgadpmbwk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2247,7 +2077,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-right-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_footnote {
+#osgadpmbwk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2256,7 +2086,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 5px;
 }
 
-#llxfcshjcq .gt_sourcenotes {
+#osgadpmbwk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2270,7 +2100,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   border-right-color: #D3D3D3;
 }
 
-#llxfcshjcq .gt_sourcenote {
+#osgadpmbwk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2278,63 +2108,63 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
   padding-right: 5px;
 }
 
-#llxfcshjcq .gt_left {
+#osgadpmbwk .gt_left {
   text-align: left;
 }
 
-#llxfcshjcq .gt_center {
+#osgadpmbwk .gt_center {
   text-align: center;
 }
 
-#llxfcshjcq .gt_right {
+#osgadpmbwk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#llxfcshjcq .gt_font_normal {
+#osgadpmbwk .gt_font_normal {
   font-weight: normal;
 }
 
-#llxfcshjcq .gt_font_bold {
+#osgadpmbwk .gt_font_bold {
   font-weight: bold;
 }
 
-#llxfcshjcq .gt_font_italic {
+#osgadpmbwk .gt_font_italic {
   font-style: italic;
 }
 
-#llxfcshjcq .gt_super {
+#osgadpmbwk .gt_super {
   font-size: 65%;
 }
 
-#llxfcshjcq .gt_footnote_marks {
+#osgadpmbwk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#llxfcshjcq .gt_asterisk {
+#osgadpmbwk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#llxfcshjcq .gt_indent_1 {
+#osgadpmbwk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#llxfcshjcq .gt_indent_2 {
+#osgadpmbwk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#llxfcshjcq .gt_indent_3 {
+#osgadpmbwk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#llxfcshjcq .gt_indent_4 {
+#osgadpmbwk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#llxfcshjcq .gt_indent_5 {
+#osgadpmbwk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3086,7 +2916,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <div class="section level2">
 <h2 id="tables">Tables<a class="anchor" aria-label="anchor" href="#tables"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tables.html">tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_codes</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 895 × 6</span></span></span>
@@ -3103,9 +2933,9 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0       0S     0SW   Medical and Surgical, Lower Joints, Re… <span style="color: #949494;">&lt;tibble&gt;</span>     710</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 0       03     031   Medical and Surgical, Upper Arteries, … <span style="color: #949494;">&lt;tibble&gt;</span>     666</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 885 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/rows.html">rows</a></span><span class="op">(</span><span class="st">"041L"</span><span class="op">)</span><span class="op">$</span><span class="va">axes</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; $row_041L.203</span></span>
+<pre><code><span><span class="co">#&gt; $row_203.041L</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 4</span></span></span>
 <span><span class="co">#&gt;    axis  title     code  label                          </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
@@ -3126,7 +2956,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 7     Qualifier Q     Lower Extremity Artery         </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 7     Qualifier S     Lower Extremity Vein           </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $row_041L.204</span></span>
+<span><span class="co">#&gt; $row_204.041L</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   axis  title     code  label                 </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
@@ -3138,7 +2968,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <div class="section level2">
 <h2 id="definitions">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>            .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">code</span>, <span class="va">section</span>, <span class="va">axis</span>, <span class="va">axis_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3157,7 +2987,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 8     Other Procedures                                  3     Operation     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 9     Chiropractic                                      3     Operation     1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more rows</span></span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span>section <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">axis</span> <span class="op">==</span> <span class="st">"5"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3179,7 +3009,7 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <div class="section level3">
 <h3 id="medical-and-surgical">Medical and Surgical<a class="anchor" aria-label="anchor" href="#medical-and-surgical"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3199,521 +3029,10 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
 <span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div id="notxexafhk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#notxexafhk table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#notxexafhk thead, #notxexafhk tbody, #notxexafhk tfoot, #notxexafhk tr, #notxexafhk td, #notxexafhk th {
-  border-style: none;
-}
-
-#notxexafhk p {
-  margin: 0;
-  padding: 0;
-}
-
-#notxexafhk .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #0B0B45;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#notxexafhk .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#notxexafhk .gt_title {
-  color: #0B0B45;
-  font-size: 24px;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#notxexafhk .gt_subtitle {
-  color: #0B0B45;
-  font-size: 18px;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#notxexafhk .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#notxexafhk .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#notxexafhk .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#notxexafhk .gt_col_heading {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#notxexafhk .gt_column_spanner_outer {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#notxexafhk .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#notxexafhk .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#notxexafhk .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#notxexafhk .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#notxexafhk .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#notxexafhk .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#notxexafhk .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#notxexafhk .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#notxexafhk .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#notxexafhk .gt_stub {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#notxexafhk .gt_stub_row_group {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#notxexafhk .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#notxexafhk .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#notxexafhk .gt_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#notxexafhk .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#notxexafhk .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#notxexafhk .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#notxexafhk .gt_grand_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#notxexafhk .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#notxexafhk .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#notxexafhk .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#notxexafhk .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#notxexafhk .gt_footnotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#notxexafhk .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#notxexafhk .gt_sourcenotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#notxexafhk .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#notxexafhk .gt_left {
-  text-align: left;
-}
-
-#notxexafhk .gt_center {
-  text-align: center;
-}
-
-#notxexafhk .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#notxexafhk .gt_font_normal {
-  font-weight: normal;
-}
-
-#notxexafhk .gt_font_bold {
-  font-weight: bold;
-}
-
-#notxexafhk .gt_font_italic {
-  font-style: italic;
-}
-
-#notxexafhk .gt_super {
-  font-size: 65%;
-}
-
-#notxexafhk .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#notxexafhk .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#notxexafhk .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#notxexafhk .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#notxexafhk .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#notxexafhk .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#notxexafhk .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="5" class="gt_heading gt_title gt_font_normal" style>
-<b>ICD-10-PCS</b> 2024<hr>
-</td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>
-<small>SECTION:</small> <b>0</b> Medical and Surgical<br><small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br><small>OPERATION:</small> <b>1</b> Bypass<br><br>
-</td>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="code">code</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label">label</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="table">table</th>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">1</th>
-<td headers="stub_1_1 name" class="gt_row gt_left">Section</td>
-<td headers="stub_1_1 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_1 label" class="gt_row gt_left">Medical and Surgical</td>
-<td headers="stub_1_1 table" class="gt_row gt_right">0</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">2</th>
-<td headers="stub_1_2 name" class="gt_row gt_left">Body System</td>
-<td headers="stub_1_2 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_2 label" class="gt_row gt_left">Central Nervous System and Cranial Nerves</td>
-<td headers="stub_1_2 table" class="gt_row gt_right">00</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">3</th>
-<td headers="stub_1_3 name" class="gt_row gt_left">Operation</td>
-<td headers="stub_1_3 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">1</td>
-<td headers="stub_1_3 label" class="gt_row gt_left">Bypass</td>
-<td headers="stub_1_3 table" class="gt_row gt_right">001</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">4</th>
-<td headers="stub_1_4 name" class="gt_row gt_left">Body Part</td>
-<td headers="stub_1_4 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">6</td>
-<td headers="stub_1_4 label" class="gt_row gt_left">Cerebral Ventricle</td>
-<td headers="stub_1_4 table" class="gt_row gt_right">0016</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">5</th>
-<td headers="stub_1_5 name" class="gt_row gt_left">Approach</td>
-<td headers="stub_1_5 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_5 label" class="gt_row gt_left">Open</td>
-<td headers="stub_1_5 table" class="gt_row gt_right">00160</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub">6</th>
-<td headers="stub_1_6 name" class="gt_row gt_left">Device</td>
-<td headers="stub_1_6 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">7</td>
-<td headers="stub_1_6 label" class="gt_row gt_left">Autologous Tissue Substitute</td>
-<td headers="stub_1_6 table" class="gt_row gt_right">001607</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub">7</th>
-<td headers="stub_1_7 name" class="gt_row gt_left">Qualifier</td>
-<td headers="stub_1_7 code" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_7 label" class="gt_row gt_left">Nasopharynx</td>
-<td headers="stub_1_7 table" class="gt_row gt_right">0016070</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `resolve_cols_i()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `code` doesn't exist.</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op">==</span> <span class="st">'0'</span>, </span>
 <span>                <span class="va">axis</span> <span class="op">==</span> <span class="st">'3'</span>, </span>
@@ -3726,14 +3045,14 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <span><span class="co">#&gt; "Rerouting contents of a body part to a downstream area of the normal route, to a similar route and body part, or to an abnormal route and dissimilar body part. Includes one or more anastomoses, with or without the use of a device" </span></span>
 <span><span class="co">#&gt;                                                                                                                                                                                                                                includes </span></span>
 <span><span class="co">#&gt;                                                                                                                                                                                           "Coronary artery bypass, colostomy formation"</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op">==</span> <span class="st">'0'</span>, </span>
 <span>                <span class="va">axis</span> <span class="op">==</span> <span class="st">'5'</span>,</span>
 <span>                <span class="va">label</span> <span class="op">==</span> <span class="st">'Open'</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">definition</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; [1] "Cutting through the skin or mucous membrane and any other body layers necessary to expose the site of the procedure"</span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/definitions.html">definitions</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op">==</span> <span class="st">'0'</span>, </span>
 <span>                <span class="va">axis</span> <span class="op">==</span> <span class="st">'6'</span>,</span>
@@ -3742,6 +3061,39 @@ position:relative;"><defs><pattern id="area_pattern" width="8" height="8" patter
 <pre><code><span><span class="co">#&gt; [1] "Autograft"                             </span></span>
 <span><span class="co">#&gt; [2] "Cultured epidermal cell autograft"     </span></span>
 <span><span class="co">#&gt; [3] "Epicel(R) cultured epidermal autograft"</span></span></code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/index.html">index</a></span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Excision, Skin and Breast"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code</span> <span class="op">==</span> <span class="st">"^0HB"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 variables: id &lt;int&gt;, index &lt;chr&gt;, term &lt;chr&gt;, type &lt;chr&gt;, value &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   code &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0HB2XZZ"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 5</span></span></span>
+<span><span class="co">#&gt;   axis  name        value label                table  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     Section     0     Medical and Surgical 0      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     Body System H     Skin and Breast      0H     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     Operation   B     Excision             0HB    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     Body Part   2     Skin, Right Ear      0HB2   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 5     Approach    X     External             0HB2X  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 6     Device      Z     No Device            0HB2XZ </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 7     Qualifier   Z     No Qualifier         0HB2XZZ</span></span></code></pre>
+<pre><code># Axis
+     1 |-- Section:                  0 Medical and Surgical
+     2      |-- Body System:         H Skin and Breast
+     3      |-- Root Operation:      B Excision
+     4           |-- Body Part:      2 Skin, Right Ear
+     5                |-- Approach:  X External
+     6                |-- Device:    Z No Device
+     7                |-- Qualifier: Z No Qualifier</code></pre>
+<pre><code>1 |-0:     Medical and Surgical
+2   |-H:   Skin and Breast
+3   |-B:   Excision
+4     |-2: Skin, Right Ear
+5     |-X: External
+6     |-Z: No Device
+7     |-Z: No Qualifier</code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
