@@ -1,13 +1,6 @@
+# # pak::pak("rconsortium/S7")
+#
 # library(S7)
-#
-# splitter <- function(x) {
-#   unlist(strsplit(x, ""), use.names = FALSE)
-# }
-#
-# collapser <- function(x) {
-#   paste0(x, collapse = "")
-# }
-#
 # prop_code <- new_property(
 #   class = class_character,
 #   validator = function(value) {
@@ -65,13 +58,13 @@
 #           getter = function(self) collapser(self@split[1:3]))
 #         )
 #   )
-# pcs@constructor
-#
-# x <- pcs("1155677")
-#
-# x@section
-#
-# x@section <- "0"
+# # pcs@constructor
+# #
+# # x <- pcs("1155677")
+# #
+# # x@section
+# #
+# # x@section <- "0"
 #
 # describe <- new_generic("describe", "x")
 #

@@ -14,87 +14,142 @@ pcs_tbl <- qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\ic
   tibble() |>
   clean_names() |>
   filter(elem %nin% c("version", "ICD10PCS.tabular")) |>
-  select(-level1)
-
-# A tibble: 5 × 2
-#   attr       n
-#   <chr>  <int>
-# 1 code   32685
-# 2 codes   2586
-# 3 pos    13059
-# 4 values 13059
-# 5 NA     63144
-
-# A tibble: 6 × 2
-#   elem           n
-#   <chr>      <int>
-# 1 axis       39177
-# 2 definition   849
-# 3 label      65370
-# 4 pcsRow      5172
-# 5 pcsTable     905
-# 6 title      13060
-
-# A tibble: 14 × 2
-#    columns                             n
-#    <chr>                           <int>
-#  1 code_pcsTable_axis_label         2715
-#  2 code_pcsTable_pcsRow_axis_label 29970
-#  3 codes_pcsTable_pcsRow            2586
-#  4 pcsTable                          904
-#  5 pcsTable_axis_definition          849
-#  6 pcsTable_axis_label              2715
-#  7 pcsTable_axis_title              2715
-#  8 pcsTable_pcsRow                  2586
-#  9 pcsTable_pcsRow_axis_label      29970
-# 10 pcsTable_pcsRow_axis_title      10344
-# 11 pos_pcsTable_axis                2715
-# 12 pos_pcsTable_pcsRow_axis        10344
-# 13 values_pcsTable_axis             2715
-# 14 values_pcsTable_pcsRow_axis     10344
-
-pcs_tbl <- pcs_tbl[4:nrow(pcs_tbl), ] |>
-  unite('columns', c(attr, level2:level5), na.rm = TRUE, remove = TRUE) |>
-  mutate(value = case_match(elem, "pcsRow" ~ "ROW", "pcsTable" ~ "TABLE", .default = value)) |>
-  filter(!is.na(value))
-
-pcs_tbl <- pcs_tbl |>
-  mutate(columns = case_match(columns,
-                              "code_pcsTable_axis_label" ~ "table_axis_code",
-                              "code_pcsTable_pcsRow_axis_label" ~ "row_axis_code",
-                              "codes_pcsTable_pcsRow" ~ "row",
-                              "pcsTable" ~ "table",
-                              "pcsTable_axis_definition" ~ "table_axis_definition",
-                              "pcsTable_axis_label" ~ "table_axis_label",
-                              "pcsTable_axis_title" ~ "table_axis_title",
-                              "pcsTable_pcsRow" ~ "row",
-                              "pcsTable_pcsRow_axis_label" ~ "row_axis_label",
-                              "pcsTable_pcsRow_axis_title" ~ "row_axis_title",
-                              "pos_pcsTable_axis" ~ "table_pos",
-                              "pos_pcsTable_pcsRow_axis" ~ "row_pos",
-                              "values_pcsTable_axis" ~ "values",
-                              "values_pcsTable_pcsRow_axis" ~ "values",
-                              .default = columns)) |>
-  filter(columns != "values") |>
+  select(-level1, -level2) |>
+  slice(2:nrow(pcs_tbl)) |>
   mutate(rowid = row_number(), .before = 1)
 
+pcsTable_ids <- pcs_tbl |>
+  filter(elem == "pcsTable") |>
+  janitor::remove_empty(which = c("rows", "cols")) |>
+  mutate(start = rowid,
+         end = dplyr::lead(start) - 1,
+         end = dplyr::case_when(start == max(start) ~ {
+           dplyr::slice_tail(pcs_tbl) |>
+             dplyr::pull(rowid)},
+           .default = end),
+         table_id = row_number()) |>
+  select(-start, -end, -elem)
+
+pcsRow_ids <- pcs_tbl |>
+  filter(elem == "pcsRow") |>
+  filter(is.na(attr)) |>
+  janitor::remove_empty(which = c("rows", "cols")) |>
+  select(-level3) |>
+  mutate(start = rowid,
+         end = dplyr::lead(start) - 1,
+         end = dplyr::case_when(start == max(start) ~ {
+           dplyr::slice_tail(pcs_tbl) |>
+             dplyr::pull(rowid)},
+           .default = end),
+         row_id = row_number()) |>
+  select(-start, -end, -elem)
+
+pcs_tbl <- left_join(pcs_tbl, pcsTable_ids) |>
+  mutate(category = if_else(!is.na(table_id), "table", NA_character_)) |>
+  left_join(pcsRow_ids) |>
+  mutate(category = if_else(!is.na(row_id), "row", category)) |>
+  fill(category) |>
+  fill(table_id) |>
+  mutate(elem = if_else(elem == "axis", NA_character_, elem),
+         elem = if_else(elem == "title", NA_character_, elem),
+         elem = if_else(elem == "label", NA_character_, elem),
+         elem = if_else(elem == "definition", NA_character_, elem)) |>
+  unite('columns', c(elem, attr, level3:level5), na.rm = TRUE, remove = TRUE) |>
+  group_by(category) |>
+  fill(row_id) |>
+  ungroup()
+
+pcs_tbl <- pcs_tbl |>
+  filter(!is.na(value)) |>
+  filter(columns %nin% c("values_axis",
+                         "values_pcsRow_axis",
+                         "pcsRow_codes_pcsRow")) |>
+  mutate(columns = case_match(
+    columns,
+    c("axis_definition") ~ "definition",
+    c("axis_label", "pcsRow_axis_label") ~ "label",
+    c("axis_title", "pcsRow_axis_title") ~ "title",
+    c("pos_axis", "pos_pcsRow_axis") ~ "axis",
+    c("code_axis_label", "code_pcsRow_axis_label") ~ "code",
+    .default = columns)) |>
+  select(columns, value, category, table_id, row_id) |>
+  mutate(id = row_number(), .before = 1)
+
+pcs_tbl |> filter(columns == "label") |> print(n = 150)
+
+defs <- pcs_tbl |>
+  filter(columns == "definition") |>
+  select(id, table_id, value) |>
+  rename(definition = value)
+
+tables <- pcs_tbl |>
+  left_join(defs) |>
+  mutate(definition = lead(definition, 2)) |>
+  filter(columns != "definition") |>
+  filter(category == "table") |>
+  select(-category, -row_id) |>
+  pivot_wider(names_from = columns, values_from = value) |>
+  select(id,
+         table_id,
+         axis,
+         title,
+         label,
+         code,
+         definition) |>
+  mutate(title = lead(title),
+         label = lead(label, 2),
+         definition = lead(definition, 2),
+         code = lead(code, 3)) |>
+  filter(!is.na(axis)) |>
+  select(-id)
+
+rows <- pcs_tbl |>
+  filter(category == "row") |>
+  select(-category) |>
+  pivot_wider(names_from = columns, values_from = value) |>
+  mutate(title = lead(title),
+         label = lead(label, 2),
+         code = lead(code, 3)) |>
+  filter(!is.na(code)) |>
+  fill(axis, title) |>
+  select(-id)
+
+pcs <- bind_rows(tables, rows) |>
+  arrange(table_id) |>
+  select(table_id, row_id, axis, code, title, label, definition)
+
+pcs |>
+  filter(axis == "1") |> count(label)
+  group_by(axis, code, title, label) |>
+  summarise(n = n(), .groups = "drop") |>
+pcs |> filter(axis == "2", code == "0")
+pcs |> filter(axis == "3") |> print(n = 150)
+
+
+###################################
 pcs_tbl <- pcs_tbl |>
   rowwise() |>
   mutate(desc = tolower(value),
          desc = str_replace_all(desc, " ", "-")) |>
   ungroup() |>
-  unite('cols', c(columns, desc), na.rm = TRUE, remove = TRUE)
-
+  unite('cols',
+        c(columns, desc),
+        na.rm = TRUE,
+        remove = TRUE)
 
 pcsTables <- pcs_tbl |>
   filter(cols == "table_pos_1") |>
   mutate(start = rowid,
          end = dplyr::lead(start) - 1,
-         end = dplyr::case_when(start == max(start) ~ {dplyr::slice_tail(pcs_tbl) |> dplyr::pull(rowid)}, .default = end)) |>
+         end = dplyr::case_when(start == max(start) ~ {
+           dplyr::slice_tail(pcs_tbl) |>
+             dplyr::pull(rowid)},
+           .default = end)) |>
   select(rowid, start, end)
 
 pcs_tbl <- left_join(pcs_tbl, pcsTables) |>
-  fill(start, end) |>
+  fill(start,
+       end) |>
   mutate(table = consecutive_id(start),
          start = NULL,
          end = NULL) |>
@@ -112,24 +167,23 @@ section_rowids <- pcs_tbl |>
          start = min(c_across(row_m_1:row_p_2)),
          end = max(c_across(row_m_1:row_p_2))) |>
   ungroup() |>
-  #select(row_m_1, rowid, row_p_1, row_p_2) |>
   pivot_longer(cols = contains("row"),
                names_to = "col",
                values_to = "rowid") |>
-  select(rowid, start, end) |>
+  select(rowid,
+         start,
+         end) |>
   arrange(rowid)
 
-## Section
+##----------------------- Sections
 Section <- pcs_tbl |>
   filter(rowid %in% section_rowids$rowid) |>
-  left_join(section_rowids)
-
-Section_2 <- Section |>
+  left_join(section_rowids) |>
   select(-elem, -elemid) |>
   pivot_wider(names_from = cols, values_from = value) |>
   clean_names()
 
-sec0 <- Section_2 |>
+sec0 <- Section |>
   mutate(table_axis_title_section = lead(table_axis_title_section),
          table_axis_label_medical_and_surgical = lead(table_axis_label_medical_and_surgical, 2),
          table_axis_code_0 = lead(table_axis_code_0, 3)) |>
@@ -140,7 +194,7 @@ sec0 <- Section_2 |>
          axis_code = table_axis_code_0) |>
   filter(!is.na(axis_pos))
 
-sec1 <- Section_2 |>
+sec1 <- Section |>
   select(rowid,
          table,
          start,
@@ -160,13 +214,11 @@ sec1 <- Section_2 |>
 
 secs <- vctrs::vec_rbind(sec0, sec1)
 
-left_join(Section, secs) |>
-  group_by()
-
 pcs_tbl <- left_join(pcs_tbl, sec0) |>
   group_by(end) |>
   mutate(section = consecutive_id(start)) |>
-  ungroup() |> print(n = 150)
+  ungroup() |>
+  print(n = 150)
 
 ## Body Part
 pcsRows_4 <- pcs_tbl |>
@@ -174,7 +226,10 @@ pcsRows_4 <- pcs_tbl |>
   filter(value == "4") |>
   mutate(start = rowid,
          end = dplyr::lead(start) - 1,
-         end = dplyr::case_when(start == max(start) ~ {dplyr::slice_tail(pcs_tbl) |> dplyr::pull(rowid)}, .default = end)) |>
+         end = dplyr::case_when(start == max(start) ~ {
+           dplyr::slice_tail(pcs_tbl) |>
+             dplyr::pull(rowid)},
+           .default = end)) |>
   select(rowid, start, end)
 
 
@@ -185,10 +240,6 @@ pcs_tbl <- left_join(pcs_tbl, pcsRows_4) |>
          start = NULL,
          end = NULL) |>
   ungroup()
-
-##### FIX
-pcs_tbl <- pcs_tbl |> ungroup()
-
 
 ## Approach
 pcsRows_5 <- pcs_tbl |>

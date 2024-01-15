@@ -28,5 +28,13 @@ post_table:
 - post_table/20240102T082010Z-efbd5/
 pre_table:
 - pre_table/20240102T081959Z-16cff/
+source_definitions:
+- source_definitions/20240115T084908Z-2b8ed/
+source_index:
+- source_index/20240115T084905Z-34c6f/
+source_order:
+- source_order/20240115T084856Z-db72f/
+source_table:
+- source_table/20240115T084900Z-b2423/
 use_see:
 - use_see/20240108T133424Z-17ca4/

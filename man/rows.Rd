@@ -16,3 +16,10 @@ If \code{NULL} (default), returns all ~ 29k rows.}
 \description{
 ICD-10-PCS Rows
 }
+\examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+rows("00X")
+
+rows("00XF")
+\dontshow{\}) # examplesIf}
+}

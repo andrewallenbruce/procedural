@@ -31,27 +31,30 @@ definitions <- function(section = NULL, axis = NULL) {
 
 #' ICD-10-PCS Index
 #' @param search Search term
+#' @param column Column to search
 #' @return a [dplyr::tibble()]
 #' @examples
 #' index(search = "Abdominohysterectomy")
 #'
-#' index(search = "Attain Ability(R) lead")
+#' index(search = "Attain Ability")
+#'
+#' index(search = "radi")
 #'
 #' @export
-index <- function(search = NULL) {
+index <- function(search = NULL, column = NULL) {
 
-  ind <- pins::pin_read(mount_board(), "index_v2")
-  # ind |>
-  #   dplyr::filter(!is.na(code)) |>
-  #   dplyr::mutate(n_obs = nchar(code)) |>
-  #   dplyr::count(n_obs)
-  #
-  # use_see <- pins::pin_read(mount_board(), "use_see") |>
-  #   dplyr::select(letter, term, verb = type, pcs_value, table)
+  ind <- pins::pin_read(mount_board(), "index_v2") |>
+    tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
+    dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
+    dplyr::rename(index = letter,
+                  type = verb) |>
+    dplyr::select(-term_id)
 
-  # ind |> dplyr::filter(verb == "Use")
-  # ind |> dplyr::filter(verb == "See")
-
-  if (!is.null(search)) ind <- vctrs::vec_slice(ind, ind$term == search)
+  if (!is.null(search)) {
+    if (is.null(column)) {column <- "term"}
+    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search, "*")))
+    }
   return(ind)
 }
+
+

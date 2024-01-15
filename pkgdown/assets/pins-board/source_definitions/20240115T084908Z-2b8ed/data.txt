@@ -1,0 +1,10 @@
+file: source_definitions.qs
+file_size: 44060
+pin_hash: 2b8ed91fdb72ed44
+type: qs
+title: 'source_definitions: a pinned 4732 x 9 data frame'
+description: ICD-10-PCS 2024 Definitions-Source
+tags: ~
+urls: ~
+created: 20240115T084908Z
+api_version: 1

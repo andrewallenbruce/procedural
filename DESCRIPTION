@@ -8,7 +8,7 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.0
 URL: https://andrewallenbruce.github.io/procedural/
 Depends: 
     R (>= 4.1.0)
@@ -21,7 +21,8 @@ Imports:
    rlang,
    vctrs,
    zeallot,
-   glue
+   glue,
+   stringi
 Suggests: 
     knitr,
     rmarkdown,

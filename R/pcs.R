@@ -31,9 +31,9 @@ pcs <- function(x) {
   # table _______________________
   tbl <- dplyr::tibble(
     axis  = as.character(1:3),
-    name  = unlist(pin[c("name_1", "name_2", "name_3")], use.names = FALSE),
-    code  = unlist(pin[c("code_1", "code_2", "code_3")], use.names = FALSE),
-    label = unlist(pin[c("label_1", "label_2", "label_3")], use.names = FALSE),
+    name  = delister(pin[c("name_1", "name_2", "name_3")]),
+    value  = delister(pin[c("code_1", "code_2", "code_3")]),
+    label = delister(pin[c("label_1", "label_2", "label_3")]),
     table = c(xs[1], collapser(xs[1:2]), collapser(xs[1:3])))
 
   pin <- pin[c("code_table", "rows")] |> tidyr::unnest(rows)
@@ -87,7 +87,7 @@ pcs <- function(x) {
                                              'code_table',
                                              'row_id')]
 
-  colnames(axes) <- c("axis", "name", "code", "label", "table", "row")
+  colnames(axes) <- c("axis", "name", "value", "label", "table", "row")
 
   if (nchar(x) > 3L) {
     key <- vctrs::vec_count(axes$row) |>
@@ -115,47 +115,30 @@ checks <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
     "x" = "{.strong x} cannot be an {.emph empty} string.",
     call = call)}
 
-  if (nchar(x) > 7L) {cli::cli_abort(c(
-    "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
-    "x" = "{.strong {.val {x}}} is {.strong {.val {nchar(x)}}} characters long."),
-    call = call)}
+  if (is.numeric(x)) x <- as.character(x)
+
+  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
   if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
     "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."),
     call = call)}
 
-  if (is.numeric(x)) x <- as.character(x)
-
-  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
+  if (nchar(x) > 7L) {cli::cli_abort(c(
+    "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
+    "x" = "{.strong {.val {x}}} is {.strong {.val {nchar(x)}}} characters long."),
+    call = call)}
 
   return(x)
 }
 
 #' @noRd
-prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
+prep <- function(x) {
 
-  if (!nzchar(x)) {cli::cli_abort(
-    "x" = "{.strong x} cannot be an {.emph empty} string.",
-    call = call)}
-
-  if (nchar(x) > 7L) {cli::cli_abort(c(
-      "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
-      "x" = "{.strong {.val {x}}} is {.strong {.val {nchar(x)}}} characters long."),
-      call = call)}
-
-  if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
-      "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."),
-      call = call)}
-
-  if (is.numeric(x)) x <- as.character(x)
-
-  # If any chars are lowercase, capitalize
-  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
-
+  x   <- checks(x)
   xs  <- splitter(x)
   sys <- collapser(xs[1:2])
-  tbl <- collapser(xs[1:3])
-  rw  <- collapser(xs[1:4])
+  tbl <- is_table(collapser(xs[1:3]))
+  rw  <- is_row(collapser(xs[1:4]))
 
   if (nchar(x) <= 2L) tbl <- rw <- NULL
   if (nchar(x) == 3L) rw  <- NULL
@@ -171,6 +154,18 @@ prep <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
          code    = x))
 
   return(results)
+}
+
+#' @noRd
+pcs_matrix <- function() {
+
+  axis   <- c(1:7)
+  value  <- c(0:9, LETTERS[c(1:8, 10:14, 16:26)])
+
+  matrix(data = NA,
+         nrow = length(axis),
+         ncol = length(value),
+         dimnames = list(axis, value))
 }
 
 #' @noRd

@@ -4,10 +4,12 @@
 \alias{index}
 \title{ICD-10-PCS Index}
 \usage{
-index(search = NULL)
+index(search = NULL, column = NULL)
 }
 \arguments{
 \item{search}{Search term}
+
+\item{column}{Column to search}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -18,6 +20,8 @@ ICD-10-PCS Index
 \examples{
 index(search = "Abdominohysterectomy")
 
-index(search = "Attain Ability(R) lead")
+index(search = "Attain Ability")
+
+index(search = "radi")
 
 }

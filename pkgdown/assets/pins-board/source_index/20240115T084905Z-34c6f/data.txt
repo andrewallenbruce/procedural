@@ -1,0 +1,10 @@
+file: source_index.qs
+file_size: 213413
+pin_hash: 34c6f9e5cc02cad8
+type: qs
+title: 'source_index: a pinned 88045 x 13 data frame'
+description: ICD-10-PCS 2024 Index-Source
+tags: ~
+urls: ~
+created: 20240115T084905Z
+api_version: 1
