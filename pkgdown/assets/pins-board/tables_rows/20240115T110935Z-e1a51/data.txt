@@ -1,0 +1,10 @@
+file: tables_rows.qs
+file_size: 215707
+pin_hash: e1a51e679791790f
+type: qs
+title: 'tables_rows: a pinned 14402 x 16 data frame'
+description: ICD-10-PCS 2024 Tables & Rows
+tags: ~
+urls: ~
+created: 20240115T110935Z
+api_version: 1

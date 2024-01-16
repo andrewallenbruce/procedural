@@ -2,12 +2,9 @@ library(janitor)
 library(tidyverse)
 library(qs)
 
-########________________________________________
-pcs_tbl <- qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_tables_2024") |>
-  tibble() |>
-  clean_names() |>
-  filter(elem %nin% c("version", "ICD10PCS.tabular")) |>
-  select(-level1)
+pcs_tbl <- mount_source("table")
+
+
 
 pcs_tbl2 <- pcs_tbl[4:nrow(pcs_tbl), ] |>
   unite('columns',
@@ -19,23 +16,23 @@ pcs_tbl2 <- pcs_tbl[4:nrow(pcs_tbl), ] |>
 pcs_tbl2 <- pcs_tbl2 |>
   pivot_wider(names_from  = columns,
               values_from = value) |>
-  mutate(pcsTable_axis_title             = lead(pcsTable_axis_title, 1),
-         pcsTable_axis_label             = lead(pcsTable_axis_label, 2),
-         code_pcsTable_axis_label        = lead(code_pcsTable_axis_label, 2),
-         # pcsTable_axis_definition      = lead(pcsTable_axis_definition, 3),
-         pos_pcsTable_pcsRow_axis        = lead(pos_pcsTable_pcsRow_axis, 5),
-         pcsTable_pcsRow_axis_title      = lead(pcsTable_pcsRow_axis_title, 6),
-         pcsTable_pcsRow_axis_label      = lead(pcsTable_pcsRow_axis_label, 7),
-         code_pcsTable_pcsRow_axis_label = lead(code_pcsTable_pcsRow_axis_label, 7)) |>
-  select(pos                             = pos_pcsTable_axis,
-         code                            = code_pcsTable_axis_label,
-         title                           = pcsTable_axis_title,
-         label                           = pcsTable_axis_label,
-         # definition                    = pcsTable_axis_definition,
-         axis_pos                        = pos_pcsTable_pcsRow_axis,
-         axis_title                      = pcsTable_pcsRow_axis_title,
-         axis_code                       = code_pcsTable_pcsRow_axis_label,
-         axis_label                      = pcsTable_pcsRow_axis_label) |>
+  select(pos = pos_pcsTable_axis,
+         title = pcsTable_axis_title,
+         label = pcsTable_axis_label,
+         code = code_pcsTable_axis_label,
+         # definition = pcsTable_axis_definition,
+         axis_pos = pos_pcsTable_pcsRow_axis,
+         axis_title = pcsTable_pcsRow_axis_title,
+         axis_label = pcsTable_pcsRow_axis_label,
+         axis_code = code_pcsTable_pcsRow_axis_label) |>
+  mutate(title = lead(title, 2),
+         label = lead(label, 3),
+         code = lead(code, 4),
+         # definition = lead(definition, 3),
+         axis_pos = lead(axis_pos, 7),
+         axis_title = lead(axis_title, 9),
+         axis_label = lead(axis_label, 10),
+         axis_code = lead(axis_code, 11)) |>
   unite('check',
         c(code, axis_code),
         sep    = "",
@@ -48,11 +45,7 @@ pcs_tbl2 <- pcs_tbl2 |>
          .before = 1)
 
 table_key <- pcs_tbl2 |>
-  select(rowid,
-         pos,
-         code,
-         title,
-         label) |>
+  select(rowid, pos, code, title, label) |>
   filter(pos %in% c("1", "2", "3")) |>
   pivot_wider(names_from = pos,
               values_from = c(code, title, label),
@@ -108,7 +101,6 @@ pcs_tbl2 <- left_join(pcs_tbl2, table_key) |>
 idx_row <- pcs_tbl2 |>
   mutate(id = row_number(), .before = 1) |>
   filter(axis_pos == "4") |>
-  # select(axis_pos) |>
   mutate(row = row_number())
 
 pcs_tbl2 <- pcs_tbl2 |>
@@ -134,26 +126,27 @@ pcs_tbl2 <- pcs_tbl2 |>
   nest(rows = contains("row_"))
 
 ########________________________________________
-board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
-
-board |> pins::pin_write(pcs_tbl2,
-                         name = "pcs_tbl2",
-                         description = "ICD-10-PCS Tables & Rows",
-                         type = "qs")
-
-board |> pins::write_board_manifest()
+# board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+#
+# board |> pins::pin_write(pcs_tbl2,
+#                          name = "pcs_tbl2",
+#                          description = "ICD-10-PCS Tables & Rows",
+#                          type = "qs")
+#
+# board |> pins::write_board_manifest()
 
 ########________________________________________
-tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
+pcs_tbl2 <- pcs_tbl2 |>
   tidyr::unnest(rows) |>
-  dplyr::select(table = code_table,
+  dplyr::select(name_1:label_3,
+                table = code_table,
                 axis = row_pos,
                 title = row_name,
                 code = row_code,
                 label = row_label,
                 rowid = row_id)
 
-row_idx <- tbl |>
+row_idx <- pcs_tbl2 |>
   dplyr::filter(axis == "4") |>
   tidyr::unite("row",
                table,
@@ -161,41 +154,53 @@ row_idx <- tbl |>
                sep = "",
                remove = FALSE,
                na.rm = TRUE) |>
-  dplyr::mutate(row_title = title,
-                row_label = label)
+  # dplyr::mutate(row_title = title,
+  #               row_label = label) |>
+  tidyr::pivot_wider(names_from = axis,
+                     values_from = c(title, code, label),
+                     names_glue = "{.value}_{axis}") |>
+  rename(name_4 = title_4)
 
-tbl <- dplyr::left_join(tbl, row_idx,
-       by = dplyr::join_by(table, axis, title, code, label, rowid)) |>
-       tidyr::fill(row, row_title, row_label)
-
-row_axes <- tbl |>
+pcs_tbl2 <- pcs_tbl2 |>
   dplyr::filter(axis != "4") |>
+  dplyr::left_join(row_idx,
+                   relationship = "many-to-many") |>
+  dplyr::select(ends_with("_1"),
+                ends_with("_2"),
+                ends_with("_3"),
+                table,
+                ends_with("_4"),
+                row,
+                rowid,
+                axis,
+                name = title,
+                code,
+                label)
+
+row_axes <- pcs_tbl2 |>
   dplyr::select(rowid,
                 axis,
-                title,
+                name,
                 code,
                 label) |>
-  tidyr::nest(.by = rowid, .key = "axes")
+  tidyr::nest(.by = rowid, .key = "rows")
 
-ttbl <- tbl |>
-  dplyr::left_join(row_axes, by = "rowid") |>
-  tidyr::unite("description",
-               row_title,
-               row_label,
-               sep = ", ",
-               remove = TRUE,
-               na.rm = TRUE) |>
-  dplyr::select(table, row, description, rowid, axes) |>
-  dplyr::rowwise() |>
-  dplyr::mutate(axes = rlang::list2("row_{rowid}.{row}" := axes)) |>
-  dplyr::ungroup() |>
-  dplyr::distinct()
+pcs_tbl2 <- pcs_tbl2 |>
+  dplyr::select(-c(axis, name, code, label)) |>
+  dplyr::distinct() |>
+  dplyr::left_join(row_axes, by = "rowid")
+
+# pcs_tbl2 |>
+#   dplyr::rowwise() |>
+#   dplyr::mutate(axes = rlang::list2("row_{rowid}.{row}" := axes)) |>
+#   dplyr::ungroup() |>
+#   dplyr::distinct()
 
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
-board |> pins::pin_write(ttbl,
-                         name = "pcs_tbl3",
-                         description = "ICD-10-PCS Tables & Rows",
+board |> pins::pin_write(pcs_tbl2,
+                         name = "tables_rows",
+                         description = "ICD-10-PCS 2024 Tables & Rows",
                          type = "qs")
 
 board |> pins::write_board_manifest()

@@ -1,9 +1,6 @@
-## code to prepare `definitions` dataset goes here
-
-# library(flatxml)
 library(tidyverse)
 library(janitor)
-library(zeallot)
+`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
 # Import and Parse _____________________________________________________________
 # pcs_def_xsd <- "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definitions.xsd"
@@ -11,18 +8,152 @@ library(zeallot)
 # pcs_def <- fxml_importXMLFlat(pcs_def_xml)
 # qs::qsave(pcs_def, "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definition_2024")
 
-pcs_def <- qs::qread("D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definition_2024")
+def <- pins::pin_read(mount_board(), "source_definitions") |>
+  #slice(4:nrow(def)) |>
+  select(-level1) |>
+  mutate(rowid = row_number(), .before = 1)
 
-pcs_def <- pcs_def |>
-  dplyr::tibble() |>
-  janitor::clean_names() |>
-  dplyr::filter(!is.na(value)) |>
-  dplyr::filter(elem != "version") |>
-  dplyr::filter(level2 != "title",
-                level2 != "deviceAggregation") |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1) |>
-  dplyr::mutate(level1 = NULL)
 
+devices <- def |>
+  filter(level2 == "deviceAggregation")
+
+sec_na_idx <- def |>
+  filter(elem == "section", is.na(value)) |>
+  pull(rowid)
+
+ax_na_idx <- def |>
+  filter(elem == "axis", is.na(value)) |>
+  pull(rowid)
+
+term_na_idx <- def |>
+  filter(elem == "terms", is.na(value)) |>
+  pull(rowid)
+
+def <- def |>
+  filter(rowid %nin% sec_na_idx) |>
+  filter(rowid %nin% ax_na_idx) |>
+  filter(rowid %nin% term_na_idx) |>
+  filter(level2 != "deviceAggregation") |>
+  select(-level2)
+
+section_idx <- def |>
+  filter(elem == "section") |>
+  mutate(section = value) |>
+  select(rowid, section)
+
+
+def <- left_join(def, section_idx) |>
+  fill(section) |>
+  filter(elem != "section") |>
+  filter(!is.na(section))
+
+section_name_idx <- def |>
+  filter(level3 == "title") |>
+  mutate(section_name = value) |>
+  select(rowid, section_name)
+
+def <- left_join(def, section_name_idx) |>
+  fill(section_name) |>
+  filter(level3 != "title")
+
+axis_idx <- def |>
+  filter(elem == "axis") |>
+  mutate(axis = value) |>
+  select(rowid, axis)
+
+def <- left_join(def, axis_idx) |>
+  group_by(section) |>
+  fill(axis) |>
+  ungroup() |>
+  filter(elem != "axis")
+
+axis_name_idx <- def |>
+  filter(level3 == "axis", level4 == "title") |>
+  mutate(axis_name = value) |>
+  select(rowid, axis_name)
+
+def <- left_join(def, axis_name_idx) |>
+  group_by(section) |>
+  fill(axis_name) |>
+  ungroup() |>
+  #filter(!is.na(level5)) |>
+  select(rowid,
+         elem,
+         elemid,
+         value,
+         section,
+         axis,
+         section_name,
+         axis_name)
+
+
+term_idx <- def |>
+  filter(elem == "title") |>
+  mutate(term = value) |>
+  select(rowid, term)
+
+def <- left_join(def, term_idx) |>
+  fill(term) |>
+  filter(elem != "title") |>
+  select( #rowid,
+         section,
+         section_name,
+         axis,
+         axis_name,
+         term,
+         type = elem,
+         # elemid,
+         value)
+
+def_nest <- def |>
+  tidyr::nest(.by = c(section,
+                      section_name,
+                      axis,
+                      axis_name,
+                      term),
+              .key = "items") |>
+  print(n = 100)
+
+def_nest |>
+  count(section, section_name, axis)
+
+def_nest |> filter(section == "0", axis == "4")
+
+# axis 3 Operations
+left_join(def_nest |> filter(axis == "3"),
+          pins::pin_read(board, "tables_rows") |>
+            select(code_1,
+                   label_1,
+                   name_3,
+                   label_3,
+                   code = code_3),
+          by = join_by("section" == "code_1",
+                       "section_name" == "label_1",
+                       "axis_name" == "name_3",
+                       "term" == "label_3")) |>
+  distinct()
+
+# axis 4 Body Part
+left_join(def_nest |> filter(axis == "4"),
+          pins::pin_read(board, "tables_rows") |>
+            select(code_1,
+                   label_1,
+                   name_4,
+                   label_4,
+                   code = code_4),
+          by = join_by("section" == "code_1",
+                       "section_name" == "label_1",
+                       "axis_name" == "name_4",
+                       "term" == "label_4")) |>
+  distinct()
+
+
+pins::pin_read(board, "tables_rows") |>
+  filter(code_1 == "1") |>
+  count(label_3)
+
+
+## ---------------------
 pcs_def <- pcs_def |>
   tidyr::unite('name', c(elem, attr, level2:level5),
                na.rm = TRUE,

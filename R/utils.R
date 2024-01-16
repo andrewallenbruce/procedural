@@ -28,6 +28,17 @@ mount_board <- function() {
   "andrewallenbruce/procedural/main/pkgdown/assets/pins-board/"))
 }
 
+
+#' Wrapper to mount package's [pins::board_url()]
+#' @noRd
+mount_source <- function(set = c("definitions", "index", "order", "table")) {
+  if(set == "definitions") pins::pin_read(mount_board(), "source_definitions")
+  if(set == "index") pins::pin_read(mount_board(), "source_index")
+  if(set == "order") pins::pin_read(mount_board(), "source_order")
+  if(set == "table") pins::pin_read(mount_board(), "source_table")
+}
+
+
 #' @noRd
 `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
