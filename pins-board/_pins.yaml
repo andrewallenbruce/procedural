@@ -36,5 +36,9 @@ source_order:
 - source_order/20240115T084856Z-db72f/
 source_table:
 - source_table/20240115T084900Z-b2423/
+tables_order:
+- tables_order/20240115T113001Z-1ecf2/
+tables_rows:
+- tables_rows/20240115T110935Z-e1a51/
 use_see:
 - use_see/20240108T133424Z-17ca4/
