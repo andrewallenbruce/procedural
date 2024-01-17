@@ -9,538 +9,264 @@ library(janitor)
 # qs::qsave(pcs_def, "D:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_definition_2024")
 
 def <- pins::pin_read(mount_board(), "source_definitions") |>
-  #slice(4:nrow(def)) |>
-  select(-level1) |>
-  mutate(rowid = row_number(), .before = 1)
-
-
-devices <- def |>
-  filter(level2 == "deviceAggregation")
-
-sec_na_idx <- def |>
-  filter(elem == "section", is.na(value)) |>
-  pull(rowid)
-
-ax_na_idx <- def |>
-  filter(elem == "axis", is.na(value)) |>
-  pull(rowid)
-
-term_na_idx <- def |>
-  filter(elem == "terms", is.na(value)) |>
-  pull(rowid)
-
-def <- def |>
-  filter(rowid %nin% sec_na_idx) |>
-  filter(rowid %nin% ax_na_idx) |>
-  filter(rowid %nin% term_na_idx) |>
+  slice(4:4800) |>
   filter(level2 != "deviceAggregation") |>
-  select(-level2)
+  select(-level1, -level2) |>
+  mutate(rowid = row_number(), .before = 1) |>
+  unite('level', level3:level5, na.rm = TRUE, remove = TRUE) |>
+  mutate(level = na_if(level, ""))
 
-section_idx <- def |>
-  filter(elem == "section") |>
-  mutate(section = value) |>
-  select(rowid, section)
+# sec_na_idx <- def |>
+#   filter(elem == "section", is.na(value)) |>
+#   pull(rowid)
 
 
-def <- left_join(def, section_idx) |>
-  fill(section) |>
-  filter(elem != "section") |>
-  filter(!is.na(section))
+# Section Code / Name
+sec_idx <- def |>
+  filter(elem == "section", attr == "code") |>
+  pivot_wider(names_from = attr,
+              values_from = value) |>
+  select(rowid, section_code = code)
 
-section_name_idx <- def |>
-  filter(level3 == "title") |>
-  mutate(section_name = value) |>
-  select(rowid, section_name)
+secname_idx <- def |>
+  filter(level == "title") |>
+  pivot_wider(names_from = elem,
+              values_from = value) |>
+  select(rowid, section_title = title)
 
-def <- left_join(def, section_name_idx) |>
-  fill(section_name) |>
-  filter(level3 != "title")
+# Axis Position / Name
+pos_idx <- def |>
+  filter(attr == "pos") |>
+  pivot_wider(names_from = attr,
+              values_from = value) |>
+  select(rowid, pos)
 
 axis_idx <- def |>
   filter(elem == "axis") |>
-  mutate(axis = value) |>
+  pivot_wider(names_from = elem,
+              values_from = value) |>
+  fill(axis, .direction = "updown") |>
   select(rowid, axis)
 
-def <- left_join(def, axis_idx) |>
-  group_by(section) |>
-  fill(axis) |>
-  ungroup() |>
-  filter(elem != "axis")
+# posname_idx <- def |>
+#   filter(level == "axis_title") |>
+#   pivot_wider(names_from = level,
+#               values_from = value) |>
+#   select(rowid, axis_title)
 
-axis_name_idx <- def |>
-  filter(level3 == "axis", level4 == "title") |>
-  mutate(axis_name = value) |>
-  select(rowid, axis_name)
 
-def <- left_join(def, axis_name_idx) |>
-  group_by(section) |>
-  fill(axis_name) |>
-  ungroup() |>
-  #filter(!is.na(level5)) |>
-  select(rowid,
-         elem,
-         elemid,
-         value,
-         section,
-         axis,
-         section_name,
-         axis_name)
-
+def <- left_join(def, sec_idx) |>
+  left_join(secname_idx) |>
+  left_join(axis_idx) |>
+  left_join(posname_idx) |>
+  fill(section_code, section_title) |>
+  fill(axis, axis_title) |>
+  filter(elem != "section") |>
+  filter(is.na(attr)) |>
+  select(-attr) |>
+  filter(!is.na(value)) |>
+  mutate(axis = as.integer(axis))
 
 term_idx <- def |>
-  filter(elem == "title") |>
+  filter(level == "axis_terms_title") |>
   mutate(term = value) |>
   select(rowid, term)
 
-def <- left_join(def, term_idx) |>
+def <- left_join(def, term_idx)
+
+lr_idx <- def |>
+  mutate(r = str_detect(term, ", Right"),
+         l = str_detect(term, ", Left"),
+         b = str_detect(term, ", Bilateral"),
+         lrb = case_when(r == TRUE ~ TRUE, .default = NA),
+         lrb = case_when(l == TRUE ~ TRUE, .default = lrb),
+         lrb = case_when(b == TRUE ~ TRUE, .default = lrb)) |>
+  select(-r, -l, -b) |>
+  filter(lrb %in% TRUE) |>
+  mutate(lrb = term,
+         term = str_remove(term, ", Right"),
+         term = str_remove(term, ", Left"),
+         term = str_remove(term, ", Bilateral")) |>
+  select(rowid, term, lrb)
+
+lr_idx[7, 2]$term <- "Adrenal Gland"
+lr_idx[31, 2]$term <- "Carotid Body"
+lr_idx[130, 2]$term <- "Kidney"
+lr_idx[262, 2]$term <- "Ureter"
+
+lr_nest <- lr_idx |>
+  select(term, lrb) |>
+  nest(.by = c(term), .key = "lrb")
+
+lr_idx <- lr_idx |>
+  select(rowid, term) |>
+  left_join(lr_nest)
+
+lr_idx |> print(n = 300)
+
+names(lr_idx) <- c("rowid", "term2", "lrb")
+
+def <- left_join(def, lr_idx) |>
+  mutate(term2 = case_when(is.na(term2) ~ term, .default = term2)) |>
+  select(-elemid, -term, -level) |>
+  rename(term = term2) |>
   fill(term) |>
+  group_by(term) |>
+  fill(lrb) |>
+  ungroup() |>
   filter(elem != "title") |>
-  select( #rowid,
-         section,
-         section_name,
+  unnest(lrb, keep_empty = TRUE) |>
+  mutate(term = case_when(!is.na(lrb) ~ lrb, .default = term)) |>
+  select(section = section_code,
+         section_title,
          axis,
-         axis_name,
+         axis_title,
          term,
-         type = elem,
-         # elemid,
-         value)
+         # lrb,
+         element = elem,
+         value) |>
+  group_by(section, section_title, axis, axis_title, term) |>
+  nest(elements = c(element, value)) |>
+  ungroup()
 
-def_nest <- def |>
-  tidyr::nest(.by = c(section,
-                      section_name,
-                      axis,
-                      axis_name,
-                      term),
-              .key = "items") |>
-  print(n = 100)
 
-def_nest |>
-  count(section, section_name, axis)
-
-def_nest |> filter(section == "0", axis == "4")
+def |>
+  filter(section == "0", axis == "4")
 
 # axis 3 Operations
-left_join(def_nest |> filter(axis == "3"),
-          pins::pin_read(board, "tables_rows") |>
-            select(code_1,
-                   label_1,
-                   name_3,
-                   label_3,
-                   code = code_3),
+tb_rw <- pins::pin_read(mount_board(), "tables_rows")
+
+def_3 <- left_join(def |> filter(axis == "3"),
+          tb_rw |> select(code_1, label_1, name_3, label_3, code = code_3),
           by = join_by("section" == "code_1",
-                       "section_name" == "label_1",
-                       "axis_name" == "name_3",
+                       "section_title" == "label_1",
+                       "axis_title" == "name_3",
                        "term" == "label_3")) |>
   distinct()
 
 # axis 4 Body Part
-left_join(def_nest |> filter(axis == "4"),
-          pins::pin_read(board, "tables_rows") |>
-            select(code_1,
-                   label_1,
-                   name_4,
-                   label_4,
-                   code = code_4),
+def_4 <- left_join(def |> filter(axis == "4"),
+          tb_rw |> select(code_1, label_1, name_4, label_4, code = code_4),
           by = join_by("section" == "code_1",
-                       "section_name" == "label_1",
-                       "axis_name" == "name_4",
+                       "section_title" == "label_1",
+                       "axis_title" == "name_4",
                        "term" == "label_4")) |>
   distinct()
 
-
-pins::pin_read(board, "tables_rows") |>
-  filter(code_1 == "1") |>
-  count(label_3)
-
-
-## ---------------------
-pcs_def <- pcs_def |>
-  tidyr::unite('name', c(elem, attr, level2:level5),
-               na.rm = TRUE,
-               remove = TRUE) |>
-  dplyr::mutate(name = dplyr::case_match(
-    name,
-    "section_code_section" ~ "section_code",
-    "title_section_title" ~ "section_label",
-    "axis_pos_section_axis" ~ "axis",
-    "title_section_axis_title" ~ "name",
-    "title_section_axis_terms_title" ~ "label",
-    "definition_section_axis_terms_definition" ~ "definition",
-    "explanation_section_axis_terms_explanation" ~ "explanation",
-    "includes_section_axis_terms_includes" ~ "includes"),
-    elemid = NULL)
-
-sect <- pcs_def |>
-  dplyr::filter(name == "section_code" | name == "section_label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::mutate(section_label = lead(section_label)) |>
-  dplyr::filter(!is.na(section_label)) |>
-  dplyr::mutate(start = rowid,
-                end = dplyr::lead(start) - 1,
-                end = dplyr::case_when(start == max(start) ~ {
-                  dplyr::slice_tail(pcs_def) |>
-                    dplyr::pull(rowid)},
-                  .default = end))
-
-
-pcs_def <- dplyr::left_join(pcs_def, sect) |>
-  tidyr::fill(section_code, section_label, start, end) |>
-  dplyr::rowwise() |>
-  dplyr::mutate(section_range = list(range(start, end)),
-                start = NULL,
-                end = NULL) |>
-  dplyr::ungroup()
-
-ax <- pcs_def |>
-  dplyr::filter(name == "axis" | name == "name") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::mutate(name = lead(name)) |>
-  dplyr::filter(!is.na(name)) |>
-  dplyr::mutate(start = rowid,
-                end = dplyr::lead(start) - 1,
-                end = dplyr::case_when(start == max(start) ~ {
-                  dplyr::slice_tail(pcs_def) |>
-                    dplyr::pull(rowid)},
-                  .default = end)) |>
-  dplyr::select(rowid, axis, axis_name = name, start, end)
-
-pcs_def <- dplyr::left_join(pcs_def, ax) |>
-  dplyr::group_by(section_label) |>
-  tidyr::fill(axis, axis_name, start, end, .direction = "downup") |>
-  dplyr::ungroup() |>
-  dplyr::rowwise() |>
-  dplyr::mutate(axis_range = list(range(start, end)),
-                start = NULL,
-                end = NULL) |>
-  dplyr::ungroup()
-
-pcs_def <- pcs_def |>
-  dplyr::filter(name %nin% c("section_code", "section_label", "axis", "name")) |>
-  dplyr::select(-c(section_range, axis_range, rowid)) |>
-  dplyr::rename(code = section_code,
-                section = section_label)
-
-def <- split(pcs_def, pcs_def$section)
-
-## ==========================================
-## Medical and Surgical ---------------------
-medical <- def$`Medical and Surgical`
-medspl <- split(medical, medical$axis_name)
-
-med_op <- medspl$Operation |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-mops_labels <- med_op |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-med_op <- dplyr::left_join(med_op, mops_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, explanation, includes)
-
-med_op <- dplyr::left_join(na.omit(med_op[c('label', 'definition')]),
-                           na.omit(med_op[c('label', 'explanation')])) |>
-  dplyr::left_join(na.omit(med_op[c('label', 'includes')])) |>
-  dplyr::left_join(med_op[1, 1:5]) |>
-  tidyr::fill(code, section, axis, axis_name) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, explanation, includes)
-
-med_dev <- medspl$Device |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-mdv_labels <- med_dev |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-med_dev <- dplyr::left_join(med_dev, mdv_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, includes)
-
-################# FIX THIS #################
-med_bod <- medspl$`Body Part` |>
-  dplyr::mutate(rowid = dplyr::row_number(),
-                conid = dplyr::consecutive_id(name),
-                .before = 1)
-
-mbd_labels <- med_bod |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid,
-                with = conid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-mbd_includes <- med_bod |>
-  dplyr::filter(name == "includes") |>
-  dplyr::mutate(start = rowid,
-                with = conid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-med_bod <- dplyr::left_join(med_bod, mbd_labels) |>
-  tidyr::fill(start, with, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, includes)
-################# FIX THIS #################
-
-med_app <- medspl$Approach |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-medical <- vctrs::vec_rbind(med_op,
-                            med_dev,
-                            #med_bod,
-                            med_app)
-
-## ==========================================
-## Obstetrics -------------------------------
-obstetrics <- def$Obstetrics |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-obs_labels <- obstetrics |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-obstetrics <- dplyr::left_join(obstetrics, obs_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::mutate(explanation = lead(explanation)) |>
-  dplyr::filter(!is.na(definition)) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, explanation)
-
-## ==========================================
-## Placement --------------------------------
-placement <- def$Placement |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Administration -------------------------
-administration <- def$Administration |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-adm_labels <- administration |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-administration <- dplyr::left_join(administration, adm_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, includes)
-
-## ==========================================
-## Measurement and Monitoring ---------------
-measuremonitor <- def$`Measurement and Monitoring` |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Extracorporeal or Systemic Assistance and Performance
-extra_perform <- def$`Extracorporeal or Systemic Assistance and Performance` |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Extracorporeal or Systemic Therapies -----
-extra_therapy <- def$`Extracorporeal or Systemic Therapies` |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Osteopathic ------------------------------
-osteopathic <- def$Osteopathic |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Other Procedures -------------------------
-other <- def$`Other Procedures` |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Chiropractic -----------------------------
-chiropractic <- def$Chiropractic |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Imaging ----------------------------------
-imaging <- def$Imaging |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Nuclear Medicine -------------------------
-nuclear <- def$`Nuclear Medicine` |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-## ==========================================
-## Physical Rehabilitation and Diagnostic Audiology
-phys_audio <- def$`Physical Rehabilitation and Diagnostic Audiology`
-physpl <- split(phys_audio, phys_audio$axis_name)
-
-phys_type <- physpl$Type |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-phys_qual <- physpl$`Type Qualifier` |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-phys_labels <- phys_qual |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-phys_qual <- dplyr::left_join(phys_qual, phys_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, includes, explanation)
-
-phys_qual <- vctrs::vec_cbind(phys_qual[1, 1:4],
-                              phys_qual |>
-                                dplyr::distinct(label, definition) |>
-                                dplyr::filter(!is.na(definition)) |>
-                                dplyr::left_join(phys_qual |>
-                                                   dplyr::distinct(label, includes) |>
-                                                   dplyr::filter(!is.na(includes))) |>
-                                dplyr::left_join(phys_qual |>
-                                                   dplyr::distinct(label, explanation) |>
-                                                   dplyr::filter(!is.na(explanation))))
-
-phys_audio <- vctrs::vec_rbind(phys_type, phys_qual)
-
-## ==========================================
-## Mental Health ----------------------------
-mental <- def$`Mental Health` |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-ment_labels <- mental |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-mental <- dplyr::left_join(mental, ment_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, includes, explanation)
-
-mental <- vctrs::vec_cbind(
-  mental[1, 1:4],
-  mental |>
-    dplyr::distinct(label, definition) |>
-    dplyr::filter(!is.na(definition)) |>
-    dplyr::left_join(
-      mental |>
-        dplyr::distinct(label, includes) |>
-        dplyr::filter(!is.na(includes))) |>
-    dplyr::left_join(
-      mental |>
-        dplyr::distinct(label, explanation) |>
-        dplyr::filter(!is.na(explanation))))
-
-## ==========================================
-## Substance Abuse Treatment ----------------
-substance <- def$`Substance Abuse Treatment` |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-subs_labels <- substance |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-substance <- dplyr::left_join(substance, subs_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::mutate(explanation = lead(explanation)) |>
-  dplyr::filter(!is.na(definition)) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, explanation)
-
-## ==========================================
-## New Technology ---------------------------
-newtech <- def$`New Technology`
-techspl <- split(newtech, newtech$axis_name)
-
-tech_op <- techspl$Operation |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-op_labels <- tech_op |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-tech_op <- dplyr::left_join(tech_op, op_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, definition, explanation, includes) |>
-  dplyr::mutate(explanation = lead(explanation),
-                includes = lead(includes, 2)) |>
-  dplyr::filter(!is.na(definition))
-
-tech_dev <- techspl$`Device / Substance / Technology` |>
-  dplyr::mutate(rowid = dplyr::row_number(), .before = 1)
-
-dev_labels <- tech_dev |>
-  dplyr::filter(name == "label") |>
-  dplyr::mutate(start = rowid) |>
-  tidyr::pivot_wider(names_from = name, values_from = value)
-
-tech_dev <- dplyr::left_join(tech_dev, dev_labels) |>
-  tidyr::fill(start, label) |>
-  dplyr::filter(name != "label") |>
-  tidyr::pivot_wider(names_from = name, values_from = value) |>
-  dplyr::select(code, section, axis, axis_name, label, includes)
-
-tech_app <- techspl$Approach |>
-  tidyr::pivot_wider(names_from = name, values_from = value, values_fn = list) |>
-  tidyr::unnest(cols = c(label, definition))
-
-newtech <- vctrs::vec_rbind(tech_op, tech_dev, tech_app)
-
-####################################################################
-
-definitions <- vctrs::vec_rbind(
-                 medical,
-                 obstetrics,
-                 placement,
-                 administration,
-                 measuremonitor,
-                 extra_perform,
-                 extra_therapy,
-                 osteopathic,
-                 other,
-                 chiropractic,
-                 imaging,
-                 nuclear,
-                 phys_audio,
-                 mental,
-                 substance,
-                 newtech)
-
+# axis 5 Approach
+def_5 <- left_join(def |> filter(axis == "5"),
+          tb_rw |>
+            select(code_1, label_1, rows) |>
+            unnest(cols = c(rows)) |>
+            mutate(axis = as.integer(axis)) |>
+            filter(axis == "5"),
+                   by = join_by("section" == "code_1",
+                                "section_title" == "label_1",
+                                "axis_title" == "name",
+                                "term" == "label",
+                                axis)) |>
+  distinct()
+
+# axis 6 Device
+def |>
+  filter(axis == "6") |>
+  print(n = 300)
+
+tb_rw |>
+  select(code_1,
+         label_1,
+         label_3,
+         rows) |>
+  unnest(cols = c(rows)) |>
+  mutate(axis = as.integer(axis)) |>
+  filter(axis == "6") |>
+  print(n = 300)
+
+
+device_idx <- devices |>
+  distinct(system) |>
+  pull(system)
+
+device_sec_sys <- tb_rw |>
+  select(sec_code = code_1,
+         section = label_1,
+         sys_code = code_2,
+         system = label_2,
+         op_code = code_3,
+         operation = label_3,
+         rows) |>
+  filter(system %in% device_idx) |>
+  unnest(rows) |>
+  filter(axis == "6") |>
+  distinct() |>
+  select(sec_code:operation, value = code, label)
+
+dss <- device_sec_sys |>
+  select(-op_code, -operation)
+
+devices2 <- left_join(devices, dss, relationship = "many-to-many") |>
+  left_join(device_sec_sys) |>
+  select(section,
+         sec_code,
+         system,
+         sys_code,
+         operation,
+         op_code,
+         device,
+         parent,
+         label,
+         value) |>
+  mutate(label = if_else(!str_equal(parent, label), NA, label)) |>
+  filter(!is.na(label)) |>
+  select(-label) |>
+  select(section = sec_code,
+         system = sys_code,
+         operation = op_code,
+         device = value,
+         device_name = parent,
+         includes = device) |>
+  distinct() |>
+  mutate(operation = if_else(is.na(operation), "All applicable", operation))
+
+devices2 |>
+  print(n = 500)
+
+def_6 <- left_join(def |>
+                     filter(axis == "6"),
+                   tb_rw |>
+                     select(code_1, label_1, rows) |>
+                     unnest(cols = c(rows)) |>
+                     mutate(axis = as.integer(axis)) |>
+                     filter(axis == "6"),
+                   by = join_by("section" == "code_1",
+                                "section_title" == "label_1",
+                                "axis_title" == "name",
+                                "term" == "label",
+                                axis)) |>
+  distinct()
+
+def <- bind_rows(def_3, def_4, def_5, def_6) |>
+  select(code = section,
+         section = section_title,
+         axis,
+         axis_name = axis_title,
+         axis_code = code,
+         label = term,
+         elements)
 
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
-board |> pins::pin_write(definitions,
-                         name = "pcs_definitions",
+board |> pins::pin_write(def,
+                         name = "definitions",
                          description = "ICD-10-PCS 2024 Definitions",
                          type = "qs")
 
+board |> pins::pin_write(devices2,
+                         name = "devices",
+                         description = "ICD-10-PCS 2024 Devices",
+                         type = "qs")
+
 board |> pins::write_board_manifest()
-
-
 ## Root Operation Codes ##############
 r0 <- vctrs::vec_c(
   "0" = "Alteration",

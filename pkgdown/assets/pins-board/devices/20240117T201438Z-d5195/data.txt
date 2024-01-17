@@ -1,0 +1,10 @@
+file: devices.qs
+file_size: 1244
+pin_hash: d5195682325b34a8
+type: qs
+title: 'devices: a pinned 99 x 6 data frame'
+description: ICD-10-PCS 2024 Devices
+tags: ~
+urls: ~
+created: 20240117T201438Z
+api_version: 1
