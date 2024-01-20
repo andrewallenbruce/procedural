@@ -1,0 +1,10 @@
+file: nest_part.qs
+file_size: 21046
+pin_hash: 7f346b5f709d0bc3
+type: qs
+title: 'nest_part: a pinned 34 x 2 data frame'
+description: Nest Body Parts
+tags: ~
+urls: ~
+created: 20240120T211629Z
+api_version: 1

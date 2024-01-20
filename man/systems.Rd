@@ -17,6 +17,7 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Body Systems
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 systems()
 
 systems("0")
@@ -24,5 +25,5 @@ systems("0")
 systems("2")
 
 systems("X")
-
+\dontshow{\}) # examplesIf}
 }

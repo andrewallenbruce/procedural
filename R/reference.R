@@ -17,7 +17,7 @@ sections <- function(x = NULL) {
   sec <- dplyr::tibble(
     axis = 1L,
     name = "Section",
-    code = c(0:9, LETTERS[2:4], LETTERS[6:8], LETTERS[24]),
+    value = c(0:9, LETTERS[2:4], LETTERS[6:8], LETTERS[24]),
     label = c("Medical and Surgical",
               "Obstetrics",
               "Placement",
@@ -41,7 +41,7 @@ sections <- function(x = NULL) {
     if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
     x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
     if (nchar(x) > 1L) x <- splitter(x)[1]
-    sec <- vctrs::vec_slice(sec, sec$code == x)
+    sec <- vctrs::vec_slice(sec, sec$value == x)
   }
   return(sec)
 }
@@ -50,7 +50,7 @@ sections <- function(x = NULL) {
 #' @param x ICD-10-PCS body systems character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 114 systems.
 #' @return a [dplyr::tibble()]
-#' @examples
+#' @examplesIf interactive()
 #' systems()
 #'
 #' systems("0")
@@ -66,7 +66,7 @@ systems <- function(x = NULL) {
   msg <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep(0, 10), c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]))),
+    value = c(paste0(rep(0, 10), c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]))),
     label = c("Central Nervous System and Cranial Nerves",
               "Peripheral Nervous System",
               "Heart and Great Vessels",
@@ -103,70 +103,70 @@ systems <- function(x = NULL) {
   obs <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "10",
+    value = "10",
     label = "Pregnancy")
 
   # Placement
   plc <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c("2W", "2Y"),
+    value = c("2W", "2Y"),
     label = c("Anatomical Regions", "Anatomical Orifices"))
 
   # Administration
   adm <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c("30", "3C", "3E"),
+    value = c("30", "3C", "3E"),
     label = c("Circulatory", "Indwelling Device", "Physiological Systems and Anatomical Regions"))
 
   # Measurement and Monitoring
   mam <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c("4A", "4B"),
+    value = c("4A", "4B"),
     label = c("Physiological Systems", "Physiological Devices"))
 
   # Extracorporeal or Systemic Assistance and Performance
   xpr <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "5A",
+    value = "5A",
     label = "Physiological Systems")
 
   # Extracorporeal or Systemic Therapies
   xth <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "6A",
+    value = "6A",
     label = "Physiological Systems")
 
   # Osteopathic
   ost <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "7W",
+    value = "7W",
     label = "Anatomical Regions")
 
   # Other Procedures
   otp <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c("8C", "8E"),
+    value = c("8C", "8E"),
     label = c("Indwelling Device", "Physiological Systems and Anatomical Regions"))
 
   # Chiropractic
   chi <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "9W",
+    value = "9W",
     label = "Anatomical Regions")
 
   # Imaging
   img <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("B", 23), c(0, 2:5, 7:9,
+    value = c(paste0(rep("B", 23), c(0, 2:5, 7:9,
                                     LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]))),
     label = c("Central Nervous System",
               "Heart",
@@ -196,7 +196,7 @@ systems <- function(x = NULL) {
   nuc <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("C", 15), c(0, 2, 5, 7:9,
+    value = c(paste0(rep("C", 15), c(0, 2, 5, 7:9,
                                     LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]))),
     label = c("Central Nervous System",
               "Heart",
@@ -218,7 +218,7 @@ systems <- function(x = NULL) {
   rad <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("D", 15), c(0, 7:9,
+    value = c(paste0(rep("D", 15), c(0, 7:9,
                                     LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]))),
     label = c("Central and Peripheral Nervous System",
               "Lymphatic and Hematologic System",
@@ -240,28 +240,28 @@ systems <- function(x = NULL) {
   phy <- dplyr::tibble(
     axis = 2L,
     name = "Section Qualifier",
-    code = c("F0", "F1"),
+    value = c("F0", "F1"),
     label = c("Rehabilitation", "Diagnostic Audiology"))
 
   # Mental Health
   men <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "GZ",
+    value = "GZ",
     label = "None")
 
   # Substance Abuse Treatment
   sub <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = "HZ",
+    value = "HZ",
     label = "None")
 
   # New Technology
   new <- dplyr::tibble(
     axis = 2L,
     name = "Body System",
-    code = c(paste0(rep("X", 12), c(0, 2,
+    value = c(paste0(rep("X", 12), c(0, 2,
                                     # D, F, H, K, N, R, T, W, X, Y
                                     LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]))),
     label = c("Nervous System",
@@ -306,7 +306,7 @@ systems <- function(x = NULL) {
 
       x <- collapser(splitter(x)[1:2])
 
-      sys <- vctrs::vec_slice(sys, sys$code == x)
+      sys <- vctrs::vec_slice(sys, sys$value == x)
 
     }
   }
@@ -343,7 +343,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Device",
                                   "Qualifier"),
-                         code = c("0", rep(NA, 6)),
+                         value = c("0", rep(NA, 6)),
                          label = c("Medical and Surgical",
                                    rep(NA, 6))))
   }
@@ -357,7 +357,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Device",
                                   "Qualifier"),
-                         code = c("1", rep(NA, 6)),
+                         value = c("1", rep(NA, 6)),
                          label = c("Obstetrics",
                                    rep(NA, 6))))
   }
@@ -371,7 +371,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Device",
                                   "Qualifier"),
-                         code = c("2", rep(NA, 6)),
+                         value = c("2", rep(NA, 6)),
                          label = c("Placement",
                                    rep(NA, 6))))
   }
@@ -385,7 +385,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Substance",
                                   "Qualifier"),
-                         code = c("3", rep(NA, 6)),
+                         value = c("3", rep(NA, 6)),
                          label = c("Administration",
                                    rep(NA, 6))))
   }
@@ -399,7 +399,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Function / Device",
                                   "Qualifier"),
-                         code = c("4", rep(NA, 6)),
+                         value = c("4", rep(NA, 6)),
                          label = c("Measurement and Monitoring",
                                    rep(NA, 6))))
   }
@@ -413,7 +413,7 @@ axes <- function(x) {
                                   "Duration",
                                   "Function",
                                   "Qualifier"),
-                         code = c("5", rep(NA, 6)),
+                         value = c("5", rep(NA, 6)),
                          label = c("Extracorporeal or Systemic Assistance and Performance",
                                    rep(NA, 6))))
   }
@@ -427,7 +427,7 @@ axes <- function(x) {
                                   "Duration",
                                   "Qualifier",
                                   "Qualifier"),
-                         code = c("6", rep(NA, 6)),
+                         value = c("6", rep(NA, 6)),
                          label = c("Extracorporeal or Systemic Therapies",
                                    rep(NA, 6))))
   }
@@ -441,7 +441,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Method",
                                   "Qualifier"),
-                         code = c("7", rep(NA, 6)),
+                         value = c("7", rep(NA, 6)),
                          label = c("Osteopathic",
                                    rep(NA, 6))))
   }
@@ -455,7 +455,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Method",
                                   "Qualifier"),
-                         code = c("8", rep(NA, 6)),
+                         value = c("8", rep(NA, 6)),
                          label = c("Other Procedures",
                                    rep(NA, 6))))
   }
@@ -469,7 +469,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Method",
                                   "Qualifier"),
-                         code = c("9", rep(NA, 6)),
+                         value = c("9", rep(NA, 6)),
                          label = c("Chiropractic",
                                    rep(NA, 6))))
   }
@@ -483,7 +483,7 @@ axes <- function(x) {
                                   "Contrast",
                                   "Qualifier",
                                   "Qualifier"),
-                         code = c("B", rep(NA, 6)),
+                         value = c("B", rep(NA, 6)),
                          label = c("Imaging",
                                    rep(NA, 6)))
     )
@@ -498,7 +498,7 @@ axes <- function(x) {
                                   "Radionuclide",
                                   "Qualifier",
                                   "Qualifier"),
-                         code = c("C", rep(NA, 6)),
+                         value = c("C", rep(NA, 6)),
                          label = c("Nuclear Medicine",
                                    rep(NA, 6))))
   }
@@ -512,7 +512,7 @@ axes <- function(x) {
                                   "Modality Qualifier",
                                   "Isotope",
                                   "Qualifier"),
-                         code = c("D", rep(NA, 6)),
+                         value = c("D", rep(NA, 6)),
                          label = c("Radiation Therapy",
                                    rep(NA, 6))))
   }
@@ -526,7 +526,7 @@ axes <- function(x) {
                                   "Type Qualifier",
                                   "Equipment",
                                   "Qualifier"),
-                         code = c("F", rep(NA, 6)),
+                         value = c("F", rep(NA, 6)),
                          label = c("Physical Rehabilitation and Diagnostic Audiology",
                                    rep(NA, 6))))
   }
@@ -540,7 +540,7 @@ axes <- function(x) {
                                   "Qualifier",
                                   "Qualifier",
                                   "Qualifier"),
-                         code = c("G", rep(NA, 6)),
+                         value = c("G", rep(NA, 6)),
                          label = c("Mental Health",
                                    rep(NA, 6))))
   }
@@ -554,7 +554,7 @@ axes <- function(x) {
                                   "Qualifier",
                                   "Qualifier",
                                   "Qualifier"),
-                         code = c("H", rep(NA, 6)),
+                         value = c("H", rep(NA, 6)),
                          label = c("Substance Abuse Treatment",
                                    rep(NA, 6))))
   }
@@ -568,7 +568,7 @@ axes <- function(x) {
                                   "Approach",
                                   "Device / Substance / Technology",
                                   "Qualifier"),
-                         code = c("X", rep(NA, 6)),
+                         value = c("X", rep(NA, 6)),
                          label = c("New Technology",
                                    rep(NA, 6))))
   }
@@ -594,7 +594,7 @@ approaches <- function(x = NULL) {
   app <- dplyr::tibble(
     axis = 5L,
     name = "Approach",
-    code = c(0:9, LETTERS[2:4], LETTERS[6:8], LETTERS[24]),
+    value = c(0:9, LETTERS[2:4], LETTERS[6:8], LETTERS[24]),
     label = c('Open',
               'Open Approach',
               'External Approach',
@@ -607,11 +607,16 @@ approaches <- function(x = NULL) {
               'Via Natural or Artificial Opening with Percutaneous Endoscopic Assistance'))
 
   if (!is.null(x)) {
+
     if (is.numeric(x)) x <- as.character(x)
+
     if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
+
     x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+
     if (nchar(x) > 1L) x <- splitter(x)[1]
-    sec <- vctrs::vec_slice(sec, sec$code == x)
+
+    sec <- vctrs::vec_slice(sec, sec$value == x)
   }
   return(app)
 }

@@ -18,10 +18,11 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Index
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 index(search = "Abdominohysterectomy")
 
 index(search = "Attain Ability")
 
-index(search = "radi")
-
+index(search = "radi*")
+\dontshow{\}) # examplesIf}
 }

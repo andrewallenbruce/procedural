@@ -2,7 +2,7 @@
 #' @param section PCS section character.
 #' @param axis PCS axis position.
 #' @return a [dplyr::tibble()]
-#' @examples
+#' @examplesIf interactive()
 #' definitions(section = "2", axis = "3")
 #'
 #' definitions(section = "4", axis = "5")
@@ -10,9 +10,9 @@
 #' @export
 definitions <- function(section = NULL, axis = NULL) {
 
-  def <- pins::pin_read(mount_board(), "pcs_definitions_v3")
+  # def <- pins::pin_read(mount_board(), "pcs_definitions_v3")
 
-  # def <- pins::pin_read(mount_board(), "pcs_definitions_v2")
+  def <- pins::pin_read(mount_board(), "definitions")
 
   if (!is.null(section)) {
     if (is.numeric(section)) section <- as.character(section)
@@ -33,12 +33,12 @@ definitions <- function(section = NULL, axis = NULL) {
 #' @param search Search term
 #' @param column Column to search
 #' @return a [dplyr::tibble()]
-#' @examples
+#' @examplesIf interactive()
 #' index(search = "Abdominohysterectomy")
 #'
 #' index(search = "Attain Ability")
 #'
-#' index(search = "radi")
+#' index(search = "radi*")
 #'
 #' @export
 index <- function(search = NULL, column = NULL) {
@@ -52,9 +52,27 @@ index <- function(search = NULL, column = NULL) {
 
   if (!is.null(search)) {
     if (is.null(column)) {column <- "term"}
-    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search, "*")))
+    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search)))
     }
   return(ind)
+}
+
+#' ICD-10-PCS Index
+#' @param search Search term
+#' @param column Column to search
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' devices()
+#' @export
+devices <- function(search = NULL, column = NULL) {
+
+  dev <- pins::pin_read(mount_board(), "devices")
+
+  if (!is.null(search)) {
+    if (is.null(column)) {column <- "term"}
+    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search)))
+  }
+  return(dev)
 }
 
 

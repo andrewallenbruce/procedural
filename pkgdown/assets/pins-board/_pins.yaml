@@ -6,6 +6,20 @@ index_v1:
 - index_v1/20240108T233709Z-2011f/
 index_v2:
 - index_v2/20240109T144347Z-a0c4c/
+nest_approach:
+- nest_approach/20240120T211702Z-2bb9e/
+nest_device:
+- nest_device/20240120T211731Z-916d5/
+nest_operation:
+- nest_operation/20240120T211559Z-4d129/
+nest_part:
+- nest_part/20240120T211629Z-7f346/
+nest_qualifier:
+- nest_qualifier/20240120T211758Z-1812c/
+nest_section:
+- nest_section/20240120T211435Z-e4cbf/
+nest_system:
+- nest_system/20240120T211457Z-11b7b/
 order:
 - order/20240105T230117Z-0964c/
 order_minimum:

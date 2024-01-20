@@ -2,7 +2,7 @@
 #' @param start 7-character string representing an ICD-10-PCS code.
 #' @param end 7-character string representing an ICD-10-PCS code.
 #' @return a [dplyr::tibble()]
-#' @examples
+#' @examplesIf interactive()
 #' code_range("0G9000Z", "0G9100Z")
 #'
 #' code_range("0G9000Z", "10D20ZZ")
