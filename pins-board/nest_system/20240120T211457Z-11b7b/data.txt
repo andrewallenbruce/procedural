@@ -1,0 +1,10 @@
+file: nest_system.qs
+file_size: 1162
+pin_hash: 11b7bef99ce5601d
+type: qs
+title: 'nest_system: a pinned 17 x 2 data frame'
+description: Nest Sections
+tags: ~
+urls: ~
+created: 20240120T211457Z
+api_version: 1
