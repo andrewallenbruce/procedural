@@ -58,19 +58,27 @@ index <- function(search = NULL, column = NULL) {
 }
 
 #' ICD-10-PCS Index
-#' @param search Search term
-#' @param column Column to search
+#' @param system Column to search
+#' @param device description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' devices()
 #' @export
-devices <- function(search = NULL, column = NULL) {
+devices <- function(system = NULL, device = NULL) {
 
   dev <- pins::pin_read(mount_board(), "devices")
 
-  if (!is.null(search)) {
-    if (is.null(column)) {column <- "term"}
-    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search)))
+  if (!is.null(system)) {
+    if (is.numeric(system)) system <- as.character(system)
+    if (grepl("[[:lower:]]*", system)) section <- toupper(system)
+    system <- rlang::arg_match(system, c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U"))
+    dev <- vctrs::vec_slice(dev, dev$system == system)
+  }
+
+  if (!is.null(device)) {
+    if (is.numeric(device)) device <- as.character(device)
+    device <- rlang::arg_match(device, c(2, 4:7, "D", "J", "M", "P", "S"))
+    dev <- vctrs::vec_slice(dev, dev$device == device)
   }
   return(dev)
 }

@@ -4,12 +4,12 @@
 \alias{devices}
 \title{ICD-10-PCS Index}
 \usage{
-devices(search = NULL, column = NULL)
+devices(system = NULL, device = NULL)
 }
 \arguments{
-\item{search}{Search term}
+\item{system}{Column to search}
 
-\item{column}{Column to search}
+\item{device}{description}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

@@ -2,7 +2,36 @@
 set <- pins::pin_read(mount_board(), "tables_rows") |>
   dplyr::mutate(system = paste0(code_1, code_2), .before = name_3)
 
+rows_ids <- dplyr::select(set, row, rowid, rows) |>
+  dplyr::group_by(row) |>
+  tidyr::nest(.key = "rows_ids") |>
+  dplyr::ungroup()
 
+set2 <- dplyr::select(set, name_1:row) |>
+  dplyr::distinct() |>
+  dplyr::left_join(rows_ids)
+
+tables_ids <- dplyr::select(set2, table:rows_ids) |>
+  dplyr::group_by(table) |>
+  tidyr::nest(.key = "tables_ids") |>
+  dplyr::ungroup()
+
+set2 <- dplyr::select(set2, name_1:table) |>
+  dplyr::distinct() |>
+  dplyr::left_join(tables_ids)
+
+systems_ids <- dplyr::select(set2, system:tables_ids) |>
+  dplyr::group_by(system) |>
+  tidyr::nest(.key = "systems_ids") |>
+  dplyr::ungroup()
+
+set2 <- dplyr::select(set2, name_1:system) |>
+  dplyr::distinct() |>
+  dplyr::left_join(systems_ids)
+
+set2_dt <- dtplyr::lazy_dt(set2)
+set2_DT <- data.table::as.data.table(set2)
+set2_tt <- tidytable::as_tidytable(set2)
 # Sections
 section <- set |>
   dplyr::select(name = name_1,
@@ -10,6 +39,7 @@ section <- set |>
                 label = label_1) |>
   dplyr::distinct() |>
   dplyr::mutate(axis = "1", .before = 1)
+
 
 # System
 system <- set |>

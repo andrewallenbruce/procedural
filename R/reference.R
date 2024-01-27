@@ -15,7 +15,7 @@
 sections <- function(x = NULL) {
 
   sec <- dplyr::tibble(
-    axis = 1L,
+    axis = "1",
     name = "Section",
     value = c(0:9, LETTERS[2:4], LETTERS[6:8], LETTERS[24]),
     label = c("Medical and Surgical",
@@ -37,10 +37,7 @@ sections <- function(x = NULL) {
               "New Technology"))
 
   if (!is.null(x)) {
-    if (is.numeric(x)) x <- as.character(x)
-    if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
     x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
-    if (nchar(x) > 1L) x <- splitter(x)[1]
     sec <- vctrs::vec_slice(sec, sec$value == x)
   }
   return(sec)
@@ -64,9 +61,10 @@ systems <- function(x = NULL) {
 
   # Medical and Surgical
   msg <- dplyr::tibble(
-    axis = 2L,
+    section = "0",
+    axis = "2",
     name = "Body System",
-    value = c(paste0(rep(0, 10), c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]))),
+    value = c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]),
     label = c("Central Nervous System and Cranial Nerves",
               "Peripheral Nervous System",
               "Heart and Great Vessels",
@@ -101,73 +99,87 @@ systems <- function(x = NULL) {
 
   # Obstetrics
   obs <- dplyr::tibble(
-    axis = 2L,
+    section = "1",
+    axis = "2",
     name = "Body System",
     value = "10",
     label = "Pregnancy")
 
   # Placement
   plc <- dplyr::tibble(
-    axis = 2L,
+    section = "2",
+    axis = "2",
     name = "Body System",
-    value = c("2W", "2Y"),
-    label = c("Anatomical Regions", "Anatomical Orifices"))
+    value = c("W", "Y"),
+    label = c("Anatomical Regions",
+              "Anatomical Orifices"))
 
   # Administration
   adm <- dplyr::tibble(
-    axis = 2L,
+    section = "3",
+    axis = "2",
     name = "Body System",
-    value = c("30", "3C", "3E"),
-    label = c("Circulatory", "Indwelling Device", "Physiological Systems and Anatomical Regions"))
+    value = c("0", "C", "E"),
+    label = c("Circulatory",
+              "Indwelling Device",
+              "Physiological Systems and Anatomical Regions"))
 
   # Measurement and Monitoring
   mam <- dplyr::tibble(
-    axis = 2L,
+    section = "4",
+    axis = "2",
     name = "Body System",
-    value = c("4A", "4B"),
-    label = c("Physiological Systems", "Physiological Devices"))
+    value = c("A", "B"),
+    label = c("Physiological Systems",
+              "Physiological Devices"))
 
   # Extracorporeal or Systemic Assistance and Performance
   xpr <- dplyr::tibble(
-    axis = 2L,
+    section = "5",
+    axis = "2",
     name = "Body System",
-    value = "5A",
+    value = "A",
     label = "Physiological Systems")
 
   # Extracorporeal or Systemic Therapies
   xth <- dplyr::tibble(
-    axis = 2L,
+    section = "6",
+    axis = "2",
     name = "Body System",
-    value = "6A",
+    value = "A",
     label = "Physiological Systems")
 
   # Osteopathic
   ost <- dplyr::tibble(
-    axis = 2L,
+    section = "7",
+    axis = "2",
     name = "Body System",
-    value = "7W",
+    value = "W",
     label = "Anatomical Regions")
 
   # Other Procedures
   otp <- dplyr::tibble(
-    axis = 2L,
+    section = "8",
+    axis = "2",
     name = "Body System",
-    value = c("8C", "8E"),
-    label = c("Indwelling Device", "Physiological Systems and Anatomical Regions"))
+    value = c("C", "E"),
+    label = c("Indwelling Device",
+              "Physiological Systems and Anatomical Regions"))
 
   # Chiropractic
   chi <- dplyr::tibble(
-    axis = 2L,
+    section = "9",
+    axis = "2",
     name = "Body System",
-    value = "9W",
+    value = "W",
     label = "Anatomical Regions")
 
   # Imaging
   img <- dplyr::tibble(
-    axis = 2L,
+    section = "B",
+    axis = "2",
     name = "Body System",
-    value = c(paste0(rep("B", 23), c(0, 2:5, 7:9,
-                                    LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]))),
+    value = c(0, 2:5, 7:9, LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]),
     label = c("Central Nervous System",
               "Heart",
               "Upper Arteries",
@@ -194,10 +206,10 @@ systems <- function(x = NULL) {
 
   # Nuclear Medicine
   nuc <- dplyr::tibble(
-    axis = 2L,
+    section = "C",
+    axis = "2",
     name = "Body System",
-    value = c(paste0(rep("C", 15), c(0, 2, 5, 7:9,
-                                    LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]))),
+    value = c(0, 2, 5, 7:9, LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]),
     label = c("Central Nervous System",
               "Heart",
               "Veins",
@@ -216,10 +228,10 @@ systems <- function(x = NULL) {
 
   # Radiation Therapy
   rad <- dplyr::tibble(
-    axis = 2L,
+    section = "D",
+    axis = "2",
     name = "Body System",
-    value = c(paste0(rep("D", 15), c(0, 7:9,
-                                    LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]))),
+    value = c(0, 7:9, LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]),
     label = c("Central and Peripheral Nervous System",
               "Lymphatic and Hematologic System",
               "Eye",
@@ -238,32 +250,35 @@ systems <- function(x = NULL) {
 
   # Physical Rehabilitation and Diagnostic Audiology
   phy <- dplyr::tibble(
-    axis = 2L,
+    section = "F",
+    axis = "2",
     name = "Section Qualifier",
-    value = c("F0", "F1"),
+    value = c("0", "1"),
     label = c("Rehabilitation", "Diagnostic Audiology"))
 
   # Mental Health
   men <- dplyr::tibble(
-    axis = 2L,
+    section = "G",
+    axis = "2",
     name = "Body System",
-    value = "GZ",
+    value = "Z",
     label = "None")
 
   # Substance Abuse Treatment
   sub <- dplyr::tibble(
-    axis = 2L,
+    section = "H",
+    axis = "2",
     name = "Body System",
-    value = "HZ",
+    value = "Z",
     label = "None")
 
   # New Technology
   new <- dplyr::tibble(
-    axis = 2L,
+    section = "X",
+    axis = "2",
     name = "Body System",
-    value = c(paste0(rep("X", 12), c(0, 2,
-                                    # D, F, H, K, N, R, T, W, X, Y
-                                    LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]))),
+    value = c(0, 2, # D, F, H, K, N, R, T, W, X, Y
+              LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]),
     label = c("Nervous System",
               "Cardiovascular System",
               "Gastrointestinal System",
@@ -277,38 +292,14 @@ systems <- function(x = NULL) {
               "Physiological Systems",
               "Extracorporeal"))
 
-  sys <- vctrs::vec_rbind(msg, obs, plc, adm, mam, xpr,
-                          xth, ost, otp, chi, img, nuc,
-                          rad, phy, men, sub, new)
+  sys <- vctrs::vec_rbind(msg, obs, plc, adm, mam,
+                          xpr, xth, ost, otp, chi,
+                          img, nuc, rad, phy, men,
+                          sub, new)
 
   if (!is.null(x)) {
-
-    if (is.numeric(x)) x <- as.character(x)
-
-    if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
-
-    if (nchar(x) == 1L) {
-
-      x <- splitter(x)[1]
-
-      x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
-
-      sys <- sys |>
-        dplyr::rowwise() |>
-        dplyr::mutate(sec = splitter(code)[1]) |>
-        dplyr::ungroup()
-
-      sys <- vctrs::vec_slice(sys, sys$sec == x)
-
-    }
-
-    if (nchar(x) > 1L) {
-
-      x <- collapser(splitter(x)[1:2])
-
-      sys <- vctrs::vec_slice(sys, sys$value == x)
-
-    }
+    x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+    sys <- vctrs::vec_slice(sys, sys$section == x)
   }
   return(sys)
 }
@@ -619,4 +610,16 @@ approaches <- function(x = NULL) {
     sec <- vctrs::vec_slice(sec, sec$value == x)
   }
   return(app)
+}
+
+#' @noRd
+pcs_matrix <- function() {
+
+  axis   <- c(1:7)
+  value  <- c(0:9, LETTERS[c(1:8, 10:14, 16:26)])
+
+  matrix(data = NA,
+         nrow = length(axis),
+         ncol = length(value),
+         dimnames = list(axis, value))
 }

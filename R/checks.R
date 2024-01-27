@@ -1,5 +1,7 @@
 #' @noRd
-is_system <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
+is_system <- function(x,
+                      arg = rlang::caller_arg(x),
+                      call = rlang::caller_env()) {
 
   if (substr(x, 1, 1) %nin% c(0:9, LETTERS[c(2:4, 6:8, 24)])) {
     cli::cli_abort(c(
@@ -44,7 +46,7 @@ is_system <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env())
       "i" = "{.strong {.val {length(valid)}}} valid value{?s}: {.val {rlang::syms(valid)}}."),
       call = call)
   }
-  x
+  nchar(x) >= 2L
 }
 
 #' @noRd
@@ -83,4 +85,8 @@ is_row <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
   x
 }
 
+#' @noRd
+is_single_id <- function(x, y) {
+  length(dplyr::intersect(x, y)) == 1L
+}
 
