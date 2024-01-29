@@ -196,11 +196,27 @@ pcs_tbl2 <- pcs_tbl2 |>
 #   dplyr::ungroup() |>
 #   dplyr::distinct()
 
+pcs_tbl2 <- pins::pin_read(mount_board(), "tables_rows") |>
+  dplyr::mutate(system = paste0(code_1, code_2), .before = name_3)
+
+ROWBASE <- pcs_tbl2 |>
+  dplyr::select(part = code_4,
+                row,
+                rowid,
+                rows) |>
+  tidyr::unnest(rows) |>
+  dplyr::rename(value = code)
+
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
 board |> pins::pin_write(pcs_tbl2,
                          name = "tables_rows",
                          description = "ICD-10-PCS 2024 Tables & Rows",
+                         type = "qs")
+
+board |> pins::pin_write(ROWBASE,
+                         name = "rowbase",
+                         description = "ICD-10-PCS 2024 Rows",
                          type = "qs")
 
 board |> pins::write_board_manifest()

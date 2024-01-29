@@ -87,9 +87,7 @@ checks <- function(x = NULL,
 .operation <- function(x) { #3
 
   #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows") |>
-    dplyr::mutate(system = paste0(code_1, code_2),
-                  .before = name_3)
+  set <- pins::pin_read(mount_board(), "tables_rows")
 
   # Filter to system.
   operation <- set |>
@@ -126,9 +124,7 @@ checks <- function(x = NULL,
 .part <- function(x) { #4
 
   #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows") |>
-    dplyr::mutate(system = paste0(code_1, code_2),
-                  .before = name_3)
+  set <- pins::pin_read(mount_board(), "tables_rows")
 
   # Filter to operation.
   part <- set |>
@@ -158,19 +154,7 @@ checks <- function(x = NULL,
 
 .approach <- function(x) { #5
 
-  #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows") |>
-    dplyr::mutate(system = paste0(code_1, code_2),
-                  .before = name_3)
-
-  #------ Updated ROW pin
-  ROWBASE <- set |>
-    dplyr::select(part = code_4,
-                  row,
-                  rowid,
-                  rows) |>
-    tidyr::unnest(rows) |>
-    dplyr::rename(value = code)
+  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
 
   # Filter to body part.
   approach <- ROWBASE |>
@@ -193,19 +177,7 @@ checks <- function(x = NULL,
 
 .device <- function(x) { #6
 
-  #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows") |>
-    dplyr::mutate(system = paste0(code_1, code_2),
-                  .before = name_3)
-
-  #------ Updated ROW pin
-  ROWBASE <- set |>
-    dplyr::select(part = code_4,
-                  row,
-                  rowid,
-                  rows) |>
-    tidyr::unnest(rows) |>
-    dplyr::rename(value = code)
+  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
 
   # Filter to body part.
   device <- ROWBASE |>
@@ -228,19 +200,7 @@ checks <- function(x = NULL,
 
 .qualifier <- function(x) { #7
 
-  #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows") |>
-    dplyr::mutate(system = paste0(code_1, code_2),
-                  .before = name_3)
-
-  #------ Updated ROW pin
-  ROWBASE <- set |>
-    dplyr::select(part = code_4,
-                  row,
-                  rowid,
-                  rows) |>
-    tidyr::unnest(rows) |>
-    dplyr::rename(value = code)
+  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
 
   #----- Updated NESTED Qualifier PIN
   qualifier <- ROWBASE |>
