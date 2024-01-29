@@ -4,7 +4,7 @@
 \alias{pcs}
 \title{Look up ICD-10-PCS Codes or Tables}
 \usage{
-pcs(x)
+pcs(x = NULL)
 }
 \arguments{
 \item{x}{an alphanumeric character vector, can be 3 to 7 characters long.}

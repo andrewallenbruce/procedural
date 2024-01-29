@@ -13,14 +13,26 @@
 #' pcs("0G9000Z")
 #'
 #' @export
-pcs <- function(x) {
+pcs <- function(x = NULL) {
 
   xs <- .section(x)
+  if (is.null(x)) return(xs)
+
   xs <- .system(xs)
+  if (nchar(x) == 1L) return(xs)
+
   xs <- .operation(xs)
+  if (nchar(x) == 2L) return(xs)
+
   xs <- .part(xs)
+  if (nchar(x) == 3L) return(xs)
+
   xs <- .approach(xs)
+  if (nchar(x) == 4L) return(xs)
+
   xs <- .device(xs)
+  if (nchar(x) == 5L) return(xs)
+
   xs <- .qualifier(xs)
 
   return(xs)
@@ -33,8 +45,7 @@ checks <- function(x = NULL,
 
   # No section == return all sections.
   if (is.null(x)) {
-    return(list(input = NA_character_,
-                select = sections()))
+    return(list(input = NA_character_))
     }
 
   if (is.numeric(x)) x <- as.character(x)
@@ -58,8 +69,11 @@ checks <- function(x = NULL,
 
   x <- checks(x)
 
+  # No section == return all sections.
+  if (is.na(x$input)) x$select <- as.data.frame(sections())
+
   # Return selected section.
-  x$section <- sections(substr(x$input, 1, 1))
+  if (!is.na(x$input)) x$head <- sections(substr(x$input, 1, 1))
 
   return(x)
 }
@@ -68,54 +82,43 @@ checks <- function(x = NULL,
 
   # Filter to section.
   system <- systems(substr(x$input, 1, 1))
-
   system$section <- NULL
 
   # No system == return Section's systems.
-  if (!is_system(x$input)) {
-    x$select <- system
-    return(x)
-  }
+  if (nchar(x$input) == 1L) x$select <- as.data.frame(system)
 
   # Return selected system.
-  if (is_system(x$input)) {
-    x$system <- dplyr::filter(system, value == substr(x$input, 2, 2))
+  if (nchar(x$input) > 1L) {
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(system, value == substr(x$input, 2, 2)))
     }
   return(x)
 }
 
 .operation <- function(x) { #3
 
-  #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows")
+  # Load pin, filter to system.
+  select <- pins::pin_read(mount_board(), "tables_rows") |>
+    dplyr::filter(system == substr(x$input, 1, 2)) |>
+    dplyr::select(code_2, name_3:rows)
 
-  # Filter to system.
-  operation <- set |>
-    dplyr::select(system = code_2,
-                  name = name_3,
-                  value = code_3,
-                  label = label_3) |>
-    dplyr::distinct() |>
-    dplyr::mutate(axis = "3", .before = 2) |>
-    dplyr::filter(system == substr(x$input, 2, 2)) |>
-    dplyr::select(axis, name, value, label)
+  # Create operation object
+  operation <- select |>
+    dplyr::mutate(axis = "3") |>
+    dplyr::select(axis, name = name_3, value = code_3, label = label_3) |>
+    dplyr::distinct()
 
   # No operation == return System's operations.
-  if (nchar(x$input) == 2L) {
-    x$select <- operation
-    return(x)
-  }
+  if (nchar(x$input) == 2L) x$select <- as.data.frame(operation)
 
   # Return selected operation.
-  if (nchar(x$input) >= 3L) {
+  if (nchar(x$input) > 2L) {
 
-    x$head <- vctrs::vec_rbind(
-      x$section,
-      x$system,
-      dplyr::filter(operation,
-                    value == substr(x$input, 3, 3)))
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(operation, value == substr(x$input, 3, 3)))
 
-    x$section <- x$system <- NULL
+    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |>
+      dplyr::select(name_4:rows)
   }
   return(x)
 }
@@ -123,130 +126,110 @@ checks <- function(x = NULL,
 # Construct Tail / Row ---------------------
 .part <- function(x) { #4
 
-  #------ Updated BASE pin
-  set <- pins::pin_read(mount_board(), "tables_rows")
-
-  # Filter to operation.
-  part <- set |>
-    dplyr::select(operation = code_3,
-                  row,
-                  rowid,
-                  name = name_4,
-                  value = code_4,
-                  label = label_4) |>
-    dplyr::distinct() |>
-    dplyr::mutate(axis = "4", .before = 4) |>
-    dplyr::filter(operation == substr(x$input, 3, 3)) |>
-    dplyr::select(-operation)
+  # Create part object
+  part <- x$select |>
+    dplyr::mutate(axis = "4") |>
+    dplyr::select(axis, name = name_4, value = code_4, label = label_4) |>
+    dplyr::distinct()
 
   # No body part == return Operation's body parts.
-  if (nchar(x$input) == 3L) {
-    x$select <- part
-    return(x)
-  }
+  if (nchar(x$input) == 3L) x$select <- as.data.frame(part)
 
   # Return selected body part.
-  if (nchar(x$input) >= 4L) {
-    x$part <- dplyr::filter(part, row == substr(x$input, 1, 4))
+  if (nchar(x$input) > 3L) {
+
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(part, value == substr(x$input, 4, 4)))
+
+
+    x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
+      dplyr::select(rowid:rows) |>
+      tidyr::unnest(rows) |>
+      dplyr::distinct() |>
+      dplyr::rename(value = code)
+
     }
   return(x)
 }
 
 .approach <- function(x) { #5
 
-  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
-
-  # Filter to body part.
-  approach <- ROWBASE |>
-    dplyr::filter(axis == "5", row == substr(x$input, 1, 4)) |>
-    dplyr::distinct() |>
-    dplyr::select(-part)
+  axis <- as.data.frame(x$select) |> split(x$select$axis)
+  x$select <- NULL
 
   # No approach == return Body Part's approaches.
-  if (nchar(x$input) == 4L) {
-    x$select <- approach
-    return(x)
-  }
+  if (nchar(x$input) == 4L) x$select <- axis$`5`
 
   # Return selected approach.
-  if (nchar(x$input) >= 5L) {
-    x$approach <- dplyr::filter(approach, value == substr(x$input, 5, 5))
+  if (nchar(x$input) > 4L) {
+
+    axis$`5` <- dplyr::filter(axis$`5`, value == substr(x$input, 5, 5))
+    rid <- unique(axis$`5`$rowid)
+
+    if (length(rid) == 1L) {
+      x$tail <- dplyr::filter(axis$`5`, rowid %in% rid)
+      axis$`6` <- dplyr::filter(axis$`6`, rowid %in% rid)
+      axis$`7` <- dplyr::filter(axis$`7`, rowid %in% rid)
+      x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
+      x <- purrr::list_flatten(x)
+    }
+
+    if (length(rid) > 1L) {
+      x$tail <- axis$`5`
+      x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
+      x <- purrr::list_flatten(x)
+    }
   }
   return(x)
 }
 
 .device <- function(x) { #6
 
-  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
-
-  # Filter to body part.
-  device <- ROWBASE |>
-    dplyr::filter(axis == "6", row == substr(x$input, 1, 4)) |>
-    dplyr::distinct() |>
-    dplyr::select(-part)
-
-  # No device == return Approach's devices.
-  if (nchar(x$input) == 5L) {
-    x$select <- device
-    return(x)
-  }
-
   # Return selected device.
-  if (nchar(x$input) >= 6L) {
-    x$device <- dplyr::filter(device, value == substr(x$input, 6, 6))
+  if (nchar(x$input) > 5L) {
+
+    x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
+    rid <- unique(x$select_6$rowid)
+
+    if (length(rid) == 1L) {
+      x$tail <- vctrs::vec_rbind(x$tail, x$select_6) |> dplyr::filter(rowid %in% rid)
+      x$select_7 <- dplyr::filter(x$select_7, rowid %in% rid)
+      x$select_6 <- NULL
+    }
+
+    if (length(rid) > 1L) {
+      x$tail <- vctrs::vec_rbind(x$tail, x$select_6)
+      x$select_6 <- NULL
+    }
   }
   return(x)
 }
 
 .qualifier <- function(x) { #7
 
-  ROWBASE <- pins::pin_read(mount_board(), "rowbase")
+  if (nchar(x$input) > 6L) {
 
-  #----- Updated NESTED Qualifier PIN
-  qualifier <- ROWBASE |>
-    dplyr::select(-part) |>
-    dplyr::filter(axis == "7") |>
-    dplyr::distinct() |>
-    dplyr::group_by(row, rowid) |>
-    tidyr::nest(.key = "qualifier") |>
-    dplyr::ungroup()
+    x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
+    rid <- unique(x$select_7$rowid)
 
-  # Filter to that device's qualifiers.
-  qualifier <- dplyr::filter(qualifier, row == substr(x$input, 1, 4)) |>
-    tidyr::unnest(qualifier)
+    if (length(rid) == 1L) {
+      x$tail <- vctrs::vec_rbind(x$tail, x$select_7) |>
+        dplyr::filter(rowid %in% rid) |>
+        dplyr::select(-rowid)
 
-  # If you haven't selected a qualifier, return all of that device's qualifiers.
-  if (nchar(x$input) == 6L) {
-    x$select <- qualifier
-    return(x)
-  }
-
-  # If you've selected a qualifier, return it.
-  if (nchar(x$input) == 7L) {
-
-    x$qualifier <- dplyr::filter(qualifier, value == x$split[7])
-
-    id <- intersect(x$part$rowid, x$approach$rowid) |>
-      intersect(x$device$rowid) |>
-      intersect(x$qualifier$rowid)
-
-    if (vctrs::vec_is_empty(id)) {
-      cli::cli_warn(
-        "{.strong {.val {x$input}}} is an invalid ICD-10-PCS code.",
-        call = rlang::caller_env())
-
-      x$select <- qualifier
-      return(x)
+      x <- vctrs::vec_rbind(x$head, x$tail)
     }
 
-    tail <- vctrs::vec_rbind(x$part,
-                             x$approach,
-                             x$device,
-                             x$qualifier) |>
-      dplyr::filter(rowid %in% id) |>
-      dplyr::select(-row, -rowid)
+    if (length(rid) > 1L) {
+      x$tail <- vctrs::vec_rbind(x$tail, x$select_7) |>
+        dplyr::select(-rowid)
 
-    x <- vctrs::vec_rbind(x$head, tail)
+      x <- vctrs::vec_rbind(x$head, x$tail)
+    }
   }
   return(x)
+}
+
+id_intersect <- function(x, y) {
+  length(dplyr::intersect(x, y)) == 1L
 }
