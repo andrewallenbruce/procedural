@@ -46,6 +46,8 @@ post_table:
 - post_table/20240102T082010Z-efbd5/
 pre_table:
 - pre_table/20240102T081959Z-16cff/
+rowbase:
+- rowbase/20240129T080037Z-16521/
 source_definitions:
 - source_definitions/20240115T084908Z-2b8ed/
 source_index:
@@ -57,6 +59,6 @@ source_table:
 tables_order:
 - tables_order/20240115T113001Z-1ecf2/
 tables_rows:
-- tables_rows/20240115T110935Z-e1a51/
+- tables_rows/20240129T075615Z-57069/
 use_see:
 - use_see/20240108T133424Z-17ca4/

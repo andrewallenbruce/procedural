@@ -1,0 +1,10 @@
+file: rowbase.qs
+file_size: 468475
+pin_hash: 16521e23e46a2692
+type: qs
+title: 'rowbase: a pinned 1278680 x 7 data frame'
+description: ICD-10-PCS 2024 Rows
+tags: ~
+urls: ~
+created: 20240129T080037Z
+api_version: 1
