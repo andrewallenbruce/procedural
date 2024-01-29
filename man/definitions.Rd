@@ -4,12 +4,14 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(section = NULL, axis = NULL)
+definitions(section = NULL, axis = NULL, value = NULL)
 }
 \arguments{
 \item{section}{PCS section character.}
 
 \item{axis}{PCS axis position.}
+
+\item{value}{PCS axis value.}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -18,9 +20,10 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Definitions
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-definitions(section = "2", axis = "3")
+definitions(section = "0", axis = "3")
 
-definitions(section = "4", axis = "5")
-\dontshow{\}) # examplesIf}
+definitions(section = "0", axis = "3", value = "Y")
+
+definitions(section = "0", axis = "3", value = "Y")$elements
+
 }

@@ -16,11 +16,6 @@ def <- pins::pin_read(mount_board(), "source_definitions") |>
   unite('level', level3:level5, na.rm = TRUE, remove = TRUE) |>
   mutate(level = na_if(level, ""))
 
-# sec_na_idx <- def |>
-#   filter(elem == "section", is.na(value)) |>
-#   pull(rowid)
-
-
 # Section Code / Name
 sec_idx <- def |>
   filter(elem == "section", attr == "code") |>
@@ -48,11 +43,11 @@ axis_idx <- def |>
   fill(axis, .direction = "updown") |>
   select(rowid, axis)
 
-# posname_idx <- def |>
-#   filter(level == "axis_title") |>
-#   pivot_wider(names_from = level,
-#               values_from = value) |>
-#   select(rowid, axis_title)
+posname_idx <- def |>
+  filter(level == "axis_title") |>
+  pivot_wider(names_from = level,
+              values_from = value) |>
+  select(rowid, axis_title)
 
 
 def <- left_join(def, sec_idx) |>
@@ -64,8 +59,7 @@ def <- left_join(def, sec_idx) |>
   filter(elem != "section") |>
   filter(is.na(attr)) |>
   select(-attr) |>
-  filter(!is.na(value)) |>
-  mutate(axis = as.integer(axis))
+  filter(!is.na(value))
 
 term_idx <- def |>
   filter(level == "axis_terms_title") |>
@@ -123,15 +117,83 @@ def <- left_join(def, lr_idx) |>
          axis_title,
          term,
          # lrb,
-         element = elem,
-         value) |>
+         type = elem,
+         description = value) |>
   group_by(section, section_title, axis, axis_title, term) |>
-  nest(elements = c(element, value)) |>
+  nest(elements = c(type, description)) |>
   ungroup()
 
 
-def |>
-  filter(section == "0", axis == "4")
+def <- def |>
+  select(section,
+         section_name = section_title,
+         axis,
+         axis_name = axis_title,
+         label = term,
+         elements)
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(def,
+                         name = "definitions",
+                         description = "ICD-10-PCS 2024 Definitions",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
+
+# Trying to join code values
+def_list <- def |> split(def$section)
+
+# Obstetrics
+obs_op <- pcs("10")$select
+obs_ap <- vctrs::vec_rbind(pcs("10S2")$select, pcs("10S0")$select[2, ])
+def_list$`1` <- left_join(def_list$`1`, bind_rows(obs_op, obs_ap)) |>
+  select(section:axis_name, value, label, elements)
+
+# Placement
+plc_op <- pcs("2W")$select
+plc_ap <- pcs("2W00")$select
+plc <- vctrs::vec_rbind(plc_op, plc_ap) |> select(axis, value, label)
+def_list$`2` <- left_join(def_list$`2`, plc) |>
+  select(section:axis_name, value, label, elements)
+
+# Administration
+adm_op <- vctrs::vec_rbind(pcs("30")$select, pcs("3E")$select) |>
+  select(axis, value, label)
+
+adm_ap <- pins::pin_read(mount_board(), "tables_rows") |>
+  filter(code_1 == "3") |>
+  select(rows) |>
+  unnest(rows) |>
+  distinct() |>
+  filter(axis == "5") |>
+  select(axis, value = code, label)
+
+adm_sb <- pins::pin_read(mount_board(), "tables_rows") |>
+  filter(code_1 == "3") |>
+  select(rows) |>
+  unnest(rows) |>
+  distinct() |>
+  filter(axis == "6") |>
+  select(axis, value = code, label)
+
+adm <- vctrs::vec_rbind(adm_op, adm_ap, adm_sb)
+
+
+
+left_join(def_list$`3`, adm) |>
+  select(section:axis_name, value, label, elements) |>
+  filter(is.na(value)) |>
+  unnest(elements, names_sep = ".") |>
+  print(n = 300)
+
+
+
+def_list$`3` |> print(n = 300)
+
+
+
+
 
 # axis 3 Operations
 tb_rw <- pins::pin_read(mount_board(), "tables_rows")

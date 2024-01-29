@@ -102,7 +102,7 @@ systems <- function(x = NULL) {
     section = "1",
     axis = "2",
     name = "Body System",
-    value = "10",
+    value = "0",
     label = "Pregnancy")
 
   # Placement

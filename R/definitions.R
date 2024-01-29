@@ -1,31 +1,53 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
 #' @param axis PCS axis position.
+#' @param value PCS axis value.
 #' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
-#' definitions(section = "2", axis = "3")
+#' @examples
+#' definitions(section = "0", axis = "3")
 #'
-#' definitions(section = "4", axis = "5")
+#' definitions(section = "0", axis = "3", value = "Y")
+#'
+#' definitions(section = "0", axis = "3", value = "Y")$elements
 #'
 #' @export
-definitions <- function(section = NULL, axis = NULL) {
-
-  # def <- pins::pin_read(mount_board(), "pcs_definitions_v3")
+definitions <- function(section = NULL, axis = NULL, value = NULL) {
 
   def <- pins::pin_read(mount_board(), "definitions")
 
   if (!is.null(section)) {
+
     if (is.numeric(section)) section <- as.character(section)
+
     if (grepl("[[:lower:]]*", section)) section <- toupper(section)
+
+    # definitions() |> distinct(code) |> unlist(use.names = FALSE)
     section <- rlang::arg_match(section, c(0:9, "B", "C", "F", "G", "H", "X"))
+
     def <- vctrs::vec_slice(def, def$code == section)
     }
 
   if (!is.null(axis)) {
+
     if (is.numeric(axis)) axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, c("3", "5", "6"))
+
+    # definitions() |> distinct(axis) |> unlist(use.names = FALSE)
+    axis <- rlang::arg_match(axis, c("3", "4", "5", "6"))
+
     def <- vctrs::vec_slice(def, def$axis == axis)
-    }
+  }
+
+  if (!is.null(value)) {
+
+    if (is.numeric(value)) value <- as.character(value)
+
+    if (grepl("[[:lower:]]*", value)) value <- toupper(value)
+
+    # definitions() |> distinct(axis_code) |> unlist(use.names = FALSE) |> sort()
+    value <- rlang::arg_match(value, c(0:9, LETTERS[c(1:8, 10:14, 16:26)]))
+
+    def <- vctrs::vec_slice(def, def$axis_code == value)
+  }
   return(def)
 }
 
