@@ -7,7 +7,7 @@
 sections(x = NULL)
 }
 \arguments{
-\item{x}{ICD-10-PCS section character, an alphanumeric code of length 1.
+\item{x}{ICD-10-PCS section value, an alphanumeric code of length 1.
 If \code{NULL} (default), returns all 17 sections.}
 }
 \value{

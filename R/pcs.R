@@ -44,16 +44,14 @@ checks <- function(x = NULL,
                    call = rlang::caller_env()) {
 
   # No section == return all sections.
-  if (is.null(x)) {
-    return(list(input = NA_character_))
-    }
+  if (is.null(x)) return(list(input = NA_character_))
 
   if (is.numeric(x)) x <- as.character(x)
 
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
   if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
-    "x" = "{.strong {.val {x}}} contains {.emph non-valid} characters."),
+    "x" = "{.strong {.val {x}}} contains {.emph invalid} PCS values."),
     call = call)}
 
   if (nchar(x) > 7L) {cli::cli_abort(c(
@@ -64,15 +62,14 @@ checks <- function(x = NULL,
   return(list(input = x))
 }
 
-# Construct Head / Table ---------------------
 .section <- function(x) { #1
 
   x <- checks(x)
 
-  # No section == return all sections.
+  # Return all sections
   if (is.na(x$input)) x$select <- as.data.frame(sections())
 
-  # Return selected section.
+  # Return selected section
   if (!is.na(x$input)) x$head <- sections(substr(x$input, 1, 1))
 
   return(x)
@@ -80,24 +77,21 @@ checks <- function(x = NULL,
 
 .system <- function(x) { #2
 
-  # Filter to section.
-  system <- systems(substr(x$input, 1, 1))
-  system$section <- NULL
+  # Filter to section
+  system <- systems(substr(x$input, 1, 1))[c("axis", "name", "value", "label")]
 
-  # No system == return Section's systems.
+  # Return all systems
   if (nchar(x$input) == 1L) x$select <- as.data.frame(system)
 
-  # Return selected system.
-  if (nchar(x$input) > 1L) {
-    x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(system, value == substr(x$input, 2, 2)))
-    }
+  # Return selected system
+  if (nchar(x$input) > 1L) x$head <- vctrs::vec_rbind(x$head, dplyr::filter(system, value == substr(x$input, 2, 2)))
+
   return(x)
 }
 
 .operation <- function(x) { #3
 
-  # Load pin, filter to system.
+  # Filter to system
   select <- pins::pin_read(mount_board(), "tables_rows") |>
     dplyr::filter(system == substr(x$input, 1, 2)) |>
     dplyr::select(code_2, name_3:rows)
@@ -108,17 +102,17 @@ checks <- function(x = NULL,
     dplyr::select(axis, name = name_3, value = code_3, label = label_3) |>
     dplyr::distinct()
 
-  # No operation == return System's operations.
+  # Return all operations
   if (nchar(x$input) == 2L) x$select <- as.data.frame(operation)
 
-  # Return selected operation.
+  # Return selected operation
   if (nchar(x$input) > 2L) {
 
-    x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(operation, value == substr(x$input, 3, 3)))
+    # Head = First 4 axes, Tail = Last 3 axes
+    x$head <- vctrs::vec_rbind(x$head, dplyr::filter(operation, value == substr(x$input, 3, 3)))
 
-    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |>
-      dplyr::select(name_4:rows)
+    # Filtered pin to pass on
+    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |> dplyr::select(name_4:rows)
   }
   return(x)
 }
@@ -132,22 +126,19 @@ checks <- function(x = NULL,
     dplyr::select(axis, name = name_4, value = code_4, label = label_4) |>
     dplyr::distinct()
 
-  # No body part == return Operation's body parts.
+  # Return all parts
   if (nchar(x$input) == 3L) x$select <- as.data.frame(part)
 
-  # Return selected body part.
+  # Return selected part
   if (nchar(x$input) > 3L) {
 
-    x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(part, value == substr(x$input, 4, 4)))
-
+    x$head <- vctrs::vec_rbind(x$head, dplyr::filter(part, value == substr(x$input, 4, 4)))
 
     x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
       dplyr::select(rowid:rows) |>
       tidyr::unnest(rows) |>
       dplyr::distinct() |>
       dplyr::rename(value = code)
-
     }
   return(x)
 }
@@ -157,10 +148,10 @@ checks <- function(x = NULL,
   axis <- as.data.frame(x$select) |> split(x$select$axis)
   x$select <- NULL
 
-  # No approach == return Body Part's approaches.
+  # Return all approaches
   if (nchar(x$input) == 4L) x$select <- axis$`5`
 
-  # Return selected approach.
+  # Return selected approach
   if (nchar(x$input) > 4L) {
 
     axis$`5` <- dplyr::filter(axis$`5`, value == substr(x$input, 5, 5))
@@ -185,7 +176,7 @@ checks <- function(x = NULL,
 
 .device <- function(x) { #6
 
-  # Return selected device.
+  # Return selected device
   if (nchar(x$input) > 5L) {
 
     x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
@@ -228,8 +219,4 @@ checks <- function(x = NULL,
     }
   }
   return(x)
-}
-
-id_intersect <- function(x, y) {
-  length(dplyr::intersect(x, y)) == 1L
 }

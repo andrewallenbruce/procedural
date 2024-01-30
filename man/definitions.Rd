@@ -4,14 +4,14 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(section = NULL, axis = NULL, value = NULL)
+definitions(section = NULL, axis = NULL, label = NULL)
 }
 \arguments{
 \item{section}{PCS section character.}
 
 \item{axis}{PCS axis position.}
 
-\item{value}{PCS axis value.}
+\item{label}{PCS axis label.}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -20,10 +20,19 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Definitions
 }
 \examples{
-definitions(section = "0", axis = "3")
+definitions(section = "0",
+            axis = "3",
+            label = "Drainage")
 
-definitions(section = "0", axis = "3", value = "Y")
+definitions(section = "0",
+            axis = "3",
+            label = "Drainage")$elements
 
-definitions(section = "0", axis = "3", value = "Y")$elements
+definitions(section = "0",
+            axis = "4",
+            label = "Abdominal Aorta")$elements
+
+definitions(section = "B",
+            label = "Fluoroscopy")$elements
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/reference.R
 \name{approaches}
 \alias{approaches}
-\title{ICD-10-PCS Sections}
+\title{ICD-10-PCS Approaches}
 \usage{
 approaches(x = NULL)
 }
@@ -14,7 +14,7 @@ If \code{NULL} (default), returns all 17 sections.}
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-ICD-10-PCS Sections
+ICD-10-PCS Approaches
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

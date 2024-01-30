@@ -1,6 +1,8 @@
-# library(flatxml)
 library(tidyverse)
 library(janitor)
+`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
+
+# library(flatxml)
 # index <- "E:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_index_2024.xml"
 #
 # pcs_index <- flatxml::fxml_importXMLFlat(index)
@@ -10,9 +12,9 @@ library(janitor)
 #   clean_names()
 #
 # qs::qsave(pcs_index, "E:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
-`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
+# pcs_index <- qs::qread("F:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
 
-pcs_index <- qs::qread("F:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
+ind <- pins::pin_read(procedural:::mount_board(), "source_index")
 
 pcs_index <- pcs_index[4:nrow(pcs_index), ] |>
   mutate(level1 = NULL,

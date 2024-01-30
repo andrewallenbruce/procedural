@@ -1,53 +1,46 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
 #' @param axis PCS axis position.
-#' @param value PCS axis value.
+#' @param label PCS axis label.
 #' @return a [dplyr::tibble()]
 #' @examples
-#' definitions(section = "0", axis = "3")
+#' definitions(section = "0",
+#'             axis = "3",
+#'             label = "Drainage")
 #'
-#' definitions(section = "0", axis = "3", value = "Y")
+#' definitions(section = "0",
+#'             axis = "3",
+#'             label = "Drainage")$elements
 #'
-#' definitions(section = "0", axis = "3", value = "Y")$elements
+#' definitions(section = "0",
+#'             axis = "4",
+#'             label = "Abdominal Aorta")$elements
+#'
+#' definitions(section = "B",
+#'             label = "Fluoroscopy")$elements
 #'
 #' @export
-definitions <- function(section = NULL, axis = NULL, value = NULL) {
+definitions <- function(section = NULL,
+                        axis = NULL,
+                        label = NULL) {
 
   def <- pins::pin_read(mount_board(), "definitions")
 
   if (!is.null(section)) {
-
-    if (is.numeric(section)) section <- as.character(section)
-
+    if (is.numeric(section))  section <- as.character(section)
     if (grepl("[[:lower:]]*", section)) section <- toupper(section)
-
-    # definitions() |> distinct(code) |> unlist(use.names = FALSE)
     section <- rlang::arg_match(section, c(0:9, "B", "C", "F", "G", "H", "X"))
-
-    def <- vctrs::vec_slice(def, def$code == section)
+    def <- vctrs::vec_slice(def, def$section == section)
     }
 
   if (!is.null(axis)) {
-
     if (is.numeric(axis)) axis <- as.character(axis)
-
-    # definitions() |> distinct(axis) |> unlist(use.names = FALSE)
     axis <- rlang::arg_match(axis, c("3", "4", "5", "6"))
-
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
-  if (!is.null(value)) {
+  if (!is.null(label)) def <- vctrs::vec_slice(def, def$label == label)
 
-    if (is.numeric(value)) value <- as.character(value)
-
-    if (grepl("[[:lower:]]*", value)) value <- toupper(value)
-
-    # definitions() |> distinct(axis_code) |> unlist(use.names = FALSE) |> sort()
-    value <- rlang::arg_match(value, c(0:9, LETTERS[c(1:8, 10:14, 16:26)]))
-
-    def <- vctrs::vec_slice(def, def$axis_code == value)
-  }
   return(def)
 }
 
@@ -63,7 +56,8 @@ definitions <- function(section = NULL, axis = NULL, value = NULL) {
 #' index(search = "radi*")
 #'
 #' @export
-index <- function(search = NULL, column = NULL) {
+index <- function(search = NULL,
+                  column = NULL) {
 
   ind <- pins::pin_read(mount_board(), "index_v2") |>
     tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
