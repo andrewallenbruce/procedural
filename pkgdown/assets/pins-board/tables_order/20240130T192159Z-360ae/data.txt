@@ -1,0 +1,10 @@
+file: tables_order.qs
+file_size: 620236
+pin_hash: 360ae7d3e969864b
+type: qs
+title: 'tables_order: a pinned 78603 x 6 data frame'
+description: ICD-10-PCS Order File 2024
+tags: ~
+urls: ~
+created: 20240130T192159Z
+api_version: 1

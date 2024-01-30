@@ -118,30 +118,44 @@ def <- left_join(def, lr_idx) |>
          term,
          # lrb,
          type = elem,
-         description = value) |>
-  group_by(section, section_title, axis, axis_title, term) |>
-  nest(elements = c(type, description)) |>
-  ungroup()
+         description = value)
 
-
-def <- def |>
+includes <- def |>
+  filter(type == "includes") |>
   select(section,
-         section_name = section_title,
+         #section_title,
          axis,
-         axis_name = axis_title,
+         name = axis_title,
          label = term,
-         elements)
+         includes = description)
+
+definitions <- def |>
+  filter(type != "includes") |>
+  select(section,
+         #section_title,
+         axis,
+         name = axis_title,
+         label = term,
+         type,
+         description) |>
+  pivot_wider(names_from = type,
+              values_from = description)
 
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
-board |> pins::pin_write(def,
+board |> pins::pin_write(definitions,
                          name = "definitions",
                          description = "ICD-10-PCS 2024 Definitions",
                          type = "qs")
 
+board |> pins::pin_write(includes,
+                         name = "includes",
+                         description = "ICD-10-PCS 2024 Includes",
+                         type = "qs")
+
 board |> pins::write_board_manifest()
 
-# Trying to join code values
+#--------------------------------------- Trying to join code values
 def_list <- def |> split(def$section)
 
 # Obstetrics

@@ -1,6 +1,7 @@
-# # pak::pak("rconsortium/S7")
+# pak::pak("rconsortium/S7")
 #
 # library(S7)
+#
 # prop_code <- new_property(
 #   class = class_character,
 #   validator = function(value) {

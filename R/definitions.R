@@ -1,28 +1,24 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
 #' @param axis PCS axis position.
-#' @param label PCS axis label.
+#' @param text PCS axis label.
 #' @return a [dplyr::tibble()]
 #' @examples
 #' definitions(section = "0",
 #'             axis = "3",
-#'             label = "Drainage")
-#'
-#' definitions(section = "0",
-#'             axis = "3",
-#'             label = "Drainage")$elements
+#'             text = "Drainage")
 #'
 #' definitions(section = "0",
 #'             axis = "4",
-#'             label = "Abdominal Aorta")$elements
+#'             text = "Abdominal Aorta")
 #'
 #' definitions(section = "B",
-#'             label = "Fluoroscopy")$elements
+#'             text = "Fluoroscopy")
 #'
 #' @export
 definitions <- function(section = NULL,
                         axis = NULL,
-                        label = NULL) {
+                        text = NULL) {
 
   def <- pins::pin_read(mount_board(), "definitions")
 
@@ -39,8 +35,9 @@ definitions <- function(section = NULL,
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
-  if (!is.null(label)) def <- vctrs::vec_slice(def, def$label == label)
-
+  if (!is.null(text)) {
+    def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))
+    }
   return(def)
 }
 

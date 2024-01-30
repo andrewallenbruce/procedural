@@ -155,21 +155,10 @@ checks <- function(x = NULL,
   if (nchar(x$input) > 4L) {
 
     axis$`5` <- dplyr::filter(axis$`5`, value == substr(x$input, 5, 5))
-    rid <- unique(axis$`5`$rowid)
-
-    if (length(rid) == 1L) {
-      x$tail <- dplyr::filter(axis$`5`, rowid %in% rid)
-      axis$`6` <- dplyr::filter(axis$`6`, rowid %in% rid)
-      axis$`7` <- dplyr::filter(axis$`7`, rowid %in% rid)
-      x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
-      x <- purrr::list_flatten(x)
-    }
-
-    if (length(rid) > 1L) {
-      x$tail <- axis$`5`
-      x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
-      x <- purrr::list_flatten(x)
-    }
+    x$id <- unique(axis$`5`$rowid)
+    x$tail <- axis$`5`
+    x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
+    x <- purrr::list_flatten(x)
   }
   return(x)
 }
@@ -180,18 +169,9 @@ checks <- function(x = NULL,
   if (nchar(x$input) > 5L) {
 
     x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
-    rid <- unique(x$select_6$rowid)
-
-    if (length(rid) == 1L) {
-      x$tail <- vctrs::vec_rbind(x$tail, x$select_6) |> dplyr::filter(rowid %in% rid)
-      x$select_7 <- dplyr::filter(x$select_7, rowid %in% rid)
-      x$select_6 <- NULL
-    }
-
-    if (length(rid) > 1L) {
-      x$tail <- vctrs::vec_rbind(x$tail, x$select_6)
-      x$select_6 <- NULL
-    }
+    x$id <- intersect(x$id, x$select_6$rowid)
+    x$tail <- vctrs::vec_rbind(x$tail, x$select_6)
+    x$select_6 <- NULL
   }
   return(x)
 }
@@ -201,22 +181,10 @@ checks <- function(x = NULL,
   if (nchar(x$input) > 6L) {
 
     x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
-    rid <- unique(x$select_7$rowid)
+    x$id <- intersect(x$id, x$select_7$rowid)
 
-    if (length(rid) == 1L) {
-      x$tail <- vctrs::vec_rbind(x$tail, x$select_7) |>
-        dplyr::filter(rowid %in% rid) |>
-        dplyr::select(-rowid)
-
-      x <- vctrs::vec_rbind(x$head, x$tail)
-    }
-
-    if (length(rid) > 1L) {
-      x$tail <- vctrs::vec_rbind(x$tail, x$select_7) |>
-        dplyr::select(-rowid)
-
-      x <- vctrs::vec_rbind(x$head, x$tail)
-    }
+    x$tail <- vctrs::vec_rbind(x$tail, x$select_7)
+    x$select_7 <- NULL
   }
   return(x)
 }

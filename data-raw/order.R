@@ -22,16 +22,35 @@ tbl <- ord |>
 ord <- ord |>
   dplyr::left_join(tbl) |>
   dplyr::select(order,
+                table,
                 code,
                 valid,
-                description_long,
-                table,
-                description) |>
-  tidyr::fill(table, description) |>
+                description_table = description,
+                description_code = description_long) |>
+  tidyr::fill(table, description_table) |>
   dplyr::filter(valid == 1) |>
   dplyr::select(-valid) |>
   dplyr::mutate(order = row_number()) |>
-  tidyr::nest(.by = c(table, description), .key = "codes")
+  dplyr::mutate(row = substr(code, 1, 4), .before = code)
+
+
+# ord |> filter(code == str_subset(code, "027004"))
+
+# ord |>
+#   filter(grepl("Dilation", description_code)) |>
+#   filter(grepl("0270", code)) |>
+#   filter(table == "027") |>
+#   count(row)
+
+# ord |>
+#   select(table, row, code) |>
+#   count(table, sort = TRUE) |>
+#   filter(table == "027")
+#   filter(n > 100)
+
+# |>
+#   dplyr::distinct()
+#   tidyr::nest(.by = c(table, description), .key = "codes")
 
 # ord |>
 #   tidyr::separate_wider_position(table, c(section = 1, system = 1, operation = 1), cols_remove = FALSE) |>
