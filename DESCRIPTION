@@ -21,7 +21,8 @@ Imports:
    rlang,
    vctrs,
    zeallot,
-   stringi
+   stringi,
+   stringr
 Suggests: 
     knitr,
     rmarkdown,

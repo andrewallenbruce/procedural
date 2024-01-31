@@ -2,7 +2,7 @@
 % Please edit documentation in R/definitions.R
 \name{devices}
 \alias{devices}
-\title{ICD-10-PCS Index}
+\title{ICD-10-PCS Devices}
 \usage{
 devices(system = NULL, device = NULL)
 }
@@ -15,7 +15,7 @@ devices(system = NULL, device = NULL)
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-ICD-10-PCS Index
+ICD-10-PCS Devices
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

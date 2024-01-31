@@ -4,11 +4,13 @@
 \alias{tables}
 \title{ICD-10-PCS Tables}
 \usage{
-tables(x = NULL)
+tables(code = NULL, text = NULL)
 }
 \arguments{
-\item{x}{1 to 3-character string representing an ICD-10-PCS table.
+\item{code}{1 to 3-character string representing an ICD-10-PCS table.
 If \code{NULL} (default), returns all 895 tables.}
+
+\item{text}{Search code descriptions}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -18,10 +20,10 @@ ICD-10-PCS Tables
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-tables("0")
+tables(code = "0")
 
-tables("00")
+tables(code = "00")
 
-tables("00X")
+tables(code = "00X")
 \dontshow{\}) # examplesIf}
 }

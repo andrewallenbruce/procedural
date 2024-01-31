@@ -4,16 +4,11 @@
 #' @param text PCS axis label.
 #' @return a [dplyr::tibble()]
 #' @examples
-#' definitions(section = "0",
-#'             axis = "3",
-#'             text = "Drainage")
+#' definitions(section = "0", axis = "3", text = "Drainage")
 #'
-#' definitions(section = "0",
-#'             axis = "4",
-#'             text = "Abdominal Aorta")
+#' definitions(section = "0", axis = "5")
 #'
-#' definitions(section = "B",
-#'             text = "Fluoroscopy")
+#' definitions(section = "B", text = "Fluoroscopy")
 #'
 #' @export
 definitions <- function(section = NULL,
@@ -31,14 +26,50 @@ definitions <- function(section = NULL,
 
   if (!is.null(axis)) {
     if (is.numeric(axis)) axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, c("3", "4", "5", "6"))
+    axis <- rlang::arg_match(axis, c("3", "4", "5"))
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
-  if (!is.null(text)) {
-    def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))
-    }
+  if (!is.null(text)) {def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))}
+
   return(def)
+}
+
+#' ICD-10-PCS Includes
+#' @param section PCS section character.
+#' @param axis PCS axis position.
+#' @param name PCS axis name.
+#' @param text PCS axis label.
+#' @return a [dplyr::tibble()]
+#' @examples
+#' includes(section = "0", axis = "3")
+#' @export
+includes <- function(section = NULL,
+                     axis = NULL,
+                     name = NULL,
+                     text = NULL) {
+
+  includes <- pins::pin_read(mount_board(), "includes")
+
+  if (!is.null(section)) {
+    if (is.numeric(section))  section <- as.character(section)
+    if (grepl("[[:lower:]]*", section)) section <- toupper(section)
+    section <- rlang::arg_match(section, c(0, 3, "F", "G", "X"))
+    includes <- vctrs::vec_slice(includes, includes$section == section)
+  }
+
+  if (!is.null(axis)) {
+    if (is.numeric(axis)) axis <- as.character(axis)
+    axis <- rlang::arg_match(axis, c("3", "4", "5", "6"))
+    includes <- vctrs::vec_slice(includes, includes$axis == axis)
+  }
+
+  if (!is.null(name)) {includes <- dplyr::filter(includes, name == name)}
+
+  if (!is.null(text)) {
+    includes <- dplyr::filter(includes, grepl(text, label, ignore.case = TRUE))
+  }
+  return(includes)
 }
 
 #' ICD-10-PCS Index
@@ -70,14 +101,15 @@ index <- function(search = NULL,
   return(ind)
 }
 
-#' ICD-10-PCS Index
+#' ICD-10-PCS Devices
 #' @param system Column to search
 #' @param device description
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' devices()
 #' @export
-devices <- function(system = NULL, device = NULL) {
+devices <- function(system = NULL,
+                    device = NULL) {
 
   dev <- pins::pin_read(mount_board(), "devices")
 
@@ -96,4 +128,33 @@ devices <- function(system = NULL, device = NULL) {
   return(dev)
 }
 
+#' Return a range of ICD-10-PCS codes.
+#' @param start 7-character string representing an ICD-10-PCS code.
+#' @param end 7-character string representing an ICD-10-PCS code.
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' code_range("0G9000Z", "0G9100Z")
+#'
+#' code_range("0G9000Z", "10D20ZZ")
+#'
+#' @export
+code_range <- function(start, end) {
+
+  start <- checks(start)
+  end <- checks(end)
+
+  if (nchar(start) < 7L) cli::cli_abort("{.var start} must be 7 characters long.")
+  if (nchar(end) < 7L) cli::cli_abort("{.var end} must be 7 characters long.")
+
+  base <- pins::pin_read(mount_board(), "tables_order")[c('order', 'code', 'table', 'row')]
+
+  o_start <- dplyr::filter(base, code == start) |> dplyr::pull(order)
+  o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
+
+  if (o_start > o_end) {
+    cli::cli_abort(c(
+      "{.val {start}} comes after {.val {end}}",
+      "x" = "{.val {o_start}} > {.val {o_end}}."))}
+  dplyr::filter(base, dplyr::between(order, o_start, o_end))
+}
 

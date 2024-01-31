@@ -1,29 +1,29 @@
 #' ICD-10-PCS Tables
-#' @param x 1 to 3-character string representing an ICD-10-PCS table.
+#' @param code 1 to 3-character string representing an ICD-10-PCS table.
 #'    If `NULL` (default), returns all 895 tables.
+#' @param text Search code descriptions
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' tables("0")
+#' tables(code = "0")
 #'
-#' tables("00")
+#' tables(code = "00")
 #'
-#' tables("00X")
+#' tables(code = "00X")
 #'
 #' @export
-tables <- function(x = NULL) {
+tables <- function(code = NULL, text = NULL) {
 
-  # table <- pins::pin_read(mount_board(), "tables_order")
+  table <- pins::pin_read(mount_board(), "tables_order") |>
+    dplyr::select(order, code, description = description_code)
 
-  table <- pins::pin_read(mount_board(), "pcs_by_table_v2")
-
-  if (!is.null(x)) {
-    x <- checks(x)
-    if (nchar(x) > 3L)  {x <- collapser(splitter(x)[1:3])}
-    if (nchar(x) == 1L) {table <- vctrs::vec_slice(table, table$section == x)}
-    if (nchar(x) == 2L) {table <- vctrs::vec_slice(table, table$system == x)}
-    if (nchar(x) == 3L) {table <- vctrs::vec_slice(table, table$table == x)}
+  if (!is.null(code)) {
+    x <- checks(code)
+    table <- dplyr::filter(table, stringr::str_starts(code, x$input))
   }
-  # table <- dplyr::mutate(table, n_codes = purrr::map_dbl(codes, nrow))
+
+  if (!is.null(text)) {
+    def <- dplyr::filter(table, grepl(text, description, ignore.case = TRUE))
+  }
   return(table)
 }
 
