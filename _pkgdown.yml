@@ -1,4 +1,10 @@
 url: https://andrewallenbruce.github.io/procedural/
 template:
   bootstrap: 5
+  bootswatch: lux
+  bslib:
+    pkgdown-nav-height: 100px
+    base_font: {google: "Rubik"}
+    heading_font: {google: "Albert Sans"}
+    code_font: {google: "Fira Code"}
 

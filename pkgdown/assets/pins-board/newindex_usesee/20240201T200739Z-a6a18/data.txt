@@ -1,0 +1,10 @@
+file: newindex_usesee.qs
+file_size: 51453
+pin_hash: a6a18750dffecf99
+type: qs
+title: 'newindex_usesee: a pinned 4296 x 5 data frame'
+description: ICD-10-PCS 2024 Index NEW pt1
+tags: ~
+urls: ~
+created: 20240201T200739Z
+api_version: 1

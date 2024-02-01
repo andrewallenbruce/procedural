@@ -43,16 +43,16 @@ checks <- function(x = NULL,
                    arg = rlang::caller_arg(x),
                    call = rlang::caller_env()) {
 
-  # No section == return all sections.
+  # No section == return NA.
   if (is.null(x)) return(list(input = NA_character_))
 
   if (is.numeric(x)) x <- as.character(x)
 
   if (grepl("[[:lower:]]*", x)) x <- toupper(x)
 
-  if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
-    "x" = "{.strong {.val {x}}} contains {.emph invalid} PCS values."),
-    call = call)}
+  # if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
+  #   "x" = "{.strong {.val {x}}} contains {.emph invalid} PCS values."),
+  #   call = call)}
 
   if (nchar(x) > 7L) {cli::cli_abort(c(
     "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
@@ -156,6 +156,7 @@ checks <- function(x = NULL,
 
     axis$`5` <- dplyr::filter(axis$`5`, value == substr(x$input, 5, 5))
     x$id <- unique(axis$`5`$rowid)
+
     x$tail <- axis$`5`
     x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
     x <- purrr::list_flatten(x)

@@ -6,6 +6,8 @@
 \alias{procedural-package}
 \title{procedural: Tidy ICD-10-PCS interface}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 What the package does (one paragraph).
 }
 \seealso{

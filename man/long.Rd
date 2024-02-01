@@ -11,6 +11,9 @@ long(df, cols = dplyr::everything())
 
 \item{cols}{columns to pivot long, default is \code{\link[dplyr:reexports]{dplyr::everything()}}}
 }
+\value{
+Pivoted data frame
+}
 \description{
 Pivot data frame to long format for easy printing
 }

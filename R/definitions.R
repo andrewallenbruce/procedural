@@ -54,7 +54,9 @@ includes <- function(section = NULL,
   if (!is.null(section)) {
     if (is.numeric(section))  section <- as.character(section)
     if (grepl("[[:lower:]]*", section)) section <- toupper(section)
+
     section <- rlang::arg_match(section, c(0, 3, "F", "G", "X"))
+
     includes <- vctrs::vec_slice(includes, includes$section == section)
   }
 

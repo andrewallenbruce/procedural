@@ -38,9 +38,9 @@ sections <- function(x = NULL) {
 
   if (!is.null(x)) {
     if (is.numeric(x)) x <- as.character(x)
-    if (grepl("[[:lower:]]*", x)) x <- toupper(x)
-    x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
-    sec <- vctrs::vec_slice(sec, sec$value == x)
+    x <- toupper(x)
+    # x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+    sec <- vctrs::vec_slice(sec, sec$value %in% x)
   }
   return(sec)
 }

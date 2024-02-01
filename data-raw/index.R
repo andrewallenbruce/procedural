@@ -4,45 +4,192 @@ library(janitor)
 
 # library(flatxml)
 # index <- "E:\\icd_10_pcs_2024\\Zip File 2 2024 Code Tables and Index\\icd10pcs_index_2024.xml"
-#
 # pcs_index <- flatxml::fxml_importXMLFlat(index)
-#
-# pcs_index <- pcs_index |>
-#   tibble() |>
-#   clean_names()
-#
+# pcs_index <- pcs_index |> tibble() |> clean_names()
 # qs::qsave(pcs_index, "E:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
 # pcs_index <- qs::qread("F:\\icd_10_pcs_2024\\converted_xml\\pcs_index")
 
 ind <- pins::pin_read(procedural:::mount_board(), "source_index")
 
-pcs_index <- pcs_index[4:nrow(pcs_index), ] |>
+ind <- ind[4:nrow(ind), ] |>
   mutate(level1 = NULL,
          level2 = NULL,
          level3 = case_when(level3 == "title" ~ "letter", .default = level3),
          level3 = case_when(level3 == "mainTerm" ~ "main", .default = level3)) |>
-  filter(elem != "mainTerm", elem != "letter") |>
+  # filter(elem != "mainTerm", elem != "letter") |>
   filter(!is.na(value))
 
-idx_letter <- pcs_index |>
+idx_letter <- ind |>
   filter(level3 == "letter") |>
-  mutate(letter = value,
-         letter_id = row_number())
+  mutate(letter = value)
 
-pcs_index <- left_join(pcs_index, idx_letter) |>
-  fill(letter, letter_id) |>
+ind <- left_join(ind, idx_letter) |>
+  fill(letter) |>
   filter(level3 != "letter") |>
   mutate(level3 = NULL)
 
 
-idx_term <- pcs_index |>
+idx_term <- ind |>
   filter(level4 == "title") |>
-  mutate(term = value,
-         term_id = row_number())
+  mutate(term = value)
 
-pcs_index <- left_join(pcs_index, idx_term) |>
-  fill(term, term_id) |>
+ind <- left_join(ind, idx_term) |>
+  fill(term) |>
   filter(level4 != "title")
+
+usesee <- ind |>
+  filter(level4 != "term") |>
+  select(-c(attr, level6, level7, level8, level9)) |>
+  filter(!is.na(level5)) |>
+  mutate(level5 = case_when(level5 == "tab" ~ "table",
+                            level5 == "codes" ~ "code",
+                            .default = level5),
+         codes = value) |>
+  unite("instruction", level4:level5, na.rm = TRUE, sep = ":") |>
+  select(elemid, letter, term, instruction, codes)
+
+ind <- left_join(ind, usesee) |>
+  unite("levels", level4:level9, na.rm = TRUE, sep = " ") |>
+  mutate(levels = case_when(attr == "level" ~ paste(elem, attr, value), .default = levels)) |>
+  select(-attr)
+
+idx_lvl1 <- ind |>
+  filter(levels == "term level 1") |>
+  mutate(lvlid = row_number()) |>
+  select(elemid, lvlid)
+
+ind <- left_join(ind, idx_lvl1) |>
+  fill(lvlid) |>
+  filter(levels != "term level 1")
+
+use_see <- ind |>
+  filter(str_detect(levels, "term", negate = TRUE)) |>
+  mutate(codes = case_match(elem, c("codes", "code", "tab") ~ value, .default = codes),
+         instruction = case_when(is.na(instruction) ~ levels, .default = instruction),
+         instruction = case_when(levels == "tab" ~ "table", .default = instruction)) |>
+  select(letter, term, instruction, value, codes)
+
+
+use_see <- use_see |>
+  mutate(rowid = row_number(), .before = 1)
+
+idx_use_see <- use_see |>
+  filter(str_detect(instruction, ":")) |>
+  mutate(rowid = rowid - 1) |>
+  select(rowid, letter, term, instruction2 = instruction, code = codes)
+
+use_see <- left_join(use_see, idx_use_see)|>
+  filter(str_detect(instruction, ":", negate = TRUE)) |>
+  unite('codes', code, codes, sep = "", na.rm = TRUE) |>
+  mutate(codes = na_if(codes, ""),
+         instruction = case_when(!is.na(instruction2) ~ instruction2, .default = instruction)) |>
+  select(-rowid, -instruction2)
+
+
+idx_term_lvl <- ind |>
+  filter(str_detect(levels, "term level")) |>
+  select(-codes, -instruction) |>
+  mutate(term_level = str_c("level", value, sep = ":")) |>
+  select(elemid, lvlid, term_level)
+
+
+ind <- left_join(ind, idx_term_lvl) |>
+  filter(str_detect(levels, "term")) |>
+  group_by(lvlid) |>
+  fill(term_level, .direction = "downup") |>
+  ungroup() |>
+  filter(str_detect(levels, "term level", negate = TRUE)) |>
+  select(-instruction, -codes)
+
+
+
+usesee3 <- ind |>
+  filter(is.na(term_level)) |>
+  select(-term_level) |>
+  filter(str_detect(levels, "term see")) |>
+  mutate(instruction = case_when(str_detect(levels, "codes") ~ "see:code",
+                                 str_detect(levels, "tab") ~ "see:table", .default = NA_character_),
+         codes = case_when(!is.na(instruction) ~ value), .default = NA_character_) |>
+  select(letter, term, value, elem, instruction, codes) |>
+  mutate(instruction = lead(instruction),
+         codes = lead(codes)) |>
+  filter(elem %nin% c("codes", "code", "tab")) |>
+  mutate(instruction = if_else(is.na(instruction), elem, instruction)) |>
+  select(-elem)
+##----------------------------------------
+use <- ind |>
+  filter(is.na(term_level)) |>
+  select(-term_level) |>
+  filter(str_detect(levels, "term see", negate = TRUE),
+         elem == "use") |>
+  select(letter, term, instruction = elem, value) |>
+  print(n = 200)
+
+ind2 <- ind |>
+  filter(!is.na(term_level)) |>
+  group_by(lvlid) |>
+  pivot_wider(names_from = elem,
+              values_from = value) |>
+  ungroup() |>
+  mutate(code = lead(code),
+         row = lead(codes, 1),
+         table = lead(tab, 1))
+
+usesee2 <- ind2 |>
+  filter(!is.na(see)) |>
+  select(letter, term, value = see, row, table) |>
+  unite("codes", row, table, sep = "", na.rm = TRUE) |>
+  mutate(codes = na_if(codes, ""),
+         instruction = if_else(is.na(codes), "see", "see:code"))
+
+use_see <- left_join(use_see, usesee2) ##### DONE
+use_see <- bind_rows(use_see, usesee3) |> arrange(letter, term)
+use_see <- bind_rows(use_see, use) |> arrange(letter, term)
+
+
+##----------------------------------------
+ind2 <- ind2 |>
+  filter(is.na(see)) |>
+  select(-see, -codes, -tab) |>
+  unite("codes", code, row, table, sep = "", na.rm = TRUE) |>
+  mutate(codes = na_if(codes, ""))
+
+ind3 <- ind |>
+  filter(is.na(term_level)) |>
+  select(-term_level) |>
+  filter(str_detect(levels, "term see", negate = TRUE),
+         elem != "use")
+
+board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
+
+board |> pins::pin_write(use_see,
+                         name = "newindex_usesee",
+                         description = "ICD-10-PCS 2024 Index NEW pt1",
+                         type = "qs")
+
+board |> pins::pin_write(ind2,
+                         name = "newindex_ind2",
+                         description = "ICD-10-PCS 2024 Index NEW pt2",
+                         type = "qs")
+
+board |> pins::pin_write(ind3,
+                         name = "newindex_ind3",
+                         description = "ICD-10-PCS 2024 Index NEW pt3",
+                         type = "qs")
+
+board |> pins::write_board_manifest()
+
+
+
+
+
+
+
+
+
+
+##----------------------------------------
+
 
 # idx_lvl1 <- pcs_index |>
 #   filter(attr == "level", value == "1") |>

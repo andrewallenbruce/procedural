@@ -1,6 +1,7 @@
 #' Pivot data frame to long format for easy printing
 #' @param df data frame
 #' @param cols columns to pivot long, default is [dplyr::everything()]
+#' @returns Pivoted data frame
 #' @export
 #' @keywords internal
 long <- function(df, cols = dplyr::everything()) {
@@ -67,6 +68,19 @@ splitter <- function(x) {
 #' @keywords internal
 collapser <- function(x) {
   paste0(x, collapse = "")
+}
+
+#' Search a data frame's column by string
+#' @param df data frame
+#' @param col column to search
+#' @param search string to search
+#' @param ignore ignore case or not
+#' @return collapsed character vector
+#' @export
+#' @keywords internal
+srchcol <- function(df, col, search, ignore = FALSE) {
+  dplyr::filter(df, stringr::str_detect(
+    !!rlang::sym(col), stringr::regex(search, ignore_case = ignore)))
 }
 
 #' @noRd

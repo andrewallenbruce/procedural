@@ -27,21 +27,29 @@ library(gt)
 ```
 
 
-The __ICD-10-PCS__, or __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M Health Information Systems](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
+The __ICD-10-PCS__, or __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
 
-# History, Structure, Tables, and Organization
+<br>
 
-The World Health Organization has maintained the International Classification of Diseases (ICD) for recording cause of death since 1893. It has updated the ICD periodically to reflect new discoveries in epidemiology and changes in medical understanding of disease.
+# Overview
 
-The Centers for Medicare & Medicaid Services (CMS), the agency responsible for maintaining the inpatient procedure code set in the U.S., contracted with 3M Health Information Systems in 1993 to design and develop a procedural classification system that would replace Volume 3 of ICD-9-CM.
+WHO has maintained the International Classification of Diseases (ICD) for recording causes of death since 1893. It has updated the ICD periodically to reflect new discoveries in epidemiology and changes in medical understanding of disease.
 
-ICD-10-PCS was initially released in 1998. It has been updated annually since that time although not in use the entire time. 
+CMS contracted with 3M Health Information Systems in 1993 to design and develop a procedural classification system that would replace Volume 3 of ICD-9-CM.
 
-The ICD-10-PCS code set has a logical, consistent structure that follows a logical, consistent process down to the individual character level. This means that the process of constructing codes in ICD-10-PCS is also logical and consistent. Individual letters and numbers, called “values,” are selected in sequence to occupy the seven spaces of the code, called “characters.” Once the coding system is learned, the process is simplified.
+ICD-10-PCS was initially released in 1998 and is updated annually.
+
+The process of constructing codes in ICD-10-PCS is logical and consistent. 
+
+Individual letters and numbers, called **values**, are selected in sequence to occupy the seven spaces of the code, called **characters**.
 
 ## Characters
 
-All codes in ICD-10-PCS are seven characters long. Each character in the seven-character code represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, called medical and surgical.
+
+An ICD-10-PCS code is best understood as the result of a process rather than as an assigned number.
+
+All codes in ICD-10-PCS are seven characters long. Each character represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, Medical and Surgical:
+
 
 | 1       | 2           | 3              | 4         | 5        | 6      | 7         |
 |---------|-------------|----------------|-----------|----------|--------|-----------|
@@ -64,59 +72,102 @@ tibble(
   opt_table_lines(extent = "all")
 ```   
 
-An ICD-10-PCS code is best understood as the result of a process rather than as an assigned number. The coding process consists of assigning values from among the valid choices for that part of the system, following the rules governing the construction of codes. It is logical and systematic in its coding approach.
+
 
 ## Values
-One of 34 possible values can be assigned to each character in a code: the numbers 0–9 and the alphabet (except I and O, because they are easily confused with the numbers 1 and 0). A finished code looks like the example below.
+
+One of 34 possible values can be assigned to each character in a code: the integers 0–9 and the alphabet (except I and O, because they are easily confused with the numbers 1 and 0). A finished code looks like the example below.
 
 > **02103D4** *Bypass coronary artery, one artery from coronary vein with intraluminal device, percutaneous approach*
 
-Choosing a specific value for each of the seven characters derives this code. Based on details about the procedure performed, values for each character specifying the section, body system, root operation, body part, approach, device, and qualifier are assigned.
 
-Because the definition of each character is a function of its actual physical position in the code, the same value placed in a different position in the code means something totally different. The value 0 in the 1st character means something different than 0 in the 2nd character, or 0 in the 3rd character, and so on.
+```{r}
+order("02103D4")
+```
 
-# ICD-10-PCS System Organization
 
-ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9 and the letters B-D, F-H and X. The broad procedure categories contained in these sections range from surgical procedures to substance abuse treatment and new technology. The complete ICD-10-PCS is presented in three parts: the Index, the Tables, and the List of Codes. There is also a list of guidelines in the ICD-10-PCS code book that instruct you on how to use the PCS code set.
 
-## Medical and Surgical Section
+Choosing a specific value for each of the seven characters derives this code. Based on details about the procedure performed, values for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device**, and **qualifier** are assigned.
 
-The first section, Medical and Surgical, contains the great majority of procedures typically reported in an inpatient setting. As shown in the previous section discussing ICD-10-PCS code structure, all procedure codes in the Medical and Surgical section begin with the section value 0.
+```{r}
+pcs("0")
+
+pcs("02")
+
+pcs("021")
+
+pcs("0210")
+
+pcs("02103")
+
+pcs("02103D")
+
+pcs("02103D4")
+```
+
+
+
+Because the definition of each character is a function of its actual physical position in the code, the same value placed in a different position in the code means something totally different. 
+
+
+## Organization
+
+ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9 and the letters B-D, F-H and X. 
+
+The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. 
+
+
+Additionally, there are **Appendices** that contain information about the structure of the code set and the definitions of the values used in the code.
+
+There is also a list of guidelines in the ICD-10-PCS code book that instruct you on how to use the PCS code set.
+
+### Medical and Surgical Section
+
+The first section, Medical and Surgical, contains the majority of procedures typically reported in an inpatient setting.
 
 __Coding Example__
 
-Let’s take a look at an example. The below operative report will describe the excision of a dorsal ganglion located at the wrist level. When coding ICD-10-PCS, the code is built by selecting the appropriate characters to describe the intent, the approach, and other qualifying information on how the procedure is performed.
+The example below describes the excision of a dorsal ganglion located at the wrist level. A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed.
 
-__Operative Report:__ *Excision of dorsal ganglion, right wrist*
-With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg. A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field. The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised. Care was taken to protect ligament integrity The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.
+> Note: The purpose of the ICD-10-PCS code is to explain the purpose of the procedure by using every character to describe the way the procedure was performed.
 
-   + Section 0 – Medical and Surgical
-   + Body System L – Tendons (Extensor tendon)
-   + Root Operation B – Excision (The tendon was excised and removed)
-   + Body Part 5 – Lower Arm, and Wrist, Right (The extensor tendon is located at the wrist level)
-   + Approach 0 – Open (An incision was performed and blunt dissection carried out through layers of tissue to expose site)
-   + Device Z – No Device
-   + Qualifier Z – No Device
+```
+__Operative Report:__ *Excision of Dorsal Ganglion, Right Wrist*
 
-> Coding Note: The purpose of the ICD-10-PCS code is to explain the purpose of the procedure by using every character to describe the way the procedure was performed.
+With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg. A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field. 
+
+The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised. Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.
+```
+
+   1. Section **0** // Medical and Surgical
+   1. Body System **L** // Tendons (Extensor tendon)
+   1. Root Operation **B** // Excision (The tendon was excised and removed)
+   1. Body Part **5** // Lower Arm, and Wrist, Right (The extensor tendon is located at the wrist level)
+   1. Approach **0** // Open (An incision was performed and blunt dissection carried out through layers of tissue to expose site)
+   1. Device **Z** // No Device
+   1. Qualifier **Z** // No Qualifier
 
 
-| 1                  | 2           | 3              | 4                          | 5        | 6         | 7            |
-|--------------------|-------------|----------------|----------------------------|----------|-----------|--------------|
-| Section            | Body System | Root Operation | Body Part                  | Approach | Device    | Qualifier    |
-| Medical & Surgical | Tendons     | Excision       | Lower Arm and Wrist, Right | Open     | No Device | No Qualifier |
-| 0                  | L           | B              | 5                          | 0        | Z         | Z            |
+
+| 1                  | 2               | 3                  | 4                           | 5            | 6          | 7            |
+|--------------------|-----------------|--------------------|-----------------------------|--------------|------------|--------------|
+| __Section__        | __Body System__ | __Root Operation__ | __Body Part__               | __Approach__ | __Device__ | __Qualifier__|
+| Medical & Surgical | Tendons         | Excision           | Lower Arm and Wrist, Right  | Open         | No Device  | No Qualifier |
+| `0`                | `L`             | `B`                | `5`                         | `0`          | `Z`        | `Z`          |
 
 <br>
+
+```{r}
+pcs("0LB50ZZ")
+```
+
 
 ## Medical and Surgical Related Sections
 
 Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
 
 ```{r}
-sections() |> 
-  select(value = code, description = label) |>
-  filter(value %in% as.character(c(0:9)))
+sections(0:9)[c('value', 'label')]
 ```
 
 
@@ -157,11 +208,10 @@ tables() |>
 ```
 
 
-In sections 1 and 2, all seven characters define the same aspects of the procedure as in the Medical and Surgical section.
+In sections 0, 1, and 2, all seven characters define the same aspects of the procedure.
 
-Codes in sections 3-9 are structured for the most part like their counterparts in the Medical and Surgical section, with a few exceptions. 
+Sections 3-9 are differ only slightly. For example, in sections 5 and 6, the 5th character is defined as Duration instead of Approach, as in this code for _Intra-aortic Balloon Pump (IABP)_:
 
-For example, in sections 5 and 6, the 5th character is defined as duration instead of approach, as in this code for intra-aortic balloon pump (IABP):
 
 ```{r}
 pcs("5A02210")
@@ -170,52 +220,61 @@ pcs("5A02210")
 
 Additional differences include these uses of the 6th character:
 
-   + Section 3 defines the 6th character as substance.
-   + Sections 4 and 5 define the 6th character as function.
-   + Sections 7 through 9 define the 6th character as method.
+   + Section 3 defines the 6th character as **Substance**.
+   + Sections 4 - 5 define it as **Function**.
+   + Sections 7 - 9 define it as **Method**.
 
 
-## Ancillary Sections
+### Ancillary Sections
 
-Sections B-D and F-H comprise the ancillary sections of ICD-10-PCS. These six sections include imaging procedures, nuclear medicine, and substance abuse treatment, as listed in table 2.
+Sections B - D and F - H comprise the ancillary sections:
+
 
 ```{r}
-sections() |> 
-  select(value = code, description = label) |>
-  filter(value %in% c("B", "C", "D", "F", "G", "H", "X"))
+sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')]
 ```
 
 
-The definitions of some characters in the ancillary sections differ from that seen in previous sections. In the Imaging section, the 3rd character is defined as root type, and the 5th and 6th characters define contrast and contrast/qualifier respectively, as in the CT scan example below.
+The definitions of some characters in the ancillary sections differ from that seen in previous sections. 
+
+In the Imaging section, the 3rd character is defined as root type, and the 5th and 6th characters define contrast and contrast/qualifier respectively, as in the CT scan example below.
 
 When coding for CT scans, the documentation must support all components for proper selection of the ICD-10-PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
 
-Example: CT scan of brain
-Technique:
-2.5 mm thick axial images were obtained through the head with diatrizoate (high osmolar contrast). 0.625 mm thick axial images as well as coronal and sagittal enhanced images were also submitted for interpretation.
+> **Example**: CT scan of brain
+>> Technique: 2.5 mm thick axial images were obtained through the head with diatrizoate (high osmolar contrast). 
+>> 0.625 mm thick axial images as well as coronal and sagittal enhanced images were also submitted for interpretation.
 
-Findings:
-No intra- or extra-axial blood or fluid collection is present. There is no mass or shift of midline. Brain densities are normal. The ventricles and sulci are normal in size and configuration. Vascular structures are normal in appearance. The pituitary, orbits, and paranasal sinuses are unremarkable. The calvarium is intact.
+> **Findings**:
+>> No intra- or extra-axial blood or fluid collection is present. There is no mass or shift of midline. Brain densities are normal. The 
+>> ventricles and sulci are normal in size and configuration. Vascular structures are normal in appearance. The pituitary, orbits, and 
+>> paranasal sinuses are unremarkable. The calvarium is intact.
 
 
 ```{r}
 pcs("B02000Z")
 ```
 
+
 Additional differences include:
 
-   + Section C defines the 5th character as radionuclide.
-   + Section D defines the 5th character as modality qualifier and the 6th character as isotope.
-   + Section F defines the 5th character as type qualifier and the 6th character as equipment.
-   + Sections G and H define the 3rd character as a root type qualifier.
-   + Section X defines the 7th character as the new technology group. This letter changes each year that new technology codes are added to the system. For example, Section X codes added for the first year have the 7th character value 1, New Technology Group 1. The next year that contains new Section X codes the 7th character value is 2, for New Technology Group 2, etc.
+   + Section C defines the 5th character as Radionuclide.
+   + Section D defines the 5th character as Modality Qualifier and the 6th character as Isotope.
+   + Section F defines the 5th character as Type Qualifier and the 6th character as Equipment.
+   + Sections G and H define the 3rd character as a Root Type qualifier.
+
+
+Section X defines the 7th character as the New Technology Group. This letter changes each year that new technology codes are added to the system. 
+
+For example, Section X codes added for the first year have the 7th character value 1, New Technology Group 1. The next year that contains new Section X codes the 7th character value is 2, for New Technology Group 2, etc.
 
 
 # Index
 
-Main terms
 
 The ICD-10-PCS Index can be used to access the Tables. The Index mirrors the structure of the Tables, so it follows a consistent pattern of organization and use of hierarchies.
+
+## Main terms
 
 The Index is organized as an alphabetic lookup. Two types of main terms are listed in the Index:
 
@@ -226,46 +285,49 @@ For the Medical and Surgical and Related sections, the root operation values are
 
 For the Medical and Surgical and Related sections, values such as excision, bypass, and transplantation are included as main terms in the index. The applicable body system entries are listed beneath the main term and refer to a specific table. For the ancillary sections, values such as fluoroscopy and positron emission tomography are listed as main terms.
 
-In the example below, the index entry “bypass” refers to the Medical and Surgical section tables for all applicable body systems, including anatomical regions and central nervous system.
+The index entry **Bypass** refers to the Medical and Surgical section tables for all applicable body systems, including anatomical regions and central nervous system:
 
+   + Bypass
+      + by Body System
+         + Peritoneal Cavity 0W1G
+         + Spinal Canal 001U
 
-Bypass
-by Body System
-Peritoneal Cavity 0W1G
-Spinal Canal 001U
+The Body System listings may be followed by entries for specific body parts:
 
-
-The body system listings may be followed by entries for specific body parts, as in the excerpt below.
-
-by Body Part
-Artery
-Anterior Chamber
-Left 08133
-Right 08123
-Axillary
-Left 03160
-Right 03150
-Brachial
-Left 03180
-Right 03170
-Common Carotid
-Left 031J0
-Right 031H0
+   + Artery
+   + Anterior Chamber
+     + Left 08133
+     + Right 08123
+   + Axillary
+     + Left 03160
+     + Right 03150
+   + Brachial
+     + Left 03180
+     + Right 03170
+   + Common Carotid
+     + Left 031J0
+     + Right 031H0
 
 In the root operations change, insertion, removal, and revision, the device entries are further defined by the body part the device is inserted into/or on.
 
 
 ## Common Procedure Terms
-The second type of term listed in the Index uses procedure names, such as “appendectomy” or “fundoplication.” These entries are listed as main terms, and refer to a table or tables from which a valid code can be constructed, as shown in the following example:
 
-> Cholecystectomy
-> see Excision, Gallbladder 0FB4
-> see Resection, Gallbladder 0FT4
+The second type of term listed in the Index uses procedure names, such as "appendectomy" or "fundoplication". 
 
-When two or more root operations are listed for a procedure, you must study the operative report to determine which root operation was documented as the purpose of the procedure. For example, excision means to cut out or off a portion of a body part, while resection means to cut out or off ALL of the body part. If all of the gallbladder is removed, code to resection of gallbladder.
+These entries are listed as main terms, and refer to a table or tables from which a valid code can be constructed, as shown in the following example:
+
+   + Cholecystectomy
+      + see Excision, Gallbladder 0FB4
+      + see Resection, Gallbladder 0FT4
+
+When two or more root operations are listed for a procedure, you must study the operative report to determine which root operation was documented as the purpose of the procedure. 
+
+For example, excision means to cut out or off a portion of a body part, while resection means to cut out or off ALL of the body part. If all of the gallbladder is removed, code to resection of gallbladder.
 
 
-Tables
+# Tables
+
 Tables are organized in a series, beginning with section 0, medical and surgical, and body system 0, central nervous, and proceeding in numerical order. Sections 0-9 are followed by sections B-D and F-H. The same convention is followed within each table for the second through the 7th characters — numeric values in order first, followed by alphabetical values in order.
 
 The following examples use the Medical and Surgical section to describe the organization and format of the ICD-10-PCS tables.
@@ -275,17 +337,21 @@ The Medical and Surgical section (1st character 0) is organized by its 31 body s
 The Tables section is what is used to construct complete and valid codes. Based on the first three values of the code provided in the Index, the corresponding table can be located. The tables and characters are arranged by number, then by letter for each character.
 
 The root operation tables consist of four columns and a varying number of rows, as in the following example of the root operation Bypass, in the Central Nervous body system.
-Section Body System Root Operation
-The below operative report will describe ventriculoperitoneal (VP) shunt placement. The purpose of a VP shunt is for a valve to be placed into your head, with one catheter being placed in the cerebral ventricle and the other end in the peritoneal cavity, hence the ventriculoperitoneal procedure name. Patients who require a VP shunt tend to be diagnosed with hydrocephalus, which is a condition where there is an accumulation of cerebrospinal fluid (CSF) in the ventricles. The shunt removes the accumulated fluid from the brain into the peritoneal cavity.
+
+Section 
+Body System 
+Root Operation
+
+The below operative report will describe ventriculoperitoneal (VP) shunt placement. The purpose of a VP shunt is for a valve to be placed into your head, with one catheter being placed in the cerebral ventricle and the other end in the peritoneal cavity. Patients who require a VP shunt tend to be diagnosed with hydrocephalus, which is a condition where there is an accumulation of cerebrospinal fluid (CSF) in the ventricles. The shunt removes the accumulated fluid from the brain into the peritoneal cavity.
 
 Operative Report: VP shunt placement
+
 The first incision was made at the level of the frontal area, and coagulation was used to control bleeding. Then, another incision was made at the level of the abdominal wall, and by using a tunneler, the peritoneal catheter was passed from the abdominal wall to the posterior parietal, where a small incision was also made and then up to the right frontal area. The catheter was primed, and the catheter used was a Bactiseal. Then, the programmable valve was set at 180 mm of water and was connected to the peritoneal catheter. At this point, using a previous bur hole, the Bactiseal ventricular catheter was soft passed into the ventricle and connected to the programmable valve. All of these areas of connection were then verified. Then, the peritoneal catheter was inserted into the peritoneal cavity, which was dissected in layers starting from the rectus muscle and then to the peritoneum. The catheter was introduced into the peritoneal cavity after verification of the dripping of CSF.
 
-00160J6 Bypass cerebral ventricle to peritoneal cavity with synthetic substitute, open approach
+00160J6 
+Bypass cerebral ventricle to peritoneal cavity with synthetic substitute, open approach
 
 When reviewing the description of the ICD-10-PCS code, you will notice the intent of the procedure is described with the root operation bypass, which is defined as altering the route of passage of the contents of a tubular body part. The highlighted keywords help determine the proper selection of the code, for example, the procedure required an incision in the frontal area and the abdominal wall to be able to insert the catheter. This will justify the character of “open” approach.
-
-(see table on page 152)
 
 The values for characters 1-3 are provided at the top of each table. Four columns contain the applicable values for characters 4-7, given the values in characters 1-3.
 
@@ -426,13 +492,8 @@ tibble(
 ```
 
 
-# Sections
 
-
-
-# Systems
-
-```{r}
+```{r echo=FALSE, eval=FALSE}
 tables() |> 
   summarise(codes = sum(n_codes),
             prop = codes / 78220, 
@@ -470,13 +531,6 @@ tables() |>
 ```
 
 
-# Tables
-
-```{r}
-tables() |> 
-  arrange(desc(n_codes))
-```
-
 ```{r}
 rows("041L")$axes
 ```
@@ -487,94 +541,65 @@ rows("041L")$axes
 ```{r}
 definitions() |> 
   summarise(n = n(), 
-            .by = c(code, section, axis, axis_name)) |> 
+            .by = c(section, axis, name)) |> 
   arrange(axis)
-```
-
-
-```{r}
-definitions(section = "F") |> 
-  filter(axis == "5") |> 
-  select(label) |> 
-  mutate(axis_code = row_number(), .before = 1)
 ```
 
 
 ## Medical and Surgical
 
 ```{r}
-pcs("0016070") |> 
-  gt(rowname_col = "axis") |> 
-  opt_table_font(font = google_font(name = "Rubik")) |> 
-  cols_align(align = "center", columns = c(axis, code)) |>
-  tab_style(style = list(cell_fill(color = "lightgray", 
-                                   alpha = 0.5), 
-                         cell_text(weight = "bold")), 
-            locations = cells_body(columns = code)) |> 
-  opt_all_caps() |> 
-  tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
-             subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
-                              <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
-                              <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
-  tab_options(
-    heading.title.font.size = px(24),
-    heading.subtitle.font.size = px(18),
-    heading.align = "left",
-    table.font.color = "#0B0B45"
-  )
-```
-
-```{r echo=FALSE, eval=FALSE}
-"#0B3D45"
-
-"#3D0B45"
-
-"#450B1C"
-
-"#452C0B"
-
-"#2C450B"
-
-"#0B451C"
-"#"
-"#"
-"#"
+# pcs("0016070") |> 
+#   gt(rowname_col = "axis") |> 
+#   opt_table_font(font = google_font(name = "Rubik")) |> 
+#   cols_align(align = "center", columns = c(axis, code)) |>
+#   tab_style(style = list(cell_fill(color = "lightgray", 
+#                                    alpha = 0.5), 
+#                          cell_text(weight = "bold")), 
+#             locations = cells_body(columns = code)) |> 
+#   opt_all_caps() |> 
+#   tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
+#              subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
+#                               <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
+#                               <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
+#   tab_options(
+#     heading.title.font.size = px(24),
+#     heading.subtitle.font.size = px(18),
+#     heading.align = "left",
+#     table.font.color = "#0B0B45"
+#   )
 ```
 
 
 ```{r}
-definitions() |> 
-  dplyr::filter(code == '0', 
-                axis == '3', 
-                axis_code == '1') |> 
-  dplyr::select(definition, explanation, includes) |> 
-  unlist()
+pcs("0016070")
+```
+
+
+
+```{r}
+definitions(section = '0', 
+            axis = '3', 
+            text = "Bypass") |> 
+  glimpse()
 ```
 
 
 ```{r}
-definitions() |> 
-  dplyr::filter(code == '0', 
-                axis == '5',
-                label == 'Open') |> 
-  dplyr::pull(definition)
+includes(section = '0', axis = '3', text = 'Bypass')
+includes(section = '0', axis = '6', text = '^Autologous Tissue Substitute')
 ```
 
 
 ```{r}
-definitions() |> 
-  dplyr::filter(code == '0', 
-                axis == '6',
-                label == 'Autologous Tissue Substitute') |> 
-  dplyr::pull(includes)
+devices()
 ```
 
 
 
 
 ```{r}
-index(search = "Excision, Skin and Breast") |> 
-  dplyr::filter(code == "^0HB")
+index(search = "^0HB", column = "code")
 ```
 
 ```{r}
@@ -582,24 +607,4 @@ pcs("0HB2XZZ")
 ```
 
 
-```
-# Axis
-     1 |-- Section:                  0 Medical and Surgical
-     2      |-- Body System:         H Skin and Breast
-     3      |-- Root Operation:      B Excision
-     4           |-- Body Part:      2 Skin, Right Ear
-     5                |-- Approach:  X External
-     6                |-- Device:    Z No Device
-     7                |-- Qualifier: Z No Qualifier
-```
-
-```
-1 |-0:     Medical and Surgical
-2   |-H:   Skin and Breast
-3   |-B:   Excision
-4     |-2: Skin, Right Ear
-5     |-X: External
-6     |-Z: No Device
-7     |-Z: No Qualifier
-```
 

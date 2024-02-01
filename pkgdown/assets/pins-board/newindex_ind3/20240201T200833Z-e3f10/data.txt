@@ -1,0 +1,10 @@
+file: newindex_ind3.qs
+file_size: 33354
+pin_hash: e3f10b1f4147ad59
+type: qs
+title: 'newindex_ind3: a pinned 5022 x 7 data frame'
+description: ICD-10-PCS 2024 Index NEW pt3
+tags: ~
+urls: ~
+created: 20240201T200833Z
+api_version: 1

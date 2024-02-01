@@ -1,0 +1,10 @@
+file: newindex_ind2.qs
+file_size: 84315
+pin_hash: db1ca8118a2592a3
+type: qs
+title: 'newindex_ind2: a pinned 28434 x 8 data frame'
+description: ICD-10-PCS 2024 Index NEW pt2
+tags: ~
+urls: ~
+created: 20240201T200821Z
+api_version: 1
