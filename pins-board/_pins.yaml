@@ -8,46 +8,16 @@ index_v1:
 - index_v1/20240108T233709Z-2011f/
 index_v2:
 - index_v2/20240109T144347Z-a0c4c/
-nest_approach:
-- nest_approach/20240120T211702Z-2bb9e/
-nest_device:
-- nest_device/20240120T211731Z-916d5/
-nest_operation:
-- nest_operation/20240120T211559Z-4d129/
-nest_part:
-- nest_part/20240120T211629Z-7f346/
-nest_qualifier:
-- nest_qualifier/20240120T211758Z-1812c/
-nest_section:
-- nest_section/20240120T211435Z-e4cbf/
-nest_system:
-- nest_system/20240120T211457Z-11b7b/
-order:
-- order/20240105T230117Z-0964c/
-order_minimum:
-- order_minimum/20240107T211107Z-60fc1/
-pcs_2024:
-- pcs_2024/20231226T020106Z-00f72/
-pcs_2024_tables:
-- pcs_2024_tables/20231226T020115Z-9ab32/
-pcs_by_table:
-- pcs_by_table/20231228T202032Z-13cbe/
-pcs_by_table_v2:
-- pcs_by_table_v2/20240108T060300Z-e047c/
-pcs_definitions:
-- pcs_definitions/20231229T030942Z-916c2/
-pcs_definitions_v2:
-- pcs_definitions_v2/20240102T040741Z-81630/
-pcs_definitions_v3:
-- pcs_definitions_v3/20240108T054758Z-761d1/
+newindex_ind2:
+- newindex_ind2/20240201T200821Z-db1ca/
+newindex_ind3:
+- newindex_ind3/20240201T200833Z-e3f10/
+newindex_usesee:
+- newindex_usesee/20240201T200739Z-a6a18/
 pcs_tbl2:
 - pcs_tbl2/20240103T114846Z-1531e/
 pcs_tbl3:
 - pcs_tbl3/20240109T205324Z-1afc8/
-post_table:
-- post_table/20240102T082010Z-efbd5/
-pre_table:
-- pre_table/20240102T081959Z-16cff/
 rowbase:
 - rowbase/20240129T080037Z-16521/
 source_definitions:
@@ -62,5 +32,3 @@ tables_order:
 - tables_order/20240130T192159Z-360ae/
 tables_rows:
 - tables_rows/20240129T075615Z-57069/
-use_see:
-- use_see/20240108T133424Z-17ca4/
