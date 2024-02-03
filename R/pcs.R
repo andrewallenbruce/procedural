@@ -16,24 +16,27 @@
 pcs <- function(x = NULL) {
 
   xs <- .section(x)
-  if (is.null(x)) return(xs)
+  if (is.null(x)) return(invisible(xs))
 
   xs <- .system(xs)
-  if (nchar(x) == 1L) return(xs)
+  if (nchar(x) == 1L) return(invisible(xs))
 
   xs <- .operation(xs)
-  if (nchar(x) == 2L) return(xs)
+  if (nchar(x) == 2L) return(invisible(xs))
 
   xs <- .part(xs)
-  if (nchar(x) == 3L) return(xs)
+  if (nchar(x) == 3L) return(invisible(xs))
 
   xs <- .approach(xs)
-  if (nchar(x) == 4L) return(xs)
+  if (nchar(x) == 4L) return(invisible(xs))
 
   xs <- .device(xs)
-  if (nchar(x) == 5L) return(xs)
+  if (nchar(x) == 5L) return(invisible(xs))
 
   xs <- .qualifier(xs)
+  if (nchar(x) == 6L) return(invisible(xs))
+
+  xs <- .finisher(xs)
 
   return(xs)
 }
@@ -67,12 +70,42 @@ checks <- function(x = NULL,
   x <- checks(x)
 
   # Return all sections
-  if (is.na(x$input)) x$select <- as.data.frame(sections())
+  if (is.na(x$input)) {
+  x$select <- as.data.frame(sections())
+  return(.cli(x))
+  }
 
   # Return selected section
-  if (!is.na(x$input)) x$head <- sections(substr(x$input, 1, 1))
+  if (!is.na(x$input)) {
+    x$head <- sections(substr(x$input, 1, 1))
+    return(x)
+    }
+}
 
-  return(x)
+.cli <- function(x) {
+
+  cl <- glue::glue_data(.x = x$select, "[{value}] {label}")
+
+  if (x$select$name[[1]] == "Section") {
+
+    cli::cli_h2("No Code Selected")
+    cli::cli_h2("Select A {.val {rlang::sym(x$select$name[[1]])}}")
+    cli::cli_li(cl)
+    cli::cli_end()
+    return(invisible(NULL))
+
+    } else {
+
+      hd <- glue::glue_data(.x = x$head, "[{value}] {name}: {label}")
+      cli::cli_h2("Selected: {.val {rlang::sym(x$input)}}")
+      cli::cli_ol(hd)
+
+      cli::cli_h2("Select {.val {rlang::sym(x$select$name[[1]])}}")
+      cli::cli_li(cl)
+      cli::cli_end()
+
+      return(invisible(NULL))
+    }
 }
 
 .system <- function(x) { #2
@@ -81,12 +114,17 @@ checks <- function(x = NULL,
   system <- systems(substr(x$input, 1, 1))[c("axis", "name", "value", "label")]
 
   # Return all systems
-  if (nchar(x$input) == 1L) x$select <- as.data.frame(system)
+  if (nchar(x$input) == 1L) {
+    x$select <- as.data.frame(system)
+    return(.cli(x))
+  }
 
   # Return selected system
-  if (nchar(x$input) > 1L) x$head <- vctrs::vec_rbind(x$head, dplyr::filter(system, value == substr(x$input, 2, 2)))
-
-  return(x)
+  if (nchar(x$input) > 1L) {
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(system, value == substr(x$input, 2, 2)))
+    return(x)
+  }
 }
 
 .operation <- function(x) { #3
@@ -103,7 +141,10 @@ checks <- function(x = NULL,
     dplyr::distinct()
 
   # Return all operations
-  if (nchar(x$input) == 2L) x$select <- as.data.frame(operation)
+  if (nchar(x$input) == 2L) {
+    x$select <- as.data.frame(operation)
+    return(.cli(x))
+  }
 
   # Return selected operation
   if (nchar(x$input) > 2L) {
@@ -113,8 +154,9 @@ checks <- function(x = NULL,
 
     # Filtered pin to pass on
     x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |> dplyr::select(name_4:rows)
+
+    return(x)
   }
-  return(x)
 }
 
 # Construct Tail / Row ---------------------
@@ -127,7 +169,10 @@ checks <- function(x = NULL,
     dplyr::distinct()
 
   # Return all parts
-  if (nchar(x$input) == 3L) x$select <- as.data.frame(part)
+  if (nchar(x$input) == 3L) {
+    x$select <- as.data.frame(part)
+    return(.cli(x))
+  }
 
   # Return selected part
   if (nchar(x$input) > 3L) {
@@ -139,53 +184,81 @@ checks <- function(x = NULL,
       tidyr::unnest(rows) |>
       dplyr::distinct() |>
       dplyr::rename(value = code)
+
+    return(x)
     }
-  return(x)
 }
 
+# Row IDs begin ---------------------
 .approach <- function(x) { #5
 
-  axis <- as.data.frame(x$select) |> split(x$select$axis)
-  x$select <- NULL
+  x$select <- as.data.frame(x$select) |> split(x$select$axis)
 
   # Return all approaches
-  if (nchar(x$input) == 4L) x$select <- axis$`5`
+  if (nchar(x$input) == 4L) {
+    x$select <- unique(x$select$`5`[c("axis", "name", "value", "label")])
+    return(.cli(x))
+  }
 
   # Return selected approach
   if (nchar(x$input) > 4L) {
-
-    axis$`5` <- dplyr::filter(axis$`5`, value == substr(x$input, 5, 5))
-    x$id <- unique(axis$`5`$rowid)
-
-    x$tail <- axis$`5`
-    x$select <- list(`6` = axis$`6`, `7` = axis$`7`)
     x <- purrr::list_flatten(x)
-  }
+
+    x$select_5 <- dplyr::filter(x$select_5, value == substr(x$input, 5, 5))
+    x$id <- unique(x$select_5$rowid)
+    x$head <- vctrs::vec_rbind(x$head, unique(x$select_5[c("axis", "name", "value", "label")]))
+
+    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
+    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+
   return(x)
+  }
 }
 
 .device <- function(x) { #6
+
+  # Return all devices
+  if (nchar(x$input) == 5L) {
+    x$select <- unique(x$select_6[c("axis", "name", "value", "label")])
+    return(.cli(x))
+  }
 
   # Return selected device
   if (nchar(x$input) > 5L) {
 
     x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
     x$id <- intersect(x$id, x$select_6$rowid)
-    x$tail <- vctrs::vec_rbind(x$tail, x$select_6)
-    x$select_6 <- NULL
+    x$head <- vctrs::vec_rbind(x$head, unique(x$select_6[c("axis", "name", "value", "label")]))
+
+    x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
+    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+
   }
   return(x)
 }
 
 .qualifier <- function(x) { #7
 
+  # Return all devices
+  if (nchar(x$input) == 6L) {
+    x$select <- unique(x$select_7[c("axis", "name", "value", "label")])
+    return(.cli(x))
+  }
+
   if (nchar(x$input) > 6L) {
 
     x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
     x$id <- intersect(x$id, x$select_7$rowid)
+    x$head <- vctrs::vec_rbind(x$head, unique(x$select_7[c("axis", "name", "value", "label")]))
 
-    x$tail <- vctrs::vec_rbind(x$tail, x$select_7)
-    x$select_7 <- NULL
+    x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
+    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
+
   }
+  return(x)
+}
+
+.finisher <- function(x) {
+  if (length(x$id) == 1L) x <- vctrs::vec_rbind(x$head)
   return(x)
 }

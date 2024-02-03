@@ -22,7 +22,8 @@ Imports:
    vctrs,
    zeallot,
    stringi,
-   stringr
+   stringr,
+   glue
 Suggests: 
     knitr,
     rmarkdown,
