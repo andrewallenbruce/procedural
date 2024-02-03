@@ -259,6 +259,10 @@ checks <- function(x = NULL,
 }
 
 .finisher <- function(x) {
-  if (length(x$id) == 1L) x <- vctrs::vec_rbind(x$head)
+  if (length(x$id) == 1L) {
+    x <- list(
+      description = order(code = x$input)$description,
+      code = x$head)
+    }
   return(x)
 }

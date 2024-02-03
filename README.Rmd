@@ -53,31 +53,11 @@ __ICD-10-PCS__, or __the International Classification of Diseases, 10th Revision
 index(search = "Achillorrhaphy")
 ```
 
-## Tables
-
-```{r}
-tables("0L")
-tables("0LQ")
-tables("0LQ")$codes
-```
-
-## Rows
-
-```{r}
-rows("0LQ")
-rows("0LQ0")
-rows("0LQ0")$axes
-```
-
-
 ## Definitions
 
 ```{r}
-definitions(section = "0", 
-            axis = "5") |> 
-  dplyr::filter(axis_code %in% c("0", "3", "4")) |> 
-  tidyr::unnest(elements) |> 
-  dplyr::select(section, axis_name, label, value)
+definitions(section = "0", axis = "5") |> 
+  dplyr::select(label, definition)
 ```
 
 

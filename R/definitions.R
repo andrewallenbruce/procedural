@@ -30,7 +30,8 @@ definitions <- function(section = NULL,
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
-  if (!is.null(text)) {def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))}
+  # if (!is.null(text)) {def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))}
+  if (!is.null(text)) def <- srchcol(def, 'label', text)
 
   return(def)
 }
@@ -160,3 +161,24 @@ code_range <- function(start, end) {
   dplyr::filter(base, dplyr::between(order, o_start, o_end))
 }
 
+#' ICD-10-PCS Code Order
+#' @param code 1 to 7-character string.
+#'    If `NULL` (default), returns all 78,603 codes.
+#' @param text Search code descriptions
+#' @return a [dplyr::tibble()]
+#' @examplesIf interactive()
+#' order(code = "00X")
+#'
+#' order(text = "Olfactory")
+#'
+#' @export
+order <- function(code = NULL, text = NULL) {
+
+  tbl <- pins::pin_read(mount_board(), "tables_order") |>
+    dplyr::select(order, code, description = description_code)
+
+  if (!is.null(code)) tbl <- srchcol(tbl, 'code', checks(code)[['input']], TRUE)
+  if (!is.null(text)) tbl <- srchcol(tbl, 'description', text)
+
+  return(tbl)
+}

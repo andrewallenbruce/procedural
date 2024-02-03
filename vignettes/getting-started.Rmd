@@ -9,7 +9,7 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = FALSE,
+  collapse  = TRUE,
   echo      = TRUE,
   message   = TRUE, 
   warning   = FALSE,
@@ -147,20 +147,15 @@ The extensor tendon was then incised, dissected, and retracted out of the operat
    1. Device **Z** // No Device
    1. Qualifier **Z** // No Qualifier
 
-
-
-| 1                  | 2               | 3                  | 4                           | 5            | 6          | 7            |
-|--------------------|-----------------|--------------------|-----------------------------|--------------|------------|--------------|
-| __Section__        | __Body System__ | __Root Operation__ | __Body Part__               | __Approach__ | __Device__ | __Qualifier__|
-| Medical & Surgical | Tendons         | Excision           | Lower Arm and Wrist, Right  | Open         | No Device  | No Qualifier |
-| `0`                | `L`             | `B`                | `5`                         | `0`          | `Z`        | `Z`          |
-
-<br>
-
 ```{r}
-pcs("0LB50ZZ")
+index(search = "^0LB", column = "code") |> 
+  select(term:code)
 ```
 
+
+```{r}
+pcs("0LB50ZX")
+```
 
 ## Medical and Surgical Related Sections
 
@@ -230,7 +225,7 @@ Additional differences include these uses of the 6th character:
 Sections B - D and F - H comprise the ancillary sections:
 
 
-```{r}
+```{r, echo=FALSE}
 sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')]
 ```
 
@@ -464,7 +459,7 @@ Within a defined code range, a character specifies the same type of information 
 For example, The __fifth__ axis of classification specifies the _Approach_ in sections 0 through 4 and 7 through 9 of the system.
 
 
-```{r}
+```{r, echo=FALSE}
 tibble(
   Position = c("Label", "Code", "Meaning"),
   `1` = c("Section", "0", "Medical and Surgical"),
@@ -531,11 +526,6 @@ tables() |>
 ```
 
 
-```{r}
-rows("041L")$axes
-```
-
-
 # Definitions
 
 ```{r}
@@ -549,30 +539,37 @@ definitions() |>
 ## Medical and Surgical
 
 ```{r}
-# pcs("0016070") |> 
-#   gt(rowname_col = "axis") |> 
-#   opt_table_font(font = google_font(name = "Rubik")) |> 
-#   cols_align(align = "center", columns = c(axis, code)) |>
-#   tab_style(style = list(cell_fill(color = "lightgray", 
-#                                    alpha = 0.5), 
-#                          cell_text(weight = "bold")), 
-#             locations = cells_body(columns = code)) |> 
-#   opt_all_caps() |> 
-#   tab_header(title = html("<b>ICD-10-PCS</b> 2024<hr>"),
-#              subtitle = html("<small>SECTION:</small> <b>0</b> Medical and Surgical<br>
-#                               <small>SYSTEM:</small> <b>0</b> Central Nervous System and Cranial Nerves<br>
-#                               <small>OPERATION:</small> <b>1</b> Bypass<br><br>")) |> 
-#   tab_options(
-#     heading.title.font.size = px(24),
-#     heading.subtitle.font.size = px(18),
-#     heading.align = "left",
-#     table.font.color = "#0B0B45"
-#   )
+index(search = "^0016", 
+      column = "code") |> 
+  select(term:code)
 ```
 
 
 ```{r}
-pcs("0016070")
+pcs("0016")
+```
+
+
+
+```{r}
+x <- pcs("0016070")
+
+x$code |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  tab_header(title = html("<b>ICD-10-PCS</b> 2024"),
+             subtitle = x$description) |>
+  tab_options(
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45")
 ```
 
 
@@ -581,30 +578,66 @@ pcs("0016070")
 definitions(section = '0', 
             axis = '3', 
             text = "Bypass") |> 
-  glimpse()
+  select(name, label, definition, explanation) |> 
+  gt() |> 
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_options(
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45")
 ```
 
 
 ```{r}
-includes(section = '0', axis = '3', text = 'Bypass')
-includes(section = '0', axis = '6', text = '^Autologous Tissue Substitute')
+definitions(section = '0', 
+            axis = '5', 
+            text = "^Open") |> 
+  select(name, label, definition) |> 
+  gt() |> 
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_options(
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45")
 ```
 
 
 ```{r}
-devices()
+includes(section = '0', 
+         axis = '3', 
+         text = 'Bypass') |> 
+  select(name, label, includes) |> 
+  gt() |> 
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_options(
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45")
 ```
-
-
 
 
 ```{r}
-index(search = "^0HB", column = "code")
+includes(section = '0', 
+         axis = '6', 
+         text = '^Autologous Tissue Substitute') |> 
+  select(name, label, includes) |> 
+  gt() |> 
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_options(
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45")
 ```
 
-```{r}
-pcs("0HB2XZZ")
-```
+
 
 
 
