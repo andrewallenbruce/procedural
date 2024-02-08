@@ -2,26 +2,25 @@
 % Please edit documentation in R/definitions.R
 \name{order}
 \alias{order}
-\title{ICD-10-PCS Code Order}
+\title{ICD-10-PCS Order File}
 \usage{
-order(code = NULL, text = NULL)
+order(col = "code", search = NULL)
 }
 \arguments{
-\item{code}{1 to 7-character string.
-If \code{NULL} (default), returns all 78,603 codes.}
+\item{col}{column to search: "code" (default), "table", "row", "description_code", "description_table"}
 
-\item{text}{Search code descriptions}
+\item{search}{string to search for in \code{col}}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 }
 \description{
-ICD-10-PCS Code Order
+ICD-10-PCS Order File
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-order(code = "00X")
+order(search = "00X")
 
-order(text = "Olfactory")
+order(search = "Olfactory", col = "description_code")
 \dontshow{\}) # examplesIf}
 }

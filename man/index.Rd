@@ -4,12 +4,12 @@
 \alias{index}
 \title{ICD-10-PCS Index}
 \usage{
-index(search = NULL, column = NULL)
+index(search = NULL, col = "term")
 }
 \arguments{
-\item{search}{Search term}
+\item{search}{string to search for in \code{col}}
 
-\item{column}{Column to search}
+\item{col}{column to search: "term" (default), "verb", "value", "code"}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

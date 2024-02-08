@@ -21,7 +21,6 @@ Imports:
    rlang,
    vctrs,
    zeallot,
-   stringi,
    stringr,
    glue
 Suggests: 

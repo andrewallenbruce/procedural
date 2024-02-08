@@ -65,62 +65,79 @@ checks <- function(x = NULL,
   return(list(input = x))
 }
 
-.section <- function(x) { #1
-
-  x <- checks(x)
-
-  # Return all sections
-  if (is.na(x$input)) {
-  x$select <- as.data.frame(sections())
-  return(.cli(x))
-  }
-
-  # Return selected section
-  if (!is.na(x$input)) {
-    x$head <- sections(substr(x$input, 1, 1))
-    return(x)
-    }
-}
-
 .cli <- function(x) {
 
-  cl <- glue::glue_data(.x = x$select, "[{value}] {label}")
+  cl <- glue::glue_data(.x = x$possible, "[{value}] {label}")
 
-  if (x$select$name[[1]] == "Section") {
+  if (x$possible$name[[1]] == "Section") {
 
     cli::cli_h2("No Code Selected")
-    cli::cli_h2("Select A {.val {rlang::sym(x$select$name[[1]])}}")
+    cli::cli_h2("Select {.val {rlang::sym(x$possible$name[[1]])}}")
     cli::cli_li(cl)
     cli::cli_end()
     return(invisible(NULL))
 
-    } else {
+  } else {
 
-      hd <- glue::glue_data(.x = x$head, "[{value}] {name}: {label}")
-      cli::cli_h2("Selected: {.val {rlang::sym(x$input)}}")
-      cli::cli_ol(hd)
+    hd <- glue::glue_data(.x = x$head, "[{value}] {name}: {label}")
+    cli::cli_h2("Selected: {.val {rlang::sym(x$input)}}")
+    cli::cli_ol(hd)
 
-      cli::cli_h2("Select {.val {rlang::sym(x$select$name[[1]])}}")
-      cli::cli_li(cl)
-      cli::cli_end()
+    cli::cli_h2("Select {.val {rlang::sym(x$possible$name[[1]])}}")
+    cli::cli_li(cl)
+    cli::cli_end()
 
-      return(invisible(NULL))
+    return(invisible(NULL))
+  }
+}
+
+.clierr <- function(x, n) {
+
+  put <- substr(x$input, n, n)
+
+  if (!put %in% delister(x$possible["value"])) {
+
+    cli::cli_abort(
+      paste("{.strong {.val {rlang::sym(put)}}} is an invalid",
+       "{.val {rlang::sym(x$possible$name[[1]])}} value."),
+      call = rlang::caller_env())
+
     }
 }
+
+.section <- function(x) { #1
+
+  x <- checks(x)
+  x$possible <- as.data.frame(sections())
+
+  # Return all sections
+  if (is.na(x$input)) {.cli(x); return(invisible(x))}
+
+  # Return selected section
+  if (!is.na(x$input)) {
+
+    .clierr(x, 1)
+
+    x$head <- sections(substr(x$input, 1, 1))
+    return(x)
+
+    }
+  }
 
 .system <- function(x) { #2
 
   # Filter to section
   system <- systems(substr(x$input, 1, 1))[c("axis", "name", "value", "label")]
+  x$possible <- as.data.frame(system)
 
   # Return all systems
-  if (nchar(x$input) == 1L) {
-    x$select <- as.data.frame(system)
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 1L) {.cli(x); return(invisible(x))}
 
   # Return selected system
   if (nchar(x$input) > 1L) {
+
+    .clierr(x, 2)
+
     x$head <- vctrs::vec_rbind(x$head,
               dplyr::filter(system, value == substr(x$input, 2, 2)))
     return(x)
@@ -140,14 +157,15 @@ checks <- function(x = NULL,
     dplyr::select(axis, name = name_3, value = code_3, label = label_3) |>
     dplyr::distinct()
 
+  x$possible <- as.data.frame(operation)
+
   # Return all operations
-  if (nchar(x$input) == 2L) {
-    x$select <- as.data.frame(operation)
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 2L) {.cli(x); return(invisible(x))}
 
   # Return selected operation
   if (nchar(x$input) > 2L) {
+
+    .clierr(x, 3)
 
     # Head = First 4 axes, Tail = Last 3 axes
     x$head <- vctrs::vec_rbind(x$head, dplyr::filter(operation, value == substr(x$input, 3, 3)))
@@ -168,14 +186,15 @@ checks <- function(x = NULL,
     dplyr::select(axis, name = name_4, value = code_4, label = label_4) |>
     dplyr::distinct()
 
+  x$possible <- as.data.frame(part)
+
   # Return all parts
-  if (nchar(x$input) == 3L) {
-    x$select <- as.data.frame(part)
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 3L) {.cli(x); return(invisible(x))}
 
   # Return selected part
   if (nchar(x$input) > 3L) {
+
+    .clierr(x, 4)
 
     x$head <- vctrs::vec_rbind(x$head, dplyr::filter(part, value == substr(x$input, 4, 4)))
 
@@ -193,15 +212,16 @@ checks <- function(x = NULL,
 .approach <- function(x) { #5
 
   x$select <- as.data.frame(x$select) |> split(x$select$axis)
+  x$possible <- unique(x$select$`5`[c("axis", "name", "value", "label")])
 
   # Return all approaches
-  if (nchar(x$input) == 4L) {
-    x$select <- unique(x$select$`5`[c("axis", "name", "value", "label")])
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 4L)  {.cli(x); return(invisible(x))}
 
   # Return selected approach
   if (nchar(x$input) > 4L) {
+
+    .clierr(x, 5)
+
     x <- purrr::list_flatten(x)
 
     x$select_5 <- dplyr::filter(x$select_5, value == substr(x$input, 5, 5))
@@ -217,14 +237,15 @@ checks <- function(x = NULL,
 
 .device <- function(x) { #6
 
+  x$possible <- unique(x$select_6[c("axis", "name", "value", "label")])
+
   # Return all devices
-  if (nchar(x$input) == 5L) {
-    x$select <- unique(x$select_6[c("axis", "name", "value", "label")])
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 5L) {.cli(x); return(invisible(x))}
 
   # Return selected device
   if (nchar(x$input) > 5L) {
+
+    .clierr(x, 6)
 
     x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
     x$id <- intersect(x$id, x$select_6$rowid)
@@ -239,13 +260,14 @@ checks <- function(x = NULL,
 
 .qualifier <- function(x) { #7
 
+  x$possible <- unique(x$select_7[c("axis", "name", "value", "label")])
+
   # Return all devices
-  if (nchar(x$input) == 6L) {
-    x$select <- unique(x$select_7[c("axis", "name", "value", "label")])
-    return(.cli(x))
-  }
+  if (nchar(x$input) == 6L) {.cli(x); return(invisible(x))}
 
   if (nchar(x$input) > 6L) {
+
+    .clierr(x, 7)
 
     x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
     x$id <- intersect(x$id, x$select_7$rowid)
@@ -259,10 +281,11 @@ checks <- function(x = NULL,
 }
 
 .finisher <- function(x) {
+
   if (length(x$id) == 1L) {
-    x <- list(
-      description = order(code = x$input)$description,
-      code = x$head)
-    }
+
+    x <- list(description = procedural::order(search = x$input)$description_code,
+              code = x$head)
+  }
   return(x)
 }

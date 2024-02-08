@@ -1,19 +1,21 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
 #' @param axis PCS axis position.
-#' @param text PCS axis label.
+#' @param col column to search: "name", "label" (default), "definition", "explanation"
+#' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examples
-#' definitions(section = "0", axis = "3", text = "Drainage")
+#' definitions(section = "0", axis = "3", search = "Drainage")
 #'
 #' definitions(section = "0", axis = "5")
 #'
-#' definitions(section = "B", text = "Fluoroscopy")
+#' definitions(section = "B", search = "Fluoroscopy")
 #'
 #' @export
 definitions <- function(section = NULL,
                         axis = NULL,
-                        text = NULL) {
+                        col = "label",
+                        search = NULL) {
 
   def <- pins::pin_read(mount_board(), "definitions")
 
@@ -30,8 +32,7 @@ definitions <- function(section = NULL,
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
-  # if (!is.null(text)) {def <- dplyr::filter(def, grepl(text, label, ignore.case = TRUE))}
-  if (!is.null(text)) def <- srchcol(def, 'label', text)
+  def <- search %nn% srchcol(def, col = col, search = search, ignore = TRUE)
 
   return(def)
 }
@@ -39,16 +40,16 @@ definitions <- function(section = NULL,
 #' ICD-10-PCS Includes
 #' @param section PCS section character.
 #' @param axis PCS axis position.
-#' @param name PCS axis name.
-#' @param text PCS axis label.
+#' @param col column to search: "name", "label" (default), "includes"
+#' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examples
 #' includes(section = "0", axis = "3")
 #' @export
 includes <- function(section = NULL,
                      axis = NULL,
-                     name = NULL,
-                     text = NULL) {
+                     col = "label",
+                     search = NULL) {
 
   includes <- pins::pin_read(mount_board(), "includes")
 
@@ -67,17 +68,15 @@ includes <- function(section = NULL,
     includes <- vctrs::vec_slice(includes, includes$axis == axis)
   }
 
-  if (!is.null(name)) {includes <- dplyr::filter(includes, name == name)}
+  if (!is.null(search)) includes <- srchcol(includes, col = col, search = search, ignore = TRUE)
+  # includes <- search %nn% srchcol(includes, col = col, search = search, ignore = TRUE)
 
-  if (!is.null(text)) {
-    includes <- dplyr::filter(includes, grepl(text, label, ignore.case = TRUE))
-  }
   return(includes)
 }
 
 #' ICD-10-PCS Index
-#' @param search Search term
-#' @param column Column to search
+#' @param col column to search: "term" (default), "verb", "value", "code"
+#' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' index(search = "Abdominohysterectomy")
@@ -88,7 +87,7 @@ includes <- function(section = NULL,
 #'
 #' @export
 index <- function(search = NULL,
-                  column = NULL) {
+                  col = "term") {
 
   ind <- pins::pin_read(mount_board(), "index_v2") |>
     tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
@@ -97,30 +96,37 @@ index <- function(search = NULL,
                   type = verb) |>
     dplyr::select(-term_id)
 
-  if (!is.null(search)) {
-    if (is.null(column)) {column <- "term"}
-    ind <- dplyr::filter(ind, stringi::stri_detect_regex(ind[[column]], paste0("(?i)", search)))
-    }
+  includes <- search %nn% srchcol(includes, col = col, search = search, ignore = TRUE)
+
   return(ind)
 }
 
 #' ICD-10-PCS Devices
-#' @param system Column to search
-#' @param device description
+#' @param system PCS system character.
+#' @param operation PCS operation character.
+#' @param device PCS device character.
+#' @param col column to search: "device_name" (default), "includes"
+#' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' devices()
 #' @export
 devices <- function(system = NULL,
-                    device = NULL) {
+                    operation = NULL,
+                    device = NULL,
+                    col = "device_name",
+                    search = NULL) {
 
   dev <- pins::pin_read(mount_board(), "devices")
 
   if (!is.null(system)) {
-    if (is.numeric(system)) system <- as.character(system)
-    if (grepl("[[:lower:]]*", system)) section <- toupper(system)
     system <- rlang::arg_match(system, c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U"))
     dev <- vctrs::vec_slice(dev, dev$system == system)
+  }
+
+  if (!is.null(operation)) {
+    operation <- rlang::arg_match(operation, c("All applicable", "H", "R", "S", "V"))
+    dev <- vctrs::vec_slice(dev, dev$operation == operation)
   }
 
   if (!is.null(device)) {
@@ -128,12 +134,15 @@ devices <- function(system = NULL,
     device <- rlang::arg_match(device, c(2, 4:7, "D", "J", "M", "P", "S"))
     dev <- vctrs::vec_slice(dev, dev$device == device)
   }
+
+  dev <- search %nn% srchcol(dev, col = col, search = search, ignore = TRUE)
+
   return(dev)
 }
 
 #' Return a range of ICD-10-PCS codes.
-#' @param start 7-character string representing an ICD-10-PCS code.
-#' @param end 7-character string representing an ICD-10-PCS code.
+#' @param start 7-character ICD-10-PCS code.
+#' @param end 7-character ICD-10-PCS code.
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
 #' code_range("0G9000Z", "0G9100Z")
@@ -161,24 +170,21 @@ code_range <- function(start, end) {
   dplyr::filter(base, dplyr::between(order, o_start, o_end))
 }
 
-#' ICD-10-PCS Code Order
-#' @param code 1 to 7-character string.
-#'    If `NULL` (default), returns all 78,603 codes.
-#' @param text Search code descriptions
+#' ICD-10-PCS Order File
+#' @param col column to search: "code" (default), "table", "row", "description_code", "description_table"
+#' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examplesIf interactive()
-#' order(code = "00X")
+#' order(search = "00X")
 #'
-#' order(text = "Olfactory")
+#' order(search = "Olfactory", col = "description_code")
 #'
 #' @export
-order <- function(code = NULL, text = NULL) {
+order <- function(col = "code", search = NULL) {
 
-  tbl <- pins::pin_read(mount_board(), "tables_order") |>
-    dplyr::select(order, code, description = description_code)
+  tbl <- pins::pin_read(mount_board(), "tables_order")
 
-  if (!is.null(code)) tbl <- srchcol(tbl, 'code', checks(code)[['input']], TRUE)
-  if (!is.null(text)) tbl <- srchcol(tbl, 'description', text)
+  tbl <- search %nn% srchcol(tbl, col = col, search = search, ignore = TRUE)
 
   return(tbl)
 }

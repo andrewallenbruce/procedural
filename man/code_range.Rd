@@ -7,9 +7,9 @@
 code_range(start, end)
 }
 \arguments{
-\item{start}{7-character string representing an ICD-10-PCS code.}
+\item{start}{7-character ICD-10-PCS code.}
 
-\item{end}{7-character string representing an ICD-10-PCS code.}
+\item{end}{7-character ICD-10-PCS code.}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

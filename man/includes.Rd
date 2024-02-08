@@ -4,16 +4,16 @@
 \alias{includes}
 \title{ICD-10-PCS Includes}
 \usage{
-includes(section = NULL, axis = NULL, name = NULL, text = NULL)
+includes(section = NULL, axis = NULL, col = "label", search = NULL)
 }
 \arguments{
 \item{section}{PCS section character.}
 
 \item{axis}{PCS axis position.}
 
-\item{name}{PCS axis name.}
+\item{col}{column to search: "name", "label" (default), "includes"}
 
-\item{text}{PCS axis label.}
+\item{search}{string to search for in \code{col}}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

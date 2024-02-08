@@ -40,44 +40,43 @@ mount_source <- function(set = c("definitions", "index", "order", "table")) {
 }
 
 
+#' Infix operator for `if (!is.null(x)) y else x` statements
+#' @param x,y description
+#' @return description
+#' @examplesIf interactive()
+#' x <- 123456
+#' x %nn% as.character(x)
+#' @noRd
+`%nn%` <- function(x, y) if (!is.null(x)) y else x #nocov
+
 #' @noRd
 `%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
 #' Wrapper for [unlist()], with `use.names` set to `FALSE`
 #' @param x character vector
 #' @return split character vector
-#' @export
-#' @keywords internal
-delister <- function(x) {
-  unlist(x, use.names = FALSE)
-}
+#' @noRd
+delister <- function(x) unlist(x, use.names = FALSE)
 
 #' Wrapper for [strsplit()] that unlists result
-#' @param x character vector
-#' @return split character vector
-#' @export
-#' @keywords internal
-splitter <- function(x) {
-  unlist(strsplit(x, ""), use.names = FALSE)
-}
+#' @param x character string
+#' @return character vector
+#' @noRd
+splitter <- function(x) unlist(strsplit(x, ""), use.names = FALSE)
 
 #' Wrapper for [paste0()] that collapses result
 #' @param x split character vector
-#' @return collapsed character vector
-#' @export
-#' @keywords internal
-collapser <- function(x) {
-  paste0(x, collapse = "")
-}
+#' @return character string
+#' @noRd
+collapser <- function(x) paste0(x, collapse = "")
 
 #' Search a data frame's column by string
 #' @param df data frame
 #' @param col column to search
 #' @param search string to search
-#' @param ignore ignore case or not
+#' @param ignore ignore string case?
 #' @return collapsed character vector
-#' @export
-#' @keywords internal
+#' @noRd
 srchcol <- function(df, col, search, ignore = FALSE) {
   dplyr::filter(df, stringr::str_detect(
     !!rlang::sym(col), stringr::regex(search, ignore_case = ignore)))

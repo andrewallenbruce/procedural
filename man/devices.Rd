@@ -4,12 +4,24 @@
 \alias{devices}
 \title{ICD-10-PCS Devices}
 \usage{
-devices(system = NULL, device = NULL)
+devices(
+  system = NULL,
+  operation = NULL,
+  device = NULL,
+  col = "device_name",
+  search = NULL
+)
 }
 \arguments{
-\item{system}{Column to search}
+\item{system}{PCS system character.}
 
-\item{device}{description}
+\item{operation}{PCS operation character.}
+
+\item{device}{PCS device character.}
+
+\item{col}{column to search: "device_name" (default), "includes"}
+
+\item{search}{string to search for in \code{col}}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

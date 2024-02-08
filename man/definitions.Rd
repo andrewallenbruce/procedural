@@ -4,14 +4,16 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(section = NULL, axis = NULL, text = NULL)
+definitions(section = NULL, axis = NULL, col = "label", search = NULL)
 }
 \arguments{
 \item{section}{PCS section character.}
 
 \item{axis}{PCS axis position.}
 
-\item{text}{PCS axis label.}
+\item{col}{column to search: "name", "label" (default), "definition", "explanation"}
+
+\item{search}{string to search for in \code{col}}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}
@@ -20,10 +22,10 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Definitions
 }
 \examples{
-definitions(section = "0", axis = "3", text = "Drainage")
+definitions(section = "0", axis = "3", search = "Drainage")
 
 definitions(section = "0", axis = "5")
 
-definitions(section = "B", text = "Fluoroscopy")
+definitions(section = "B", search = "Fluoroscopy")
 
 }
