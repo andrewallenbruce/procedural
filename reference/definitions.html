@@ -54,7 +54,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">definitions</span><span class="op">(</span></span>
 <span>  section <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  axis <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"label"</span>, <span class="st">"name"</span>, <span class="st">"definition"</span>, <span class="st">"explanation"</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"value"</span>, <span class="st">"label"</span>, <span class="st">"name"</span>, <span class="st">"definition"</span>, <span class="st">"explanation"</span><span class="op">)</span>,</span>
 <span>  search <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -70,7 +70,7 @@
 
 
 <dt>col</dt>
-<dd><p>column to search: "name", "label" (default), "definition", "explanation"</p></dd>
+<dd><p>column to search: "name", "value" (default), "label" "definition", "explanation"</p></dd>
 
 
 <dt>search</dt>
@@ -89,10 +89,9 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">definitions</span><span class="op">(</span>section <span class="op">=</span> <span class="st">"0"</span>, axis <span class="op">=</span> <span class="st">"3"</span>, search <span class="op">=</span> <span class="st">"Drainage"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   section axis  name      value label    definition                  explanation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0       3     Operation 9     Drainage Taking or letting out flui… The qualif…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 variables: section &lt;chr&gt;, axis &lt;chr&gt;, name &lt;chr&gt;, value &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label &lt;chr&gt;, definition &lt;chr&gt;, explanation &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">definitions</span><span class="op">(</span>section <span class="op">=</span> <span class="st">"0"</span>, axis <span class="op">=</span> <span class="st">"5"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 7</span></span>
@@ -107,10 +106,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 0       5     Approach F     Via Natural or Artificial… Entry of … <span style="color: #BB0000;">NA</span>         </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">definitions</span><span class="op">(</span>section <span class="op">=</span> <span class="st">"B"</span>, search <span class="op">=</span> <span class="st">"Fluoroscopy"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   section axis  name  value label       definition                   explanation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> B       3     Type  1     Fluoroscopy Single plane or bi-plane re… <span style="color: #BB0000;">NA</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 variables: section &lt;chr&gt;, axis &lt;chr&gt;, name &lt;chr&gt;, value &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   label &lt;chr&gt;, definition &lt;chr&gt;, explanation &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
