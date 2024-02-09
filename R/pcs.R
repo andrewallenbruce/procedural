@@ -171,10 +171,12 @@ checks <- function(x = NULL,
     .clierr(x, 3)
 
     # Head = First 4 axes, Tail = Last 3 axes
-    x$head <- vctrs::vec_rbind(x$head, dplyr::filter(operation, value == substr(x$input, 3, 3)))
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(operation, value == substr(x$input, 3, 3)))
 
     # Filtered pin to pass on
-    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |> dplyr::select(name_4:rows)
+    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |>
+      dplyr::select(name_4:rows)
 
     return(x)
   }
@@ -199,7 +201,8 @@ checks <- function(x = NULL,
 
     .clierr(x, 4)
 
-    x$head <- vctrs::vec_rbind(x$head, dplyr::filter(part, value == substr(x$input, 4, 4)))
+    x$head <- vctrs::vec_rbind(x$head,
+              dplyr::filter(part, value == substr(x$input, 4, 4)))
 
     x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
       dplyr::select(rowid:rows) |>
@@ -208,7 +211,7 @@ checks <- function(x = NULL,
       dplyr::rename(value = code)
 
     return(x)
-    }
+  }
 }
 
 # Row IDs begin ---------------------
@@ -226,15 +229,16 @@ checks <- function(x = NULL,
     .clierr(x, 5)
 
     x <- purrr::list_flatten(x)
-
-    x$select_5 <- dplyr::filter(x$select_5, value == substr(x$input, 5, 5))
+    x$select_5 <- dplyr::filter(x$select_5,
+                                value == substr(x$input, 5, 5))
     x$id <- unique(x$select_5$rowid)
-    x$head <- vctrs::vec_rbind(x$head, unique(x$select_5[c("axis", "name", "value", "label")]))
+
+    x$head <- vctrs::vec_rbind(x$head,
+              unique(x$select_5[c("axis", "name", "value", "label")]))
 
     x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
     x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
-
-  return(x)
+    return(x)
   }
 }
 
@@ -250,9 +254,11 @@ checks <- function(x = NULL,
 
     .clierr(x, 6)
 
-    x$select_6 <- dplyr::filter(x$select_6, value == substr(x$input, 6, 6))
+    x$select_6 <- dplyr::filter(x$select_6,
+                                value == substr(x$input, 6, 6))
     x$id <- intersect(x$id, x$select_6$rowid)
-    x$head <- vctrs::vec_rbind(x$head, unique(x$select_6[c("axis", "name", "value", "label")]))
+    x$head <- vctrs::vec_rbind(x$head,
+              unique(x$select_6[c("axis", "name", "value", "label")]))
 
     x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
     x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
@@ -274,7 +280,8 @@ checks <- function(x = NULL,
 
     x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
     x$id <- intersect(x$id, x$select_7$rowid)
-    x$head <- vctrs::vec_rbind(x$head, unique(x$select_7[c("axis", "name", "value", "label")]))
+    x$head <- vctrs::vec_rbind(x$head,
+              unique(x$select_7[c("axis", "name", "value", "label")]))
 
     x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
     x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
@@ -287,8 +294,10 @@ checks <- function(x = NULL,
 
   if (length(x$id) == 1L) {
 
-    x <- list(description = procedural::order(search = x$input)$description_code,
-              code = x$head)
+    x <- list(
+      description = procedural::order(search = x$input)$description_code,
+      code = x$head
+      )
   }
   return(x)
 }

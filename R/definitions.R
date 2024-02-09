@@ -1,7 +1,7 @@
 #' ICD-10-PCS Definitions
 #' @param section PCS section character.
 #' @param axis PCS axis position.
-#' @param col column to search: "name", "label" (default), "definition", "explanation"
+#' @param col column to search: "name", "value" (default), "label" "definition", "explanation"
 #' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examples
@@ -14,7 +14,7 @@
 #' @export
 definitions <- function(section = NULL,
                         axis = NULL,
-                        col = c("label", "name", "definition", "explanation"),
+                        col = c("value", "label", "name", "definition", "explanation"),
                         search = NULL) {
 
   def <- pins::pin_read(mount_board(), "definitions")

@@ -16,16 +16,302 @@ ind <- left_join(ind, idx_letter) |>
   filter(!is.na(level3), level3 != "title") |>
   select(-level2)
 
+# idx_mainTerm <- ind |>
+#   filter(level3 == "mainTerm", level4 == "title") |>
+#   select(elemid, mainTerm = value)
+
 idx_mainTerm <- ind |>
-  count(level4)
-filter(level3 == "mainTerm", level4 == "title") |>
-  select(elemid, mainTerm = value)
+  filter(elem == "mainTerm") |>
+  select(elemid, mainTerm = elem) |>
+  mutate(id = row_number(mainTerm)) |>
+  select(elemid, mainTerm = id)
 
 ind <- left_join(ind, idx_mainTerm) |>
   fill(mainTerm) |>
-  filter(!is.na(level4), level4 != "title") |>
-  select(-level3) |>
-  mutate(mainID = consecutive_id(mainTerm))
+  filter(!is.na(level4)) |>
+  select(-level3)
+
+idx_title <- ind |>
+  filter(elem == "title") |>
+  select(elemid, title = value, mainTerm)
+
+ind <- left_join(ind, idx_title) |>
+  fill(title) |>
+  filter(elem != "title")
+
+#------------- SPLIT - top level terms
+top <- ind |>
+  filter(level4 != "term") |>
+  remove_empty() |>
+  rename(action = level4)
+
+topidx_code <- top |>
+  filter(!is.na(level5)) |>
+  select(code = value, mainTerm)
+
+top <- left_join(top, topidx_code) |>
+  filter(is.na(level5)) |>
+  select(-level5)
+
+codes <- c("codes", "code", "tab")
+
+top <- top |>
+  mutate(code = ifelse(elem %in% codes, value, code),
+         value = ifelse(elem %in% codes, NA_character_, value),
+         action = ifelse(elem %in% codes, "see", action)) |>
+  select(letter,
+         mainTerm,
+         term = title,
+         action,
+         value,
+         code)
+
+top # FINAL
+
+#------------- SPLIT - top level terms
+deep <- ind |>
+  filter(level4 == "term")
+
+
+deepidx_term <- deep |>
+  filter(elem == "term") |>
+  select(elemid, mainTerm) |>
+  distinct() |>
+  mutate(term_id = row_number())
+
+deep <- left_join(deep, deepidx_term) |>
+  fill(term_id) |>
+  filter(!is.na(value)) |>
+  select(letter,
+         mainTerm,
+         title,
+         term_id,
+         elem,
+         elemid,
+         attr,
+         value,
+         level5:level9)
+
+deepidx_lvls_234 <- deep |>
+  filter(attr == "level", value != "1") |>
+  select(mainTerm) |>
+  distinct() |>
+  pull(mainTerm)
+
+
+#------------- SPLIT - terms with one level
+deep_one_level <- deep |>
+  filter(mainTerm %nin% deepidx_lvls_234) |>
+  remove_empty()
+
+deep_one_level_idx <- deep_one_level |>
+  filter(attr == "level") |>
+  mutate(lvl_id = row_number()) |>
+  select(mainTerm, term_id, elemid, lvl_id)
+
+deep_one_level <- left_join(deep_one_level,
+                            deep_one_level_idx) |>
+  fill(lvl_id) |>
+  filter(is.na(attr)) |>
+  select(-attr)
+
+deep_one_code_idx <- deep_one_level |>
+  filter(!is.na(level6)) |>
+  select(code = value, lvl_id)
+
+deep_one_level <- left_join(deep_one_level, deep_one_code_idx) |>
+  filter(is.na(level6)) |>
+  select(-level6)
+
+codes <- c("codes", "code", "tab")
+
+deep_one_level <- deep_one_level |>
+  rename(action = level5) |>
+  mutate(code = ifelse(elem %in% codes, value, code),
+         value = ifelse(elem %in% codes, NA_character_, value),
+         action = ifelse(elem %in% codes, "see", action)) |>
+  select(letter,
+         mainTerm,
+         term = title,
+         action,
+         value,
+         code)
+
+deep_one_level # FINAL
+
+# vctrs::vec_rbind(top, deep_one_level) |>
+#   arrange(mainTerm) |>
+#   print(n = 200)
+
+#------------- SPLIT - terms with more than one level
+deep_more_levels <- deep |>
+  filter(mainTerm %in% deepidx_lvls_234) |>
+  remove_empty()
+
+deep_more_main_idx <- deep_more_levels |>
+  group_by(mainTerm) |>
+  slice_min(elemid) |>
+  ungroup() |>
+  mutate(main_term = title) |>
+  select(mainTerm, term_id, elemid, main_term)
+
+deep_more_levels <- left_join(deep_more_levels,
+                              deep_more_main_idx) |>
+  fill(main_term) |>
+  filter(value != "1")
+
+deep_more_1 <- deep_more_levels |>
+  filter(level5 %nin% "term") |>
+  remove_empty() |>
+  select(letter,
+         mainTerm,
+         term = main_term,
+         sub_term = title,
+         elem,
+         value) |>
+  mutate(code = ifelse(elem %in% codes, value, NA_character_),
+         value = ifelse(elem %in% codes, NA_character_, value),
+         action = ifelse(elem %in% codes, "see", elem)) |>
+  select(letter, mainTerm, term, sub_term, action, value, code)
+
+#------------- SPLIT
+deep_more_levels <- deep_more_levels |>
+  filter(level5 %in% "term")
+
+deep_more_levels <- deep_more_levels |>
+  mutate(rowid = row_number())
+
+term_vec <- deep_more_levels |>
+  filter(level5 == "term", is.na(level6)) |>
+  pull(term_id)
+
+deep_sub1_idx <- deep_more_levels |>
+  group_by(term_id) |>
+  slice_min(elemid) |>
+  ungroup() |>
+  filter(value == "2") |>
+  filter(title %nin% c("Anesthesia", "Left", "Right", "Bilateral", "Lower", "Upper", "No Qualifier")) |>
+  rename(sub_term = title) |>
+  select(mainTerm, term_id, sub_term)
+
+deep_sub1_rowid <- deep_more_levels |>
+  group_by(term_id) |>
+  slice_min(elemid) |>
+  ungroup() |>
+  filter(value == "2") |>
+  filter(title %nin% c("Anesthesia", "Left", "Right", "Bilateral", "Lower", "Upper", "No Qualifier")) |>
+  pull(rowid)
+
+deep_levels_2 <- left_join(deep_more_levels,
+                              deep_sub1_idx) |>
+  fill(sub_term) |>
+  filter(rowid %nin% deep_sub1_rowid) |>
+  filter(!is.na(level6)) |>
+  select(-level5)
+
+deep_more_2 <- deep_levels_2 |>
+  filter(level6 == "code") |>
+  remove_empty() |>
+  mutate(action = ifelse(elem %in% codes, "see", elem)) |>
+  select(letter,
+         mainTerm,
+         term = main_term,
+         sub_term,
+         action,
+         value = title,
+         code = value)
+
+rowid_idx <- deep_levels_2 |>
+  filter(level6 == "code") |>
+  pull(rowid)
+
+deep_lvl_3 <- deep_levels_2 |>
+  filter(rowid %nin% rowid_idx)
+
+deep_more_3 <- deep_lvl_3 |>
+  filter(level6 %nin% "term") |>
+  mutate(repeated = title == sub_term) |>
+  filter(repeated == TRUE) |>
+  remove_empty() |>
+  select(letter,
+         mainTerm,
+         term = main_term,
+         sub_term,
+         elem,
+         value) |>
+  mutate(code = ifelse(elem %in% codes, value, NA_character_),
+         value = ifelse(elem %in% codes, NA_character_, value),
+         action = ifelse(elem %in% codes, "see", elem)) |>
+  select(letter, mainTerm, term, sub_term, action, value, code)
+
+
+vctrs::vec_rbind(top,
+                 deep_one_level,
+                 deep_more_1,
+                 deep_more_2,
+                 deep_more_3) |>
+  arrange(mainTerm) |>
+  select(letter, mainTerm, term, sub_term, action, value, code) |>
+  # filter(action == "see") |>
+  # remove_empty() |>
+  print(n = 200)
+
+deep_lvl_3 |>
+  filter(level6 %nin% "term") |>
+  mutate(repeated = title == sub_term) |>
+  filter(repeated == FALSE) |>
+  mutate(repeated = NULL) |>
+  select(letter, mainTerm, term = main_term, sub_term, sub_term2 = title, elem, value) |>
+  print(n = 400)
+
+deep_lvl_3 |>
+  filter(level6 %in% "term")
+
+
+deep_more_main_idx <- deep_more_levels |>
+  filter(level5 %in% "term") |>
+  filter(is.na(level6)) |>
+  group_by(term_id, elem) |>
+  slice_min(elemid) |>
+  ungroup() |>
+  filter(value != "3") |>
+  mutate(sub_term_1 = title) |>
+  select(mainTerm, term_id, elemid, main_term)
+
+
+deep_more_lvl_1_idx <- deep_more_levels |>
+  filter(attr == "level", value == "1") |>
+  mutate(lvl_id = row_number()) |>
+  select(mainTerm, term_id, elemid, lvl_id, term_1 = title)
+
+
+
+
+
+deep_more_levels |>
+  filter(!is.na(level6)) |>
+  filter(level6 %nin% "term")
+  count(level6)
+
+
+left_join(deep_more_levels, deep_more_lvl_1_idx) |>
+  fill(lvl_id) |> print(n = 200)
+  select(-c(level5:level9)) |>
+  mutate(
+    level = ifelse(!is.na(attr), value, attr),
+    term_2 = ifelse(level == "2", title, NA_character_),
+    code = ifelse(elem %in% codes, value, NA_character_)
+    ) |>
+  # filter(term_id != 39) |>
+  print(n = 200)
+
+
+
+deep_more_levels |>
+  select(-c(level5:level9)) |>
+  print(n = 200)
+
+
 
 idx_lvl <- ind |>
   filter(!is.na(attr)) |>
@@ -164,32 +450,3 @@ left_join(lvl_23, lvl_3, by = join_by("elemid")) |>
   select(elemid, letter, mainTerm, action, val_2, val_3, codes) |>
   # fill(val_2) |>
   print(n = 100)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-idx_lvl2 <- ind |>
-  filter(is.na(level5)) |>
-  count(level4)
-select(elemid, lvl_2 = value, mainTermID)
-
-left_join(ind, idx_lvl2) |>
-  group_by(elem) |>
-  fill(lvl_2) |>
-  ungroup() |>
-  print(n = 100)
-count(level5) |>
-  filter(!is.na(level4), level4 != "title") |>
-  select(-level3)

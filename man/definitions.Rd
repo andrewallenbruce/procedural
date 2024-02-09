@@ -7,7 +7,7 @@
 definitions(
   section = NULL,
   axis = NULL,
-  col = c("label", "name", "definition", "explanation"),
+  col = c("value", "label", "name", "definition", "explanation"),
   search = NULL
 )
 }
@@ -16,7 +16,7 @@ definitions(
 
 \item{axis}{PCS axis position.}
 
-\item{col}{column to search: "name", "label" (default), "definition", "explanation"}
+\item{col}{column to search: "name", "value" (default), "label" "definition", "explanation"}
 
 \item{search}{string to search for in \code{col}}
 }

@@ -148,7 +148,7 @@ The extensor tendon was then incised, dissected, and retracted out of the operat
    1. Qualifier **Z** // No Qualifier
 
 ```{r}
-index(search = "^0LB", column = "code") |> 
+index(search = "^0LB", col = "code") |> 
   select(term:code)
 ```
 
@@ -526,21 +526,10 @@ tables() |>
 ```
 
 
-# Definitions
+# Appendices
 
 ```{r}
-definitions() |> 
-  summarise(n = n(), 
-            .by = c(section, axis, name)) |> 
-  arrange(axis)
-```
-
-
-## Medical and Surgical
-
-```{r}
-index(search = "^0016", 
-      column = "code") |> 
+index(search = "^0016", col = "code") |> 
   select(term:code)
 ```
 
@@ -552,8 +541,19 @@ pcs("0016")
 
 
 ```{r}
-x <- pcs("0016070")
+code <- "0016070"
 
+x <- pcs(code)
+
+op <- unlist(definitions(section = "0", 
+            axis = "3", 
+            col = "value", 
+            search = "1")[c("definition", "explanation")])
+
+app <- unlist(definitions(section = "0", 
+                          axis = "5", 
+                          search = "0", 
+                          col = "value")[c("definition")])
 x$code |>
   gt(rowname_col = "axis") |>
   opt_table_font(font = google_font(name = "Rubik")) |>
@@ -563,78 +563,21 @@ x$code |>
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS</b> 2024"),
+  tab_header(title = html("<b>ICD-10-PCS Code</b>: ", code),
              subtitle = x$description) |>
+  tab_footnote(
+    footnote = paste0(op[["definition"]],". ", op[["explanation"]], "."),
+    locations = cells_body(columns = label, rows = 3)) |>
+  tab_footnote(
+    footnote = paste0(app[["definition"]], "."),
+    locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
+    table.width = pct(50),
     heading.title.font.size = px(20),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
-    table.font.color = "#0B0B45")
-```
-
-
-
-```{r}
-definitions(section = '0', 
-            axis = '3', 
-            text = "Bypass") |> 
-  select(name, label, definition, explanation) |> 
-  gt() |> 
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_options(
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45")
-```
-
-
-```{r}
-definitions(section = '0', 
-            axis = '5', 
-            text = "^Open") |> 
-  select(name, label, definition) |> 
-  gt() |> 
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_options(
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45")
-```
-
-
-```{r}
-includes(section = '0', 
-         axis = '3', 
-         text = 'Bypass') |> 
-  select(name, label, includes) |> 
-  gt() |> 
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_options(
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45")
-```
-
-
-```{r}
-includes(section = '0', 
-         axis = '6', 
-         text = '^Autologous Tissue Substitute') |> 
-  select(name, label, includes) |> 
-  gt() |> 
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_options(
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45")
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12))
 ```
 
 
