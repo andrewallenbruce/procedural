@@ -492,17 +492,18 @@ x$axes |>
              subtitle = x$description) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-      delister(x$definitions[x$definitions$label == "Bypass", ])[2],". ",
-      delister(x$definitions[x$definitions$label == "Bypass", ])[3], ".")),
+      procedural:::delister(x$definitions[x$definitions$label == "Bypass", ])[2],". ",
+      procedural:::delister(x$definitions[x$definitions$label == "Bypass", ])[3], ".")),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
     footnote = html(paste("<b>Includes:</b>", 
-               stringr::str_flatten_comma(delister(x$includes[c("includes")]), 
-                                          last = ", and "))),
+               stringr::str_flatten_comma(
+                 procedural:::delister(x$includes[c("includes")]), 
+                 last = ", and "))),
     locations = cells_body(columns = label, rows = 4)) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-      delister(x$definitions[x$definitions$label == "Open", ])[2], ".")),
+      procedural:::delister(x$definitions[x$definitions$label == "Open", ])[2], ".")),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
     table.width = pct(55),
