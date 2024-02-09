@@ -27,7 +27,7 @@ a \code{\link[dplyr:reexports]{dplyr::tibble()}}
 ICD-10-PCS Definitions
 }
 \examples{
-definitions(section = "0", axis = "3", search = "Drainage")
+definitions(section = "0", axis = "3", col = "label", search = "Drainage")
 
 definitions(section = "0", axis = "5")
 

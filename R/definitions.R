@@ -5,7 +5,7 @@
 #' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examples
-#' definitions(section = "0", axis = "3", search = "Drainage")
+#' definitions(section = "0", axis = "3", col = "label", search = "Drainage")
 #'
 #' definitions(section = "0", axis = "5")
 #'

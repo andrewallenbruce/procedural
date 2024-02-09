@@ -51,11 +51,6 @@ An ICD-10-PCS code is best understood as the result of a process rather than as 
 All codes in ICD-10-PCS are seven characters long. Each character represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, Medical and Surgical:
 
 
-| 1       | 2           | 3              | 4         | 5        | 6      | 7         |
-|---------|-------------|----------------|-----------|----------|--------|-----------|
-| Section | Body System | Root Operation | Body Part | Approach | Device | Qualifier |
-
-
 ```{r echo=FALSE}
 tibble(
   Axis = 1:7,
@@ -69,7 +64,7 @@ tibble(
   gt() |> 
   cols_align(align = 'center', columns = Axis) |> 
   opt_table_font(font = google_font(name = "Rubik")) |> 
-  opt_table_lines(extent = "all")
+  opt_table_lines(extent = "default")
 ```   
 
 
@@ -82,14 +77,15 @@ One of 34 possible values can be assigned to each character in a code: the integ
 
 
 ```{r}
-order("02103D4")
+pcs("02103D4")
 ```
 
 
 
 Choosing a specific value for each of the seven characters derives this code. Based on details about the procedure performed, values for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device**, and **qualifier** are assigned.
 
-```{r}
+
+```{r eval=FALSE}
 pcs("0")
 
 pcs("02")
@@ -147,11 +143,6 @@ The extensor tendon was then incised, dissected, and retracted out of the operat
    1. Device **Z** // No Device
    1. Qualifier **Z** // No Qualifier
 
-```{r}
-index(search = "^0LB", col = "code") |> 
-  select(term:code)
-```
-
 
 ```{r}
 pcs("0LB50ZX")
@@ -161,7 +152,7 @@ pcs("0LB50ZX")
 
 Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
 
-```{r}
+```{r echo=FALSE}
 sections(0:9)[c('value', 'label')]
 ```
 
@@ -375,8 +366,6 @@ Table 3. Introductory table of values for the Medical and Surgical section urina
 0: Medical and Surgical
 T: Urinary System
 
-(see table on page 153)
-
 Appendix F
 contains the Substance Key. This table provides the substance term and then the corresponding ICD-10-PCS Value. For example, Seprafilm® has an ICD-10-PCS Value as an adhesion barrier.
 
@@ -400,47 +389,6 @@ and
 Appendix H
 contains Non-OR Not Affecting MS-DRG Assignment codes.
 
-ICD-10-PCS Fundamentals
-ICD-10-PCS was designed and developed to adhere to recommendations made by the National Committee on Vital and Health Statistics (NCVHS). It also incorporates input from a wide range of organizations, individual physicians, healthcare professionals, and researchers.
-
-Several structural attributes were recommended for a new procedure coding system. These attributes include the following:
-
-Multiaxial structure
-Completeness
-Expandability
-Multiaxial structure
-The key attribute that provides the framework for all other structural attributes is multiaxial code structure. Multiaxial code structure makes it possible for the ICD-10-PCS to be complete, expandable, and to provide a high degree of flexibility and functionality.
-
-CODING TIP
-Multiaxial refers to “more than one axis” or developing on more than a single line.
-
-ICD-10-PCS codes are composed of seven characters. Each character can be considered an axis. Thus, the structure of the code is “multiaxial.” Each character represents a category of information that can be specified about the procedure performed. A character defines both the category of information and its physical position in the code.
-
-1	2	3	4	5	6	7
-Section	Body System	Root Operation	Body Part	Approach	Device	Qualifier
-A character’s position can be understood as a semi-independent axis of classification that allows different specific values to be inserted into that space, and whose physical position remains stable. Within a defined code range, a character retains the general meaning that it confers on any value in that position. For example, the 5th character retains the general meaning “approach” in sections 0-4 and 7-9 of the system. Any specific value in the 5th character will define a specific approach, such as Open.
-
-Each group of values for a character contains all of the valid choices in relation to the other characters of the code, giving the system completeness. In the 5th character, for example, each significantly distinct approach is assigned its own approach value and all applicable approach values are included to represent the possible versions of a procedure.
-
-Each group of values for a character can be added to as needed, giving the system expandability. If a significantly new distinct approach is used to perform procedures, a new approach value can be added to the system in upcoming years.
-
-Each group of values is confined to its own character, giving ICD-10-PCS a stable, predictable readability across a wide range of codes. In sections 0-4 and 7-9 of the system, for example, the 5th character always represents the approach.
-
-ICD-10-PCS’ multiaxial structure houses its capacity for completeness, expandability, and flexibility, giving it a high degree of functionality for multiple uses.
-
-Completeness
-Completeness is considered a key structural attribute for a new procedure coding system. The specific recommendation for completeness includes these characteristics:
-
-A unique code is available for each significantly different procedure.
-Each code retains its unique definition. Codes are not reused.
-A unique code can be constructed for every significantly different procedure. This vastly enhances the data capturing process.
-
-Within each section, a character defines a consistent component of a code, and contains all applicable values for that character. The values define individual expressions (open, percutaneous) of the character’s general meaning (approach) that are then used to construct unique procedure codes.
-
-Because all approaches by which a procedure is performed are assigned a separate approach value in the system, every procedure which uses a different approach will have its own unique code. This is true of the other characters as well. The same procedure performed on a different body part has its own unique code; the same procedure performed using a different device has its own unique code; and so on.
-
-Unique Definitions
-Because ICD-10-PCS codes are constructed of individual values rather than lists of fixed codes and text descriptions, the unique, stable definition of a code in the system is retained. New values may be added to the system to represent a specific new approach or device or qualifier, but whole codes by design cannot be given new meanings and reused.
 
 # Coding Conventions
 
@@ -459,7 +407,7 @@ Within a defined code range, a character specifies the same type of information 
 For example, The __fifth__ axis of classification specifies the _Approach_ in sections 0 through 4 and 7 through 9 of the system.
 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=FALSE}
 tibble(
   Position = c("Label", "Code", "Meaning"),
   `1` = c("Section", "0", "Medical and Surgical"),
@@ -526,35 +474,12 @@ tables() |>
 ```
 
 
-# Appendices
+# Example
 
 ```{r}
-index(search = "^0016", col = "code") |> 
-  select(term:code)
-```
+x <- pcs("0016070")
 
-
-```{r}
-pcs("0016")
-```
-
-
-
-```{r}
-code <- "0016070"
-
-x <- pcs(code)
-
-op <- unlist(definitions(section = "0", 
-            axis = "3", 
-            col = "value", 
-            search = "1")[c("definition", "explanation")])
-
-app <- unlist(definitions(section = "0", 
-                          axis = "5", 
-                          search = "0", 
-                          col = "value")[c("definition")])
-x$code |>
+x$axes |>
   gt(rowname_col = "axis") |>
   opt_table_font(font = google_font(name = "Rubik")) |>
   cols_align(align = "center", columns = c(axis, value)) |>
@@ -563,16 +488,24 @@ x$code |>
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS Code</b>: ", code),
+  tab_header(title = html("<b>ICD-10-PCS Code</b>: ", x$code),
              subtitle = x$description) |>
   tab_footnote(
-    footnote = paste0(op[["definition"]],". ", op[["explanation"]], "."),
+    footnote = html(paste0("<b>Definition:</b> ", 
+      delister(x$definitions[x$definitions$label == "Bypass", ])[2],". ",
+      delister(x$definitions[x$definitions$label == "Bypass", ])[3], ".")),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
-    footnote = paste0(app[["definition"]], "."),
+    footnote = html(paste("<b>Includes:</b>", 
+               stringr::str_flatten_comma(delister(x$includes[c("includes")]), 
+                                          last = ", and "))),
+    locations = cells_body(columns = label, rows = 4)) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+      delister(x$definitions[x$definitions$label == "Open", ])[2], ".")),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
-    table.width = pct(50),
+    table.width = pct(55),
     heading.title.font.size = px(20),
     heading.subtitle.font.size = px(14),
     heading.align = "left",

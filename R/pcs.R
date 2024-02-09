@@ -170,6 +170,11 @@ checks <- function(x = NULL,
 
     .clierr(x, 3)
 
+    x$definitions <- definitions(section = substr(x$input, 1, 1),
+                                 axis = "3",
+                                 col = "value",
+                                 search = substr(x$input, 3, 3))[c("label", "definition", "explanation")]
+
     # Head = First 4 axes, Tail = Last 3 axes
     x$head <- vctrs::vec_rbind(x$head,
               dplyr::filter(operation, value == substr(x$input, 3, 3)))
@@ -201,8 +206,17 @@ checks <- function(x = NULL,
 
     .clierr(x, 4)
 
+
     x$head <- vctrs::vec_rbind(x$head,
               dplyr::filter(part, value == substr(x$input, 4, 4)))
+
+    if (substr(x$input, 1, 1) %in% c(0, 3, "F", "G", "X")) {
+
+      x$includes <- includes(section = substr(x$input, 1, 1),
+                             axis = "3",
+                             col = "label",
+                             search = delister(x$head[4, 4]))[c("label", "includes")]
+    }
 
     x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
       dplyr::select(rowid:rows) |>
@@ -227,6 +241,12 @@ checks <- function(x = NULL,
   if (nchar(x$input) > 4L) {
 
     .clierr(x, 5)
+
+    x$definitions <- vctrs::vec_rbind(x$definitions,
+                     definitions(section = substr(x$input, 1, 1),
+                                 axis = "5",
+                                 col = "value",
+                                 search = substr(x$input, 5, 5))[c("label", "definition", "explanation")])
 
     x <- purrr::list_flatten(x)
     x$select_5 <- dplyr::filter(x$select_5,
@@ -295,8 +315,11 @@ checks <- function(x = NULL,
   if (length(x$id) == 1L) {
 
     x <- list(
+      code = x$input,
       description = procedural::order(search = x$input)$description_code,
-      code = x$head
+      axes = x$head,
+      definitions = x$definitions,
+      includes = x$includes
       )
   }
   return(x)
