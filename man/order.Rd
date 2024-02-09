@@ -4,12 +4,15 @@
 \alias{order}
 \title{ICD-10-PCS Order File}
 \usage{
-order(col = "code", search = NULL)
+order(
+  search = NULL,
+  col = c("code", "table", "row", "description_code", "description_table", "order")
+)
 }
 \arguments{
-\item{col}{column to search: "code" (default), "table", "row", "description_code", "description_table"}
-
 \item{search}{string to search for in \code{col}}
+
+\item{col}{column to search: "code" (default), "table", "row", "description_code", "description_table", "order"}
 }
 \value{
 a \code{\link[dplyr:reexports]{dplyr::tibble()}}

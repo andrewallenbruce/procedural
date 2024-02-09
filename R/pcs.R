@@ -91,7 +91,10 @@ checks <- function(x = NULL,
   }
 }
 
-.clierr <- function(x, n) {
+.clierr <- function(x,
+                    n,
+                    arg = rlang::caller_arg(x),
+                    call = rlang::caller_env()) {
 
   put <- substr(x$input, n, n)
 
@@ -100,7 +103,7 @@ checks <- function(x = NULL,
     cli::cli_abort(
       paste("{.strong {.val {rlang::sym(put)}}} is an invalid",
        "{.val {rlang::sym(x$possible$name[[1]])}} value."),
-      call = rlang::caller_env())
+      call = call)
 
     }
 }

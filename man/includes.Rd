@@ -4,7 +4,12 @@
 \alias{includes}
 \title{ICD-10-PCS Includes}
 \usage{
-includes(section = NULL, axis = NULL, col = "label", search = NULL)
+includes(
+  section = NULL,
+  axis = NULL,
+  col = c("label", "name", "includes"),
+  search = NULL
+)
 }
 \arguments{
 \item{section}{PCS section character.}

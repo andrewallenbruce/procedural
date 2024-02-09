@@ -8,7 +8,7 @@ devices(
   system = NULL,
   operation = NULL,
   device = NULL,
-  col = "device_name",
+  col = c("device_name", "section", "system", "operation", "device", "includes"),
   search = NULL
 )
 }
@@ -19,7 +19,7 @@ devices(
 
 \item{device}{PCS device character.}
 
-\item{col}{column to search: "device_name" (default), "includes"}
+\item{col}{column to search: "device_name" (default), "section", "system", "operation", "device", "includes"}
 
 \item{search}{string to search for in \code{col}}
 }

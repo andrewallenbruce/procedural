@@ -4,7 +4,12 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(section = NULL, axis = NULL, col = "label", search = NULL)
+definitions(
+  section = NULL,
+  axis = NULL,
+  col = c("label", "name", "definition", "explanation"),
+  search = NULL
+)
 }
 \arguments{
 \item{section}{PCS section character.}

@@ -1,0 +1,10 @@
+file: definitions.qs
+file_size: 13783
+pin_hash: 0107105680958532
+type: qs
+title: 'definitions: a pinned 329 x 7 data frame'
+description: ICD-10-PCS 2024 Definitions
+tags: ~
+urls: ~
+created: 20240209T022033Z
+api_version: 1

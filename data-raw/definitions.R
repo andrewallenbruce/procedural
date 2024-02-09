@@ -141,6 +141,60 @@ definitions <- def |>
   pivot_wider(names_from = type,
               values_from = description)
 
+#-------------------------------------
+select <- pins::pin_read(mount_board(), "tables_rows")
+
+axis3 <- select |>
+  select(
+    section = code_1,
+    name = name_3,
+    value = code_3,
+    label = label_3) |>
+  distinct()
+
+
+def_axis_3 <- left_join(definitions(axis = "3"), axis3) |>
+  select(section, axis, value, name, label, definition, explanation)
+
+axis4 <- select |>
+  filter(code_1 == "G") |>
+  select(
+    section = code_1,
+    name = name_4,
+    value = code_4,
+    label = label_4) |>
+  distinct()
+
+
+def_axis_4 <- left_join(definitions(axis = "4"), axis4) |>
+  select(section, axis, value, name, label, definition, explanation)
+
+
+sects <- definitions(axis = "5") |>
+  distinct(section) |>
+  pull(section)
+
+axis5 <- select |>
+  filter(code_1 %in% sects) |>
+  select(section = code_1, rows) |>
+  unnest(rows) |>
+  filter(axis == "5") |>
+  select(
+    section,
+    name,
+    value = code,
+    label) |>
+  distinct()
+
+
+def_axis_5 <- left_join(definitions(axis = "5"), axis5) |>
+  select(section, axis, value, name, label, definition, explanation)
+
+
+definitions <- vctrs::vec_rbind(def_axis_3, def_axis_4, def_axis_5) |>
+  select(section, axis, name, value, label, definition, explanation)
+#-------------------------------------------
+
 board <- pins::board_folder(here::here("pkgdown/assets/pins-board"))
 
 board |> pins::pin_write(definitions,
