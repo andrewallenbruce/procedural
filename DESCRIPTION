@@ -26,7 +26,9 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    gt, 
+    gt,
+    gtExtras,
+    tibble,
     qs
 VignetteBuilder: knitr
 Remotes: 

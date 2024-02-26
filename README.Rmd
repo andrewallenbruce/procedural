@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
   )
 ```
 
-# `procedural` <a href="https://andrewallenbruce.github.io/procedural/"><img src="man/figures/logo.png" align="right" height="139" alt="procedural website" /></a>
+# procedural <a href="https://andrewallenbruce.github.io/procedural/"><img src="man/figures/logo.png" align="right" height="139" alt="procedural website" /></a>
 
 
 <!-- badges: start -->
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/procedural/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of __`procedural`__ is to provide a set of tools for working with the __2024 ICD-10-PCS__ procedure classification system.
+The goal of __procedural__ is to provide a set of tools for working with the __2024 ICD-10-PCS__ procedure classification system.
 
 # :package: Installation
 

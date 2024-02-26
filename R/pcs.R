@@ -67,7 +67,7 @@ checks <- function(x = NULL,
 
 .cli <- function(x) {
 
-  cl <- glue::glue_data(.x = x$possible, "[{value}] {label}")
+  cl <- glue::glue_data(.x = x$possible, "{value} >=> {label}")
 
   if (x$possible$name[[1]] == "Section") {
 
@@ -173,7 +173,7 @@ checks <- function(x = NULL,
     x$definitions <- definitions(section = substr(x$input, 1, 1),
                                  axis = "3",
                                  col = "value",
-                                 search = substr(x$input, 3, 3))[c("label", "definition", "explanation")]
+                                 search = substr(x$input, 3, 3))
 
     # Head = First 4 axes, Tail = Last 3 axes
     x$head <- vctrs::vec_rbind(x$head,
@@ -213,9 +213,12 @@ checks <- function(x = NULL,
     if (substr(x$input, 1, 1) %in% c(0, 3, "F", "G", "X")) {
 
       x$includes <- includes(section = substr(x$input, 1, 1),
-                             axis = "3",
+                             axis = "4",
                              col = "label",
-                             search = delister(x$head[4, 4]))[c("label", "includes")]
+                             search = delister(x$head[4, 4]))
+    } else {
+
+      x$includes <- NA
     }
 
     x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
@@ -242,11 +245,14 @@ checks <- function(x = NULL,
 
     .clierr(x, 5)
 
-    x$definitions <- vctrs::vec_rbind(x$definitions,
-                     definitions(section = substr(x$input, 1, 1),
-                                 axis = "5",
-                                 col = "value",
-                                 search = substr(x$input, 5, 5))[c("label", "definition", "explanation")])
+    if (substr(x$input, 1, 1) %in% c(0:4, 7:9, "F", "X")) {
+
+      x$definitions <- vctrs::vec_rbind(x$definitions,
+                       definitions(section = substr(x$input, 1, 1),
+                                   axis = "5",
+                                   col = "value",
+                                   search = substr(x$input, 5, 5)))
+    }
 
     x <- purrr::list_flatten(x)
     x$select_5 <- dplyr::filter(x$select_5,
@@ -275,14 +281,25 @@ checks <- function(x = NULL,
     .clierr(x, 6)
 
     x$select_6 <- dplyr::filter(x$select_6,
-                                value == substr(x$input, 6, 6))
+                  value == substr(x$input, 6, 6))
+
     x$id <- intersect(x$id, x$select_6$rowid)
+
     x$head <- vctrs::vec_rbind(x$head,
               unique(x$select_6[c("axis", "name", "value", "label")]))
 
+    # x$select_6 <- NULL
     x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
     x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
 
+    if (substr(x$input, 1, 1) %in% c(0, 3, "X")) {
+
+      x$includes <- vctrs::vec_rbind(x$includes,
+                    includes(section = substr(x$input, 1, 1),
+                             axis = "6",
+                             col = "label",
+                             search = delister(x$head[6, 4])))
+    }
   }
   return(x)
 }
@@ -318,8 +335,13 @@ checks <- function(x = NULL,
       code = x$input,
       description = procedural::order(search = x$input)$description_code,
       axes = x$head,
-      definitions = x$definitions,
-      includes = x$includes
+      definitions = x$definitions |>
+        dplyr::mutate(definition = dplyr::if_else(!is.na(explanation),
+        paste0(definition, ". ", explanation, "."), definition), explanation = NULL),
+      includes = x$includes |>
+        tidyr::nest(includes = "includes") |>
+        dplyr::mutate(includes = purrr::map_chr(
+          includes, ~paste(.x$includes, collapse = ", ")))
       )
   }
   return(x)
