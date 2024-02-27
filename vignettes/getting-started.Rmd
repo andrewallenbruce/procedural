@@ -89,8 +89,8 @@ x$axes |>
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
   opt_table_outline(style = "none") |> 
-  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
-             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
+             title = html(paste0("<b><u>", x$code, "</u></b> ", x$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
     procedural:::delister(x$definitions[1, 6]))),
@@ -100,7 +100,7 @@ x$axes |>
     procedural:::delister(x$definitions[2, 6]))),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
-    table.width = pct(55),
+    table.width = pct(75),
     heading.title.font.size = px(18),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
@@ -165,8 +165,9 @@ x$axes |>
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
-             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  opt_table_outline(style = "none") |>
+  tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
+             title = html(paste0("<b><u>", x$code, "</u></b> ", x$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
     procedural:::delister(x$definitions[1, 6]))),
@@ -176,8 +177,8 @@ x$axes |>
     procedural:::delister(x$definitions[2, 6]))),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
-    table.width = pct(55),
-    heading.title.font.size = px(20),
+    table.width = pct(75),
+    heading.title.font.size = px(18),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
     table.font.color = "#0B0B45",
@@ -190,7 +191,7 @@ x$axes |>
 Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
 
 ```{r echo=FALSE}
-sections(0:9)[c('value', 'label')] |> 
+procedural:::sections(0:9)[c('value', 'label')] |> 
   gt(rowname_col = "value") |>
   opt_table_font(font = google_font(name = "Rubik")) |>
   opt_all_caps() |>
@@ -260,15 +261,26 @@ x$axes |>
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
-             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  opt_table_outline(style = "none") |>
+  tab_header(subtitle = htmltools::tagList(htmltools::tags$div(
+    style = htmltools::css(`text-align` = "right"), 
+    htmltools::tags$div(htmltools::tags$strong("ICD-10-PCS 2024")))),
+    title = html(paste0("<b>", x$code, "</b>  ", x$description))) |>
   tab_options(
-    table.width = pct(55),
-    heading.title.font.size = px(20),
+    stub.background.color = "#0B0B35",
+    stub.border.color = "#0B0B35",
+    stub_row_group.border.color = "#0B0B35",
+    table.width = pct(75),
+    heading.title.font.size = px(16),
     heading.subtitle.font.size = px(14),
+    heading.background.color = "white",
+    heading.border.bottom.color = "#0B0B35",
     heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12))
+    table.font.color = "#0B0B35",
+    table.font.size = px(14),
+    table.border.bottom.color = "white",
+    footnotes.font.size = px(12),
+    column_labels.hidden = TRUE)
 ```
 
 
@@ -285,13 +297,13 @@ Sections B - D and F - H comprise the ancillary sections:
 
 
 ```{r, echo=FALSE}
-sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] |> 
+procedural::sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] |> 
   gt(rowname_col = "value") |>
   opt_table_font(font = google_font(name = "Rubik")) |>
   opt_all_caps() |>
   tab_header(title = md("**Ancillary Sections**")) |>
   tab_options(
-    table.width = pct(55),
+    table.width = pct(75),
     heading.title.font.size = px(18),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
@@ -571,7 +583,7 @@ x$axes |>
     procedural:::delister(x$definitions[2, 6]))),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
-    table.width = pct(55),
+    table.width = pct(75),
     heading.title.font.size = px(20),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
