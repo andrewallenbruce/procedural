@@ -68,6 +68,8 @@
   rep(NA, max(len_vec) - unname(len_vec[y]))
 }
 
+x <- "0016070"
+
 #' @noRd
 tables <- function(x) {
 

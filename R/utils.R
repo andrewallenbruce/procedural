@@ -2,8 +2,7 @@
 #' @param df data frame
 #' @param cols columns to pivot long, default is [dplyr::everything()]
 #' @returns Pivoted data frame
-#' @export
-#' @keywords internal
+#' @noRd
 long <- function(df, cols = dplyr::everything()) {
   df |>
     dplyr::mutate(

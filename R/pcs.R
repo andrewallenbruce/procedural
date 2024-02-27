@@ -67,24 +67,33 @@ checks <- function(x = NULL,
 
 .cli <- function(x) {
 
-  cl <- glue::glue_data(.x = x$possible, "{value} >=> {label}")
+  cl <- glue::glue_data(.x = x$possible,
+  "{.strong {.field <<value>>}} >=> <<label>>", .open = "<<", .close = ">>")
+
+  pkg_rule <- cli::cli_rule("{.strong {.fn procedural::pcs}}",
+              right = "{.strong {.emph ICD-10-PCS 2024}}")
 
   if (x$possible$name[[1]] == "Section") {
+    pkg_rule
 
-    cli::cli_h2("No Code Selected")
-    cli::cli_h2("Select {.val {rlang::sym(x$possible$name[[1]])}}")
+    cli::cli_bullets(c("!" = "No Section Selected"))
+
+    cli::cli_h3("Select {.val {rlang::sym(x$possible$name[[1]])}}")
     cli::cli_li(cl)
     cli::cli_end()
     return(invisible(NULL))
 
   } else {
 
-    hd <- glue::glue_data(.x = x$head, "[{value}] {name}: {label}")
-    cli::cli_h2("Selected: {.val {rlang::sym(x$input)}}")
+    hd <- glue::glue_data(.x = x$head,
+    "[{.strong {.field <<value>>}}] <<name>>: <<label>>", .open = "<<", .close = ">>")
+
+    pkg_rule
+    cli::cli_bullets(c(" " = " ", " " = "Selected: {.field {rlang::sym(x$input)}}", " "))
     cli::cli_ol(hd)
 
-    cli::cli_h2("Select {.val {rlang::sym(x$possible$name[[1]])}}")
-    cli::cli_li(cl)
+    cli::cli_bullets(c(" ", ">" = "{.emph Select} {.val {rlang::sym(x$possible$name[[1]])}}", " "))
+    cli::cli_ul(cl)
     cli::cli_end()
 
     return(invisible(NULL))
@@ -124,7 +133,6 @@ checks <- function(x = NULL,
     x$head <- sections(substr(x$input, 1, 1))
 
     return(x)
-
     }
   }
 

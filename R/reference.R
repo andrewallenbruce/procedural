@@ -11,7 +11,7 @@
 #'
 #' sections("X")
 #'
-#' @export
+#' @noRd
 sections <- function(x = NULL) {
 
   sec <- data.frame(
@@ -58,7 +58,7 @@ sections <- function(x = NULL) {
 #'
 #' systems("X")
 #'
-#' @export
+#' @noRd
 systems <- function(x = NULL) {
 
   # Medical and Surgical
@@ -331,7 +331,7 @@ systems <- function(x = NULL) {
 #'
 #' approaches("X")
 #'
-#' @export
+#' @noRd
 approaches <- function(x = NULL) {
 
   app <- data.frame(
@@ -386,6 +386,7 @@ pcs_matrix <- function(x) {
   # drawr::draw_matrix(x, highlight_area = x == 1, show_indices = "none")
 }
 
+#' @noRd
 lk <- function(x) {
 
   x <- splitter(toupper(x))
@@ -398,6 +399,38 @@ lk <- function(x) {
 
 }
 
+#' @noRd
+.axisnames <- function(x) {
+
+  if (is.numeric(x)) x <- as.character(x)
+
+  if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
+
+  x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+
+  if (nchar(x) > 1L) x <- splitter(x)[1]
+
+  switch(x,
+    "0" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
+    "1" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
+    "2" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
+    "3" = c("Section", "Body System", "Operation", "Body System / Region", "Approach", "Substance", "Qualifier"),
+    "4" = c("Section", "Body System", "Operation", "Body System / Region", "Approach", "Function / Device", "Qualifier"),
+    "5" = c("Section", "Body System", "Operation", "Body System", "Duration", "Function", "Qualifier"),
+    "6" = c("Section", "Body System", "Operation", "Body System", "Duration", "Qualifier", "Qualifier"),
+    "7" = c("Section", "Body System", "Operation", "Body Region", "Approach", "Method", "Qualifier"),
+    "8" = c("Section", "Body System", "Operation", "Body Region", "Approach", "Method", "Qualifier"),
+    "9" = c("Section", "Body System", "Operation", "Body Region", "Approach", "Method", "Qualifier"),
+    "B" = c("Section", "Body System", "Root Type", "Body Part", "Contrast", "Qualifier", "Qualifier"),
+    "C" = c("Section", "Body System", "Root Type", "Body Part", "Radionuclide", "Qualifier", "Qualifier"),
+    "D" = c("Section", "Body System", "Modality", "Treatment Site", "Modality Qualifier", "Isotope", "Qualifier"),
+    "F" = c("Section", "Section Qualifier", "Root Type", "Body System / Region", "Type Qualifier", "Equipment", "Qualifier"),
+    "G" = c("Section", "Body System", "Root Type", "Qualifier", "Qualifier", "Qualifier", "Qualifier"),
+    "H" = c("Section", "Body System", "Root Type", "Qualifier", "Qualifier", "Qualifier", "Qualifier"),
+    "X" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device / Substance / Technology", "Qualifier"))
+}
+
+
 #' ICD-10-PCS Axes by Section
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
 #' @return a [dplyr::tibble()]
@@ -408,7 +441,7 @@ lk <- function(x) {
 #'
 #' axes("X")
 #'
-#' @export
+#' @noRd
 axes <- function(x) {
 
   if (is.numeric(x)) x <- as.character(x)
