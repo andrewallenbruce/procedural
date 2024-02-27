@@ -77,31 +77,41 @@ One of 34 possible values can be assigned to each character in a code: the integ
 
 
 ```{r}
-pcs("02103D4")
+x <- pcs("02103D4")
+
+x$axes |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  opt_table_outline(style = "none") |> 
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    procedural:::delister(x$definitions[1, 6]))),
+    locations = cells_body(columns = label, rows = 3)) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    procedural:::delister(x$definitions[2, 6]))),
+    locations = cells_body(columns = label, rows = 5)) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(18),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12),
+    column_labels.hidden = TRUE)
 ```
 
 
 
 Choosing a specific value for each of the seven characters derives this code. Based on details about the procedure performed, values for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device**, and **qualifier** are assigned.
-
-
-```{r eval=FALSE}
-pcs("0")
-
-pcs("02")
-
-pcs("021")
-
-pcs("0210")
-
-pcs("02103")
-
-pcs("02103D")
-
-pcs("02103D4")
-```
-
-
 
 Because the definition of each character is a function of its actual physical position in the code, the same value placed in a different position in the code means something totally different. 
 
@@ -127,25 +137,52 @@ The example below describes the excision of a dorsal ganglion located at the wri
 
 > Note: The purpose of the ICD-10-PCS code is to explain the purpose of the procedure by using every character to describe the way the procedure was performed.
 
-```
+
 __Operative Report:__ *Excision of Dorsal Ganglion, Right Wrist*
 
 With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg. A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field. 
 
 The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised. Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.
-```
 
-   1. Section **0** // Medical and Surgical
-   1. Body System **L** // Tendons (Extensor tendon)
-   1. Root Operation **B** // Excision (The tendon was excised and removed)
-   1. Body Part **5** // Lower Arm, and Wrist, Right (The extensor tendon is located at the wrist level)
-   1. Approach **0** // Open (An incision was performed and blunt dissection carried out through layers of tissue to expose site)
-   1. Device **Z** // No Device
-   1. Qualifier **Z** // No Qualifier
+   1. Section **0** Medical and Surgical
+   1. Body System **L** Tendons (Extensor tendon)
+   1. Root Operation **B** Excision (The tendon was excised and removed)
+   1. Body Part **5** Lower Arm, and Wrist, Right (The extensor tendon is located at the wrist level)
+   1. Approach **0** Open (An incision was performed and blunt dissection carried out through layers of tissue to expose site)
+   1. Device **Z** No Device
+   1. Qualifier **Z** No Qualifier
 
 
 ```{r}
-pcs("0LB50ZX")
+x <- pcs("0LB50ZX")
+
+x$axes |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    procedural:::delister(x$definitions[1, 6]))),
+    locations = cells_body(columns = label, rows = 3)) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    procedural:::delister(x$definitions[2, 6]))),
+    locations = cells_body(columns = label, rows = 5)) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12),
+    column_labels.hidden = TRUE)
 ```
 
 ## Medical and Surgical Related Sections
@@ -153,7 +190,19 @@ pcs("0LB50ZX")
 Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
 
 ```{r echo=FALSE}
-sections(0:9)[c('value', 'label')]
+sections(0:9)[c('value', 'label')] |> 
+  gt(rowname_col = "value") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_header(title = md("**Medical and Surgical-Related Sections**")) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(18),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12),
+    column_labels.hidden = TRUE)
 ```
 
 
@@ -200,7 +249,26 @@ Sections 3-9 are differ only slightly. For example, in sections 5 and 6, the 5th
 
 
 ```{r}
-pcs("5A02210")
+x <- pcs("5A02210")
+
+x$axes |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12))
 ```
 
 
@@ -217,7 +285,19 @@ Sections B - D and F - H comprise the ancillary sections:
 
 
 ```{r, echo=FALSE}
-sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')]
+sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] |> 
+  gt(rowname_col = "value") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  tab_header(title = md("**Ancillary Sections**")) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(18),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12),
+    column_labels.hidden = TRUE)
 ```
 
 
@@ -238,7 +318,26 @@ When coding for CT scans, the documentation must support all components for prop
 
 
 ```{r}
-pcs("B02000Z")
+x <- pcs("B02000Z")
+
+x$axes |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_options(
+    table.width = pct(55),
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12))
 ```
 
 
@@ -406,36 +505,6 @@ Within a defined code range, a character specifies the same type of information 
 
 For example, The __fifth__ axis of classification specifies the _Approach_ in sections 0 through 4 and 7 through 9 of the system.
 
-
-```{r, echo=FALSE, eval=FALSE}
-tibble(
-  Position = c("Label", "Code", "Meaning"),
-  `1` = c("Section", "0", "Medical and Surgical"),
-  `2` = c("Body System", "0", "Central Nervous System and Cranial Nerves"),
-  `3` = c("Operation", "1", "Bypass"),
-  `4` = c("Body Part", "6", "Cerebral Ventricle"),
-  `5` = c("Approach", "0", "Open"),
-  `6` = c("Device", "7", "Autologous Tissue Substitute"),
-  `7` = c("Qualifier", "0", "Nasopharynx")) |> 
-  gt() |> 
-  tab_spanner(label = "Table", columns = c(`1`, `2`, `3`)) |>
-  tab_spanner(label = "Row", columns = c(`1`, `2`, `3`, `4`)) |>
-  tab_spanner(label = "Code", columns = c(`1`, `2`, `3`, `4`, `5`, `6`, `7`)) |>
-  cols_align(align = 'center') |> 
-  opt_table_font(font = google_font(name = "Rubik")) |> 
-  #opt_table_outline() |> 
-  opt_table_lines(extent = "all") |> 
-  tab_options(
-    column_labels.vlines.style = "solid",
-    column_labels.vlines.width = px(3),
-    #column_labels.font.weight = "bold",
-    heading.align = "left"
-  ) |> 
-  tab_header(title = md("**ICD-10-PCS** Code Structure"))
-```
-
-
-
 ```{r echo=FALSE, eval=FALSE}
 tables() |> 
   summarise(codes = sum(n_codes),
@@ -488,22 +557,18 @@ x$axes |>
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS Code</b>: ", x$code),
-             subtitle = x$description) |>
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-      procedural:::delister(x$definitions[x$definitions$label == "Bypass", ])[2],". ",
-      procedural:::delister(x$definitions[x$definitions$label == "Bypass", ])[3], ".")),
+    procedural:::delister(x$definitions[1, 6]))),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
-    footnote = html(paste("<b>Includes:</b>", 
-               stringr::str_flatten_comma(
-                 procedural:::delister(x$includes[c("includes")]), 
-                 last = ", and "))),
+    footnote = html(paste("<b>Includes:</b>", procedural:::delister(x$includes[1, 5]))),
     locations = cells_body(columns = label, rows = 4)) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-      procedural:::delister(x$definitions[x$definitions$label == "Open", ])[2], ".")),
+    procedural:::delister(x$definitions[2, 6]))),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
     table.width = pct(55),

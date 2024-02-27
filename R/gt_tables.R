@@ -5,7 +5,7 @@
                     axis = "3",
                     search = substr(x$input, 3, 3)) |>
     dplyr::mutate(definition = dplyr::if_else(!is.na(explanation),
-          paste0(definition, ". ", explanation, "."), definition)) |>
+                                              paste0(definition, ". ", explanation, "."), definition)) |>
     dplyr::mutate(display = glue::glue('{label}: <small>{definition}.</small>')) |>
     dplyr::select(label, display) |>
     unlist()
@@ -50,8 +50,8 @@
 .def_ap <- function(x, y) {
 
   search <- paste0("(",
-            paste0(unique(y),
-            collapse = "|"), ")")
+                   paste0(unique(y),
+                          collapse = "|"), ")")
 
   definitions(section = substr(x$input, 1, 1),
               axis = "5",
@@ -91,7 +91,7 @@ tables <- function(x) {
     dplyr::select(-axis)
 
   top <- tibble::add_row(top,
-  display = "<b>ICD-10-PCS 2024  &empty;</b><hr>", .before = 1)
+                         display = "<b>ICD-10-PCS 2024  &empty;</b><hr>", .before = 1)
 
   # Bottom of gt table
   bottom <- dplyr::select(pg, name_4:rows)
@@ -119,9 +119,9 @@ tables <- function(x) {
   app_def <- .def_ap(x, bottom_rows$code_5)
 
   bottom_rows <- dplyr::left_join(bottom |>
-                 dplyr::select(-rows, -row),
-                 bottom_rows, by = dplyr::join_by(rowid),
-                 relationship = "many-to-many") |>
+                                    dplyr::select(-rows, -row),
+                                  bottom_rows, by = dplyr::join_by(rowid),
+                                  relationship = "many-to-many") |>
     dplyr::mutate(
       ax4 = glue::glue("**{code_4}** {label_4}"),
       ax5 = glue::glue("**{code_5}** {label_5}"),
@@ -155,11 +155,11 @@ tables <- function(x) {
   res <- tibble::add_column(
     x1,
     x2 = c(unlist(unique(x[names(len_vec[2])]),
-         use.names = FALSE), .vc_ln(x, names(len_vec)[2])),
+                  use.names = FALSE), .vc_ln(x, names(len_vec)[2])),
     x3 = c(unlist(unique(x[names(len_vec[3])]),
-         use.names = FALSE), .vc_ln(x, names(len_vec)[3])),
+                  use.names = FALSE), .vc_ln(x, names(len_vec)[3])),
     x4 = c(unlist(unique(x[names(len_vec[4])]),
-        use.names = FALSE), .vc_ln(x, names(len_vec)[4])))
+                  use.names = FALSE), .vc_ln(x, names(len_vec)[4])))
 
   names(res) <- names(len_vec)
 

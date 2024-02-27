@@ -36,37 +36,10 @@ Revision, Procedure Coding System**, is a procedure classification
 system used to code procedures performed in hospital inpatient health
 care settings.
 
-## Index
+## Codes
 
 ``` r
-index(search = "Achillorrhaphy")
-```
-
-    #> # A tibble: 1 × 6
-    #>      id index term           type  value           code 
-    #>   <int> <chr> <chr>          <chr> <chr>           <chr>
-    #> 1    38 A     Achillorrhaphy See   Repair, Tendons 0LQ
-
-## Definitions
-
-``` r
-definitions(section = "0", axis = "5") |> 
-  dplyr::select(label, definition)
-```
-
-    #> # A tibble: 7 × 2
-    #>   label                                                               definition
-    #>   <chr>                                                               <chr>     
-    #> 1 External                                                            Procedure…
-    #> 2 Open                                                                Cutting t…
-    #> 3 Percutaneous                                                        Entry, by…
-    #> 4 Percutaneous Endoscopic                                             Entry, by…
-    #> 5 Via Natural or Artificial Opening                                   Entry of …
-    #> 6 Via Natural or Artificial Opening Endoscopic                        Entry of …
-    #> 7 Via Natural or Artificial Opening With Percutaneous Endoscopic Ass… Entry of …
-
-``` r
-pcs("0LQV3ZZ")
+pcs("0LQV3ZZ") # Medical and Surgical
 ```
 
     #> $code
@@ -95,11 +68,7 @@ pcs("0LQV3ZZ")
     #> 2 0       5     Approach  3     Percutaneous Entry, by puncture or minor incisi…
     #> 
     #> $includes
-    #> # A tibble: 0 × 5
-    #> # ℹ 5 variables: section <chr>, axis <chr>, name <chr>, label <chr>,
-    #> #   includes <chr>
-
-## Codes
+    #> [1] NA
 
 ``` r
 pcs("0G9000Z") # Medical and Surgical
@@ -131,23 +100,74 @@ pcs("0G9000Z") # Medical and Surgical
     #> 2 0       5     Approach  0     Open     Cutting through the skin or mucous mem…
     #> 
     #> $includes
-    #> # A tibble: 2 × 5
+    #> # A tibble: 1 × 5
     #>   section axis  name      label           includes                              
     #>   <chr>   <chr> <chr>     <chr>           <chr>                                 
     #> 1 0       4     Body Part Pituitary Gland Adenohypophysis, Hypophysis, Neurohyp…
-    #> 2 0       6     Device    Drainage Device Cystostomy tube, Foley catheter, Perc…
 
 ``` r
 pcs("10D20ZZ") # Obstetrics
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "10D20ZZ"
+    #> 
+    #> $description
+    #> [1] "Extraction of Products of Conception, Ectopic, Open Approach"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label                          
+    #>   <chr> <chr>       <chr> <chr>                          
+    #> 1 1     Section     1     Obstetrics                     
+    #> 2 2     Body System 0     Pregnancy                      
+    #> 3 3     Operation   D     Extraction                     
+    #> 4 4     Body Part   2     Products of Conception, Ectopic
+    #> 5 5     Approach    0     Open                           
+    #> 6 6     Device      Z     No Device                      
+    #> 7 7     Qualifier   Z     No Qualifier                   
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label      definition                           
+    #>   <chr>   <chr> <chr>     <chr> <chr>      <chr>                                
+    #> 1 1       3     Operation D     Extraction Pulling or stripping out or off all …
+    #> 2 1       5     Approach  0     Open       Cutting through the skin or mucous m…
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("2W0UX0Z") # Placement
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "2W0UX0Z"
+    #> 
+    #> $description
+    #> [1] "Change Traction Apparatus on Right Toe"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label             
+    #>   <chr> <chr>       <chr> <chr>             
+    #> 1 1     Section     2     Placement         
+    #> 2 2     Body System W     Anatomical Regions
+    #> 3 3     Operation   0     Change            
+    #> 4 4     Body Region U     Toe, Right        
+    #> 5 5     Approach    X     External          
+    #> 6 6     Device      0     Traction Apparatus
+    #> 7 7     Qualifier   Z     No Qualifier      
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label    definition                             
+    #>   <chr>   <chr> <chr>     <chr> <chr>    <chr>                                  
+    #> 1 2       3     Operation 0     Change   Taking out or off a device from a body…
+    #> 2 2       5     Approach  X     External Procedures performed directly on the s…
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("3E1938X") # Administration
@@ -179,65 +199,275 @@ pcs("3E1938X") # Administration
     #> 2 3       5     Approach  3     Percutaneous Entry, by puncture or minor incisi…
     #> 
     #> $includes
-    #> # A tibble: 0 × 5
-    #> # ℹ 5 variables: section <chr>, axis <chr>, name <chr>, label <chr>,
-    #> #   includes <chr>
+    #> [1] NA
 
 ``` r
 pcs("4B01XVZ") # Measurement and Monitoring
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "4B01XVZ"
+    #> 
+    #> $description
+    #> [1] "Measurement of Peripheral Nervous Stimulator, External Approach"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name              value label                     
+    #>   <chr> <chr>             <chr> <chr>                     
+    #> 1 1     Section           4     Measurement and Monitoring
+    #> 2 2     Body System       B     Physiological Devices     
+    #> 3 3     Operation         0     Measurement               
+    #> 4 4     Body System       1     Peripheral Nervous        
+    #> 5 5     Approach          X     External                  
+    #> 6 6     Function / Device V     Stimulator                
+    #> 7 7     Qualifier         Z     No Qualifier              
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label       definition                          
+    #>   <chr>   <chr> <chr>     <chr> <chr>       <chr>                               
+    #> 1 4       3     Operation 0     Measurement Determining the level of a physiolo…
+    #> 2 4       5     Approach  X     External    Procedures performed directly on th…
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "5A02110"
+    #> 
+    #> $description
+    #> [1] "Assistance with Cardiac Output using Balloon Pump, Intermittent"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label                                                
+    #>   <chr> <chr>       <chr> <chr>                                                
+    #> 1 1     Section     5     Extracorporeal or Systemic Assistance and Performance
+    #> 2 2     Body System A     Physiological Systems                                
+    #> 3 3     Operation   0     Assistance                                           
+    #> 4 4     Body System 2     Cardiac                                              
+    #> 5 5     Duration    1     Intermittent                                         
+    #> 6 6     Function    1     Output                                               
+    #> 7 7     Qualifier   0     Balloon Pump                                         
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "6A0Z0ZZ"
+    #> 
+    #> $description
+    #> [1] "Atmospheric Control, Single"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label                               
+    #>   <chr> <chr>       <chr> <chr>                               
+    #> 1 1     Section     6     Extracorporeal or Systemic Therapies
+    #> 2 2     Body System A     Physiological Systems               
+    #> 3 3     Operation   0     Atmospheric Control                 
+    #> 4 4     Body System Z     None                                
+    #> 5 5     Duration    0     Single                              
+    #> 6 6     Qualifier   Z     No Qualifier                        
+    #> 7 7     Qualifier   Z     No Qualifier                        
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("7W00X0Z") # Osteopathic
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "7W00X0Z"
+    #> 
+    #> $description
+    #> [1] "Osteopathic Treatment of Head using Articulatory-Raising Forces"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label               
+    #>   <chr> <chr>       <chr> <chr>               
+    #> 1 1     Section     7     Osteopathic         
+    #> 2 2     Body System W     Anatomical Regions  
+    #> 3 3     Operation   0     Treatment           
+    #> 4 4     Body Region 0     Head                
+    #> 5 5     Approach    X     External            
+    #> 6 6     Method      0     Articulatory-Raising
+    #> 7 7     Qualifier   Z     None                
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label     definition                            
+    #>   <chr>   <chr> <chr>     <chr> <chr>     <chr>                                 
+    #> 1 7       3     Operation 0     Treatment Manual treatment to eliminate or alle…
+    #> 2 7       5     Approach  X     External  Procedures performed directly on the …
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("8C01X6J") # Other Procedures
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "8C01X6J"
+    #> 
+    #> $description
+    #> [1] "Collection of Cerebrospinal Fluid from Indwelling Device in Nervous System"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label              
+    #>   <chr> <chr>       <chr> <chr>              
+    #> 1 1     Section     8     Other Procedures   
+    #> 2 2     Body System C     Indwelling Device  
+    #> 3 3     Operation   0     Other Procedures   
+    #> 4 4     Body Region 1     Nervous System     
+    #> 5 5     Approach    X     External           
+    #> 6 6     Method      6     Collection         
+    #> 7 7     Qualifier   J     Cerebrospinal Fluid
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label            definition                     
+    #>   <chr>   <chr> <chr>     <chr> <chr>            <chr>                          
+    #> 1 8       3     Operation 0     Other Procedures Methodologies which attempt to…
+    #> 2 8       5     Approach  X     External         Procedures performed directly …
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("9WB0XBZ") # Chiropractic
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "9WB0XBZ"
+    #> 
+    #> $description
+    #> [1] "Chiropractic Manipulation of Head, Non-Manual"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label             
+    #>   <chr> <chr>       <chr> <chr>             
+    #> 1 1     Section     9     Chiropractic      
+    #> 2 2     Body System W     Anatomical Regions
+    #> 3 3     Operation   B     Manipulation      
+    #> 4 4     Body Region 0     Head              
+    #> 5 5     Approach    X     External          
+    #> 6 6     Method      B     Non-Manual        
+    #> 7 7     Qualifier   Z     None              
+    #> 
+    #> $definitions
+    #> # A tibble: 2 × 6
+    #>   section axis  name      value label        definition                         
+    #>   <chr>   <chr> <chr>     <chr> <chr>        <chr>                              
+    #> 1 9       3     Operation B     Manipulation Manual procedure that involves a d…
+    #> 2 9       5     Approach  X     External     Procedures performed directly on t…
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("B00B0ZZ") # Imaging
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "B00B0ZZ"
+    #> 
+    #> $description
+    #> [1] "Plain Radiography of Spinal Cord using High Osmolar Contrast"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label                 
+    #>   <chr> <chr>       <chr> <chr>                 
+    #> 1 1     Section     B     Imaging               
+    #> 2 2     Body System 0     Central Nervous System
+    #> 3 3     Type        0     Plain Radiography     
+    #> 4 4     Body Part   B     Spinal Cord           
+    #> 5 5     Contrast    0     High Osmolar          
+    #> 6 6     Qualifier   Z     None                  
+    #> 7 7     Qualifier   Z     None                  
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("C0101ZZ") # Nuclear Medicine
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "C0101ZZ"
+    #> 
+    #> $description
+    #> [1] "Planar Nuclear Medicine Imaging of Brain using Technetium 99m (Tc-99m)"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name         value label                          
+    #>   <chr> <chr>        <chr> <chr>                          
+    #> 1 1     Section      C     Nuclear Medicine               
+    #> 2 2     Body System  0     Central Nervous System         
+    #> 3 3     Type         1     Planar Nuclear Medicine Imaging
+    #> 4 4     Body Part    0     Brain                          
+    #> 5 5     Radionuclide 1     Technetium 99m (Tc-99m)        
+    #> 6 6     Qualifier    Z     None                           
+    #> 7 7     Qualifier    Z     None                           
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("DG22DZZ") # Radiation Therapy
 ```
 
-    #> Error in `definitions()`:
-    #> ! `section` must be one of "0", "1", "2", "3", "4", "5", "6", "7", "8",
-    #>   "9", "B", "C", "F", "G", "H", or "X", not "D".
+    #> $code
+    #> [1] "DG22DZZ"
+    #> 
+    #> $description
+    #> [1] "Stereotactic Other Photon Radiosurgery of Adrenal Glands"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name               value label                                 
+    #>   <chr> <chr>              <chr> <chr>                                 
+    #> 1 1     Section            D     Radiation Therapy                     
+    #> 2 2     Body System        G     Endocrine System                      
+    #> 3 3     Modality           2     Stereotactic Radiosurgery             
+    #> 4 4     Treatment Site     2     Adrenal Glands                        
+    #> 5 5     Modality Qualifier D     Stereotactic Other Photon Radiosurgery
+    #> 6 6     Isotope            Z     None                                  
+    #> 7 7     Qualifier          Z     None                                  
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
@@ -277,9 +507,7 @@ pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
     #> 10 F       5     Type Qualifier 0     Vestibular                      Applying …
     #> 
     #> $includes
-    #> # A tibble: 0 × 5
-    #> # ℹ 5 variables: section <chr>, axis <chr>, name <chr>, label <chr>,
-    #> #   includes <chr>
+    #> [1] NA
 
 ``` r
 pcs("GZ10ZZZ") # Mental Health
@@ -304,21 +532,38 @@ pcs("GZ10ZZZ") # Mental Health
     #> 7 7     Qualifier   Z     None               
     #> 
     #> $definitions
-    #> # A tibble: 1 × 6
-    #>   section axis  name  value label               definition                      
-    #>   <chr>   <chr> <chr> <chr> <chr>               <chr>                           
-    #> 1 G       3     Type  1     Psychological Tests The administration and interpre…
+    #> [1] NA
     #> 
     #> $includes
-    #> # A tibble: 0 × 5
-    #> # ℹ 5 variables: section <chr>, axis <chr>, name <chr>, label <chr>,
-    #> #   includes <chr>
+    #> [1] NA
 
 ``` r
 pcs("HZ96ZZZ") # Substance Abuse Treatment
 ```
 
-    #> Error in UseMethod("nest"): no applicable method for 'nest' applied to an object of class "logical"
+    #> $code
+    #> [1] "HZ96ZZZ"
+    #> 
+    #> $description
+    #> [1] "Pharmacotherapy for Substance Abuse Treatment, Clonidine"
+    #> 
+    #> $axes
+    #> # A tibble: 7 × 4
+    #>   axis  name        value label                    
+    #>   <chr> <chr>       <chr> <chr>                    
+    #> 1 1     Section     H     Substance Abuse Treatment
+    #> 2 2     Body System Z     None                     
+    #> 3 3     Type        9     Pharmacotherapy          
+    #> 4 4     Qualifier   6     Clonidine                
+    #> 5 5     Qualifier   Z     None                     
+    #> 6 6     Qualifier   Z     None                     
+    #> 7 7     Qualifier   Z     None                     
+    #> 
+    #> $definitions
+    #> [1] NA
+    #> 
+    #> $includes
+    #> [1] NA
 
 ``` r
 pcs("XY0YX37") # New Technology
@@ -350,10 +595,7 @@ pcs("XY0YX37") # New Technology
     #> 2 X       5     Approach  X     External     Procedures performed directly on t…
     #> 
     #> $includes
-    #> # A tibble: 1 × 5
-    #>   section axis  name                            label                   includes
-    #>   <chr>   <chr> <chr>                           <chr>                   <chr>   
-    #> 1 X       6     Device / Substance / Technology Nafamostat Anticoagula… LTX Reg…
+    #> [1] NA
 
 <br>
 

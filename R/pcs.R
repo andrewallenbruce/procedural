@@ -122,6 +122,7 @@ checks <- function(x = NULL,
     .clierr(x, 1)
 
     x$head <- sections(substr(x$input, 1, 1))
+
     return(x)
 
     }
@@ -130,7 +131,8 @@ checks <- function(x = NULL,
 .system <- function(x) { #2
 
   # Filter to section
-  system <- systems(substr(x$input, 1, 1))[c("axis", "name", "value", "label")]
+  system <- systems(
+  substr(x$input, 1, 1))[c("axis", "name", "value", "label")]
   x$possible <- as.data.frame(system)
 
   # Return all systems
@@ -157,7 +159,10 @@ checks <- function(x = NULL,
   # Create operation object
   operation <- select |>
     dplyr::mutate(axis = "3") |>
-    dplyr::select(axis, name = name_3, value = code_3, label = label_3) |>
+    dplyr::select(axis,
+                  name = name_3,
+                  value = code_3,
+                  label = label_3) |>
     dplyr::distinct()
 
   x$possible <- as.data.frame(operation)
@@ -170,17 +175,29 @@ checks <- function(x = NULL,
 
     .clierr(x, 3)
 
-    x$definitions <- definitions(section = substr(x$input, 1, 1),
-                                 axis = "3",
-                                 col = "value",
-                                 search = substr(x$input, 3, 3))
+    # Axis 3 Definition
+    x$definitions <- switch(
+      substr(x$input, 1, 1),
+      'D' = dplyr::tibble(section = character(0),
+                          axis = character(0),
+                          name = character(0),
+                          value = character(0),
+                          label = character(0),
+                          definition = character(0),
+                          explanation = character(0)),
+      definitions(section = substr(x$input, 1, 1),
+                  axis = "3",
+                  col = "value",
+                  search = substr(x$input, 3, 3)))
 
     # Head = First 4 axes, Tail = Last 3 axes
     x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(operation, value == substr(x$input, 3, 3)))
+              dplyr::filter(operation,
+              value == substr(x$input, 3, 3)))
 
     # Filtered pin to pass on
-    x$select <- dplyr::filter(select, table == substr(x$input, 1, 3)) |>
+    x$select <- dplyr::filter(select,
+      table == substr(x$input, 1, 3)) |>
       dplyr::select(name_4:rows)
 
     return(x)
@@ -193,7 +210,10 @@ checks <- function(x = NULL,
   # Create part object
   part <- x$select |>
     dplyr::mutate(axis = "4") |>
-    dplyr::select(axis, name = name_4, value = code_4, label = label_4) |>
+    dplyr::select(axis,
+                  name = name_4,
+                  value = code_4,
+                  label = label_4) |>
     dplyr::distinct()
 
   x$possible <- as.data.frame(part)
@@ -206,22 +226,29 @@ checks <- function(x = NULL,
 
     .clierr(x, 4)
 
-
     x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(part, value == substr(x$input, 4, 4)))
+              dplyr::filter(part,
+              value == substr(x$input, 4, 4)))
 
-    if (substr(x$input, 1, 1) %in% c(0, 3, "F", "G", "X")) {
+    # Axis 4 Includes
+    x$includes <- switch(
+      substr(x$input, 1, 1),
+      "0" = ,
+      "3" = ,
+      "F" = ,
+      "G" = ,
+      "X" = includes(section = substr(x$input, 1, 1),
+                     axis = "4",
+                     col = "label",
+                     search = delister(x$head[4, 4])),
+                     dplyr::tibble(section = character(0),
+                                   axis = character(0),
+                                   name = character(0),
+                                   label = character(0),
+                                   includes = character(0)))
 
-      x$includes <- includes(section = substr(x$input, 1, 1),
-                             axis = "4",
-                             col = "label",
-                             search = delister(x$head[4, 4]))
-    } else {
-
-      x$includes <- NA
-    }
-
-    x$select <- dplyr::filter(x$select, row == substr(x$input, 1, 4)) |>
+    x$select <- dplyr::filter(x$select,
+      row == substr(x$input, 1, 4)) |>
       dplyr::select(rowid:rows) |>
       tidyr::unnest(rows) |>
       dplyr::distinct() |>
@@ -245,18 +272,36 @@ checks <- function(x = NULL,
 
     .clierr(x, 5)
 
-    if (substr(x$input, 1, 1) %in% c(0:4, 7:9, "F", "X")) {
-
-      x$definitions <- vctrs::vec_rbind(x$definitions,
-                       definitions(section = substr(x$input, 1, 1),
-                                   axis = "5",
-                                   col = "value",
-                                   search = substr(x$input, 5, 5)))
-    }
+    # Axis 5 Definition
+    x$definitions <- switch(
+      substr(x$input, 1, 1),
+      "0" = ,
+      "1" = ,
+      "2" = ,
+      "3" = ,
+      "4" = ,
+      "7" = ,
+      "8" = ,
+      "9" = ,
+      "F" = ,
+      "X" = vctrs::vec_rbind(x$definitions,
+      definitions(section = substr(x$input, 1, 1),
+                  axis = "5",
+                  col = "value",
+                  search = substr(x$input, 5, 5))),
+      dplyr::tibble(section = character(0),
+                    axis = character(0),
+                    name = character(0),
+                    value = character(0),
+                    label = character(0),
+                    definition = character(0),
+                    explanation = character(0)))
 
     x <- purrr::list_flatten(x)
+
     x$select_5 <- dplyr::filter(x$select_5,
-                                value == substr(x$input, 5, 5))
+                  value == substr(x$input, 5, 5))
+
     x$id <- unique(x$select_5$rowid)
 
     x$head <- vctrs::vec_rbind(x$head,
@@ -264,6 +309,7 @@ checks <- function(x = NULL,
 
     x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
     x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+
     return(x)
   }
 }
@@ -288,18 +334,26 @@ checks <- function(x = NULL,
     x$head <- vctrs::vec_rbind(x$head,
               unique(x$select_6[c("axis", "name", "value", "label")]))
 
-    # x$select_6 <- NULL
     x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
     x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
 
-    if (substr(x$input, 1, 1) %in% c(0, 3, "X")) {
-
-      x$includes <- vctrs::vec_rbind(x$includes,
-                    includes(section = substr(x$input, 1, 1),
-                             axis = "6",
-                             col = "label",
-                             search = delister(x$head[6, 4])))
-    }
+    # Axis 6 Includes
+    x$includes <- switch(
+      substr(x$input, 1, 1),
+      "0" = ,
+      "3" = ,
+      "F" = ,
+      "G" = ,
+      "X" = vctrs::vec_rbind(x$includes,
+            includes(section = substr(x$input, 1, 1),
+                     axis = "4",
+                     col = "label",
+                     search = delister(x$head[6, 4]))),
+      dplyr::tibble(section = character(0),
+                    axis = character(0),
+                    name = character(0),
+                    label = character(0),
+                    includes = character(0)))
   }
   return(x)
 }
@@ -315,8 +369,11 @@ checks <- function(x = NULL,
 
     .clierr(x, 7)
 
-    x$select_7 <- dplyr::filter(x$select_7, value == substr(x$input, 7, 7))
+    x$select_7 <- dplyr::filter(x$select_7,
+                  value == substr(x$input, 7, 7))
+
     x$id <- intersect(x$id, x$select_7$rowid)
+
     x$head <- vctrs::vec_rbind(x$head,
               unique(x$select_7[c("axis", "name", "value", "label")]))
 
@@ -332,17 +389,26 @@ checks <- function(x = NULL,
   if (length(x$id) == 1L) {
 
     x <- list(
+
       code = x$input,
+
       description = procedural::order(search = x$input)$description_code,
+
       axes = x$head,
+
       definitions = x$definitions |>
         dplyr::mutate(definition = dplyr::if_else(!is.na(explanation),
-        paste0(definition, ". ", explanation, "."), definition), explanation = NULL),
+        paste0(definition, ". ", explanation, "."), definition),
+        explanation = NULL),
+
       includes = x$includes |>
         tidyr::nest(includes = "includes") |>
         dplyr::mutate(includes = purrr::map_chr(
-          includes, ~paste(.x$includes, collapse = ", ")))
+        includes, ~paste(.x$includes, collapse = ", ")))
       )
+
+    if(vctrs::vec_is_empty(x$definitions)) x$definitions <- NA
+    if(vctrs::vec_is_empty(x$includes))    x$includes <- NA
   }
   return(x)
 }
