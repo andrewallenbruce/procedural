@@ -10,13 +10,12 @@ pcs(x = NULL)
 \item{x}{an alphanumeric character vector, can be 3 to 7 characters long.}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Look up ICD-10-PCS Codes or Tables
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pcs("0G9")
 
 pcs("0G90")
@@ -26,5 +25,5 @@ pcs("0G900")
 pcs("0G9000")
 
 pcs("0G9000Z")
-\dontshow{\}) # examplesIf}
+
 }

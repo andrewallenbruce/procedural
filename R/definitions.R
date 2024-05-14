@@ -1,9 +1,17 @@
 #' ICD-10-PCS Definitions
-#' @param section PCS section character.
-#' @param axis PCS axis position.
+#'
+#' @param section PCS section: 0:9, B, C, F, G, H, X
+#'
+#' @param axis PCS axis: 3, 4, 5
+#'
 #' @param col column to search: "name", "value" (default), "label" "definition", "explanation"
+#'
 #' @param search string to search for in `col`
-#' @return a [dplyr::tibble()]
+#'
+#' @param display output for display, e.g. in `ggplot` or `gt`: `TRUE` or `FALSE` (default)
+#'
+#' @template returns-default
+#'
 #' @examples
 #' definitions(section = "0", axis = "3", col = "label", search = "Drainage")
 #'
@@ -15,16 +23,16 @@
 definitions <- function(section = NULL,
                         axis = NULL,
                         col = c("value", "label", "name", "definition", "explanation"),
-                        search = NULL) {
+                        search = NULL,
+                        display = FALSE) {
 
-  def <- pins::pin_read(mount_board(), "definitions")
+  def <- get_pin("definitions")
 
   col <- match.arg(col)
 
   if (!is.null(section)) {
     if (is.numeric(section))  section <- as.character(section)
     if (grepl("[[:lower:]]*", section)) section <- toupper(section)
-    # section <- rlang::arg_match(section, c(0:9, "B", "C", "F", "G", "H", "X"))
     def <- vctrs::vec_slice(def, def$section == section)
     }
 
@@ -35,15 +43,42 @@ definitions <- function(section = NULL,
   }
 
   if (!is.null(search)) {
-    def <- srchcol(def, col = col, search = search, ignore = TRUE)
+
+    def <- fuimus::srchcol(
+      def,
+      col = col,
+      search = search,
+      ignore = TRUE
+      )
+
     }
+
+  if (display) {
+    def <- dplyr::mutate(def,
+           definition = dplyr::if_else(!is.na(explanation),
+           paste0(definition, ". ", explanation, "."), definition)) |>
+      dplyr::select(label, definition)
+  }
   return(def)
 }
 
 #' ICD-10-PCS Includes
-#' @param section PCS section character.
-#' @param axis PCS axis position.
-#' @param col column to search: "name", "label" (default), "includes"
+#' @param section PCS section:
+#' + `"0"` (Medical and Surgical),
+#' + `"3"` (Administration)
+#' + `"F"` (Physical Rehabilitation and Diagnostic Audiology)
+#' + `"G"` (Mental Health)
+#' + `"X"` (New Technology)
+#' @param axis PCS axis:
+#' + `"3"`
+#'   + Operation (0:9, X)
+#'   + Type (B, C, F, G, H)
+#' + `"4"`
+#'   + Qualifier (G)
+#' + `"5"`
+#'   + Approach (0:4, 7:9, X)
+#'   + Type Qualifier (F)
+#' @param col column to search: `"name"`, `"label"` (default), `"includes"`
 #' @param search string to search for in `col`
 #' @return a [dplyr::tibble()]
 #' @examples
@@ -54,7 +89,7 @@ includes <- function(section = NULL,
                      col = c("label", "name", "includes"),
                      search = NULL) {
 
-  includes <- pins::pin_read(mount_board(), "includes")
+  includes <- get_pin("includes")
 
   col <- match.arg(col)
 
@@ -69,12 +104,12 @@ includes <- function(section = NULL,
 
   if (!is.null(axis)) {
     if (is.numeric(axis)) axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, c("3", "4", "5", "6"))
+    axis <- rlang::arg_match(axis, c("3", "4", "5"))
     includes <- vctrs::vec_slice(includes, includes$axis == axis)
   }
 
   if (!is.null(search)) {
-    includes <- srchcol(includes, col = col, search = search, ignore = TRUE)
+    includes <- fuimus::srchcol(includes, col = col, search = search, ignore = TRUE)
     }
   return(includes)
 }
@@ -94,7 +129,7 @@ includes <- function(section = NULL,
 index <- function(search = NULL,
                   col = c("term", "index", "type", "value", "code")) {
 
-  ind <- pins::pin_read(mount_board(), "index_v2") |>
+  ind <- get_pin("index_v2") |>
     tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
     dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
     dplyr::rename(index = letter,
@@ -105,7 +140,7 @@ index <- function(search = NULL,
 
   if (!is.null(search)) {
 
-    ind <- srchcol(ind, col = col, search = search, ignore = TRUE)
+    ind <- fuimus::srchcol(ind, col = col, search = search, ignore = TRUE)
 
   }
   return(ind)
@@ -128,13 +163,13 @@ order <- function(search = NULL, col = c("code",
                                          "description_table",
                                          "order")) {
 
-  tbl <- pins::pin_read(mount_board(), "tables_order")
+  tbl <- get_pin("tables_order")
 
   col <- match.arg(col)
 
   if (!is.null(search)) {
 
-    tbl <- srchcol(tbl, col = col, search = search, ignore = TRUE)
+    tbl <- fuimus::srchcol(tbl, col = col, search = search, ignore = TRUE)
 
   }
   return(tbl)
@@ -186,7 +221,7 @@ devices <- function(system = NULL,
                     col = c("device_name", "section", "system", "operation", "device", "includes"),
                     search = NULL) {
 
-  dev <- pins::pin_read(mount_board(), "devices")
+  dev <- get_pin("devices")
 
   col <- match.arg(col)
 
@@ -208,7 +243,7 @@ devices <- function(system = NULL,
 
   if (!is.null(search)) {
 
-    dev <- srchcol(dev, col = col, search = search, ignore = TRUE)
+    dev <- fuimus::srchcol(dev, col = col, search = search, ignore = TRUE)
 
   }
 

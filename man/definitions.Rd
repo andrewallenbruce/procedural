@@ -8,20 +8,23 @@ definitions(
   section = NULL,
   axis = NULL,
   col = c("value", "label", "name", "definition", "explanation"),
-  search = NULL
+  search = NULL,
+  display = FALSE
 )
 }
 \arguments{
-\item{section}{PCS section character.}
+\item{section}{PCS section: 0:9, B, C, F, G, H, X}
 
-\item{axis}{PCS axis position.}
+\item{axis}{PCS axis: 3, 4, 5}
 
 \item{col}{column to search: "name", "value" (default), "label" "definition", "explanation"}
 
 \item{search}{string to search for in \code{col}}
+
+\item{display}{output for display, e.g. in \code{ggplot} or \code{gt}: \code{TRUE} or \code{FALSE} (default)}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Definitions

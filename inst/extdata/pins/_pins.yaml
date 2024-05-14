@@ -20,6 +20,8 @@ pcs_tbl3:
 - pcs_tbl3/20240109T205324Z-1afc8/
 rowbase:
 - rowbase/20240129T080037Z-16521/
+sections:
+- sections/20240514T165007Z-fcd6f/
 source_definitions:
 - source_definitions/20240115T084908Z-2b8ed/
 source_index:
@@ -28,6 +30,8 @@ source_order:
 - source_order/20240115T084856Z-db72f/
 source_table:
 - source_table/20240115T084900Z-b2423/
+systems:
+- systems/20240514T165252Z-59b60/
 tables_order:
 - tables_order/20240130T192159Z-360ae/
 tables_rows:

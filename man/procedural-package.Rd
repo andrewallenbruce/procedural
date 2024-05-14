@@ -8,17 +8,19 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-What the package does (one paragraph).
+Provides a tidy interface to the ICD-10-PCS procedure code system. The package includes a dataset of all ICD-10-PCS codes and their attributes, as well as functions to search and filter the dataset.
 }
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/andrewallenbruce/procedural}
   \item \url{https://andrewallenbruce.github.io/procedural/}
+  \item Report bugs at \url{https://github.com/andrewallenbruce/procedural/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Andrew Bruce \email{andrewbruce.himni@gmail.com} [copyright holder]
+\strong{Maintainer}: Andrew Bruce \email{andrew.bruce@northstarrevenueintegrity.com} [copyright holder]
 
 }
 \keyword{internal}

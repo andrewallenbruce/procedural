@@ -24,6 +24,7 @@ knitr::opts_chunk$set(
 library(procedural)
 library(dplyr)
 library(gt)
+library(htmltools)
 ```
 
 
@@ -62,9 +63,24 @@ tibble(
               'Device',
               'Qualifier')) |> 
   gt() |> 
-  cols_align(align = 'center', columns = Axis) |> 
-  opt_table_font(font = google_font(name = "Rubik")) |> 
-  opt_table_lines(extent = "default")
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = Axis)) |>
+  cols_align(align = 'center', columns = Axis) |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  opt_table_outline(style = "none") |> 
+  tab_options(
+    table.width = pct(75),
+    heading.title.font.size = px(18),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12),
+    footnotes.marks = letters,
+    # column_labels.hidden = TRUE
+    )
 ```   
 
 
@@ -81,24 +97,26 @@ x <- pcs("02103D4")
 
 x$axes |>
   gt(rowname_col = "axis") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
   cols_align(align = "center", columns = c(axis, value)) |>
   tab_style(style = list(cell_fill(color = "lightgray",
                                    alpha = 0.5),
                          cell_text(weight = "bold")),
             locations = cells_body(columns = value)) |>
-  opt_all_caps() |>
-  opt_table_outline(style = "none") |> 
   tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
-             title = html(paste0("<b><u>", x$code, "</u></b> ", x$description))) |>
+             title = html(paste0("<b><u>", 
+                                 x$procedure$code, "</u></b> ", 
+                                 x$procedure$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[1, 6]))),
+    x$definitions$definition[1])),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[2, 6]))),
+    x$definitions$definition[2])),
     locations = cells_body(columns = label, rows = 5)) |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  opt_all_caps() |>
+  opt_table_outline(style = "none") |> 
   tab_options(
     table.width = pct(75),
     heading.title.font.size = px(18),
@@ -106,6 +124,7 @@ x$axes |>
     heading.align = "left",
     table.font.color = "#0B0B45",
     footnotes.font.size = px(12),
+    footnotes.marks = letters,
     column_labels.hidden = TRUE)
 ```
 
@@ -167,14 +186,16 @@ x$axes |>
   opt_all_caps() |>
   opt_table_outline(style = "none") |>
   tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
-             title = html(paste0("<b><u>", x$code, "</u></b> ", x$description))) |>
+             title = html(paste0("<b><u>", 
+                                 x$procedure$code, "</u></b> ", 
+                                 x$procedure$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[1, 6]))),
+    x$definitions$definition[1])),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[2, 6]))),
+    x$definitions$definition[2])),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
     table.width = pct(75),
@@ -197,7 +218,7 @@ procedural:::sections(0:9)[c('value', 'label')] |>
   opt_all_caps() |>
   tab_header(title = md("**Medical and Surgical-Related Sections**")) |>
   tab_options(
-    table.width = pct(55),
+    table.width = pct(75),
     heading.title.font.size = px(18),
     heading.subtitle.font.size = px(14),
     heading.align = "left",
@@ -262,13 +283,13 @@ x$axes |>
             locations = cells_body(columns = value)) |>
   opt_all_caps() |>
   opt_table_outline(style = "none") |>
-  tab_header(subtitle = htmltools::tagList(htmltools::tags$div(
-    style = htmltools::css(`text-align` = "right"), 
-    htmltools::tags$div(htmltools::tags$strong("ICD-10-PCS 2024")))),
-    title = html(paste0("<b>", x$code, "</b>  ", x$description))) |>
+  tab_header(
+    title = html(paste0("<b>", x$code, "</b>  ", x$description)),
+    subtitle = tagList(tags$div(style = css(`text-align` = "right"), 
+                                tags$div(tags$strong("ICD-10-PCS 2024"))))) |>
   tab_options(
     stub.background.color = "#0B0B35",
-    stub.border.color = "#0B0B35",
+    stub.border.color = "white",
     stub_row_group.border.color = "#0B0B35",
     table.width = pct(75),
     heading.title.font.size = px(16),
@@ -278,17 +299,10 @@ x$axes |>
     heading.align = "left",
     table.font.color = "#0B0B35",
     table.font.size = px(14),
-    table.border.bottom.color = "white",
+    table.border.bottom.color = "#0B0B35",
     footnotes.font.size = px(12),
     column_labels.hidden = TRUE)
 ```
-
-
-Additional differences include these uses of the 6th character:
-
-   + Section 3 defines the 6th character as **Substance**.
-   + Sections 4 - 5 define it as **Function**.
-   + Sections 7 - 9 define it as **Method**.
 
 
 ### Ancillary Sections
@@ -311,11 +325,6 @@ procedural::sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] 
     footnotes.font.size = px(12),
     column_labels.hidden = TRUE)
 ```
-
-
-The definitions of some characters in the ancillary sections differ from that seen in previous sections. 
-
-In the Imaging section, the 3rd character is defined as root type, and the 5th and 6th characters define contrast and contrast/qualifier respectively, as in the CT scan example below.
 
 When coding for CT scans, the documentation must support all components for proper selection of the ICD-10-PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
 
@@ -351,14 +360,6 @@ x$axes |>
     table.font.color = "#0B0B45",
     footnotes.font.size = px(12))
 ```
-
-
-Additional differences include:
-
-   + Section C defines the 5th character as Radionuclide.
-   + Section D defines the 5th character as Modality Qualifier and the 6th character as Isotope.
-   + Section F defines the 5th character as Type Qualifier and the 6th character as Equipment.
-   + Sections G and H define the 3rd character as a Root Type qualifier.
 
 
 Section X defines the 7th character as the New Technology Group. This letter changes each year that new technology codes are added to the system. 
@@ -454,48 +455,30 @@ The values for characters 1-3 are provided at the top of each table. Four column
 
 A table may be separated into rows to specify the valid choices of values in characters 4-7. A code built using values from more than one row of a table is not a valid code. In the table above, there are only five choices for the 7th character of Body Part, U, Spinal Canal. You can’t cross the line to choose a 7th character from the row above.
 
+## Appendices
+
 There are many tables in ICD-10-PCS besides the tables used to construct the codes. The appendices in the ICD-10-PCS code book contain many helpful tables.
 
-Appendix A
+### Appendix A
 contains a table that defines all root operations in the ICD-10-PCS code book. It lists not only the definition, but also an explanation and example(s) for each root operation. The root operations are listed by character value, in numeric order, followed by alphabetical order. For example, Root Operations - Alteration is listed with Definition, Explanation, and Examples such as face lift and breast augmentation.
 
-Appendix B
+### Appendix B
 is a Body Part Key. This is a very helpful tool to help match a specific body part to a descriptor in ICD-10-PCS. It is listed in alphabetic order.
 
-Appendix C
+### Appendix C
 is a Device Key. Similar to the body part key, it matches a device to a descriptor in ICD-10-PCS. For example, Brachytherapy seeds leads to Radioactive Element.
 
-Appendix D
+### Appendix D
 is the Device Aggregation Table. This table crosswalks specific device character value definitions for specific root operation in a specific body system to the more general device character value to be used. For example, the specific device Autologous Arterial Tissue, for all applicable operations in the heart and great vessels, lower arteries, lower veins, upper arteries, and upper veins leads to a General Device of 7 Autologous Tissue Substitute.
 
-Appendix E
-contains the Character Meanings tables. This gives an overview of the codes for an entire system in one place. The following example shows the introductory table for the Urinary system.
+### Appendix E
+contains the Character Meanings tables. This gives an overview of the codes for an entire system in one place.
 
-The following example shows the introductory table for the urinary system.
-
-Table 3. Introductory table of values for the Medical and Surgical section urinary body system (characters 3-7)
-0: Medical and Surgical
-T: Urinary System
-
-Appendix F
+### Appendix F
 contains the Substance Key. This table provides the substance term and then the corresponding ICD-10-PCS Value. For example, Seprafilm® has an ICD-10-PCS Value as an adhesion barrier.
 
-Appendix G
-contains Combination Clusters. This table is used for codes that require more than one ICD-10-PCS procedure code for correct reporting. An example is provided for insertion of a cardiac pacemaker lead into a coronary vein. The additional procedures describe the exact location of where the lead is inserted, which is required for correct reporting. The instructions in the Appendix specify that the first code in the cluster needs to be reported with one or more of the additional codes listed for all codes to be considered valid. In the example listed below, the codes are listed for the insertion of a cardiac resynchronization pacemaker pulse generator with the insertion of three leads. Code as many of the additional codes as are documented in the operative report.
-
-02H40JZ Insertion of pacemaker lead into coronary vein, open approach
-
-and
-
-02H60JZ Insertion of pacemaker lead into right atrium, open approach
-
-and
-
-02HK0JZ Insertion of pacemaker lead into right ventricle, open approach
-
-and
-
-0JH607Z Insertion of cardiac resynchronization pacemaker pulse generator into chest subcutaneous tissue and fascia, open approach
+### Appendix G
+contains Combination Clusters. This table is used for codes that require more than one ICD-10-PCS procedure code for correct reporting. An example is provided for insertion of a cardiac pacemaker lead into a coronary vein. The additional procedures describe the exact location of where the lead is inserted, which is required for correct reporting. The instructions in the Appendix specify that the first code in the cluster needs to be reported with one or more of the additional codes listed for all codes to be considered valid. 
 
 Appendix H
 contains Non-OR Not Affecting MS-DRG Assignment codes.

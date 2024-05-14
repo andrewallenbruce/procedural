@@ -1,55 +1,61 @@
-#' Pivot data frame to long format for easy printing
-#' @param df data frame
-#' @param cols columns to pivot long, default is [dplyr::everything()]
-#' @returns Pivoted data frame
+#' Mount [pins][pins::pins-package] board
+#'
+#' @param source `<chr>` `"local"` or `"remote"`
+#'
+#' @returns `<pins_board_folder>` or `<pins_board_url>`
+#'
 #' @noRd
-long <- function(df, cols = dplyr::everything()) {
-  df |>
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::everything(), as.character)) |>
-    tidyr::pivot_longer({{ cols }})
+mount_board <- function(source = c("local", "remote")) {
+
+  source <- match.arg(source)
+
+  switch(
+    source,
+    local  = pins::board_folder(
+      fs::path_package(
+        "extdata/pins",
+        package = "procedural")
+    ),
+    remote = pins::board_url(
+      fuimus::gh_raw(
+        "andrewallenbruce/procedural/master/inst/extdata/pins/")
+    )
+  )
 }
 
-#' Return GitHub raw url
-#' @param x url
-#' @returns raw url
-#' @examplesIf interactive()
-#' github_raw("andrewallenbruce/provider/")
+#' List pins from a [pins][pins::pins-package] board
+#'
+#' @param ... arguments to pass to [mount_board()]
+#'
+#' @returns `<list>` of [pins][pins::pins-package]
+#'
 #' @noRd
-github_raw <- function(x) {
-  paste0("https://raw.githubusercontent.com/", x)
+list_pins <- function(...) {
+
+  board <- mount_board(...)
+
+  pins::pin_list(board)
+
 }
 
-#' Wrapper to mount package's [pins::board_url()]
+#' Get a pinned dataset from a [pins][pins::pins-package] board
+#'
+#' @param pin `<chr>` string name of pinned dataset
+#'
+#' @template args-dots
+#'
+#' @returns `<tibble>`
+#'
 #' @noRd
-mount_board <- function() {
-  pins::board_url(github_raw(
-  "andrewallenbruce/procedural/main/pkgdown/assets/pins-board/"))
+get_pin <- function(pin, ...) {
+
+  board <- mount_board(...)
+
+  pin <- rlang::arg_match0(pin, list_pins())
+
+  pins::pin_read(board, pin)
+
 }
-
-
-#' Wrapper to mount package's [pins::board_url()]
-#' @noRd
-mount_source <- function(set = c("definitions", "index", "order", "table")) {
-  if(set == "definitions") pins::pin_read(mount_board(), "source_definitions")
-  if(set == "index") pins::pin_read(mount_board(), "source_index")
-  if(set == "order") pins::pin_read(mount_board(), "source_order")
-  if(set == "table") pins::pin_read(mount_board(), "source_table")
-}
-
-
-#' Infix operator for `if (!is.null(x)) y else x` statements
-#' @param x,y description
-#' @return description
-#' @examplesIf interactive()
-#' x <- 123456
-#' x %nn% as.character(x)
-#' @noRd
-`%nn%` <- function(x, y) if (!is.null(x)) y else x #nocov
-
-#' @noRd
-`%nin%` <- function(x, table) match(x, table, nomatch = 0L) == 0L
 
 #' Wrapper for [unlist()], with `use.names` set to `FALSE`
 #' @param x character vector
@@ -68,48 +74,3 @@ splitter <- function(x) unlist(strsplit(x, ""), use.names = FALSE)
 #' @return character string
 #' @noRd
 collapser <- function(x) paste0(x, collapse = "")
-
-#' Search a data frame's column by string
-#' @param df data frame
-#' @param col column to search
-#' @param search string to search
-#' @param ignore ignore string case?
-#' @return collapsed character vector
-#' @noRd
-srchcol <- function(df, col, search, ignore = FALSE) {
-  dplyr::filter(df, stringr::str_detect(
-    !!rlang::sym(col), stringr::regex(search, ignore_case = ignore)))
-}
-
-#' @noRd
-download_links <- function() {
-  # https://www.cms.gov/medicare/coding-billing/icd-10-codes/2024-icd-10-pcs
-  dplyr::tibble(
-    codeset = "ICD-10-PCS",
-    version = 2024L,
-    updated = as.Date("2023-12-19"),
-    filename = c(
-      "Order File (Long and Abbreviated Titles)",
-      "Official Coding Guidelines",
-      "Version Update Summary",
-      "Codes File",
-      "Conversion Table",
-      "Code Tables and Index",
-      "Addendum"),
-    filetype = c(
-      "zip",
-      "pdf",
-      "zip",
-      "zip",
-      "zip",
-      "zip",
-      "zip"),
-    link = c(
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-order-file-long-and-abbreviated-titles-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/document/2024-official-icd-10-pcs-coding-guidelines-updated-12/19/2023.pdf",
-      "https://www.cms.gov/files/zip/2024-version-update-summary-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-codes-file-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-conversion-table-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-code-tables-and-index-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-addendum-updated-12/19/2023.zip"))
-}

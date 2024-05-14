@@ -4,8 +4,8 @@
   op <- definitions(section = substr(x$input, 1, 1),
                     axis = "3",
                     search = substr(x$input, 3, 3)) |>
-    dplyr::mutate(definition = dplyr::if_else(!is.na(explanation),
-                                              paste0(definition, ". ", explanation, "."), definition)) |>
+    dplyr::mutate(definition = dplyr::if_else(
+      !is.na(explanation), paste0(definition, ". ", explanation, "."), definition)) |>
     dplyr::mutate(display = glue::glue('{label}: <small>{definition}.</small>')) |>
     dplyr::select(label, display) |>
     unlist()
@@ -67,8 +67,6 @@
 
   rep(NA, max(len_vec) - unname(len_vec[y]))
 }
-
-x <- "0016070"
 
 #' @noRd
 tables <- function(x) {

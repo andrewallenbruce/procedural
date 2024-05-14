@@ -1,7 +1,7 @@
 ^procedural\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-vignettes
+^vignettes
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^docs$
@@ -11,3 +11,4 @@ vignettes
 ^vignettes/articles$
 ^codecov\.yml$
 ^data-raw$
+^man-roxygen$

@@ -2,34 +2,48 @@ Package: procedural
 Title: Tidy ICD-10-PCS interface
 Version: 0.0.0.9000
 Authors@R: 
-    person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
-Description: What the package does (one paragraph).
+    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
+Description: Provides a tidy interface to the ICD-10-PCS procedure code
+    system. The package includes a dataset of all ICD-10-PCS codes and
+    their attributes, as well as functions to search and filter the
+    dataset.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
-URL: https://andrewallenbruce.github.io/procedural/
+URL: https://github.com/andrewallenbruce/procedural,
+    https://andrewallenbruce.github.io/procedural/
+BugReports: https://github.com/andrewallenbruce/procedural/issues
 Depends: 
     R (>= 4.1.0)
 Imports:
-   dplyr,
-   tidyr,
-   cli,
-   pins,
-   purrr,
-   rlang,
-   vctrs,
-   zeallot,
-   stringr,
-   glue
+    cli,
+    dplyr,
+    fs,
+    glue,
+    pins,
+    purrr,
+    rlang,
+    stringr,
+    tidyr,
+    vctrs,
+    zeallot
 Suggests: 
-    knitr,
-    rmarkdown,
+    fuimus,
     gt,
     gtExtras,
-    tibble,
-    qs
-VignetteBuilder: knitr
+    knitr,
+    qs,
+    rmarkdown,
+    roxyglobals,
+    testthat (>= 3.0.0),
+    tibble
+VignetteBuilder: 
+    knitr
 Remotes: 
-    github::rstudio/gt
+    github::andrewallenbruce/fuimus
+Config/roxyglobals/filename: generated-globals.R
+Config/roxyglobals/unique: TRUE
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
+RoxygenNote: 7.3.1

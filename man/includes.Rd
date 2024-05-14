@@ -12,11 +12,34 @@ includes(
 )
 }
 \arguments{
-\item{section}{PCS section character.}
+\item{section}{PCS section:
+\itemize{
+\item \code{"0"} (Medical and Surgical),
+\item \code{"3"} (Administration)
+\item \code{"F"} (Physical Rehabilitation and Diagnostic Audiology)
+\item \code{"G"} (Mental Health)
+\item \code{"X"} (New Technology)
+}}
 
-\item{axis}{PCS axis position.}
+\item{axis}{PCS axis:
+\itemize{
+\item \code{"3"}
+\itemize{
+\item Operation (0:9, X)
+\item Type (B, C, F, G, H)
+}
+\item \code{"4"}
+\itemize{
+\item Qualifier (G)
+}
+\item \code{"5"}
+\itemize{
+\item Approach (0:4, 7:9, X)
+\item Type Qualifier (F)
+}
+}}
 
-\item{col}{column to search: "name", "label" (default), "includes"}
+\item{col}{column to search: \code{"name"}, \code{"label"} (default), \code{"includes"}}
 
 \item{search}{string to search for in \code{col}}
 }

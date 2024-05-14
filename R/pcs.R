@@ -1,7 +1,11 @@
 #' Look up ICD-10-PCS Codes or Tables
+#'
 #' @param x an alphanumeric character vector, can be 3 to 7 characters long.
-#' @return a [dplyr::tibble()]
+#'
+#' @template returns-default
+#'
 #' @examplesIf interactive()
+#'
 #' pcs("0G9")
 #'
 #' pcs("0G90")
@@ -11,6 +15,8 @@
 #' pcs("0G9000")
 #'
 #' pcs("0G9000Z")
+#'
+#' @autoglobal
 #'
 #' @export
 pcs <- function(x = NULL) {
@@ -186,17 +192,13 @@ checks <- function(x = NULL,
     # Axis 3 Definition
     x$definitions <- switch(
       substr(x$input, 1, 1),
-      'D' = dplyr::tibble(section = character(0),
-                          axis = character(0),
-                          name = character(0),
-                          value = character(0),
-                          label = character(0),
-                          definition = character(0),
-                          explanation = character(0)),
+      'D' = dplyr::tibble(label = character(0),
+                          definition = character(0)),
       definitions(section = substr(x$input, 1, 1),
                   axis = "3",
                   col = "value",
-                  search = substr(x$input, 3, 3)))
+                  search = substr(x$input, 3, 3),
+                  display = TRUE))
 
     # Head = First 4 axes, Tail = Last 3 axes
     x$head <- vctrs::vec_rbind(x$head,
@@ -280,6 +282,19 @@ checks <- function(x = NULL,
 
     .clierr(x, 5)
 
+    x <- purrr::list_flatten(x)
+
+    x$select_5 <- dplyr::filter(x$select_5,
+                  value == substr(x$input, 5, 5))
+
+    x$id <- unique(x$select_5$rowid)
+
+    x$head <- vctrs::vec_rbind(x$head,
+              unique(x$select_5[c("axis", "name", "value", "label")]))
+
+    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
+    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+
     # Axis 5 Definition
     x$definitions <- switch(
       substr(x$input, 1, 1),
@@ -296,28 +311,13 @@ checks <- function(x = NULL,
       definitions(section = substr(x$input, 1, 1),
                   axis = "5",
                   col = "value",
-                  search = substr(x$input, 5, 5))),
-      dplyr::tibble(section = character(0),
-                    axis = character(0),
-                    name = character(0),
-                    value = character(0),
-                    label = character(0),
-                    definition = character(0),
-                    explanation = character(0)))
-
-    x <- purrr::list_flatten(x)
-
-    x$select_5 <- dplyr::filter(x$select_5,
-                  value == substr(x$input, 5, 5))
-
-    x$id <- unique(x$select_5$rowid)
-
-    x$head <- vctrs::vec_rbind(x$head,
-              unique(x$select_5[c("axis", "name", "value", "label")]))
-
-    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
-    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
-
+                  search = substr(x$input, 5, 5),
+                  # col = "label",
+                  # search = delister(x$head[5, 4])
+                  display = TRUE)),
+      vctrs::vec_rbind(x$definitions,
+      dplyr::tibble(label = character(0),
+                    definition = character(0))))
     return(x)
   }
 }
@@ -357,11 +357,12 @@ checks <- function(x = NULL,
                      axis = "4",
                      col = "label",
                      search = delister(x$head[6, 4]))),
+      vctrs::vec_rbind(x$includes,
       dplyr::tibble(section = character(0),
                     axis = character(0),
                     name = character(0),
                     label = character(0),
-                    includes = character(0)))
+                    includes = character(0))))
   }
   return(x)
 }
@@ -398,16 +399,17 @@ checks <- function(x = NULL,
 
     x <- list(
 
-      code = x$input,
+      # code = x$input,
+      # description = procedural::order(search = x$input)$description_code,
 
-      description = procedural::order(search = x$input)$description_code,
+      procedure = tibble(
+        code = x$input,
+        description = procedural::order(search = x$input)$description_code,
+      ),
 
       axes = x$head,
 
-      definitions = x$definitions |>
-        dplyr::mutate(definition = dplyr::if_else(!is.na(explanation),
-        paste0(definition, ". ", explanation, "."), definition),
-        explanation = NULL),
+      definitions = x$definitions,
 
       includes = x$includes |>
         tidyr::nest(includes = "includes") |>
