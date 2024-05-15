@@ -25,6 +25,9 @@
     <loc>https://andrewallenbruce.github.io/procedural/news/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/approaches.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/code_range.html</loc>
   </url>
   <url>
@@ -56,5 +59,8 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/procedural/reference/sections.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/procedural/reference/systems.html</loc>
   </url>
 </urlset>

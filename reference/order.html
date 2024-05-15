@@ -70,25 +70,53 @@
 
 
 <dt>col</dt>
-<dd><p>column to search: "code" (default), "table", "row", "description_code", "description_table", "order"</p></dd>
+<dd><p>column to search: "code" (default), "table", "row",
+"description_code", "description_table", "order"</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>a <code><a href="https://dplyr.tidyverse.org/reference/reexports.html" class="external-link">dplyr::tibble()</a></code></p>
+<p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
 
 
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">order</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"00X"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">order</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"00X"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 333 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    order table row   code    description_table                  description_code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">1</span>727 00X   00XF  00XF0ZF Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">1</span>728 00X   00XF  00XF0ZG Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">1</span>729 00X   00XF  00XF0ZH Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">1</span>730 00X   00XF  00XF0ZJ Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">1</span>731 00X   00XF  00XF0ZK Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">1</span>732 00X   00XF  00XF0ZL Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">1</span>733 00X   00XF  00XF0ZM Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">1</span>734 00X   00XF  00XF0ZN Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">1</span>735 00X   00XF  00XF0ZP Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">1</span>736 00X   00XF  00XF0ZQ Central Nervous System and Crania… Transfer Olfact…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 323 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">order</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Olfactory"</span>, col <span class="op">=</span> <span class="st">"description_code"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 98 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    order table row   code    description_table                  description_code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   190 005   005F  005F0ZZ Central Nervous System and Crania… Destruction of …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   191 005   005F  005F3ZZ Central Nervous System and Crania… Destruction of …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>   192 005   005F  005F4ZZ Central Nervous System and Crania… Destruction of …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>   259 008   008F  008F0ZZ Central Nervous System and Crania… Division of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>   260 008   008F  008F3ZZ Central Nervous System and Crania… Division of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>   261 008   008F  008F4ZZ Central Nervous System and Crania… Division of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>   430 009   009F  009F00Z Central Nervous System and Crania… Drainage of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   431 009   009F  009F0ZX Central Nervous System and Crania… Drainage of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   432 009   009F  009F0ZZ Central Nervous System and Crania… Drainage of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   433 009   009F  009F30Z Central Nervous System and Crania… Drainage of Olf…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 88 more rows</span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
