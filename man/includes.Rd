@@ -44,11 +44,12 @@ includes(
 \item{search}{string to search for in \code{col}}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Includes
 }
 \examples{
 includes(section = "0", axis = "3")
+
 }

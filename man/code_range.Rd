@@ -2,7 +2,7 @@
 % Please edit documentation in R/definitions.R
 \name{code_range}
 \alias{code_range}
-\title{Return a range of ICD-10-PCS codes.}
+\title{Return a range of ICD-10-PCS codes}
 \usage{
 code_range(start, end)
 }
@@ -12,15 +12,14 @@ code_range(start, end)
 \item{end}{7-character ICD-10-PCS code.}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
-Return a range of ICD-10-PCS codes.
+Return a range of ICD-10-PCS codes
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 code_range("0G9000Z", "0G9100Z")
 
 code_range("0G9000Z", "10D20ZZ")
-\dontshow{\}) # examplesIf}
+
 }

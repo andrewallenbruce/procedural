@@ -14,12 +14,16 @@
 #'
 #' sections("X")
 #'
+#' @autoglobal
+#'
 #' @export
 sections <- function(x = NULL) {
 
   sec <- get_pin("sections")
 
-  sec <- fuimus::search_in(sec, sec$value, toupper(as.character(x)))
+  if (!is.null(x)) {x <- toupper(as.character(x))}
+
+  sec <- fuimus::search_in_if(sec, sec$value, x)
 
   return(sec)
 }
@@ -40,12 +44,16 @@ sections <- function(x = NULL) {
 #'
 #' systems("X")
 #'
-#' @noRd
+#' @autoglobal
+#'
+#' @export
 systems <- function(x = NULL) {
 
   sys <- get_pin("systems")
 
-  sys <- fuimus::search_in(sys, sys$section, toupper(as.character(x)))
+  if (!is.null(x)) {x <- toupper(as.character(x))}
+
+  sys <- fuimus::search_in_if(sys, sys$section, x)
 
   return(sys)
 }
@@ -53,8 +61,10 @@ systems <- function(x = NULL) {
 #' ICD-10-PCS Approaches
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 17 sections.
-#' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#'
+#' @template returns-default
+#'
+#' @examples
 #'
 #' approaches()
 #'
@@ -64,7 +74,9 @@ systems <- function(x = NULL) {
 #'
 #' approaches("X")
 #'
-#' @noRd
+#' @autoglobal
+#'
+#' @export
 approaches <- function(x = NULL) {
 
   app <- data.frame(
@@ -81,13 +93,12 @@ approaches <- function(x = NULL) {
 
   if (!is.null(x)) {
 
-    if (is.numeric(x)) x <- as.character(x)
-
-    if (grepl("[[:lower:]]*", x)) x <- toupper(x)
+    x <- toupper(as.character(x))
 
     x <- rlang::arg_match(x, c(0, 3, 4, 7, 8, "F", "X"))
 
-    app <- vctrs::vec_slice(app, app$value == x)
+    app <- fuimus::search_in_if(app, app$value, x)
+
   }
   return(app)
 }
@@ -165,8 +176,11 @@ lk <- function(x) {
 
 
 #' ICD-10-PCS Axes by Section
+#'
 #' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
-#' @return a [dplyr::tibble()]
+#'
+#' @template returns-default
+#'
 #' @examplesIf interactive()
 #' axes("0")
 #'
@@ -174,12 +188,12 @@ lk <- function(x) {
 #'
 #' axes("X")
 #'
+#' @autoglobal
+#'
 #' @noRd
 axes <- function(x) {
 
-  if (is.numeric(x)) x <- as.character(x)
-
-  if (grepl("[[:lower:]]*", x)) {x <- toupper(x)}
+  x <- toupper(as.character(x))
 
   x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
 

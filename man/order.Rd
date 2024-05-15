@@ -12,18 +12,18 @@ order(
 \arguments{
 \item{search}{string to search for in \code{col}}
 
-\item{col}{column to search: "code" (default), "table", "row", "description_code", "description_table", "order"}
+\item{col}{column to search: "code" (default), "table", "row",
+"description_code", "description_table", "order"}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Order File
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 order(search = "00X")
 
 order(search = "Olfactory", col = "description_code")
-\dontshow{\}) # examplesIf}
+
 }

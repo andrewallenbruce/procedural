@@ -12,17 +12,16 @@ index(search = NULL, col = c("term", "index", "type", "value", "code"))
 \item{col}{column to search: "term" (default), "index", "type", "value", "code"}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Index
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 index(search = "Abdominohysterectomy")
 
 index(search = "Attain Ability")
 
 index(search = "radi*")
-\dontshow{\}) # examplesIf}
+
 }

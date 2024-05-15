@@ -24,13 +24,12 @@ devices(
 \item{search}{string to search for in \code{col}}
 }
 \value{
-a \code{\link[dplyr:reexports]{dplyr::tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Devices
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 devices()
-\dontshow{\}) # examplesIf}
+
 }

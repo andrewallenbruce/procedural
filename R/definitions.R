@@ -19,6 +19,8 @@
 #'
 #' definitions(section = "B", search = "Fluoroscopy")
 #'
+#' @autoglobal
+#'
 #' @export
 definitions <- function(section = NULL,
                         axis = NULL,
@@ -31,14 +33,17 @@ definitions <- function(section = NULL,
   col <- match.arg(col)
 
   if (!is.null(section)) {
-    if (is.numeric(section))  section <- as.character(section)
-    if (grepl("[[:lower:]]*", section)) section <- toupper(section)
+
+    section <- toupper(as.character(section))
+
     def <- vctrs::vec_slice(def, def$section == section)
-    }
+  }
 
   if (!is.null(axis)) {
-    if (is.numeric(axis)) axis <- as.character(axis)
+    axis <- as.character(axis)
+
     axis <- rlang::arg_match(axis, c("3", "4", "5"))
+
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
 
@@ -54,35 +59,55 @@ definitions <- function(section = NULL,
     }
 
   if (display) {
-    def <- dplyr::mutate(def,
-           definition = dplyr::if_else(!is.na(explanation),
-           paste0(definition, ". ", explanation, "."), definition)) |>
-      dplyr::select(label, definition)
+
+    def <- def |>
+      dplyr::mutate(
+        definition = dplyr::if_else(
+          !is.na(explanation),
+          paste0(
+            definition, ". ", explanation, "."
+            ),
+          definition
+          )
+        ) |>
+      dplyr::select(
+        label,
+        definition
+        )
   }
   return(def)
 }
 
 #' ICD-10-PCS Includes
+#'
 #' @param section PCS section:
-#' + `"0"` (Medical and Surgical),
-#' + `"3"` (Administration)
-#' + `"F"` (Physical Rehabilitation and Diagnostic Audiology)
-#' + `"G"` (Mental Health)
-#' + `"X"` (New Technology)
+#'    * `"0"` (Medical and Surgical),
+#'    * `"3"` (Administration)
+#'    * `"F"` (Physical Rehabilitation and Diagnostic Audiology)
+#'    * `"G"` (Mental Health)
+#'    * `"X"` (New Technology)
+#'
 #' @param axis PCS axis:
-#' + `"3"`
-#'   + Operation (0:9, X)
-#'   + Type (B, C, F, G, H)
-#' + `"4"`
-#'   + Qualifier (G)
-#' + `"5"`
-#'   + Approach (0:4, 7:9, X)
-#'   + Type Qualifier (F)
+#'    * `"3"`
+#'      * Operation (0:9, X)
+#'      * Type (B, C, F, G, H)
+#'    * `"4"`
+#'      * Qualifier (G)
+#'    * `"5"`
+#'      * Approach (0:4, 7:9, X)
+#'      * Type Qualifier (F)
+#'
 #' @param col column to search: `"name"`, `"label"` (default), `"includes"`
+#'
 #' @param search string to search for in `col`
-#' @return a [dplyr::tibble()]
+#'
+#' @template returns-default
+#'
 #' @examples
 #' includes(section = "0", axis = "3")
+#'
+#' @autoglobal
+#'
 #' @export
 includes <- function(section = NULL,
                      axis = NULL,
@@ -94,8 +119,8 @@ includes <- function(section = NULL,
   col <- match.arg(col)
 
   if (!is.null(section)) {
-    if (is.numeric(section))  section <- as.character(section)
-    if (grepl("[[:lower:]]*", section)) section <- toupper(section)
+
+    section <- toupper(as.character(section))
 
     section <- rlang::arg_match(section, c(0, 3, "F", "G", "X"))
 
@@ -103,27 +128,41 @@ includes <- function(section = NULL,
   }
 
   if (!is.null(axis)) {
-    if (is.numeric(axis)) axis <- as.character(axis)
+
+    axis <- as.character(axis)
+
     axis <- rlang::arg_match(axis, c("3", "4", "5"))
+
     includes <- vctrs::vec_slice(includes, includes$axis == axis)
   }
 
   if (!is.null(search)) {
-    includes <- fuimus::srchcol(includes, col = col, search = search, ignore = TRUE)
+    includes <- fuimus::srchcol(
+      includes,
+      col = col,
+      search = search,
+      ignore = TRUE
+      )
     }
   return(includes)
 }
 
 #' ICD-10-PCS Index
+#'
 #' @param col column to search: "term" (default), "index", "type", "value", "code"
+#'
 #' @param search string to search for in `col`
-#' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#'
+#' @template returns-default
+#'
+#' @examples
 #' index(search = "Abdominohysterectomy")
 #'
 #' index(search = "Attain Ability")
 #'
 #' index(search = "radi*")
+#'
+#' @autoglobal
 #'
 #' @export
 index <- function(search = NULL,
@@ -147,13 +186,20 @@ index <- function(search = NULL,
 }
 
 #' ICD-10-PCS Order File
-#' @param col column to search: "code" (default), "table", "row", "description_code", "description_table", "order"
+#'
+#' @param col column to search: "code" (default), "table", "row",
+#'   "description_code", "description_table", "order"
+#'
 #' @param search string to search for in `col`
-#' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#'
+#' @template returns-default
+#'
+#' @examples
 #' order(search = "00X")
 #'
 #' order(search = "Olfactory", col = "description_code")
+#'
+#' @autoglobal
 #'
 #' @export
 order <- function(search = NULL, col = c("code",
@@ -175,14 +221,20 @@ order <- function(search = NULL, col = c("code",
   return(tbl)
 }
 
-#' Return a range of ICD-10-PCS codes.
+#' Return a range of ICD-10-PCS codes
+#'
 #' @param start 7-character ICD-10-PCS code.
+#'
 #' @param end 7-character ICD-10-PCS code.
-#' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#'
+#' @template returns-default
+#'
+#' @examples
 #' code_range("0G9000Z", "0G9100Z")
 #'
 #' code_range("0G9000Z", "10D20ZZ")
+#'
+#' @autoglobal
 #'
 #' @export
 code_range <- function(start, end) {
@@ -206,14 +258,24 @@ code_range <- function(start, end) {
 }
 
 #' ICD-10-PCS Devices
+#'
 #' @param system PCS system character.
+#'
 #' @param operation PCS operation character.
+#'
 #' @param device PCS device character.
+#'
 #' @param col column to search: "device_name" (default), "section", "system", "operation", "device", "includes"
+#'
 #' @param search string to search for in `col`
-#' @return a [dplyr::tibble()]
-#' @examplesIf interactive()
+#'
+#' @template returns-default
+#'
+#' @examples
 #' devices()
+#'
+#' @autoglobal
+#'
 #' @export
 devices <- function(system = NULL,
                     operation = NULL,
@@ -246,6 +308,5 @@ devices <- function(system = NULL,
     dev <- fuimus::srchcol(dev, col = col, search = search, ignore = TRUE)
 
   }
-
   return(dev)
 }
