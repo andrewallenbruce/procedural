@@ -213,28 +213,28 @@ pcs <- function(x = NULL) {
 # Row IDs begin ---------------------
 .approach <- function(x) { #5
 
-  x$select <- as.data.frame(x$select) |> split(x$select$axis)
+  x$select <- as.data.frame(x$select) |> collapse::rsplit(x$select$axis)
   x$possible <- collapse::funique(x$select$`5`[c("axis", "name", "value", "label")])
 
   # Return all approaches
-  if (nchar(x$input) == 4L)  {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 4L)  {.cli(x); return(invisible(x))}
 
   # Return selected approach
-  if (nchar(x$input) > 4L) {
+  if (stringfish::sf_nchar(x$input) > 4L) {
 
     .clierr(x, 5)
 
     x <- purrr::list_flatten(x)
 
-    x$select_5 <- dplyr::filter(
+    x$select_5 <- vctrs::vec_slice(
       x$select_5,
-      value == stringfish::sf_substr(x$input, 5, 5))
+      x$select_5$value == stringfish::sf_substr(x$input, 5, 5))
 
-    x$id <- unique(x$select_5$rowid)
+    x$id <- collapse::funique(x$select_5$rowid)
 
     x$head <- vctrs::vec_rbind(
       x$head,
-      unique(x$select_5[c("axis", "name", "value", "label")])
+      collapse::funique(x$select_5[c("axis", "name", "value", "label")])
       )
 
     x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
@@ -273,7 +273,7 @@ pcs <- function(x = NULL) {
 
 .device <- function(x) { #6
 
-  x$possible <- unique(x$select_6[c("axis", "name", "value", "label")])
+  x$possible <- collapse::funique(x$select_6[c("axis", "name", "value", "label")])
 
   # Return all devices
   if (stringfish::sf_nchar(x$input) == 5L) {.cli(x); return(invisible(x))}
@@ -283,20 +283,22 @@ pcs <- function(x = NULL) {
 
     .clierr(x, 6)
 
-    x$select_6 <- dplyr::filter(
+    x$select_6 <- vctrs::vec_slice(
       x$select_6,
-      value == stringfish::sf_substr(x$input, 6, 6)
+      x$select_6$value == stringfish::sf_substr(x$input, 6, 6)
       )
 
-    x$id <- intersect(x$id, x$select_6$rowid)
+    x$id <- vctrs::vec_set_intersect(x$id, x$select_6$rowid)
 
     x$head <- vctrs::vec_rbind(
       x$head,
-      unique(x$select_6[c("axis", "name", "value", "label")])
+      collapse::funique(
+        x$select_6[c("axis", "name", "value", "label")]
+        )
       )
 
-    x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
-    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+    x$select_5 <- fuimus::search_in(x$select_5, x$select_5$rowid, x$id)
+    x$select_7 <- fuimus::search_in(x$select_7, x$select_7$rowid, x$id)
 
     # Axis 6 Includes
     x$includes <- switch(
@@ -310,7 +312,7 @@ pcs <- function(x = NULL) {
         includes(section = stringfish::sf_substr(x$input, 1, 1),
                  axis = "4",
                  col = "label",
-                 search = delister(x$head[6, 4]))
+                 search = fuimus::delister(x$head[6, 4]))
         ),
       vctrs::vec_rbind(
         x$includes,
@@ -325,7 +327,7 @@ pcs <- function(x = NULL) {
 
 .qualifier <- function(x) { #7
 
-  x$possible <- unique(x$select_7[c("axis", "name", "value", "label")])
+  x$possible <- collapse::funique(x$select_7[c("axis", "name", "value", "label")])
 
   # Return all devices
   if (stringfish::sf_nchar(x$input) == 6L) {.cli(x); return(invisible(x))}
@@ -334,20 +336,20 @@ pcs <- function(x = NULL) {
 
     .clierr(x, 7)
 
-    x$select_7 <- dplyr::filter(
+    x$select_7 <- vctrs::vec_slice(
       x$select_7,
-      value == stringfish::sf_substr(x$input, 7, 7)
+      x$select_7$value == stringfish::sf_substr(x$input, 7, 7)
       )
 
-    x$id <- intersect(x$id, x$select_7$rowid)
+    x$id <- vctrs::vec_set_intersect(x$id, x$select_7$rowid)
 
     x$head <- vctrs::vec_rbind(
       x$head,
-      unique(x$select_7[c("axis", "name", "value", "label")])
+      collapse::funique(x$select_7[c("axis", "name", "value", "label")])
       )
 
-    x$select_5 <- dplyr::filter(x$select_5, rowid %in% x$id)
-    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
+    x$select_5 <- fuimus::search_in(x$select_5, x$select_5$rowid, x$id)
+    x$select_6 <- fuimus::search_in(x$select_6, x$select_7$rowid, x$id)
 
   }
   return(x)
@@ -362,23 +364,23 @@ pcs <- function(x = NULL) {
       code = x$input,
       description = procedural::order(search = x$input)$description_code,
 
-      # procedure = dplyr::tibble(
-      #   code = x$input,
-      #   description = procedural::order(search = x$input)$description_code,
-      # ),
+      procedure = dplyr::tibble(
+        code = x$input,
+        description = procedural::order(search = x$input)$description_code,
+      ),
 
       axes = x$head,
 
       definitions = fuimus::null_if_empty(x$definitions),
 
-      includes = x$includes |>
+      includes = fuimus::null_if_empty(x$includes |>
         tidyr::nest(includes = "includes") |>
         dplyr::mutate(includes = purrr::map_chr(
-        includes, ~paste(.x$includes, collapse = ", ")))
-      )
-
-    # if(vctrs::vec_is_empty(x$definitions)) x$definitions <- NA
-    if(vctrs::vec_is_empty(x$includes))    x$includes <- NA
+        includes, ~paste(.x$includes, collapse = ", ")
+        )
+      ))
+    ) |>
+      purrr::compact()
   }
   return(x)
 }

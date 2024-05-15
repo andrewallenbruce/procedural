@@ -131,7 +131,7 @@ pcs_matrix <- function(x) {
 #' @noRd
 lk <- function(x) {
 
-  x <- splitter(toupper(x))
+  x <- fuimus::splitter(toupper(x))
 
   values <- 1:34
 
@@ -150,9 +150,12 @@ lk <- function(x) {
 
   x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
 
-  if (nchar(x) > 1L) x <- splitter(x)[1]
+  if (nchar(x) > 1L) {
+    x <- fuimus::splitter(x)[1]
+    }
 
-  switch(x,
+  switch(
+    x,
     "0" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
     "1" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
     "2" = c("Section", "Body System", "Operation", "Body Part", "Approach", "Device", "Qualifier"),
@@ -193,7 +196,9 @@ axes <- function(x) {
 
   x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
 
-  if (nchar(x) > 1L) x <- splitter(x)[1]
+  if (nchar(x) > 1L) {
+    x <- fuimus::splitter(x)[1]
+    }
 
   if (x == "0") {
     return(dplyr::tibble(axis = c(1:7),

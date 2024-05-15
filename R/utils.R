@@ -56,21 +56,3 @@ get_pin <- function(pin, ...) {
   pins::pin_read(board, pin)
 
 }
-
-#' Wrapper for [unlist()], with `use.names` set to `FALSE`
-#' @param x character vector
-#' @return split character vector
-#' @noRd
-delister <- function(x) unlist(x, use.names = FALSE)
-
-#' Wrapper for [strsplit()] that unlists result
-#' @param x character string
-#' @return character vector
-#' @noRd
-splitter <- function(x) unlist(strsplit(x, ""), use.names = FALSE)
-
-#' Wrapper for [paste0()] that collapses result
-#' @param x split character vector
-#' @return character string
-#' @noRd
-collapser <- function(x) paste0(x, collapse = "")

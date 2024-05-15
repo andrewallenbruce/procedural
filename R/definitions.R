@@ -242,10 +242,15 @@ code_range <- function(start, end) {
   start <- checks(start)
   end <- checks(end)
 
-  if (nchar(start) < 7L) cli::cli_abort("{.var start} must be 7 characters long.")
-  if (nchar(end) < 7L) cli::cli_abort("{.var end} must be 7 characters long.")
+  if (nchar(start) < 7L) {
+    cli::cli_abort("{.var start} must be 7 characters long.")
+  }
 
-  base <- pins::pin_read(mount_board(), "tables_order")[c('order', 'code', 'table', 'row')]
+  if (nchar(end) < 7L) {
+    cli::cli_abort("{.var end} must be 7 characters long.")
+    }
+
+  base <- get_pin("tables_order")[c('order', 'code', 'table', 'row')]
 
   o_start <- dplyr::filter(base, code == start) |> dplyr::pull(order)
   o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)

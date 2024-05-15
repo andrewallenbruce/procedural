@@ -1,12 +1,20 @@
 #' @noRd
 .def_op <- function(x) {
 
-  op <- definitions(section = substr(x$input, 1, 1),
-                    axis = "3",
-                    search = substr(x$input, 3, 3)) |>
-    dplyr::mutate(definition = dplyr::if_else(
-      !is.na(explanation), paste0(definition, ". ", explanation, "."), definition)) |>
-    dplyr::mutate(display = glue::glue('{label}: <small>{definition}.</small>')) |>
+  op <- definitions(
+    section = substr(x$input, 1, 1),
+    axis = "3",
+    search = substr(x$input, 3, 3)
+    ) |>
+    dplyr::mutate(
+      definition = dplyr::if_else(
+        !is.na(explanation),
+        paste0(definition, ". ", explanation, "."),
+        definition)
+      ) |>
+    dplyr::mutate(
+      display = glue::glue('{label}: <small>{definition}.</small>')
+      ) |>
     dplyr::select(label, display) |>
     unlist()
 
@@ -19,13 +27,19 @@
 .inc_part <- function(x, y) {
 
   search <- paste0("(",
-                   paste0(unique(y$label_4),
-                          collapse = "|"), ")")
+                   paste0(
+                     unique(y$label_4),
+                          collapse = "|"),
+                   ")")
 
-  inc <- includes(section = substr(x$input, 1, 1),
-                  axis = "4",
-                  search = search) |>
-    dplyr::mutate(includes = stringr::str_to_title(includes)) |>
+  inc <- includes(
+    section = substr(x$input, 1, 1),
+    axis = "4",
+    search = search
+    ) |>
+    dplyr::mutate(
+      includes = stringr::str_to_title(includes)
+      ) |>
     dplyr::select(label, includes) |>
     dplyr::distinct() |>
     dplyr::group_by(label) |>
@@ -73,7 +87,7 @@ tables <- function(x) {
 
   x <- checks(x)
 
-  pg <- pins::pin_read(mount_board(), "tables_rows") |>
+  pg <- get_pin("tables_rows") |>
     dplyr::filter(table == substr(x$input, 1, 3))
 
   # Top of gt table
@@ -90,8 +104,11 @@ tables <- function(x) {
     dplyr::mutate(display = glue::glue("<b>{code}</b>  {label}<br>")) |>
     dplyr::select(-axis)
 
-  top <- tibble::add_row(top,
-                         display = "<b>ICD-10-PCS 2024  &empty;</b><hr>", .before = 1)
+  top <- tibble::add_row(
+    top,
+    display = "<b>ICD-10-PCS 2024  &empty;</b><hr>",
+    .before = 1
+    )
 
   # Bottom of gt table
   bottom <- dplyr::select(pg, name_4:rows)
@@ -118,10 +135,12 @@ tables <- function(x) {
 
   app_def <- .def_ap(x, bottom_rows$code_5)
 
-  bottom_rows <- dplyr::left_join(bottom |>
-                                    dplyr::select(-rows, -row),
-                                  bottom_rows, by = dplyr::join_by(rowid),
-                                  relationship = "many-to-many") |>
+  bottom_rows <- dplyr::left_join(
+    bottom |>
+      dplyr::select(-rows, -row),
+    bottom_rows, by = dplyr::join_by(rowid),
+    relationship = "many-to-many"
+    ) |>
     dplyr::mutate(
       ax4 = glue::glue("**{code_4}** {label_4}"),
       ax5 = glue::glue("**{code_5}** {label_5}"),
