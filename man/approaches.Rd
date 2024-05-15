@@ -22,8 +22,6 @@ approaches()
 
 approaches("0")
 
-approaches("2")
-
 approaches("X")
 
 }

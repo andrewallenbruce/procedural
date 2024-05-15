@@ -70,8 +70,6 @@ systems <- function(x = NULL) {
 #'
 #' approaches("0")
 #'
-#' approaches("2")
-#'
 #' approaches("X")
 #'
 #' @autoglobal
@@ -183,8 +181,6 @@ lk <- function(x) {
 #'
 #' @examplesIf interactive()
 #' axes("0")
-#'
-#' axes("2")
 #'
 #' axes("X")
 #'
