@@ -51,22 +51,3 @@ x <- x |>
 pcs("0LQV3ZZ") |> data.table::as.data.table()
 
 checks("F14Z01Z") |> .def_op()
-
-vctrs::vec_rbind(x$definitions,
-                 definitions(section = stringfish::sf_substr(x$input, 1, 1),
-                             axis = "5",
-                             col = "value",
-                             search = substr(x$input, 5, 5),
-                             # col = "label",
-                             # search = delister(x$head[5, 4])
-                             display = TRUE))
-
-definitions(section = substr(x$input, 1, 1),
-            axis = "3",
-            col = "value",
-            search = substr(x$input, 3, 3),
-            # col = "label",
-            # search = delister(x$head[5, 4])
-            display = TRUE) |>
-  # tidytable::as_tidytable()
-  data.table::as.data.table()

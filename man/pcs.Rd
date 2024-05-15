@@ -16,7 +16,6 @@ a \link[tibble:tibble-package]{tibble}
 Look up ICD-10-PCS Codes or Tables
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 pcs("0G9")
 
@@ -27,5 +26,5 @@ pcs("0G900")
 pcs("0G9000")
 
 pcs("0G9000Z")
-\dontshow{\}) # examplesIf}
+
 }

@@ -4,7 +4,7 @@
 #'
 #' @template returns-default
 #'
-#' @examplesIf interactive()
+#' @examples
 #'
 #' pcs("0G9")
 #'
@@ -190,7 +190,7 @@ pcs <- function(x = NULL) {
       "X" = includes(section = stringfish::sf_substr(x$input, 1, 1),
                      axis = "4",
                      col = "label",
-                     search = delister(x$head[4, 4])),
+                     search = fuimus::delister(x$head[4, 4])),
                      dplyr::tibble(section = character(0),
                                    axis = character(0),
                                    name = character(0),
@@ -237,8 +237,8 @@ pcs <- function(x = NULL) {
       collapse::funique(x$select_5[c("axis", "name", "value", "label")])
       )
 
-    x$select_6 <- dplyr::filter(x$select_6, rowid %in% x$id)
-    x$select_7 <- dplyr::filter(x$select_7, rowid %in% x$id)
+    x$select_6 <- fuimus::search_in(x$select_6, x$select_6$rowid, x$id)
+    x$select_7 <- fuimus::search_in(x$select_7, x$select_7$rowid, x$id)
 
     # Axis 5 Definition
     x$definitions <- switch(

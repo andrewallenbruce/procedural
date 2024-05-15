@@ -13,11 +13,13 @@
 #' @template returns-default
 #'
 #' @examples
-#' definitions(section = "0", axis = "3", col = "label", search = "Drainage")
+#' definitions(col = "label", search = "drain")
 #'
 #' definitions(section = "0", axis = "5")
 #'
-#' definitions(section = "B", search = "Fluoroscopy")
+#' definitions(section = "B", col = "label", search = "fluoro")
+#'
+#' definitions(section = "B", col = "label", search = "fluoro", display = TRUE)
 #'
 #' @autoglobal
 #'
