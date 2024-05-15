@@ -77,18 +77,128 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0G9"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">`procedural::pcs()`</span> ────────────────────────────────────── <span style="font-weight: bold; font-style: italic;">ICD-10-PCS 2024</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Selected: <span style="color: #00BB00;">0G9</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1. [<span style="color: #00BB00; font-weight: bold;">0</span>] Section: Medical and Surgical</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2. [<span style="color: #00BB00; font-weight: bold;">G</span>] Body System: Endocrine System</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3. [<span style="color: #00BB00; font-weight: bold;">9</span>] Operation: Drainage</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → <span style="font-style: italic;">Select</span> <span style="color: #0000BB;">Body Part</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">0</span> &gt;=&gt; Pituitary Gland</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">1</span> &gt;=&gt; Pineal Body</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">2</span> &gt;=&gt; Adrenal Gland, Left</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">3</span> &gt;=&gt; Adrenal Gland, Right</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">4</span> &gt;=&gt; Adrenal Glands, Bilateral</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">6</span> &gt;=&gt; Carotid Body, Left</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">7</span> &gt;=&gt; Carotid Body, Right</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">8</span> &gt;=&gt; Carotid Bodies, Bilateral</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">9</span> &gt;=&gt; Para-aortic Body</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">B</span> &gt;=&gt; Coccygeal Glomus</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">C</span> &gt;=&gt; Glomus Jugulare</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">D</span> &gt;=&gt; Aortic Body</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">F</span> &gt;=&gt; Paraganglion Extremity</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">G</span> &gt;=&gt; Thyroid Gland Lobe, Left</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">H</span> &gt;=&gt; Thyroid Gland Lobe, Right</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">K</span> &gt;=&gt; Thyroid Gland</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">L</span> &gt;=&gt; Superior Parathyroid Gland, Right</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">M</span> &gt;=&gt; Superior Parathyroid Gland, Left</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">N</span> &gt;=&gt; Inferior Parathyroid Gland, Right</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">P</span> &gt;=&gt; Inferior Parathyroid Gland, Left</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">Q</span> &gt;=&gt; Parathyroid Glands, Multiple</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">R</span> &gt;=&gt; Parathyroid Gland</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0G90"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">`procedural::pcs()`</span> ────────────────────────────────────── <span style="font-weight: bold; font-style: italic;">ICD-10-PCS 2024</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Selected: <span style="color: #00BB00;">0G90</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1. [<span style="color: #00BB00; font-weight: bold;">0</span>] Section: Medical and Surgical</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2. [<span style="color: #00BB00; font-weight: bold;">G</span>] Body System: Endocrine System</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3. [<span style="color: #00BB00; font-weight: bold;">9</span>] Operation: Drainage</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 4. [<span style="color: #00BB00; font-weight: bold;">0</span>] Body Part: Pituitary Gland</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → <span style="font-style: italic;">Select</span> <span style="color: #0000BB;">Approach</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">0</span> &gt;=&gt; Open</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">3</span> &gt;=&gt; Percutaneous</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">4</span> &gt;=&gt; Percutaneous Endoscopic</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0G900"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">`procedural::pcs()`</span> ────────────────────────────────────── <span style="font-weight: bold; font-style: italic;">ICD-10-PCS 2024</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Selected: <span style="color: #00BB00;">0G900</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1. [<span style="color: #00BB00; font-weight: bold;">0</span>] Section: Medical and Surgical</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2. [<span style="color: #00BB00; font-weight: bold;">G</span>] Body System: Endocrine System</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3. [<span style="color: #00BB00; font-weight: bold;">9</span>] Operation: Drainage</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 4. [<span style="color: #00BB00; font-weight: bold;">0</span>] Body Part: Pituitary Gland</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5. [<span style="color: #00BB00; font-weight: bold;">0</span>] Approach: Open</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → <span style="font-style: italic;">Select</span> <span style="color: #0000BB;">Device</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">0</span> &gt;=&gt; Drainage Device</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">Z</span> &gt;=&gt; No Device</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0G9000"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">`procedural::pcs()`</span> ────────────────────────────────────── <span style="font-weight: bold; font-style: italic;">ICD-10-PCS 2024</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Selected: <span style="color: #00BB00;">0G9000</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 1. [<span style="color: #00BB00; font-weight: bold;">0</span>] Section: Medical and Surgical</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 2. [<span style="color: #00BB00; font-weight: bold;">G</span>] Body System: Endocrine System</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 3. [<span style="color: #00BB00; font-weight: bold;">9</span>] Operation: Drainage</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 4. [<span style="color: #00BB00; font-weight: bold;">0</span>] Body Part: Pituitary Gland</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 5. [<span style="color: #00BB00; font-weight: bold;">0</span>] Approach: Open</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> 6. [<span style="color: #00BB00; font-weight: bold;">0</span>] Device: Drainage Device</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → <span style="font-style: italic;">Select</span> <span style="color: #0000BB;">Qualifier</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BB00; font-weight: bold;">Z</span> &gt;=&gt; No Qualifier</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0G9000Z"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $code</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0G9000Z"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Drainage of Pituitary Gland with Drainage Device, Open Approach"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $procedure</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   code    description                                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0G9000Z Drainage of Pituitary Gland with Drainage Device, Open Approach</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $axes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   axis  name        value label               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1     Section     0     Medical and Surgical</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2     Body System G     Endocrine System    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3     Operation   9     Drainage            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4     Body Part   0     Pituitary Gland     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5     Approach    0     Open                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6     Device      0     Drainage Device     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 7     Qualifier   Z     No Qualifier        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $definitions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   label    definition                                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Drainage Taking or letting out fluids and/or gases from a body part. The qual…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Open     Cutting through the skin or mucous membrane and any other body layer…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $includes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   section axis  name      label           includes                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0       4     Body Part Pituitary Gland Adenohypophysis, Hypophysis, Neurohyp…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
