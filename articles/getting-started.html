@@ -620,6 +620,7 @@ coronary vein with intraluminal device, percutaneous approach</em></p>
 </blockquote>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"02103D4"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in delister(x$head[4, 4]): could not find function "delister"</span></span>
 <span></span>
 <span><span class="va">x</span><span class="op">$</span><span class="va">axes</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -651,7 +652,120 @@ coronary vein with intraluminal device, percutaneous approach</em></p>
 <span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span>,</span>
 <span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    footnotes.marks <span class="op">=</span> <span class="va">letters</span>,</span>
-<span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x' not found</span></span></code></pre></div>
+<p>Choosing a specific value for each of the seven characters derives
+this code. Based on details about the procedure performed, values for
+each character specifying the <strong>section</strong>, <strong>body
+system</strong>, <strong>root operation</strong>, <strong>body
+part</strong>, <strong>approach</strong>, <strong>device</strong>, and
+<strong>qualifier</strong> are assigned.</p>
+<p>Because the definition of each character is a function of its actual
+physical position in the code, the same value placed in a different
+position in the code means something totally different.</p>
+</div>
+<div class="section level3">
+<h3 id="organization">Organization<a class="anchor" aria-label="anchor" href="#organization"></a>
+</h3>
+<p>ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9
+and the letters B-D, F-H and X.</p>
+<p>The machinery of PCS is contained in three parts: the
+<strong>Index</strong>, the <strong>Tables</strong>, and the
+<strong>List of Codes</strong>.</p>
+<p>Additionally, there are <strong>Appendices</strong> that contain
+information about the structure of the code set and the definitions of
+the values used in the code.</p>
+<p>There is also a list of guidelines in the ICD-10-PCS code book that
+instruct you on how to use the PCS code set.</p>
+<div class="section level4">
+<h4 id="medical-and-surgical-section">Medical and Surgical Section<a class="anchor" aria-label="anchor" href="#medical-and-surgical-section"></a>
+</h4>
+<p>The first section, Medical and Surgical, contains the majority of
+procedures typically reported in an inpatient setting.</p>
+<p><strong>Coding Example</strong></p>
+<p>The example below describes the excision of a dorsal ganglion located
+at the wrist level. A PCS code is built by selecting the appropriate
+characters to describe the <em>intent</em>, the <em>approach</em>, and
+other <em>qualifying information</em> on how the procedure is
+performed.</p>
+<blockquote>
+<p>Note: The purpose of the ICD-10-PCS code is to explain the purpose of
+the procedure by using every character to describe the way the procedure
+was performed.</p>
+</blockquote>
+<p><strong>Operative Report:</strong> <em>Excision of Dorsal Ganglion,
+Right Wrist</em></p>
+<p>With the patient under adequate anesthesia, the right upper extremity
+was prepped and draped in a sterile manner. The arm was exsanguinated
+and the tourniquet was elevated to 290 mm/Hg. A transverse incision was
+made over the dorsal ganglion. Using blunt dissection the dorsal ulnar
+sensory nerve branches and radial sensory nerve branches were dissected
+and retracted out of the operative field.</p>
+<p>The extensor tendon was then incised, dissected, and retracted out of
+the operative field. The ganglion was then further dissected to its
+origin from the dorsal distal scapholunate interosseus ligament and
+excised. Care was taken to protect ligament integrity. The wound was
+then infiltrated with 0.25% Marcaine. The tendons were allowed to resume
+their normal anatomical position. The skin was closed with 3-0 Prolene
+subcuticular stitch. Sterile dressings were applied. The tourniquet was
+deflated.</p>
+<ol style="list-style-type: decimal">
+<li>Section <strong>0</strong> Medical and Surgical</li>
+<li>Body System <strong>L</strong> Tendons (Extensor tendon)</li>
+<li>Root Operation <strong>B</strong> Excision (The tendon was excised
+and removed)</li>
+<li>Body Part <strong>5</strong> Lower Arm, and Wrist, Right (The
+extensor tendon is located at the wrist level)</li>
+<li>Approach <strong>0</strong> Open (An incision was performed and
+blunt dissection carried out through layers of tissue to expose
+site)</li>
+<li>Device <strong>Z</strong> No Device</li>
+<li>Qualifier <strong>Z</strong> No Qualifier</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0LB50ZX"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in delister(x$head[4, 4]): could not find function "delister"</span></span>
+<span></span>
+<span><span class="va">x</span><span class="op">$</span><span class="va">axes</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">axis</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>,</span>
+<span>                                   alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>                         <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>            locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_outline.html" class="external-link">opt_table_outline</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;b&gt;&lt;i&gt;ICD-10-PCS 2024&lt;/i&gt;&lt;/b&gt;"</span><span class="op">)</span>,</span>
+<span>             title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;&lt;u&gt;"</span>, </span>
+<span>                                 <span class="va">x</span><span class="op">$</span><span class="va">procedure</span><span class="op">$</span><span class="va">code</span>, <span class="st">"&lt;/u&gt;&lt;/b&gt; "</span>, </span>
+<span>                                 <span class="va">x</span><span class="op">$</span><span class="va">procedure</span><span class="op">$</span><span class="va">description</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
+<span>    footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;Definition:&lt;/b&gt; "</span>, </span>
+<span>    <span class="va">x</span><span class="op">$</span><span class="va">definitions</span><span class="op">$</span><span class="va">definition</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">label</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
+<span>    footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;Definition:&lt;/b&gt; "</span>, </span>
+<span>    <span class="va">x</span><span class="op">$</span><span class="va">definitions</span><span class="op">$</span><span class="va">definition</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">label</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
+<span>    table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">75</span><span class="op">)</span>,</span>
+<span>    heading.title.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span>,</span>
+<span>    heading.subtitle.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
+<span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
+<span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span>,</span>
+<span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'x' not found</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="medical-and-surgical-related-sections">Medical and Surgical Related Sections<a class="anchor" aria-label="anchor" href="#medical-and-surgical-related-sections"></a>
+</h3>
+<p>Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related
+sections. These sections include obstetrical procedures, administration
+of substances, measurement and monitoring of body functions, and
+extracorporeal therapies, as listed in the table below.</p>
 <div id="eexombwkke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 #eexombwkke table {
@@ -681,13 +795,13 @@ coronary vein with intraluminal device, percutaneous approach</em></p>
   font-style: normal;
   background-color: #FFFFFF;
   width: 75%;
-  border-top-style: none;
+  border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #A8A8A8;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  border-bottom-style: none;
+  border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
   border-left-style: none;
@@ -1094,1134 +1208,6 @@ coronary vein with intraluminal device, percutaneous approach</em></p>
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal" style>
-<b><u></u></b> </td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style><b><i>ICD-10-PCS 2024</i></b></td>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">1</th>
-<td headers="stub_1_1 name" class="gt_row gt_left">Section</td>
-<td headers="stub_1_1 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_1 label" class="gt_row gt_left">Medical and Surgical</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">2</th>
-<td headers="stub_1_2 name" class="gt_row gt_left">Body System</td>
-<td headers="stub_1_2 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">2</td>
-<td headers="stub_1_2 label" class="gt_row gt_left">Heart and Great Vessels</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">3</th>
-<td headers="stub_1_3 name" class="gt_row gt_left">Operation</td>
-<td headers="stub_1_3 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">1</td>
-<td headers="stub_1_3 label" class="gt_row gt_left">Bypass<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>a</sup></span>
-</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">4</th>
-<td headers="stub_1_4 name" class="gt_row gt_left">Body Part</td>
-<td headers="stub_1_4 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_4 label" class="gt_row gt_left">Coronary Artery, One Artery</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">5</th>
-<td headers="stub_1_5 name" class="gt_row gt_left">Approach</td>
-<td headers="stub_1_5 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">3</td>
-<td headers="stub_1_5 label" class="gt_row gt_left">Percutaneous<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>b</sup></span>
-</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub">6</th>
-<td headers="stub_1_6 name" class="gt_row gt_left">Device</td>
-<td headers="stub_1_6 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">D</td>
-<td headers="stub_1_6 label" class="gt_row gt_left">Intraluminal Device</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub">7</th>
-<td headers="stub_1_7 name" class="gt_row gt_left">Qualifier</td>
-<td headers="stub_1_7 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">4</td>
-<td headers="stub_1_7 label" class="gt_row gt_left">Coronary Vein</td>
-</tr>
-</tbody>
-<tfoot class="gt_footnotes">
-<tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>a</sup></span> <b>Definition:</b> Altering the route of passage of the contents of a tubular body part. Rerouting contents of a body part to a downstream area of the normal route, to a similar route and body part, or to an abnormal route and dissimilar body part. Includes one or more anastomoses, with or without the use of a device.</td>
-    </tr>
-<tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>b</sup></span> <b>Definition:</b> Entry, by puncture or minor incision, of instrumentation through the skin or mucous membrane and any other body layers necessary to reach the site of the procedure</td>
-    </tr>
-</tfoot>
-</table>
-</div>
-<p>Choosing a specific value for each of the seven characters derives
-this code. Based on details about the procedure performed, values for
-each character specifying the <strong>section</strong>, <strong>body
-system</strong>, <strong>root operation</strong>, <strong>body
-part</strong>, <strong>approach</strong>, <strong>device</strong>, and
-<strong>qualifier</strong> are assigned.</p>
-<p>Because the definition of each character is a function of its actual
-physical position in the code, the same value placed in a different
-position in the code means something totally different.</p>
-</div>
-<div class="section level3">
-<h3 id="organization">Organization<a class="anchor" aria-label="anchor" href="#organization"></a>
-</h3>
-<p>ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9
-and the letters B-D, F-H and X.</p>
-<p>The machinery of PCS is contained in three parts: the
-<strong>Index</strong>, the <strong>Tables</strong>, and the
-<strong>List of Codes</strong>.</p>
-<p>Additionally, there are <strong>Appendices</strong> that contain
-information about the structure of the code set and the definitions of
-the values used in the code.</p>
-<p>There is also a list of guidelines in the ICD-10-PCS code book that
-instruct you on how to use the PCS code set.</p>
-<div class="section level4">
-<h4 id="medical-and-surgical-section">Medical and Surgical Section<a class="anchor" aria-label="anchor" href="#medical-and-surgical-section"></a>
-</h4>
-<p>The first section, Medical and Surgical, contains the majority of
-procedures typically reported in an inpatient setting.</p>
-<p><strong>Coding Example</strong></p>
-<p>The example below describes the excision of a dorsal ganglion located
-at the wrist level. A PCS code is built by selecting the appropriate
-characters to describe the <em>intent</em>, the <em>approach</em>, and
-other <em>qualifying information</em> on how the procedure is
-performed.</p>
-<blockquote>
-<p>Note: The purpose of the ICD-10-PCS code is to explain the purpose of
-the procedure by using every character to describe the way the procedure
-was performed.</p>
-</blockquote>
-<p><strong>Operative Report:</strong> <em>Excision of Dorsal Ganglion,
-Right Wrist</em></p>
-<p>With the patient under adequate anesthesia, the right upper extremity
-was prepped and draped in a sterile manner. The arm was exsanguinated
-and the tourniquet was elevated to 290 mm/Hg. A transverse incision was
-made over the dorsal ganglion. Using blunt dissection the dorsal ulnar
-sensory nerve branches and radial sensory nerve branches were dissected
-and retracted out of the operative field.</p>
-<p>The extensor tendon was then incised, dissected, and retracted out of
-the operative field. The ganglion was then further dissected to its
-origin from the dorsal distal scapholunate interosseus ligament and
-excised. Care was taken to protect ligament integrity. The wound was
-then infiltrated with 0.25% Marcaine. The tendons were allowed to resume
-their normal anatomical position. The skin was closed with 3-0 Prolene
-subcuticular stitch. Sterile dressings were applied. The tourniquet was
-deflated.</p>
-<ol style="list-style-type: decimal">
-<li>Section <strong>0</strong> Medical and Surgical</li>
-<li>Body System <strong>L</strong> Tendons (Extensor tendon)</li>
-<li>Root Operation <strong>B</strong> Excision (The tendon was excised
-and removed)</li>
-<li>Body Part <strong>5</strong> Lower Arm, and Wrist, Right (The
-extensor tendon is located at the wrist level)</li>
-<li>Approach <strong>0</strong> Open (An incision was performed and
-blunt dissection carried out through layers of tissue to expose
-site)</li>
-<li>Device <strong>Z</strong> No Device</li>
-<li>Qualifier <strong>Z</strong> No Qualifier</li>
-</ol>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0LB50ZX"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">x</span><span class="op">$</span><span class="va">axes</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Rubik"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"center"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">axis</span>, <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"lightgray"</span>,</span>
-<span>                                   alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
-<span>                         <span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>            locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_outline.html" class="external-link">opt_table_outline</a></span><span class="op">(</span>style <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="st">"&lt;b&gt;&lt;i&gt;ICD-10-PCS 2024&lt;/i&gt;&lt;/b&gt;"</span><span class="op">)</span>,</span>
-<span>             title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;&lt;u&gt;"</span>, </span>
-<span>                                 <span class="va">x</span><span class="op">$</span><span class="va">procedure</span><span class="op">$</span><span class="va">code</span>, <span class="st">"&lt;/u&gt;&lt;/b&gt; "</span>, </span>
-<span>                                 <span class="va">x</span><span class="op">$</span><span class="va">procedure</span><span class="op">$</span><span class="va">description</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
-<span>    footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;Definition:&lt;/b&gt; "</span>, </span>
-<span>    <span class="va">x</span><span class="op">$</span><span class="va">definitions</span><span class="op">$</span><span class="va">definition</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">label</span>, rows <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
-<span>    footnote <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"&lt;b&gt;Definition:&lt;/b&gt; "</span>, </span>
-<span>    <span class="va">x</span><span class="op">$</span><span class="va">definitions</span><span class="op">$</span><span class="va">definition</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">label</span>, rows <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
-<span>    table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">75</span><span class="op">)</span>,</span>
-<span>    heading.title.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">18</span><span class="op">)</span>,</span>
-<span>    heading.subtitle.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">14</span><span class="op">)</span>,</span>
-<span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
-<span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span>,</span>
-<span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
-<span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div id="ulbfdpbcyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ulbfdpbcyv table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#ulbfdpbcyv thead, #ulbfdpbcyv tbody, #ulbfdpbcyv tfoot, #ulbfdpbcyv tr, #ulbfdpbcyv td, #ulbfdpbcyv th {
-  border-style: none;
-}
-
-#ulbfdpbcyv p {
-  margin: 0;
-  padding: 0;
-}
-
-#ulbfdpbcyv .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #0B0B45;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: 75%;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#ulbfdpbcyv .gt_title {
-  color: #0B0B45;
-  font-size: 18px;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#ulbfdpbcyv .gt_subtitle {
-  color: #0B0B45;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#ulbfdpbcyv .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_col_heading {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#ulbfdpbcyv .gt_column_spanner_outer {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#ulbfdpbcyv .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#ulbfdpbcyv .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#ulbfdpbcyv .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#ulbfdpbcyv .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#ulbfdpbcyv .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#ulbfdpbcyv .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#ulbfdpbcyv .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#ulbfdpbcyv .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#ulbfdpbcyv .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#ulbfdpbcyv .gt_stub {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ulbfdpbcyv .gt_stub_row_group {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#ulbfdpbcyv .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#ulbfdpbcyv .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#ulbfdpbcyv .gt_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ulbfdpbcyv .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#ulbfdpbcyv .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_grand_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ulbfdpbcyv .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#ulbfdpbcyv .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_footnotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ulbfdpbcyv .gt_sourcenotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ulbfdpbcyv .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ulbfdpbcyv .gt_left {
-  text-align: left;
-}
-
-#ulbfdpbcyv .gt_center {
-  text-align: center;
-}
-
-#ulbfdpbcyv .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#ulbfdpbcyv .gt_font_normal {
-  font-weight: normal;
-}
-
-#ulbfdpbcyv .gt_font_bold {
-  font-weight: bold;
-}
-
-#ulbfdpbcyv .gt_font_italic {
-  font-style: italic;
-}
-
-#ulbfdpbcyv .gt_super {
-  font-size: 65%;
-}
-
-#ulbfdpbcyv .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#ulbfdpbcyv .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#ulbfdpbcyv .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#ulbfdpbcyv .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#ulbfdpbcyv .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#ulbfdpbcyv .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#ulbfdpbcyv .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal" style>
-<b><u></u></b> </td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style><b><i>ICD-10-PCS 2024</i></b></td>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_center gt_stub">1</th>
-<td headers="stub_1_1 name" class="gt_row gt_left">Section</td>
-<td headers="stub_1_1 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_1 label" class="gt_row gt_left">Medical and Surgical</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_center gt_stub">2</th>
-<td headers="stub_1_2 name" class="gt_row gt_left">Body System</td>
-<td headers="stub_1_2 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">L</td>
-<td headers="stub_1_2 label" class="gt_row gt_left">Tendons</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_center gt_stub">3</th>
-<td headers="stub_1_3 name" class="gt_row gt_left">Operation</td>
-<td headers="stub_1_3 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">B</td>
-<td headers="stub_1_3 label" class="gt_row gt_left">Excision<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span>
-</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_center gt_stub">4</th>
-<td headers="stub_1_4 name" class="gt_row gt_left">Body Part</td>
-<td headers="stub_1_4 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">5</td>
-<td headers="stub_1_4 label" class="gt_row gt_left">Lower Arm and Wrist Tendon, Right</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_center gt_stub">5</th>
-<td headers="stub_1_5 name" class="gt_row gt_left">Approach</td>
-<td headers="stub_1_5 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">0</td>
-<td headers="stub_1_5 label" class="gt_row gt_left">Open<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span>
-</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_center gt_stub">6</th>
-<td headers="stub_1_6 name" class="gt_row gt_left">Device</td>
-<td headers="stub_1_6 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">Z</td>
-<td headers="stub_1_6 label" class="gt_row gt_left">No Device</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_center gt_stub">7</th>
-<td headers="stub_1_7 name" class="gt_row gt_left">Qualifier</td>
-<td headers="stub_1_7 value" class="gt_row gt_center" style="background-color: rgba(211,211,211,0.5); font-weight: bold;">X</td>
-<td headers="stub_1_7 label" class="gt_row gt_left">Diagnostic</td>
-</tr>
-</tbody>
-<tfoot class="gt_footnotes">
-<tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span> <b>Definition:</b> Cutting out or off, without replacement, a portion of a body part. The qualifier DIAGNOSTIC is used to identify excision procedures that are biopsies.</td>
-    </tr>
-<tr>
-<td class="gt_footnote" colspan="4">
-<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>2</sup></span> <b>Definition:</b> Cutting through the skin or mucous membrane and any other body layers necessary to expose the site of the procedure</td>
-    </tr>
-</tfoot>
-</table>
-</div>
-</div>
-</div>
-<div class="section level3">
-<h3 id="medical-and-surgical-related-sections">Medical and Surgical Related Sections<a class="anchor" aria-label="anchor" href="#medical-and-surgical-related-sections"></a>
-</h3>
-<p>Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related
-sections. These sections include obstetrical procedures, administration
-of substances, measurement and monitoring of body functions, and
-extracorporeal therapies, as listed in the table below.</p>
-<div id="kgufivjubq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kgufivjubq table {
-  font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#kgufivjubq thead, #kgufivjubq tbody, #kgufivjubq tfoot, #kgufivjubq tr, #kgufivjubq td, #kgufivjubq th {
-  border-style: none;
-}
-
-#kgufivjubq p {
-  margin: 0;
-  padding: 0;
-}
-
-#kgufivjubq .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #0B0B45;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: 75%;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#kgufivjubq .gt_title {
-  color: #0B0B45;
-  font-size: 18px;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#kgufivjubq .gt_subtitle {
-  color: #0B0B45;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#kgufivjubq .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_col_heading {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#kgufivjubq .gt_column_spanner_outer {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#kgufivjubq .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#kgufivjubq .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#kgufivjubq .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#kgufivjubq .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#kgufivjubq .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#kgufivjubq .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#kgufivjubq .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#kgufivjubq .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#kgufivjubq .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#kgufivjubq .gt_stub {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kgufivjubq .gt_stub_row_group {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#kgufivjubq .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#kgufivjubq .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#kgufivjubq .gt_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kgufivjubq .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#kgufivjubq .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_grand_summary_row {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kgufivjubq .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#kgufivjubq .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_footnotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kgufivjubq .gt_sourcenotes {
-  color: #0B0B45;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kgufivjubq .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kgufivjubq .gt_left {
-  text-align: left;
-}
-
-#kgufivjubq .gt_center {
-  text-align: center;
-}
-
-#kgufivjubq .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#kgufivjubq .gt_font_normal {
-  font-weight: normal;
-}
-
-#kgufivjubq .gt_font_bold {
-  font-weight: bold;
-}
-
-#kgufivjubq .gt_font_italic {
-  font-style: italic;
-}
-
-#kgufivjubq .gt_super {
-  font-size: 65%;
-}
-
-#kgufivjubq .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#kgufivjubq .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#kgufivjubq .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#kgufivjubq .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#kgufivjubq .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#kgufivjubq .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#kgufivjubq .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_heading">
 <td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><strong>Medical and Surgical-Related Sections</strong></td>
     </tr></thead>
@@ -2306,24 +1292,24 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
 <span>    table.border.bottom.color <span class="op">=</span> <span class="st">"#0B0B35"</span>,</span>
 <span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    column_labels.hidden <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div id="vafbsnayor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bfdpbcyvkg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vafbsnayor table {
+#bfdpbcyvkg table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vafbsnayor thead, #vafbsnayor tbody, #vafbsnayor tfoot, #vafbsnayor tr, #vafbsnayor td, #vafbsnayor th {
+#bfdpbcyvkg thead, #bfdpbcyvkg tbody, #bfdpbcyvkg tfoot, #bfdpbcyvkg tr, #bfdpbcyvkg td, #bfdpbcyvkg th {
   border-style: none;
 }
 
-#vafbsnayor p {
+#bfdpbcyvkg p {
   margin: 0;
   padding: 0;
 }
 
-#vafbsnayor .gt_table {
+#bfdpbcyvkg .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2349,12 +1335,12 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-left-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_caption {
+#bfdpbcyvkg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vafbsnayor .gt_title {
+#bfdpbcyvkg .gt_title {
   color: #0B0B35;
   font-size: 16px;
   font-weight: initial;
@@ -2366,7 +1352,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-width: 0;
 }
 
-#vafbsnayor .gt_subtitle {
+#bfdpbcyvkg .gt_subtitle {
   color: #0B0B35;
   font-size: 14px;
   font-weight: initial;
@@ -2378,7 +1364,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-top-width: 0;
 }
 
-#vafbsnayor .gt_heading {
+#bfdpbcyvkg .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2390,13 +1376,13 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_bottom_border {
+#bfdpbcyvkg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #0B0B35;
 }
 
-#vafbsnayor .gt_col_headings {
+#bfdpbcyvkg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2411,7 +1397,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_col_heading {
+#bfdpbcyvkg .gt_col_heading {
   color: #0B0B35;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2431,7 +1417,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   overflow-x: hidden;
 }
 
-#vafbsnayor .gt_column_spanner_outer {
+#bfdpbcyvkg .gt_column_spanner_outer {
   color: #0B0B35;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2443,15 +1429,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 4px;
 }
 
-#vafbsnayor .gt_column_spanner_outer:first-child {
+#bfdpbcyvkg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vafbsnayor .gt_column_spanner_outer:last-child {
+#bfdpbcyvkg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vafbsnayor .gt_column_spanner {
+#bfdpbcyvkg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2463,11 +1449,11 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   width: 100%;
 }
 
-#vafbsnayor .gt_spanner_row {
+#bfdpbcyvkg .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vafbsnayor .gt_group_heading {
+#bfdpbcyvkg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2493,7 +1479,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   text-align: left;
 }
 
-#vafbsnayor .gt_empty_group_heading {
+#bfdpbcyvkg .gt_empty_group_heading {
   padding: 0.5px;
   color: #0B0B35;
   background-color: #FFFFFF;
@@ -2508,15 +1494,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   vertical-align: middle;
 }
 
-#vafbsnayor .gt_from_md > :first-child {
+#bfdpbcyvkg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vafbsnayor .gt_from_md > :last-child {
+#bfdpbcyvkg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vafbsnayor .gt_row {
+#bfdpbcyvkg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2535,7 +1521,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   overflow-x: hidden;
 }
 
-#vafbsnayor .gt_stub {
+#bfdpbcyvkg .gt_stub {
   color: #FFFFFF;
   background-color: #0B0B35;
   font-size: 80%;
@@ -2548,7 +1534,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#vafbsnayor .gt_stub_row_group {
+#bfdpbcyvkg .gt_stub_row_group {
   color: #0B0B35;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2562,15 +1548,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   vertical-align: top;
 }
 
-#vafbsnayor .gt_row_group_first td {
+#bfdpbcyvkg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vafbsnayor .gt_row_group_first th {
+#bfdpbcyvkg .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vafbsnayor .gt_summary_row {
+#bfdpbcyvkg .gt_summary_row {
   color: #0B0B35;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2580,16 +1566,16 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#vafbsnayor .gt_first_summary_row {
+#bfdpbcyvkg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_first_summary_row.thick {
+#bfdpbcyvkg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vafbsnayor .gt_last_summary_row {
+#bfdpbcyvkg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2599,7 +1585,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_grand_summary_row {
+#bfdpbcyvkg .gt_grand_summary_row {
   color: #0B0B35;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2609,7 +1595,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#vafbsnayor .gt_first_grand_summary_row {
+#bfdpbcyvkg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2619,7 +1605,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-top-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_last_grand_summary_row_top {
+#bfdpbcyvkg .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2629,11 +1615,11 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_striped {
+#bfdpbcyvkg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vafbsnayor .gt_table_body {
+#bfdpbcyvkg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2642,7 +1628,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_footnotes {
+#bfdpbcyvkg .gt_footnotes {
   color: #0B0B35;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2656,7 +1642,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_footnote {
+#bfdpbcyvkg .gt_footnote {
   margin: 0px;
   font-size: 12px;
   padding-top: 4px;
@@ -2665,7 +1651,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#vafbsnayor .gt_sourcenotes {
+#bfdpbcyvkg .gt_sourcenotes {
   color: #0B0B35;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2679,7 +1665,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vafbsnayor .gt_sourcenote {
+#bfdpbcyvkg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2687,63 +1673,63 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#vafbsnayor .gt_left {
+#bfdpbcyvkg .gt_left {
   text-align: left;
 }
 
-#vafbsnayor .gt_center {
+#bfdpbcyvkg .gt_center {
   text-align: center;
 }
 
-#vafbsnayor .gt_right {
+#bfdpbcyvkg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vafbsnayor .gt_font_normal {
+#bfdpbcyvkg .gt_font_normal {
   font-weight: normal;
 }
 
-#vafbsnayor .gt_font_bold {
+#bfdpbcyvkg .gt_font_bold {
   font-weight: bold;
 }
 
-#vafbsnayor .gt_font_italic {
+#bfdpbcyvkg .gt_font_italic {
   font-style: italic;
 }
 
-#vafbsnayor .gt_super {
+#bfdpbcyvkg .gt_super {
   font-size: 65%;
 }
 
-#vafbsnayor .gt_footnote_marks {
+#bfdpbcyvkg .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vafbsnayor .gt_asterisk {
+#bfdpbcyvkg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vafbsnayor .gt_indent_1 {
+#bfdpbcyvkg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vafbsnayor .gt_indent_2 {
+#bfdpbcyvkg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vafbsnayor .gt_indent_3 {
+#bfdpbcyvkg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vafbsnayor .gt_indent_4 {
+#bfdpbcyvkg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vafbsnayor .gt_indent_5 {
+#bfdpbcyvkg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2811,24 +1797,24 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
 <h4 id="ancillary-sections">Ancillary Sections<a class="anchor" aria-label="anchor" href="#ancillary-sections"></a>
 </h4>
 <p>Sections B - D and F - H comprise the ancillary sections:</p>
-<div id="ehalspkzcb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ufivjubqtx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ehalspkzcb table {
+#ufivjubqtx table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ehalspkzcb thead, #ehalspkzcb tbody, #ehalspkzcb tfoot, #ehalspkzcb tr, #ehalspkzcb td, #ehalspkzcb th {
+#ufivjubqtx thead, #ufivjubqtx tbody, #ufivjubqtx tfoot, #ufivjubqtx tr, #ufivjubqtx td, #ufivjubqtx th {
   border-style: none;
 }
 
-#ehalspkzcb p {
+#ufivjubqtx p {
   margin: 0;
   padding: 0;
 }
 
-#ehalspkzcb .gt_table {
+#ufivjubqtx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2854,12 +1840,12 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-left-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_caption {
+#ufivjubqtx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ehalspkzcb .gt_title {
+#ufivjubqtx .gt_title {
   color: #0B0B45;
   font-size: 18px;
   font-weight: initial;
@@ -2871,7 +1857,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-width: 0;
 }
 
-#ehalspkzcb .gt_subtitle {
+#ufivjubqtx .gt_subtitle {
   color: #0B0B45;
   font-size: 14px;
   font-weight: initial;
@@ -2883,7 +1869,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-top-width: 0;
 }
 
-#ehalspkzcb .gt_heading {
+#ufivjubqtx .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2895,13 +1881,13 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_bottom_border {
+#ufivjubqtx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_col_headings {
+#ufivjubqtx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2916,7 +1902,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_col_heading {
+#ufivjubqtx .gt_col_heading {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2936,7 +1922,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   overflow-x: hidden;
 }
 
-#ehalspkzcb .gt_column_spanner_outer {
+#ufivjubqtx .gt_column_spanner_outer {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2948,15 +1934,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 4px;
 }
 
-#ehalspkzcb .gt_column_spanner_outer:first-child {
+#ufivjubqtx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ehalspkzcb .gt_column_spanner_outer:last-child {
+#ufivjubqtx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ehalspkzcb .gt_column_spanner {
+#ufivjubqtx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2968,11 +1954,11 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   width: 100%;
 }
 
-#ehalspkzcb .gt_spanner_row {
+#ufivjubqtx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ehalspkzcb .gt_group_heading {
+#ufivjubqtx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2998,7 +1984,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   text-align: left;
 }
 
-#ehalspkzcb .gt_empty_group_heading {
+#ufivjubqtx .gt_empty_group_heading {
   padding: 0.5px;
   color: #0B0B45;
   background-color: #FFFFFF;
@@ -3013,15 +1999,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   vertical-align: middle;
 }
 
-#ehalspkzcb .gt_from_md > :first-child {
+#ufivjubqtx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ehalspkzcb .gt_from_md > :last-child {
+#ufivjubqtx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ehalspkzcb .gt_row {
+#ufivjubqtx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3040,7 +2026,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   overflow-x: hidden;
 }
 
-#ehalspkzcb .gt_stub {
+#ufivjubqtx .gt_stub {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3053,7 +2039,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#ehalspkzcb .gt_stub_row_group {
+#ufivjubqtx .gt_stub_row_group {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3067,15 +2053,15 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   vertical-align: top;
 }
 
-#ehalspkzcb .gt_row_group_first td {
+#ufivjubqtx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ehalspkzcb .gt_row_group_first th {
+#ufivjubqtx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ehalspkzcb .gt_summary_row {
+#ufivjubqtx .gt_summary_row {
   color: #0B0B45;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3085,16 +2071,16 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#ehalspkzcb .gt_first_summary_row {
+#ufivjubqtx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_first_summary_row.thick {
+#ufivjubqtx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ehalspkzcb .gt_last_summary_row {
+#ufivjubqtx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3104,7 +2090,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_grand_summary_row {
+#ufivjubqtx .gt_grand_summary_row {
   color: #0B0B45;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3114,7 +2100,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#ehalspkzcb .gt_first_grand_summary_row {
+#ufivjubqtx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3124,7 +2110,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-top-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_last_grand_summary_row_top {
+#ufivjubqtx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3134,11 +2120,11 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_striped {
+#ufivjubqtx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ehalspkzcb .gt_table_body {
+#ufivjubqtx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3147,7 +2133,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_footnotes {
+#ufivjubqtx .gt_footnotes {
   color: #0B0B45;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3161,7 +2147,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_footnote {
+#ufivjubqtx .gt_footnote {
   margin: 0px;
   font-size: 12px;
   padding-top: 4px;
@@ -3170,7 +2156,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#ehalspkzcb .gt_sourcenotes {
+#ufivjubqtx .gt_sourcenotes {
   color: #0B0B45;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3184,7 +2170,7 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ehalspkzcb .gt_sourcenote {
+#ufivjubqtx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3192,63 +2178,63 @@ this code for <em>Intra-aortic Balloon Pump (IABP)</em>:</p>
   padding-right: 5px;
 }
 
-#ehalspkzcb .gt_left {
+#ufivjubqtx .gt_left {
   text-align: left;
 }
 
-#ehalspkzcb .gt_center {
+#ufivjubqtx .gt_center {
   text-align: center;
 }
 
-#ehalspkzcb .gt_right {
+#ufivjubqtx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ehalspkzcb .gt_font_normal {
+#ufivjubqtx .gt_font_normal {
   font-weight: normal;
 }
 
-#ehalspkzcb .gt_font_bold {
+#ufivjubqtx .gt_font_bold {
   font-weight: bold;
 }
 
-#ehalspkzcb .gt_font_italic {
+#ufivjubqtx .gt_font_italic {
   font-style: italic;
 }
 
-#ehalspkzcb .gt_super {
+#ufivjubqtx .gt_super {
   font-size: 65%;
 }
 
-#ehalspkzcb .gt_footnote_marks {
+#ufivjubqtx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ehalspkzcb .gt_asterisk {
+#ufivjubqtx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ehalspkzcb .gt_indent_1 {
+#ufivjubqtx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ehalspkzcb .gt_indent_2 {
+#ufivjubqtx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ehalspkzcb .gt_indent_3 {
+#ufivjubqtx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ehalspkzcb .gt_indent_4 {
+#ufivjubqtx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ehalspkzcb .gt_indent_5 {
+#ufivjubqtx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3333,24 +2319,24 @@ calvarium is intact.</p>
 <span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
 <span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span>,</span>
 <span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div id="djagfvsybh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fbsnayoreh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#djagfvsybh table {
+#fbsnayoreh table {
   font-family: Rubik, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#djagfvsybh thead, #djagfvsybh tbody, #djagfvsybh tfoot, #djagfvsybh tr, #djagfvsybh td, #djagfvsybh th {
+#fbsnayoreh thead, #fbsnayoreh tbody, #fbsnayoreh tfoot, #fbsnayoreh tr, #fbsnayoreh td, #fbsnayoreh th {
   border-style: none;
 }
 
-#djagfvsybh p {
+#fbsnayoreh p {
   margin: 0;
   padding: 0;
 }
 
-#djagfvsybh .gt_table {
+#fbsnayoreh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3376,12 +2362,12 @@ calvarium is intact.</p>
   border-left-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_caption {
+#fbsnayoreh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#djagfvsybh .gt_title {
+#fbsnayoreh .gt_title {
   color: #0B0B45;
   font-size: 20px;
   font-weight: initial;
@@ -3393,7 +2379,7 @@ calvarium is intact.</p>
   border-bottom-width: 0;
 }
 
-#djagfvsybh .gt_subtitle {
+#fbsnayoreh .gt_subtitle {
   color: #0B0B45;
   font-size: 14px;
   font-weight: initial;
@@ -3405,7 +2391,7 @@ calvarium is intact.</p>
   border-top-width: 0;
 }
 
-#djagfvsybh .gt_heading {
+#fbsnayoreh .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3417,13 +2403,13 @@ calvarium is intact.</p>
   border-right-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_bottom_border {
+#fbsnayoreh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_col_headings {
+#fbsnayoreh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3438,7 +2424,7 @@ calvarium is intact.</p>
   border-right-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_col_heading {
+#fbsnayoreh .gt_col_heading {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3458,7 +2444,7 @@ calvarium is intact.</p>
   overflow-x: hidden;
 }
 
-#djagfvsybh .gt_column_spanner_outer {
+#fbsnayoreh .gt_column_spanner_outer {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3470,15 +2456,15 @@ calvarium is intact.</p>
   padding-right: 4px;
 }
 
-#djagfvsybh .gt_column_spanner_outer:first-child {
+#fbsnayoreh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#djagfvsybh .gt_column_spanner_outer:last-child {
+#fbsnayoreh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#djagfvsybh .gt_column_spanner {
+#fbsnayoreh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3490,11 +2476,11 @@ calvarium is intact.</p>
   width: 100%;
 }
 
-#djagfvsybh .gt_spanner_row {
+#fbsnayoreh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#djagfvsybh .gt_group_heading {
+#fbsnayoreh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3520,7 +2506,7 @@ calvarium is intact.</p>
   text-align: left;
 }
 
-#djagfvsybh .gt_empty_group_heading {
+#fbsnayoreh .gt_empty_group_heading {
   padding: 0.5px;
   color: #0B0B45;
   background-color: #FFFFFF;
@@ -3535,15 +2521,15 @@ calvarium is intact.</p>
   vertical-align: middle;
 }
 
-#djagfvsybh .gt_from_md > :first-child {
+#fbsnayoreh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#djagfvsybh .gt_from_md > :last-child {
+#fbsnayoreh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#djagfvsybh .gt_row {
+#fbsnayoreh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3562,7 +2548,7 @@ calvarium is intact.</p>
   overflow-x: hidden;
 }
 
-#djagfvsybh .gt_stub {
+#fbsnayoreh .gt_stub {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3575,7 +2561,7 @@ calvarium is intact.</p>
   padding-right: 5px;
 }
 
-#djagfvsybh .gt_stub_row_group {
+#fbsnayoreh .gt_stub_row_group {
   color: #0B0B45;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3589,15 +2575,15 @@ calvarium is intact.</p>
   vertical-align: top;
 }
 
-#djagfvsybh .gt_row_group_first td {
+#fbsnayoreh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#djagfvsybh .gt_row_group_first th {
+#fbsnayoreh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#djagfvsybh .gt_summary_row {
+#fbsnayoreh .gt_summary_row {
   color: #0B0B45;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3607,16 +2593,16 @@ calvarium is intact.</p>
   padding-right: 5px;
 }
 
-#djagfvsybh .gt_first_summary_row {
+#fbsnayoreh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_first_summary_row.thick {
+#fbsnayoreh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#djagfvsybh .gt_last_summary_row {
+#fbsnayoreh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3626,7 +2612,7 @@ calvarium is intact.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_grand_summary_row {
+#fbsnayoreh .gt_grand_summary_row {
   color: #0B0B45;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3636,7 +2622,7 @@ calvarium is intact.</p>
   padding-right: 5px;
 }
 
-#djagfvsybh .gt_first_grand_summary_row {
+#fbsnayoreh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3646,7 +2632,7 @@ calvarium is intact.</p>
   border-top-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_last_grand_summary_row_top {
+#fbsnayoreh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3656,11 +2642,11 @@ calvarium is intact.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_striped {
+#fbsnayoreh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#djagfvsybh .gt_table_body {
+#fbsnayoreh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3669,7 +2655,7 @@ calvarium is intact.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_footnotes {
+#fbsnayoreh .gt_footnotes {
   color: #0B0B45;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3683,7 +2669,7 @@ calvarium is intact.</p>
   border-right-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_footnote {
+#fbsnayoreh .gt_footnote {
   margin: 0px;
   font-size: 12px;
   padding-top: 4px;
@@ -3692,7 +2678,7 @@ calvarium is intact.</p>
   padding-right: 5px;
 }
 
-#djagfvsybh .gt_sourcenotes {
+#fbsnayoreh .gt_sourcenotes {
   color: #0B0B45;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3706,7 +2692,7 @@ calvarium is intact.</p>
   border-right-color: #D3D3D3;
 }
 
-#djagfvsybh .gt_sourcenote {
+#fbsnayoreh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3714,63 +2700,63 @@ calvarium is intact.</p>
   padding-right: 5px;
 }
 
-#djagfvsybh .gt_left {
+#fbsnayoreh .gt_left {
   text-align: left;
 }
 
-#djagfvsybh .gt_center {
+#fbsnayoreh .gt_center {
   text-align: center;
 }
 
-#djagfvsybh .gt_right {
+#fbsnayoreh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#djagfvsybh .gt_font_normal {
+#fbsnayoreh .gt_font_normal {
   font-weight: normal;
 }
 
-#djagfvsybh .gt_font_bold {
+#fbsnayoreh .gt_font_bold {
   font-weight: bold;
 }
 
-#djagfvsybh .gt_font_italic {
+#fbsnayoreh .gt_font_italic {
   font-style: italic;
 }
 
-#djagfvsybh .gt_super {
+#fbsnayoreh .gt_super {
   font-size: 65%;
 }
 
-#djagfvsybh .gt_footnote_marks {
+#fbsnayoreh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#djagfvsybh .gt_asterisk {
+#fbsnayoreh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#djagfvsybh .gt_indent_1 {
+#fbsnayoreh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#djagfvsybh .gt_indent_2 {
+#fbsnayoreh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#djagfvsybh .gt_indent_3 {
+#fbsnayoreh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#djagfvsybh .gt_indent_4 {
+#fbsnayoreh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#djagfvsybh .gt_indent_5 {
+#fbsnayoreh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -4110,6 +3096,7 @@ of the system.</p>
 </h2>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in delister(x$head[4, 4]): could not find function "delister"</span></span>
 <span></span>
 <span><span class="va">x</span><span class="op">$</span><span class="va">axes</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -4140,10 +3127,7 @@ of the system.</p>
 <span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
 <span>    table.font.color <span class="op">=</span> <span class="st">"#0B0B45"</span>,</span>
 <span>    footnotes.font.size <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `x$definitions[1, 6]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 6 doesn't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 2 columns.</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in paste0("&lt;b&gt;Definition:&lt;/b&gt; ", procedural:::delister(x$definitions[1, : object 'delister' not found</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
