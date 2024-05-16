@@ -3,7 +3,7 @@ pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
   getting-started: getting-started.html
-last_built: 2024-05-15T22:33Z
+last_built: 2024-05-16T00:45Z
 urls:
   reference: https://andrewallenbruce.github.io/procedural/reference
   article: https://andrewallenbruce.github.io/procedural/articles
