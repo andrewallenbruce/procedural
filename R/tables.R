@@ -1,16 +1,21 @@
 #' ICD-10-PCS Rows
-#' @param x 3 to 4-character string representing an ICD-10-PCS row within a table.
-#'    If `NULL` (default), returns all ~ 29k rows.
-#' @return [tibble()]
-#' @examplesIf interactive()
+#'
+#' @param x 3 to 4-character string representing an ICD-10-PCS row within a
+#'   table. If `NULL` (default), returns all ~ 29k rows.
+#'
+#' @template returns-default
+#'
+#' @examples
 #' rows("00X")
 #'
 #' rows("00XF")
 #'
+#' @autoglobal
+#'
 #' @export
 rows <- function(x = NULL) {
 
-  tbl <- pins::pin_read(mount_board(), "pcs_tbl3")
+  tbl <- get_pin("pcs_tbl3")
   # tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
   #   tidyr::unnest(rows) |>
   #   dplyr::select(table = code_table,
@@ -60,9 +65,15 @@ rows <- function(x = NULL) {
   #   dplyr::distinct()
 
   if (!is.null(x)) {
+
     x <- checks(x)
-    if (nchar(x) == 3L) tbl <- dplyr::filter(tbl, table == x)
-    if (nchar(x) > 3L) tbl <- dplyr::filter(tbl, row == substr(x, 1, 4))
+
+    if (nchar(x) == 3L) {
+      tbl <- dplyr::filter(tbl, table == x)
+      }
+    if (nchar(x) > 3L) {
+      tbl <- dplyr::filter(tbl, row == substr(x, 1, 4))
+      }
   }
   return(tbl)
 }

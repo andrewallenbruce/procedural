@@ -213,8 +213,12 @@ pcs <- function(x = NULL) {
 # Row IDs begin ---------------------
 .approach <- function(x) { #5
 
-  x$select <- as.data.frame(x$select) |> collapse::rsplit(x$select$axis)
-  x$possible <- collapse::funique(x$select$`5`[c("axis", "name", "value", "label")])
+  x$select <- as.data.frame(x$select) |>
+    collapse::rsplit(x$select$axis)
+
+  x$possible <- collapse::funique(
+    x$select$`5`[c("axis", "name", "value", "label")]
+    )
 
   # Return all approaches
   if (stringfish::sf_nchar(x$input) == 4L)  {.cli(x); return(invisible(x))}
@@ -234,11 +238,21 @@ pcs <- function(x = NULL) {
 
     x$head <- vctrs::vec_rbind(
       x$head,
-      collapse::funique(x$select_5[c("axis", "name", "value", "label")])
+      collapse::funique(
+        x$select_5[c("axis", "name", "value", "label")]
+        )
       )
 
-    x$select_6 <- fuimus::search_in(x$select_6, x$select_6$rowid, x$id)
-    x$select_7 <- fuimus::search_in(x$select_7, x$select_7$rowid, x$id)
+    x$select_6 <- fuimus::search_in(
+      x$select_6,
+      x$select_6$rowid,
+      x$id
+      )
+    x$select_7 <- fuimus::search_in(
+      x$select_7,
+      x$select_7$rowid,
+      x$id
+      )
 
     # Axis 5 Definition
     x$definitions <- switch(
@@ -273,7 +287,9 @@ pcs <- function(x = NULL) {
 
 .device <- function(x) { #6
 
-  x$possible <- collapse::funique(x$select_6[c("axis", "name", "value", "label")])
+  x$possible <- collapse::funique(
+    x$select_6[c("axis", "name", "value", "label")]
+    )
 
   # Return all devices
   if (stringfish::sf_nchar(x$input) == 5L) {.cli(x); return(invisible(x))}
@@ -288,7 +304,10 @@ pcs <- function(x = NULL) {
       x$select_6$value == stringfish::sf_substr(x$input, 6, 6)
       )
 
-    x$id <- vctrs::vec_set_intersect(x$id, x$select_6$rowid)
+    x$id <- vctrs::vec_set_intersect(
+      x$id,
+      x$select_6$rowid
+      )
 
     x$head <- vctrs::vec_rbind(
       x$head,
@@ -297,8 +316,16 @@ pcs <- function(x = NULL) {
         )
       )
 
-    x$select_5 <- fuimus::search_in(x$select_5, x$select_5$rowid, x$id)
-    x$select_7 <- fuimus::search_in(x$select_7, x$select_7$rowid, x$id)
+    x$select_5 <- fuimus::search_in(
+      x$select_5,
+      x$select_5$rowid,
+      x$id
+      )
+    x$select_7 <- fuimus::search_in(
+      x$select_7,
+      x$select_7$rowid,
+      x$id
+      )
 
     # Axis 6 Includes
     x$includes <- switch(
@@ -327,7 +354,9 @@ pcs <- function(x = NULL) {
 
 .qualifier <- function(x) { #7
 
-  x$possible <- collapse::funique(x$select_7[c("axis", "name", "value", "label")])
+  x$possible <- collapse::funique(
+    x$select_7[c("axis", "name", "value", "label")]
+    )
 
   # Return all devices
   if (stringfish::sf_nchar(x$input) == 6L) {.cli(x); return(invisible(x))}
@@ -341,16 +370,28 @@ pcs <- function(x = NULL) {
       x$select_7$value == stringfish::sf_substr(x$input, 7, 7)
       )
 
-    x$id <- vctrs::vec_set_intersect(x$id, x$select_7$rowid)
+    x$id <- vctrs::vec_set_intersect(
+      x$id,
+      x$select_7$rowid
+      )
 
     x$head <- vctrs::vec_rbind(
       x$head,
-      collapse::funique(x$select_7[c("axis", "name", "value", "label")])
+      collapse::funique(
+        x$select_7[c("axis", "name", "value", "label")]
+        )
       )
 
-    x$select_5 <- fuimus::search_in(x$select_5, x$select_5$rowid, x$id)
-    x$select_6 <- fuimus::search_in(x$select_6, x$select_7$rowid, x$id)
-
+    x$select_5 <- fuimus::search_in(
+      x$select_5,
+      x$select_5$rowid,
+      x$id
+      )
+    x$select_6 <- fuimus::search_in(
+      x$select_6,
+      x$select_7$rowid,
+      x$id
+      )
   }
   return(x)
 }

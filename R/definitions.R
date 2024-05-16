@@ -44,7 +44,7 @@ definitions <- function(section = NULL,
   if (!is.null(axis)) {
     axis <- as.character(axis)
 
-    axis <- rlang::arg_match(axis, c("3", "4", "5"))
+    axis <- rlang::arg_match0(axis, c("3", "4", "5"))
 
     def <- vctrs::vec_slice(def, def$axis == axis)
   }
@@ -258,9 +258,13 @@ code_range <- function(start, end) {
   o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
 
   if (o_start > o_end) {
-    cli::cli_abort(c(
-      "{.val {start}} comes after {.val {end}}",
-      "x" = "{.val {o_start}} > {.val {o_end}}."))}
+
+    cli::cli_abort(
+      c(
+        "{.val {start}} comes after {.val {end}}",
+        "x" = "{.val {o_start}} > {.val {o_end}}.")
+    )
+  }
   dplyr::filter(base, dplyr::between(order, o_start, o_end))
 }
 
@@ -295,18 +299,18 @@ devices <- function(system = NULL,
   col <- match.arg(col)
 
   if (!is.null(system)) {
-    system <- rlang::arg_match(system, c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U"))
+    system <- rlang::arg_match0(system, c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U"))
     dev <- vctrs::vec_slice(dev, dev$system == system)
   }
 
   if (!is.null(operation)) {
-    operation <- rlang::arg_match(operation, c("All applicable", "H", "R", "S", "V"))
+    operation <- rlang::arg_match0(operation, c("All applicable", "H", "R", "S", "V"))
     dev <- vctrs::vec_slice(dev, dev$operation == operation)
   }
 
   if (!is.null(device)) {
-    if (is.numeric(device)) device <- as.character(device)
-    device <- rlang::arg_match(device, c(2, 4:7, "D", "J", "M", "P", "S"))
+    device <- as.character(device)
+    device <- rlang::arg_match0(device, c(2, 4:7, "D", "J", "M", "P", "S"))
     dev <- vctrs::vec_slice(dev, dev$device == device)
   }
 

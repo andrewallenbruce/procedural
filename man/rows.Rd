@@ -7,19 +7,18 @@
 rows(x = NULL)
 }
 \arguments{
-\item{x}{3 to 4-character string representing an ICD-10-PCS row within a table.
-If \code{NULL} (default), returns all ~ 29k rows.}
+\item{x}{3 to 4-character string representing an ICD-10-PCS row within a
+table. If \code{NULL} (default), returns all ~ 29k rows.}
 }
 \value{
-\code{\link[=tibble]{tibble()}}
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 ICD-10-PCS Rows
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 rows("00X")
 
 rows("00XF")
-\dontshow{\}) # examplesIf}
+
 }

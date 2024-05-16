@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 
 ```{r setup, message=FALSE, warning=FALSE}
 library(procedural)
+library(fuimus)
 library(dplyr)
 library(gt)
 library(htmltools)
@@ -556,14 +557,14 @@ x$axes |>
              subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[1, 6]))),
+    fuimus::delister(x$definitions[1, 2]))),
     locations = cells_body(columns = label, rows = 3)) |>
   tab_footnote(
-    footnote = html(paste("<b>Includes:</b>", procedural:::delister(x$includes[1, 5]))),
+    footnote = html(paste("<b>Includes:</b>", fuimus::delister(x$includes[1, 5]))),
     locations = cells_body(columns = label, rows = 4)) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
-    procedural:::delister(x$definitions[2, 6]))),
+    fuimus::delister(x$definitions[2, 2]))),
     locations = cells_body(columns = label, rows = 5)) |>
   tab_options(
     table.width = pct(75),

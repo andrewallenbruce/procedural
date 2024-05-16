@@ -48,6 +48,12 @@ pcs("0LQV3ZZ") # Medical and Surgical
     #> $description
     #> [1] "Repair Right Foot Tendon, Percutaneous Approach"
     #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                    
+    #>   <chr>   <chr>                                          
+    #> 1 0LQV3ZZ Repair Right Foot Tendon, Percutaneous Approach
+    #> 
     #> $axes
     #> # A tibble: 7 × 4
     #>   axis  name        value label               
@@ -61,14 +67,11 @@ pcs("0LQV3ZZ") # Medical and Surgical
     #> 7 7     Qualifier   Z     No Qualifier        
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label        definition                         
-    #>   <chr>   <chr> <chr>     <chr> <chr>        <chr>                              
-    #> 1 0       3     Operation Q     Repair       Restoring, to the extent possible,…
-    #> 2 0       5     Approach  3     Percutaneous Entry, by puncture or minor incisi…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label        definition                                                       
+    #>   <chr>        <chr>                                                            
+    #> 1 Repair       Restoring, to the extent possible, a body part to its normal ana…
+    #> 2 Percutaneous Entry, by puncture or minor incision, of instrumentation through…
 
 ``` r
 pcs("0G9000Z") # Medical and Surgical
@@ -79,6 +82,12 @@ pcs("0G9000Z") # Medical and Surgical
     #> 
     #> $description
     #> [1] "Drainage of Pituitary Gland with Drainage Device, Open Approach"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                    
+    #>   <chr>   <chr>                                                          
+    #> 1 0G9000Z Drainage of Pituitary Gland with Drainage Device, Open Approach
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -93,11 +102,11 @@ pcs("0G9000Z") # Medical and Surgical
     #> 7 7     Qualifier   Z     No Qualifier        
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label    definition                             
-    #>   <chr>   <chr> <chr>     <chr> <chr>    <chr>                                  
-    #> 1 0       3     Operation 9     Drainage Taking or letting out fluids and/or ga…
-    #> 2 0       5     Approach  0     Open     Cutting through the skin or mucous mem…
+    #> # A tibble: 2 × 2
+    #>   label    definition                                                           
+    #>   <chr>    <chr>                                                                
+    #> 1 Drainage Taking or letting out fluids and/or gases from a body part. The qual…
+    #> 2 Open     Cutting through the skin or mucous membrane and any other body layer…
     #> 
     #> $includes
     #> # A tibble: 1 × 5
@@ -115,6 +124,12 @@ pcs("10D20ZZ") # Obstetrics
     #> $description
     #> [1] "Extraction of Products of Conception, Ectopic, Open Approach"
     #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                 
+    #>   <chr>   <chr>                                                       
+    #> 1 10D20ZZ Extraction of Products of Conception, Ectopic, Open Approach
+    #> 
     #> $axes
     #> # A tibble: 7 × 4
     #>   axis  name        value label                          
@@ -128,14 +143,11 @@ pcs("10D20ZZ") # Obstetrics
     #> 7 7     Qualifier   Z     No Qualifier                   
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label      definition                           
-    #>   <chr>   <chr> <chr>     <chr> <chr>      <chr>                                
-    #> 1 1       3     Operation D     Extraction Pulling or stripping out or off all …
-    #> 2 1       5     Approach  0     Open       Cutting through the skin or mucous m…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label      definition                                                         
+    #>   <chr>      <chr>                                                              
+    #> 1 Extraction Pulling or stripping out or off all or a portion of a body part by…
+    #> 2 Open       Cutting through the skin or mucous membrane and any other body lay…
 
 ``` r
 pcs("2W0UX0Z") # Placement
@@ -146,6 +158,12 @@ pcs("2W0UX0Z") # Placement
     #> 
     #> $description
     #> [1] "Change Traction Apparatus on Right Toe"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                           
+    #>   <chr>   <chr>                                 
+    #> 1 2W0UX0Z Change Traction Apparatus on Right Toe
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -160,14 +178,11 @@ pcs("2W0UX0Z") # Placement
     #> 7 7     Qualifier   Z     No Qualifier      
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label    definition                             
-    #>   <chr>   <chr> <chr>     <chr> <chr>    <chr>                                  
-    #> 1 2       3     Operation 0     Change   Taking out or off a device from a body…
-    #> 2 2       5     Approach  X     External Procedures performed directly on the s…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label    definition                                                           
+    #>   <chr>    <chr>                                                                
+    #> 1 Change   Taking out or off a device from a body part and putting back an iden…
+    #> 2 External Procedures performed directly on the skin or mucous membrane and pro…
 
 ``` r
 pcs("3E1938X") # Administration
@@ -178,6 +193,12 @@ pcs("3E1938X") # Administration
     #> 
     #> $description
     #> [1] "Irrigation of Nose using Irrigating Substance, Percutaneous Approach, Diagnostic"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                           
+    #>   <chr>   <chr>                                                                 
+    #> 1 3E1938X Irrigation of Nose using Irrigating Substance, Percutaneous Approach,…
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -192,14 +213,11 @@ pcs("3E1938X") # Administration
     #> 7 7     Qualifier            X     Diagnostic                                  
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label        definition                         
-    #>   <chr>   <chr> <chr>     <chr> <chr>        <chr>                              
-    #> 1 3       3     Operation 1     Irrigation   Putting in or on a cleansing subst…
-    #> 2 3       5     Approach  3     Percutaneous Entry, by puncture or minor incisi…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label        definition                                                       
+    #>   <chr>        <chr>                                                            
+    #> 1 Irrigation   Putting in or on a cleansing substance                           
+    #> 2 Percutaneous Entry, by puncture or minor incision, of instrumentation through…
 
 ``` r
 pcs("4B01XVZ") # Measurement and Monitoring
@@ -210,6 +228,12 @@ pcs("4B01XVZ") # Measurement and Monitoring
     #> 
     #> $description
     #> [1] "Measurement of Peripheral Nervous Stimulator, External Approach"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                    
+    #>   <chr>   <chr>                                                          
+    #> 1 4B01XVZ Measurement of Peripheral Nervous Stimulator, External Approach
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -224,14 +248,11 @@ pcs("4B01XVZ") # Measurement and Monitoring
     #> 7 7     Qualifier         Z     No Qualifier              
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label       definition                          
-    #>   <chr>   <chr> <chr>     <chr> <chr>       <chr>                               
-    #> 1 4       3     Operation 0     Measurement Determining the level of a physiolo…
-    #> 2 4       5     Approach  X     External    Procedures performed directly on th…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label       definition                                                        
+    #>   <chr>       <chr>                                                             
+    #> 1 Measurement Determining the level of a physiological or physical function at …
+    #> 2 External    Procedures performed directly on the skin or mucous membrane and …
 
 ``` r
 pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
@@ -242,6 +263,12 @@ pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
     #> 
     #> $description
     #> [1] "Assistance with Cardiac Output using Balloon Pump, Intermittent"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                    
+    #>   <chr>   <chr>                                                          
+    #> 1 5A02110 Assistance with Cardiac Output using Balloon Pump, Intermittent
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -256,10 +283,10 @@ pcs("5A02110") # Extracorporeal or Systemic Assistance and Performance
     #> 7 7     Qualifier   0     Balloon Pump                                         
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label      definition                                                         
+    #>   <chr>      <chr>                                                              
+    #> 1 Assistance Taking over a portion of a physiological function by extracorporea…
 
 ``` r
 pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
@@ -270,6 +297,12 @@ pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
     #> 
     #> $description
     #> [1] "Atmospheric Control, Single"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                
+    #>   <chr>   <chr>                      
+    #> 1 6A0Z0ZZ Atmospheric Control, Single
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -284,10 +317,10 @@ pcs("6A0Z0ZZ") # Extracorporeal or Systemic Therapies
     #> 7 7     Qualifier   Z     No Qualifier                        
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label               definition                                                
+    #>   <chr>               <chr>                                                     
+    #> 1 Atmospheric Control Extracorporeal control of atmospheric pressure and compos…
 
 ``` r
 pcs("7W00X0Z") # Osteopathic
@@ -298,6 +331,12 @@ pcs("7W00X0Z") # Osteopathic
     #> 
     #> $description
     #> [1] "Osteopathic Treatment of Head using Articulatory-Raising Forces"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                    
+    #>   <chr>   <chr>                                                          
+    #> 1 7W00X0Z Osteopathic Treatment of Head using Articulatory-Raising Forces
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -312,14 +351,11 @@ pcs("7W00X0Z") # Osteopathic
     #> 7 7     Qualifier   Z     None                
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label     definition                            
-    #>   <chr>   <chr> <chr>     <chr> <chr>     <chr>                                 
-    #> 1 7       3     Operation 0     Treatment Manual treatment to eliminate or alle…
-    #> 2 7       5     Approach  X     External  Procedures performed directly on the …
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label     definition                                                          
+    #>   <chr>     <chr>                                                               
+    #> 1 Treatment Manual treatment to eliminate or alleviate somatic dysfunction and …
+    #> 2 External  Procedures performed directly on the skin or mucous membrane and pr…
 
 ``` r
 pcs("8C01X6J") # Other Procedures
@@ -330,6 +366,12 @@ pcs("8C01X6J") # Other Procedures
     #> 
     #> $description
     #> [1] "Collection of Cerebrospinal Fluid from Indwelling Device in Nervous System"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                           
+    #>   <chr>   <chr>                                                                 
+    #> 1 8C01X6J Collection of Cerebrospinal Fluid from Indwelling Device in Nervous S…
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -344,14 +386,11 @@ pcs("8C01X6J") # Other Procedures
     #> 7 7     Qualifier   J     Cerebrospinal Fluid
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label            definition                     
-    #>   <chr>   <chr> <chr>     <chr> <chr>            <chr>                          
-    #> 1 8       3     Operation 0     Other Procedures Methodologies which attempt to…
-    #> 2 8       5     Approach  X     External         Procedures performed directly …
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label            definition                                                   
+    #>   <chr>            <chr>                                                        
+    #> 1 Other Procedures Methodologies which attempt to remediate or cure a disorder …
+    #> 2 External         Procedures performed directly on the skin or mucous membrane…
 
 ``` r
 pcs("9WB0XBZ") # Chiropractic
@@ -362,6 +401,12 @@ pcs("9WB0XBZ") # Chiropractic
     #> 
     #> $description
     #> [1] "Chiropractic Manipulation of Head, Non-Manual"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                  
+    #>   <chr>   <chr>                                        
+    #> 1 9WB0XBZ Chiropractic Manipulation of Head, Non-Manual
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -376,14 +421,11 @@ pcs("9WB0XBZ") # Chiropractic
     #> 7 7     Qualifier   Z     None              
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label        definition                         
-    #>   <chr>   <chr> <chr>     <chr> <chr>        <chr>                              
-    #> 1 9       3     Operation B     Manipulation Manual procedure that involves a d…
-    #> 2 9       5     Approach  X     External     Procedures performed directly on t…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label        definition                                                       
+    #>   <chr>        <chr>                                                            
+    #> 1 Manipulation Manual procedure that involves a directed thrust to move a joint…
+    #> 2 External     Procedures performed directly on the skin or mucous membrane and…
 
 ``` r
 pcs("B00B0ZZ") # Imaging
@@ -394,6 +436,12 @@ pcs("B00B0ZZ") # Imaging
     #> 
     #> $description
     #> [1] "Plain Radiography of Spinal Cord using High Osmolar Contrast"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                 
+    #>   <chr>   <chr>                                                       
+    #> 1 B00B0ZZ Plain Radiography of Spinal Cord using High Osmolar Contrast
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -408,10 +456,10 @@ pcs("B00B0ZZ") # Imaging
     #> 7 7     Qualifier   Z     None                  
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label             definition                                                  
+    #>   <chr>             <chr>                                                       
+    #> 1 Plain Radiography Planar display of an image developed from the capture of ex…
 
 ``` r
 pcs("C0101ZZ") # Nuclear Medicine
@@ -422,6 +470,12 @@ pcs("C0101ZZ") # Nuclear Medicine
     #> 
     #> $description
     #> [1] "Planar Nuclear Medicine Imaging of Brain using Technetium 99m (Tc-99m)"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                           
+    #>   <chr>   <chr>                                                                 
+    #> 1 C0101ZZ Planar Nuclear Medicine Imaging of Brain using Technetium 99m (Tc-99m)
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -436,10 +490,10 @@ pcs("C0101ZZ") # Nuclear Medicine
     #> 7 7     Qualifier    Z     None                           
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label                           definition                                    
+    #>   <chr>                           <chr>                                         
+    #> 1 Planar Nuclear Medicine Imaging Introduction of radioactive materials into th…
 
 ``` r
 pcs("DG22DZZ") # Radiation Therapy
@@ -451,6 +505,12 @@ pcs("DG22DZZ") # Radiation Therapy
     #> $description
     #> [1] "Stereotactic Other Photon Radiosurgery of Adrenal Glands"
     #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                             
+    #>   <chr>   <chr>                                                   
+    #> 1 DG22DZZ Stereotactic Other Photon Radiosurgery of Adrenal Glands
+    #> 
     #> $axes
     #> # A tibble: 7 × 4
     #>   axis  name               value label                                 
@@ -461,13 +521,7 @@ pcs("DG22DZZ") # Radiation Therapy
     #> 4 4     Treatment Site     2     Adrenal Glands                        
     #> 5 5     Modality Qualifier D     Stereotactic Other Photon Radiosurgery
     #> 6 6     Isotope            Z     None                                  
-    #> 7 7     Qualifier          Z     None                                  
-    #> 
-    #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> 7 7     Qualifier          Z     None
 
 ``` r
 pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
@@ -478,6 +532,12 @@ pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
     #> 
     #> $description
     #> [1] "Cochlear Implant Assessment using Audiometer"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                 
+    #>   <chr>   <chr>                                       
+    #> 1 F14Z01Z Cochlear Implant Assessment using Audiometer
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -492,22 +552,19 @@ pcs("F14Z01Z") # Physical Rehabilitation and Diagnostic Audiology
     #> 7 7     Qualifier            Z     None                                         
     #> 
     #> $definitions
-    #> # A tibble: 10 × 6
-    #>    section axis  name           value label                           definition
-    #>    <chr>   <chr> <chr>          <chr> <chr>                           <chr>     
-    #>  1 F       3     Type           4     Hearing Aid Assessment          Measureme…
-    #>  2 F       5     Type Qualifier 0     Bathing/Showering Techniques    Activitie…
-    #>  3 F       5     Type Qualifier 0     Bithermal, Binaural Caloric Ir… Measures …
-    #>  4 F       5     Type Qualifier 0     Cochlear Implant                Measures …
-    #>  5 F       5     Type Qualifier 0     Cochlear Implant Rehabilitation Applying …
-    #>  6 F       5     Type Qualifier 0     Filtered Speech                 Uses high…
-    #>  7 F       5     Type Qualifier 0     Hearing and Related Disorders … Provides …
-    #>  8 F       5     Type Qualifier 0     Hearing Screening               Pass/refe…
-    #>  9 F       5     Type Qualifier 0     Range of Motion and Joint Mobi… Exercise …
-    #> 10 F       5     Type Qualifier 0     Vestibular                      Applying …
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 10 × 2
+    #>    label                                    definition                          
+    #>    <chr>                                    <chr>                               
+    #>  1 Hearing Aid Assessment                   Measurement of the appropriateness …
+    #>  2 Bathing/Showering Techniques             Activities to facilitate obtaining …
+    #>  3 Bithermal, Binaural Caloric Irrigation   Measures the rhythmic eye movements…
+    #>  4 Cochlear Implant                         Measures candidacy for cochlear imp…
+    #>  5 Cochlear Implant Rehabilitation          Applying techniques to improve the …
+    #>  6 Filtered Speech                          Uses high or low pass filtered spee…
+    #>  7 Hearing and Related Disorders Counseling Provides patients/families/caregive…
+    #>  8 Hearing Screening                        Pass/refer measures designed to ide…
+    #>  9 Range of Motion and Joint Mobility       Exercise or activities to increase …
+    #> 10 Vestibular                               Applying techniques to compensate f…
 
 ``` r
 pcs("GZ10ZZZ") # Mental Health
@@ -518,6 +575,12 @@ pcs("GZ10ZZZ") # Mental Health
     #> 
     #> $description
     #> [1] "Psychological Tests, Developmental"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                       
+    #>   <chr>   <chr>                             
+    #> 1 GZ10ZZZ Psychological Tests, Developmental
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -532,10 +595,10 @@ pcs("GZ10ZZZ") # Mental Health
     #> 7 7     Qualifier   Z     None               
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label               definition                                                
+    #>   <chr>               <chr>                                                     
+    #> 1 Psychological Tests The administration and interpretation of standardized psy…
 
 ``` r
 pcs("HZ96ZZZ") # Substance Abuse Treatment
@@ -546,6 +609,12 @@ pcs("HZ96ZZZ") # Substance Abuse Treatment
     #> 
     #> $description
     #> [1] "Pharmacotherapy for Substance Abuse Treatment, Clonidine"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                             
+    #>   <chr>   <chr>                                                   
+    #> 1 HZ96ZZZ Pharmacotherapy for Substance Abuse Treatment, Clonidine
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -560,10 +629,10 @@ pcs("HZ96ZZZ") # Substance Abuse Treatment
     #> 7 7     Qualifier   Z     None                     
     #> 
     #> $definitions
-    #> [1] NA
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 1 × 2
+    #>   label           definition                                                    
+    #>   <chr>           <chr>                                                         
+    #> 1 Pharmacotherapy The use of replacement medications for the treatment of addic…
 
 ``` r
 pcs("XY0YX37") # New Technology
@@ -574,6 +643,12 @@ pcs("XY0YX37") # New Technology
     #> 
     #> $description
     #> [1] "Extracorporeal Introduction of Nafamostat Anticoagulant, New Technology Group 7"
+    #> 
+    #> $procedure
+    #> # A tibble: 1 × 2
+    #>   code    description                                                           
+    #>   <chr>   <chr>                                                                 
+    #> 1 XY0YX37 Extracorporeal Introduction of Nafamostat Anticoagulant, New Technolo…
     #> 
     #> $axes
     #> # A tibble: 7 × 4
@@ -588,14 +663,11 @@ pcs("XY0YX37") # New Technology
     #> 7 7     Qualifier                       7     New Technology Group 7  
     #> 
     #> $definitions
-    #> # A tibble: 2 × 6
-    #>   section axis  name      value label        definition                         
-    #>   <chr>   <chr> <chr>     <chr> <chr>        <chr>                              
-    #> 1 X       3     Operation 0     Introduction Putting in or on a therapeutic, di…
-    #> 2 X       5     Approach  X     External     Procedures performed directly on t…
-    #> 
-    #> $includes
-    #> [1] NA
+    #> # A tibble: 2 × 2
+    #>   label        definition                                                       
+    #>   <chr>        <chr>                                                            
+    #> 1 Introduction Putting in or on a therapeutic, diagnostic, nutritional, physiol…
+    #> 2 External     Procedures performed directly on the skin or mucous membrane and…
 
 <br>
 
