@@ -1,10 +1,18 @@
 url: https://andrewallenbruce.github.io/procedural/
+
 template:
   bootstrap: 5
-  bootswatch: cosmo
+  theme: tango
+  bootswatch: sandstone
   bslib:
-    # pkgdown-nav-height: 100px
+    line_height: 1.75
     base_font: {google: "Rubik"}
     heading_font: {google: "Albert Sans"}
     code_font: {google: "Fira Code"}
 
+home:
+  title: procedural • Tidy ICD-10-PCS Tools
+  description: >
+    Tidy tools for working with ICD-10-PCS procedure codes.
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]

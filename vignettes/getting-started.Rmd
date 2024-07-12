@@ -29,46 +29,47 @@ library(htmltools)
 ```
 
 
-The __ICD-10-PCS__, or __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
+__ICD-10-PCS__, or the __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
 
 <br>
 
 # Overview
 
-WHO has maintained the International Classification of Diseases (ICD) for recording causes of death since 1893. It has updated the ICD periodically to reflect new discoveries in epidemiology and changes in medical understanding of disease.
+WHO has maintained the International Classification of Diseases (ICD) for recording causes of death since 1893. It has updated the ICD periodically to reflect new discoveries in epidemiology and changes in medical understanding of disease. CMS contracted with 3M Health Information Systems in 1993 to design and develop a procedural classification system that would replace Volume 3 of ICD-9-CM. ICD-10-PCS was initially released in 1998 and is updated annually.
 
-CMS contracted with 3M Health Information Systems in 1993 to design and develop a procedural classification system that would replace Volume 3 of ICD-9-CM.
-
-ICD-10-PCS was initially released in 1998 and is updated annually.
-
-The process of constructing codes in ICD-10-PCS is logical and consistent. 
-
-Individual letters and numbers, called **values**, are selected in sequence to occupy the seven spaces of the code, called **characters**.
-
-## Characters
-
+# Structure
 
 An ICD-10-PCS code is best understood as the result of a process rather than as an assigned number.
 
-All codes in ICD-10-PCS are seven characters long. Each character represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, Medical and Surgical:
+All valid codes in ICD-10-PCS are seven characters long. Each character represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, Medical and Surgical:
+
+Individual letters and numbers, called **values**, are selected in sequence to occupy the seven spaces of the code, called **characters**.
+
+
 
 
 ```{r echo=FALSE}
 tibble(
   Axis = 1:7,
-  Name = c('Section',
-              'Body System',
-              'Root Operation',
-              'Body Part',
-              'Approach',
-              'Device',
-              'Qualifier')) |> 
+  Name = c(
+    'Section',
+    'Body System',
+    'Root Operation',
+    'Body Part',
+    'Approach',
+    'Device',
+    'Qualifier'
+  )
+) |> 
   gt() |> 
-  tab_style(style = list(cell_fill(color = "lightgray",
-                                   alpha = 0.5),
-                         cell_text(weight = "bold")),
-            locations = cells_body(columns = Axis)) |>
-  cols_align(align = 'center', columns = Axis) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgray",
+                alpha = 0.5),
+      cell_text(weight = "bold")),
+    locations = cells_body(columns = Axis)) |>
+  cols_align(align = 'center', 
+             columns = Axis) |>
   opt_table_font(font = google_font(name = "Rubik")) |>
   opt_all_caps() |>
   opt_table_outline(style = "none") |> 
@@ -79,8 +80,7 @@ tibble(
     heading.align = "left",
     table.font.color = "#0B0B45",
     footnotes.font.size = px(12),
-    footnotes.marks = letters,
-    # column_labels.hidden = TRUE
+    footnotes.marks = letters
     )
 ```   
 

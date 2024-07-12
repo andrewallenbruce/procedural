@@ -1,3 +1,4 @@
+#' @autoglobal
 #' @noRd
 .def_op <- function(x) {
 
@@ -23,6 +24,7 @@
   op[2]
 }
 
+#' @autoglobal
 #' @noRd
 .inc_part <- function(x, y) {
 
@@ -60,6 +62,7 @@
     tibble::deframe()
 }
 
+#' @autoglobal
 #' @noRd
 .def_ap <- function(x, y) {
 
@@ -74,6 +77,7 @@
     tibble::deframe()
 }
 
+#' @autoglobal
 #' @noRd
 .vc_ln <- function(x, y) {
 
@@ -82,6 +86,7 @@
   rep(NA, max(len_vec) - unname(len_vec[y]))
 }
 
+#' @autoglobal
 #' @noRd
 tables <- function(x) {
 
@@ -164,6 +169,7 @@ tables <- function(x) {
 
 }
 
+#' @autoglobal
 #' @noRd
 .m_axis <- function(x) {
 
@@ -189,6 +195,7 @@ tables <- function(x) {
                   .appdef = dplyr::if_else(is.na(.appdef), "", .appdef))
 }
 
+#' @autoglobal
 #' @noRd
 .pcs_gt <- function(data) {
 
