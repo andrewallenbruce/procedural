@@ -1,66 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/404.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/articles/getting-started.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/approaches.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/code_range.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/definitions.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/devices.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/includes.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/index-topic.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/order.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/pcs.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/procedural-package.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/rows.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/sections.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/procedural/reference/systems.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://andrewallenbruce.github.io/procedural/404.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/LICENSE-text.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/LICENSE.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/articles/getting-started.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/articles/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/authors.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/news/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/approaches.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/code_range.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/definitions.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/devices.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/includes.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/index-topic.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/index.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/order.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/pcs.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/procedural-package.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/rows.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/sections.html</loc></url>
+<url><loc>https://andrewallenbruce.github.io/procedural/reference/systems.html</loc></url>
 </urlset>
+
