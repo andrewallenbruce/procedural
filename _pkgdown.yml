@@ -1,5 +1,8 @@
 url: https://andrewallenbruce.github.io/procedural/
 
+deploy:
+  install_metadata: true
+
 template:
   bootstrap: 5
   theme: tango

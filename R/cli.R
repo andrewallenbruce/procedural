@@ -3,7 +3,7 @@
 .cli <- function(x) {
 
   cl <- glue::glue_data(
-    .x = x$possible,
+    .x = x$opt,
     "{.strong {.field <<value>>}} >=> <<label>>",
     .open = "<<",
     .close = ">>")
@@ -12,13 +12,13 @@
     "{.strong {.fn procedural::pcs}}",
     right = "{.strong {.emph ICD-10-PCS 2024}}")
 
-  if (x$possible$name[[1]] == "Section") {
+  if (x$opt$name[[1]] == "Section") {
 
     pkg_rule
 
     cli::cli_bullets(c("!" = "No Section Selected"))
 
-    cli::cli_h3("Select {.val {rlang::sym(x$possible$name[[1]])}}")
+    cli::cli_h3("Select {.val {rlang::sym(x$opt$name[[1]])}}")
     cli::cli_li(cl)
     cli::cli_end()
 
@@ -44,7 +44,7 @@
 
     cli::cli_bullets(
       c(" ",
-        ">" = "{.emph Select} {.val {rlang::sym(x$possible$name[[1]])}}",
+        ">" = "{.emph Select} {.val {rlang::sym(x$opt$name[[1]])}}",
         " "
         )
       )
@@ -64,11 +64,11 @@
 
   put <- stringfish::sf_substr(x$input, n, n)
 
-  if (!put %in% fuimus::delister(x$possible["value"])) {
+  if (!put %in% fuimus::delister(x$opt["value"])) {
 
     cli::cli_abort(
       paste("{.strong {.val {rlang::sym(put)}}} is an invalid",
-            "{.val {rlang::sym(x$possible$name[[1]])}} value."),
+            "{.val {rlang::sym(x$opt$name[[1]])}} value."),
       call = call)
 
   }

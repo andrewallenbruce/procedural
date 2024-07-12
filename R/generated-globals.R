@@ -82,8 +82,6 @@ utils::globalVariables(c(
   "term_id",
   # <.pcs_gt>
   "top",
-  # <.part>
-  "value",
   # <index>
   "verb",
   NULL

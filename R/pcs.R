@@ -51,45 +51,47 @@ pcs <- function(x = NULL) {
 
 #' @autoglobal
 #' @noRd
-checks <- function(x = NULL,
-                   arg = rlang::caller_arg(x),
-                   call = rlang::caller_env()) {
+checks <- function(x = NULL) {
 
-  # No section == return NA.
+  arg  <- rlang::caller_arg(x)
+  call <- rlang::caller_env()
+
   if (is.null(x)) return(list(input = NA_character_))
 
-  if (is.numeric(x)) x <- as.character(x)
+  x <- stringfish::sf_toupper(as.character(x))
 
-  if (grepl("[[:lower:]]*", x)) x <- toupper(x)
-
-  # if (grepl("[^[0-9A-HJ-NP-Z]]*", x)) {cli::cli_abort(c(
-  #   "x" = "{.strong {.val {x}}} contains {.emph invalid} PCS values."),
-  #   call = call)}
-
-  if (stringfish::sf_nchar(x) > 7L) {cli::cli_abort(c(
-    "A valid {.strong PCS} code is {.emph {.strong 7} characters long}.",
-    "x" = "{.strong {.val {x}}} is {.strong {.val {nchar(x)}}} characters long."),
-    call = call)}
-
+  if (stringfish::sf_nchar(x) > 7L) {
+    cli::cli_abort(
+      c(
+    "{.strong PCS} codes have {.strong 7} characters.",
+    "x" = "{.strong {.val {rlang::sym(x)}}} has {.strong {.val {nchar(x)}}}."
+       ),
+    arg = arg,
+    call = call
+    )
+  }
   return(list(input = x))
 }
+
 
 #' @autoglobal
 #' @noRd
 .section <- function(x) { #1
 
   x <- checks(x)
-  x$possible <- as.data.frame(sections())
+  x$opt <- sections()
 
   # Return all sections
-  if (is.na(x$input)) {.cli(x); return(invisible(x))}
+  if (is.na(x$input)) {.cli(x); invisible(x)}
 
   # Return selected section
   if (!is.na(x$input)) {
 
     .clierr(x, 1)
 
-    x$head <- sections(stringfish::sf_substr(x$input, 1, 1))
+    x$head <- x$opt[which(x$opt$value == stringfish::sf_substr(x$input, 1, 1)), ]
+
+    # x$opt <- NULL
 
     return(x)
     }
@@ -100,14 +102,10 @@ checks <- function(x = NULL,
 .system <- function(x) { #2
 
   # Filter to section
-  system <- systems(
-    stringfish::sf_substr(x$input, 1, 1)
-    )[c("axis", "name", "value", "label")]
-
-  x$possible <- as.data.frame(system)
+  x$opt <- system <- systems(stringfish::sf_substr(x$input, 1, 1))[2:5]
 
   # Return all systems
-  if (stringfish::sf_nchar(x$input) == 1L) {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 1L) {.cli(x); invisible(x)}
 
   # Return selected system
   if (stringfish::sf_nchar(x$input) > 1L) {
@@ -121,6 +119,9 @@ checks <- function(x = NULL,
         system$value == stringfish::sf_substr(x$input, 2, 2)
         )
       )
+
+    # x$opt <- NULL
+
     return(x)
   }
 }
@@ -130,13 +131,12 @@ checks <- function(x = NULL,
 .operation <- function(x) { #3
 
   # Filter to system
-  # TODO
   select <- get_pin("tables_rows") |>
     dplyr::filter(system == stringfish::sf_substr(x$input, 1, 2)) |>
     dplyr::select(code_2, name_3:rows)
 
   # Create operation object
-  operation <- select |>
+  x$opt <- operation <- select |>
     dplyr::mutate(axis = "3") |>
     dplyr::select(axis,
                   name = name_3,
@@ -144,17 +144,15 @@ checks <- function(x = NULL,
                   label = label_3) |>
     dplyr::distinct()
 
-  x$possible <- as.data.frame(operation)
-
   # Return all operations
-  if (stringfish::sf_nchar(x$input) == 2L) {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 2L) {.cli(x); invisible(x)}
 
   # Return selected operation
   if (stringfish::sf_nchar(x$input) > 2L) {
 
     .clierr(x, 3)
 
-    # Axis 3 Definition
+    # TODO Axis 3 Definition
     x$definitions <- switch(
       stringfish::sf_substr(x$input, 1, 1),
       'D' = dplyr::tibble(label = character(0),
@@ -181,6 +179,8 @@ checks <- function(x = NULL,
       ) |>
       dplyr::select(name_4:rows)
 
+    # x$opt <- NULL
+
     return(x)
   }
 }
@@ -191,7 +191,7 @@ checks <- function(x = NULL,
 .part <- function(x) { #4
 
   # Create part object
-  part <- x$select |>
+  x$opt <- part <- x$select |>
     dplyr::mutate(axis = "4") |>
     dplyr::select(axis,
                   name = name_4,
@@ -199,21 +199,23 @@ checks <- function(x = NULL,
                   label = label_4) |>
     dplyr::distinct()
 
-  x$possible <- as.data.frame(part)
-
   # Return all parts
-  if (stringfish::sf_nchar(x$input) == 3L) {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 3L) {.cli(x); invisible(x)}
 
   # Return selected part
   if (stringfish::sf_nchar(x$input) > 3L) {
 
     .clierr(x, 4)
 
-    x$head <- vctrs::vec_rbind(x$head,
-              dplyr::filter(part,
-              value == stringfish::sf_substr(x$input, 4, 4)))
+    x$head <- vctrs::vec_rbind(
+      x$head,
+      vctrs::vec_slice(
+        part,
+        part$value == stringfish::sf_substr(x$input, 4, 4)
+      )
+    )
 
-    # Axis 4 Includes
+    # TODO Axis 4 Includes
     x$includes <- switch(
       stringfish::sf_substr(x$input, 1, 1),
       "0" = ,
@@ -230,14 +232,16 @@ checks <- function(x = NULL,
                                    label = character(0),
                                    includes = character(0)))
 
-    x$select <- dplyr::filter(
+    x$select <- vctrs::vec_slice(
       x$select,
-      row == stringfish::sf_substr(x$input, 1, 4)
-      ) |>
+      x$select$row == stringfish::sf_substr(x$input, 1, 4)
+    ) |>
       dplyr::select(rowid:rows) |>
       tidyr::unnest(rows) |>
       dplyr::distinct() |>
       dplyr::rename(value = code)
+
+    # x$opt <- NULL
 
     return(x)
   }
@@ -248,15 +252,12 @@ checks <- function(x = NULL,
 #' @noRd
 .approach <- function(x) { #5
 
-  x$select <- as.data.frame(x$select) |>
-    collapse::rsplit(x$select$axis)
+  x$select <- collapse::rsplit(x$select, x$select$axis)
 
-  x$possible <- collapse::funique(
-    x$select$`5`[c("axis", "name", "value", "label")]
-    )
+  x$opt <- collapse::funique(x$select$`5`[c("axis", "name", "value", "label")])
 
   # Return all approaches
-  if (stringfish::sf_nchar(x$input) == 4L)  {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 4L)  {.cli(x); invisible(x)}
 
   # Return selected approach
   if (stringfish::sf_nchar(x$input) > 4L) {
@@ -283,13 +284,14 @@ checks <- function(x = NULL,
       x$select_6$rowid,
       x$id
       )
+
     x$select_7 <- fuimus::search_in(
       x$select_7,
       x$select_7$rowid,
       x$id
       )
 
-    # Axis 5 Definition
+    # TODO Axis 5 Definition
     x$definitions <- switch(
       stringfish::sf_substr(x$input, 1, 1),
       "0" = ,
@@ -316,6 +318,7 @@ checks <- function(x = NULL,
         x$definitions,
         dplyr::tibble(label = character(0),
                       definition = character(0))))
+
     return(x)
   }
 }
@@ -324,12 +327,10 @@ checks <- function(x = NULL,
 #' @noRd
 .device <- function(x) { #6
 
-  x$possible <- collapse::funique(
-    x$select_6[c("axis", "name", "value", "label")]
-    )
+  x$opt <- collapse::funique(x$select_6[c("axis", "name", "value", "label")])
 
   # Return all devices
-  if (stringfish::sf_nchar(x$input) == 5L) {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 5L) {.cli(x); invisible(x)}
 
   # Return selected device
   if (stringfish::sf_nchar(x$input) > 5L) {
@@ -358,13 +359,14 @@ checks <- function(x = NULL,
       x$select_5$rowid,
       x$id
       )
+
     x$select_7 <- fuimus::search_in(
       x$select_7,
       x$select_7$rowid,
       x$id
       )
 
-    # Axis 6 Includes
+    # TODO Axis 6 Includes
     x$includes <- switch(
       stringfish::sf_substr(x$input, 1, 1),
       "0" = ,
@@ -386,6 +388,7 @@ checks <- function(x = NULL,
                     label = character(0),
                     includes = character(0))))
   }
+  # FIXME: Move Return inside if statement?
   return(x)
 }
 
@@ -393,12 +396,10 @@ checks <- function(x = NULL,
 #' @noRd
 .qualifier <- function(x) { #7
 
-  x$possible <- collapse::funique(
-    x$select_7[c("axis", "name", "value", "label")]
-    )
+  x$opt <- collapse::funique(x$select_7[c("axis", "name", "value", "label")])
 
   # Return all devices
-  if (stringfish::sf_nchar(x$input) == 6L) {.cli(x); return(invisible(x))}
+  if (stringfish::sf_nchar(x$input) == 6L) {.cli(x); invisible(x)}
 
   if (stringfish::sf_nchar(x$input) > 6L) {
 
@@ -426,12 +427,14 @@ checks <- function(x = NULL,
       x$select_5$rowid,
       x$id
       )
+
     x$select_6 <- fuimus::search_in(
       x$select_6,
       x$select_7$rowid,
       x$id
       )
   }
+  # FIXME: Move Return inside if statement?
   return(x)
 }
 
