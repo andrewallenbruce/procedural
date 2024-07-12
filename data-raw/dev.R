@@ -51,3 +51,16 @@ x <- x |>
 pcs("0LQV3ZZ") |> data.table::as.data.table()
 
 checks("F14Z01Z") |> .def_op()
+
+
+paste0("(", pat1, "|", pat2, ")")
+
+x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', '0000V', 'D6964', 'B0123')
+
+stringfish::sf_grepl(x, "(^\\d{4}[AFMTU0-9]$|^[A-CEGHJ-MP-V]\\d{4}$)")
+
+northstar::search_descriptions("B0123")
+northstar::is_valid_hcpcs(x)
+#> [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+
+x[which(northstar::is_valid_hcpcs(x))]
