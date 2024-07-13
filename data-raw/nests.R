@@ -1,5 +1,5 @@
 ## code to prepare `nests` dataset goes here
-set <- pins::pin_read(mount_board(), "tables_rows") |>
+set <- pins::pin_read(procedural::mount_board(), "tables_rows") |>
   dplyr::mutate(system = paste0(code_1, code_2), .before = name_3)
 
 rows_ids <- dplyr::select(set, row, rowid, rows) |>

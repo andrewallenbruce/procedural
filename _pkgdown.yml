@@ -6,7 +6,7 @@ deploy:
 template:
   bootstrap: 5
   bootswatch: simplex
-  theme: breezedark
+  theme: kate
   bslib:
     # font_scale: 1.1
     line_height: 1.75
