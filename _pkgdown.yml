@@ -5,12 +5,12 @@ deploy:
 
 template:
   bootstrap: 5
-  theme: tango
-  # bootswatch: sandstone
+  bootswatch: simplex
+  theme: breezedark
   bslib:
-    font_scale: 1.1
+    # font_scale: 1.1
     line_height: 1.75
-    base_font: {google: "Rubik"}
+    base_font: {google: "IBM Plex Sans"}
     heading_font: {google: "Fira Sans"}
     code_font: {google: "Fira Code"}
 
