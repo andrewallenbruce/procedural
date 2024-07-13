@@ -6,11 +6,12 @@ deploy:
 template:
   bootstrap: 5
   theme: tango
-  bootswatch: sandstone
+  # bootswatch: sandstone
   bslib:
+    font_scale: 1.1
     line_height: 1.75
     base_font: {google: "Rubik"}
-    heading_font: {google: "Albert Sans"}
+    heading_font: {google: "Fira Sans"}
     code_font: {google: "Fira Code"}
 
 home:
