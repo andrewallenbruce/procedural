@@ -21,7 +21,7 @@ sections <- function(x = NULL) {
 
   sec <- get_pin("sections")
 
-  if (!is.null(x)) {x <- toupper(as.character(x))}
+  if (!is.null(x)) x <- stringfish::sf_toupper(as.character(x))
 
   sec <- fuimus::search_in_if(sec, sec$value, x)
 
@@ -53,11 +53,7 @@ systems <- function(x = NULL) {
 
   if (!is.null(x)) x <- stringfish::sf_toupper(as.character(x))
 
-  sys <- fuimus::search_in_if(
-    sys,
-    sys$section,
-    x
-    )
+  sys <- fuimus::search_in_if(sys, sys$section, x)
 
   return(sys)
 }
