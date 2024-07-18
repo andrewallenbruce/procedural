@@ -66,34 +66,44 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span><span class="st">"0G9000Z"</span>, <span class="st">"0G9100Z"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    order code    table row  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">order</span> <span style="font-weight: bold;">code</span>    <span style="font-weight: bold;">table</span> <span style="font-weight: bold;">row</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">35</span>212 0G9000Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">35</span>213 0G900ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">35</span>214 0G900ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">35</span>215 0G9030Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">35</span>216 0G903ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">35</span>217 0G903ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">35</span>218 0G9040Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">35</span>219 0G904ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>220 0G904ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>221 0G9100Z 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">12</span> 0G9000Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">13</span> 0G900ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">14</span> 0G900ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">15</span> 0G9030Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">16</span> 0G903ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">17</span> 0G903ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">18</span> 0G9040Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">19</span> 0G904ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">20</span> 0G904ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">21</span> 0G9100Z 0G9   0G91 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span><span class="st">"0G9000Z"</span>, <span class="st">"10D20ZZ"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32,901 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    order code    table row  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="font-weight: bold;">order</span> <span style="font-weight: bold;">code</span>    <span style="font-weight: bold;">table</span> <span style="font-weight: bold;">row</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">35</span>212 0G9000Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">35</span>213 0G900ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">35</span>214 0G900ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">35</span>215 0G9030Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">35</span>216 0G903ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">35</span>217 0G903ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">35</span>218 0G9040Z 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">35</span>219 0G904ZX 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>220 0G904ZZ 0G9   0G90 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>221 0G9100Z 0G9   0G91 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32,891 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">12</span> 0G9000Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">13</span> 0G900ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">14</span> 0G900ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">15</span> 0G9030Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">16</span> 0G903ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">17</span> 0G903ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">18</span> 0G9040Z 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">19</span> 0G904ZX 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">20</span> 0G904ZZ 0G9   0G90 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">21</span> 0G9100Z 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">22</span> 0G910ZX 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">23</span> 0G910ZZ 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">24</span> 0G9130Z 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">25</span> 0G913ZX 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">26</span> 0G913ZZ 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">27</span> 0G9140Z 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">28</span> 0G914ZX 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">29</span> 0G914ZZ 0G9   0G91 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">30</span> 0G9200Z 0G9   0G92 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> <span style="text-decoration: underline;">35</span>2<span style="color: #949494;">31</span> 0G920ZX 0G9   0G92 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 32,881 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

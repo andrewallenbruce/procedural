@@ -66,20 +66,20 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">index</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Abdominohysterectomy"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      id index term                 type  value             code </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="font-weight: bold;">id</span> <span style="font-weight: bold;">index</span> <span style="font-weight: bold;">term</span>                 <span style="font-weight: bold;">type</span>  <span style="font-weight: bold;">value</span>             <span style="font-weight: bold;">code</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     5 A     Abdominohysterectomy See   Resection, Uterus 0UT9 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">index</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"Attain Ability"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      id index term                   type  value                          code </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="font-weight: bold;">id</span> <span style="font-weight: bold;">index</span> <span style="font-weight: bold;">term</span>                   <span style="font-weight: bold;">type</span>  <span style="font-weight: bold;">value</span>                          <span style="font-weight: bold;">code</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>   449 A     Attain Ability(R) lead Use   Cardiac Lead, Pacemaker in     02H  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   450 A     Attain Ability(R) lead Use   Cardiac Lead, Defibrillator in 02H  </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">index</span><span class="op">(</span>search <span class="op">=</span> <span class="st">"radi*"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 984 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       id index term                      type  value                       code </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="font-weight: bold;">id</span> <span style="font-weight: bold;">index</span> <span style="font-weight: bold;">term</span>                      <span style="font-weight: bold;">type</span>  <span style="font-weight: bold;">value</span>                       <span style="font-weight: bold;">code</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>   174 A     Analog radiography        See   Plain Radiography           <span style="color: #BB0000;">NA</span>   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>   175 A     Analog radiology          See   Plain Radiography           <span style="color: #BB0000;">NA</span>   </span>
@@ -91,7 +91,17 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>   524 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Respiratory, Less than 24 … DG02…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>   525 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bile Ducts                  DF02 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>   526 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Respiratory, Less than 24 … DF02…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 974 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span>   527 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bladder                     DT02 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   528 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Respiratory, Less than 24 … DT02…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>   529 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone, Other                 DP0C </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span>   530 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone, Intraoperative        DP0C…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span>   531 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone Marrow                 D700 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span>   532 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone, Intraoperative        D700…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span>   533 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Brain                       D000 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span>   534 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone, Intraoperative        D000…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span>   535 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Brain Stem                  D001 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span>   536 B     Beam Radiation            <span style="color: #BB0000;">NA</span>    Bone, Intraoperative        D001…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 964 more rows</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
