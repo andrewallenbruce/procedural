@@ -20,6 +20,7 @@ Imports:
     dplyr,
     fs,
     glue,
+    htmltools,
     pins,
     purrr,
     rlang,
@@ -27,6 +28,7 @@ Imports:
     stringr,
     tidyr,
     vctrs,
+    withr,
     zeallot
 Suggests: 
     fuimus,

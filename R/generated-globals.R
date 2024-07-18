@@ -15,6 +15,8 @@ utils::globalVariables(c(
   # <.m_axis>
   # <.pcs_gt>
   "ax5",
+  # <gt_pcs>
+  # <gt_pcs2>
   # <tables>
   # <.operation>
   # <.part>
@@ -45,6 +47,7 @@ utils::globalVariables(c(
   # <.def_op>
   "explanation",
   # <definitions>
+  # <gt_pcs>
   # <.def_op>
   # <.inc_part>
   # <.def_ap>
@@ -82,6 +85,9 @@ utils::globalVariables(c(
   "term_id",
   # <.pcs_gt>
   "top",
+  # <gt_pcs>
+  # <gt_pcs2>
+  "value",
   # <index>
   "verb",
   NULL

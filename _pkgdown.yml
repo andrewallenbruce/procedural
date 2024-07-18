@@ -5,8 +5,8 @@ deploy:
 
 template:
   bootstrap: 5
-  bootswatch: simplex
-  theme: kate
+  # bootswatch: simplex
+  # theme: tango
   bslib:
     # font_scale: 1.1
     line_height: 1.75

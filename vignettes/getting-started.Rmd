@@ -188,8 +188,8 @@ x$axes |>
   opt_table_outline(style = "none") |>
   tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
              title = html(paste0("<b><u>", 
-                                 x$procedure$code, "</u></b> ", 
-                                 x$procedure$description))) |>
+                                 x$code, "</u></b> ", 
+                                 x$description))) |>
   tab_footnote(
     footnote = html(paste0("<b>Definition:</b> ", 
     x$definitions$definition[1])),
@@ -213,7 +213,7 @@ x$axes |>
 Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
 
 ```{r echo=FALSE}
-procedural:::sections(0:9)[c('value', 'label')] |> 
+sections(0:9)[c('value', 'label')] |> 
   gt(rowname_col = "value") |>
   opt_table_font(font = google_font(name = "Rubik")) |>
   opt_all_caps() |>
@@ -226,43 +226,6 @@ procedural:::sections(0:9)[c('value', 'label')] |>
     table.font.color = "#0B0B45",
     footnotes.font.size = px(12),
     column_labels.hidden = TRUE)
-```
-
-
-```{r echo=FALSE, eval=FALSE}
-tables() |> 
-  group_by(section) |>
-  summarise(codes = sum(n_codes),
-            prop = codes / 78220) |>
-  rename(code = section) |> 
-  left_join(sections()[c('code', 'label')], 
-            by = join_by(code)) |> 
-  select(code, label, codes, prop) |> 
-  mutate(id = row_number(), .before = 1) |>
-  gt(rowname_col = "id") |> 
-  fmt_percent(columns = prop, decimals = 1) |>
-  fmt_number(columns = codes, decimals = 0) |>
-  opt_table_font(font = google_font(name = "Rubik")) |> 
-  cols_align(align = "center", columns = code) |>
-  cols_hide(c(codes, prop)) |> 
-  tab_style(style = list(cell_fill(color = "lightgray", 
-                                   alpha = 0.5), 
-                         cell_text(weight = "bold")), 
-            locations = cells_body(columns = code)) |> 
-  opt_all_caps() |> 
-  opt_align_table_header(align = "left") |>
-  tab_header(title = md("**ICD-10-PCS 2024** Sections")) |> 
-  cols_nanoplot(columns = codes, 
-                plot_type = "bar", 
-                new_col_label = "# of Codes",
-                options = nanoplot_options(
-                  data_bar_fill_color = "#0B0B45",
-                  data_bar_stroke_color = "#0B0B45",
-                  interactive_data_values = FALSE)) |>
-  tab_style(style = cell_borders(sides = c("left"), 
-                                 weight = "5px", 
-                                 color = "lightgray"),
-            locations = cells_body(columns = nanoplots))
 ```
 
 

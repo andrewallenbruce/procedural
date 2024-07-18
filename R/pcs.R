@@ -46,6 +46,10 @@ pcs <- function(x = NULL) {
 
   xs <- .finisher(xs)
 
+  xs$axes$axis <- as.integer(xs$axes$axis)
+
+  class(xs) <- unique(c("pcs", class(xs)))
+
   return(xs)
 }
 
@@ -434,7 +438,7 @@ checks <- function(x = NULL) {
       x$id
       )
   }
-  # FIXME: Move Return inside if statement?
+  # FIXME: Move return(x) inside if statement?
   return(x)
 }
 
@@ -448,11 +452,6 @@ checks <- function(x = NULL) {
 
       code = x$input,
       description = procedural::order(search = x$input)$description_code,
-
-      procedure = dplyr::tibble(
-        code = x$input,
-        description = procedural::order(search = x$input)$description_code,
-      ),
 
       axes = x$head,
 

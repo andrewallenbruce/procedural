@@ -4,6 +4,9 @@ is_system <- function(x,
                       arg = rlang::caller_arg(x),
                       call = rlang::caller_env()) {
 
+  # Regex for PCS System (114)
+  # "^[B-DF-HX0-9][A-HJ-NP-Z0-9]$"
+
   if (!substr(x, 1, 1) %in% c(0:9, LETTERS[c(2:4, 6:8, 24)])) {
     cli::cli_abort(c(
       "Invalid {.strong Section} value",
@@ -54,6 +57,9 @@ is_system <- function(x,
 #' @noRd
 is_table <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
 
+  # Regex for PCS Table (905)
+  # "^[B-DF-HX0-9][A-HJ-NP-Z0-9]{2}$"
+
   if (!substr(x, 1, 1) %in% c(0:9, LETTERS[c(2:4, 6:8, 24)])) {
     cli::cli_abort(c(
       "Valid {.strong PCS Section} axis values: {.emph {.strong 0-9, B-H or X}}.",
@@ -78,6 +84,9 @@ is_table <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) 
 #' @autoglobal
 #' @noRd
 is_row <- function(x, arg = rlang::caller_arg(x), call = rlang::caller_env()) {
+
+  # Regex for PCS Row (11862)
+  # "^[B-DF-HX0-9][A-HJ-NP-Z0-9]{3}$"
 
   if (!substr(x, 4, 4) %in% c(0:9, LETTERS[c(1:8, 10:14, 16:26)])) {
     cli::cli_abort(c(

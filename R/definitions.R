@@ -184,7 +184,7 @@ index <- function(search = NULL,
     ind <- fuimus::srchcol(ind, col = col, search = search, ignore = TRUE)
 
   }
-  return(ind)
+  return(.add_class(ind))
 }
 
 #' ICD-10-PCS Order File
@@ -220,7 +220,7 @@ order <- function(search = NULL, col = c("code",
     tbl <- fuimus::srchcol(tbl, col = col, search = search, ignore = TRUE)
 
   }
-  return(tbl)
+  return(.add_class(tbl))
 }
 
 #' Return a range of ICD-10-PCS codes
@@ -265,7 +265,7 @@ code_range <- function(start, end) {
         "x" = "{.val {o_start}} > {.val {o_end}}.")
     )
   }
-  dplyr::filter(base, dplyr::between(order, o_start, o_end))
+  dplyr::filter(base, dplyr::between(order, o_start, o_end)) |> .add_class()
 }
 
 #' ICD-10-PCS Devices
@@ -319,5 +319,5 @@ devices <- function(system = NULL,
     dev <- fuimus::srchcol(dev, col = col, search = search, ignore = TRUE)
 
   }
-  return(dev)
+  return(.add_class(dev))
 }
