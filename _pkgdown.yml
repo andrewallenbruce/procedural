@@ -4,15 +4,16 @@ deploy:
   install_metadata: true
 
 template:
+  light-switch: true
   bootstrap: 5
   # bootswatch: simplex
   # theme: tango
-  bslib:
+  # bslib:
     # font_scale: 1.1
-    line_height: 1.75
-    base_font: {google: "IBM Plex Sans"}
-    heading_font: {google: "Fira Sans"}
-    code_font: {google: "Fira Code"}
+    # line_height: 1.75
+    # base_font: {google: "IBM Plex Sans"}
+    # heading_font: {google: "Fira Sans"}
+    # code_font: {google: "Fira Code"}
 
 home:
   title: procedural • Tidy ICD-10-PCS Tools
