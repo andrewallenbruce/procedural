@@ -10,12 +10,14 @@ gt_pcs(x)
 \item{x}{an object of class \code{pcs}.}
 }
 \value{
-description
+a gt table
 }
 \description{
 Return ICD-10-PCS Code as a \code{gt} Table
 }
 \examples{
 pcs("0G9000Z") |> gt_pcs()
+
+gt_pcs(pcs("0016070"))
 
 }

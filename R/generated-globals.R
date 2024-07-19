@@ -88,7 +88,5 @@ utils::globalVariables(c(
   # <gt_pcs>
   # <gt_pcs2>
   "value",
-  # <index>
-  "verb",
   NULL
 ))

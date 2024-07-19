@@ -4,12 +4,13 @@
 \alias{index}
 \title{ICD-10-PCS Index}
 \usage{
-index(search = NULL, col = c("term", "index", "type", "value", "code"))
+index(search = NULL, col = c("term", "index", "verb", "value", "code"))
 }
 \arguments{
 \item{search}{string to search for in \code{col}}
 
-\item{col}{column to search: "term" (default), "index", "type", "value", "code"}
+\item{col}{column to search: "term" (default), "index", "type", "value",
+"code"}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}
