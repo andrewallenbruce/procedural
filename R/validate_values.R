@@ -2,7 +2,7 @@
 #'
 #' The 17 valid PCS Section values are "B-D", "F-H", "X", and "0-9".
 #'
-#' @param pcs_value `<chr>` string
+#' @param section_value `<chr>` string
 #'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
@@ -15,21 +15,21 @@
 #'
 #' try(is_section_value("XX"))
 #'
-#' @family Value Validators
+#' @family PCS value validators
 #'
 #' @autoglobal
 #'
 #' @export
-is_section_value <- function(pcs_value) {
-  check_nchar(pcs_value, 1)
-  stringfish::sf_grepl(pcs_value, "^[BCDFGHX0-9]$")
+is_section_value <- function(section_value) {
+  check_nchar(section_value, 1)
+  stringfish::sf_grepl(section_value, "^[BCDFGHX0-9]$")
 }
 
 #' Validate System Values
 #'
 #' The 34 valid PCS System values are "A-H", "J-N", "P-Z", and "0-9".
 #'
-#' @param pcs_value `<chr>` string
+#' @param system_value `<chr>` string
 #'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
 #'
@@ -42,12 +42,12 @@ is_section_value <- function(pcs_value) {
 #'
 #' try(is_system_value("XX"))
 #'
-#' @family Value Validators
+#' @family PCS value validators
 #'
 #' @autoglobal
 #'
 #' @export
-is_system_value <- function(pcs_value) {
-  check_nchar(pcs_value, 1)
-  stringfish::sf_grepl(pcs_value, "^[A-HJ-NP-Z0-9]$")
+is_system_value <- function(system_value) {
+  check_nchar(system_value, 1)
+  stringfish::sf_grepl(system_value, "^[A-HJ-NP-Z0-9]$")
 }

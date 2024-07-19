@@ -15,21 +15,6 @@ is_section_7(pcs_code)
 \description{
 Section 7 accounts for 0.13\% of all PCS codes.
 }
-\details{
-\subsection{Code Pattern}{
-
-Section 7 codes adhere to the following the pattern:
-\enumerate{
-\item \verb{[1]}
-\item \verb{[0]}
-\item \verb{[ADEHJPQSTY29]}
-\item \verb{[0-2]}
-\item \verb{[X03478]}
-\item \verb{[YZ3]}
-\item \verb{[A-HJ-NP-Z0-9]}
-}
-}
-}
 \examples{
 x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 
@@ -41,7 +26,7 @@ try(is_section_7("01UB3K"))
 
 }
 \seealso{
-Other Section Validators: 
+Other PCS code validators: 
 \code{\link{is_section_0}()},
 \code{\link{is_section_1}()},
 \code{\link{is_section_2}()},
@@ -57,6 +42,7 @@ Other Section Validators:
 \code{\link{is_section_F}()},
 \code{\link{is_section_G}()},
 \code{\link{is_section_H}()},
-\code{\link{is_section_X}()}
+\code{\link{is_section_X}()},
+\code{\link{is_section_code}()}
 }
-\concept{Section Validators}
+\concept{PCS code validators}
