@@ -1,24 +1,3 @@
-#' Check that input is 7 characters long
-#'
-#' @param x `<chr>` string
-#'
-#' @autoglobal
-#'
-#' @noRd
-check_7chars <- function(x) {
-
-  arg  <- rlang::caller_arg(x)
-  call <- rlang::caller_env()
-
-  if (any(stringfish::sf_nchar(x) != 7L, na.rm = TRUE)) {
-    cli::cli_abort(
-      "{.arg {arg}} must be 7 characters long.",
-      arg = arg,
-      call = call)
-  }
-  stringfish::sf_toupper(x)
-}
-
 #' Validate Medical & Surgical Codes
 #'
 #' Section 0 accounts for 87% of all PCS codes.
@@ -54,7 +33,7 @@ check_7chars <- function(x) {
 #'
 #' @export
 is_section_0 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[0][B-DF-HJ-NP-Y0-9]{2}[A-HJ-NP-Y0-9][FX03478][A-HJ-NP-Z0-9]{2}$"
@@ -96,7 +75,7 @@ is_section_0 <- function(pcs_code) {
 #'
 #' @export
 is_section_1 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[1][0][ADEHJPQSTY29][0-2][X03478][YZ3][A-HJ-NP-Z0-9]$"
@@ -138,7 +117,7 @@ is_section_1 <- function(pcs_code) {
 #'
 #' @export
 is_section_2 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[2][WY][0-6][A-HJ-NP-V0-9][X][YZ0-79][Z]$"
@@ -180,7 +159,7 @@ is_section_2 <- function(pcs_code) {
 #'
 #' @export
 is_section_3 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[3][CE0][012][A-HJ-NP-Z0-9][X03478][A-HJ-NP-Y0-9][A-DF-HJ-NP-RX-Z0-9]$"
@@ -222,7 +201,7 @@ is_section_3 <- function(pcs_code) {
 #'
 #' @export
 is_section_4 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[4][AB][01][B-DF-HJZ0-9][X03478][B-DF-HJ-NP-TVW0-9][A-HZ0-9]$"
@@ -264,7 +243,7 @@ is_section_4 <- function(pcs_code) {
 #'
 #' @export
 is_section_5 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[5][A][0-2][CD259][A-D0-9][0-5][A-DF-HJKZ0-24-9]$"
@@ -306,7 +285,7 @@ is_section_5 <- function(pcs_code) {
 #'
 #' @export
 is_section_6 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[6][A][B0-9][BFTZ0-35][01][BZ][TVZ0-7]$"
@@ -348,7 +327,7 @@ is_section_6 <- function(pcs_code) {
 #'
 #' @export
 is_section_7 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[7][W][0][0-9][X][0-9][Z]$"
@@ -390,7 +369,7 @@ is_section_7 <- function(pcs_code) {
 #'
 #' @export
 is_section_8 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[8][CE][0][HKUVW-Z129][X03478][B-EY016][CDF-HJ-NZ0-9]$"
@@ -432,7 +411,7 @@ is_section_8 <- function(pcs_code) {
 #'
 #' @export
 is_section_9 <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[9][W][B][0-9][X][B-DF-HJ-L][Z]$"
@@ -474,7 +453,7 @@ is_section_9 <- function(pcs_code) {
 #'
 #' @export
 is_section_B <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[B][BDF-HLNP-RT-WY0-57-9][0-5][A-HJ-NP-Y0-9][YZ0-2][Z0-3][AZ0134]$"
@@ -516,7 +495,7 @@ is_section_B <- function(pcs_code) {
 #'
 #' @export
 is_section_C <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[C][BDF-HPTVW0257-9][1-7][B-DF-HJ-NP-RYZ0-9][B-DF-HK-NP-TVWYZ17-9][Z]{2}$"
@@ -558,7 +537,7 @@ is_section_C <- function(pcs_code) {
 #'
 #' @export
 is_section_D <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[D][BDF-HMPT-W07-9][Y0-2][B-DFKLP-RXY0-9][B-DF-HJ0-9][B-DF-HYZ6-9][Z01]$"
@@ -600,7 +579,7 @@ is_section_D <- function(pcs_code) {
 #'
 #' @export
 is_section_F <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[F][01][B-DF0-9][B-DF-HJ-NZ0-9][B-DF-HJ-NP-TV-X0-9][B-HJ-NPQS-Z0-9][Z]$"
@@ -642,7 +621,7 @@ is_section_F <- function(pcs_code) {
 #'
 #' @export
 is_section_G <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[G][Z][BCFGHJ1-35-7][Z0-689][Z]{3}$"
@@ -684,7 +663,7 @@ is_section_G <- function(pcs_code) {
 #'
 #' @export
 is_section_H <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[H][Z][2-689][B-DZ0-9][Z]{3}$"
@@ -726,7 +705,7 @@ is_section_H <- function(pcs_code) {
 #'
 #' @export
 is_section_X <- function(pcs_code) {
-  check_7chars(pcs_code)
+  check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
     pcs_code,
     "^[X][DFHKNRTW-Y02][ACEGHJKPRSUVZ0-257][A-HJ-NP-Y0-9][X03478][A-HJ-NP-Y0-9][235-9]$"
