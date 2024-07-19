@@ -57,10 +57,10 @@
 
 #' @autoglobal
 #' @noRd
-.clierr <- function(x,
-                    n,
-                    arg = rlang::caller_arg(x),
-                    call = rlang::caller_env()) {
+.clierr <- function(x, n) {
+
+  arg  <- rlang::caller_arg(x)
+  call <- rlang::caller_env()
 
   put <- stringfish::sf_substr(x$input, n, n)
 

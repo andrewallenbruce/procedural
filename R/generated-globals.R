@@ -29,13 +29,17 @@ utils::globalVariables(c(
   # <.inc_part>
   # <tables>
   # <.part>
+  # <.pcs_part>
   "code",
   # <.operation>
+  # <.pcs_operation>
   "code_2",
   # <.operation>
+  # <.pcs_operation>
   "code_3",
   # <.inc_part>
   # <.part>
+  # <.pcs_part>
   "code_4",
   # <definitions>
   # <.def_op>
@@ -57,9 +61,11 @@ utils::globalVariables(c(
   "label_2",
   # <tables>
   # <.operation>
+  # <.pcs_operation>
   "label_3",
   # <.inc_part>
   # <.part>
+  # <.pcs_part>
   "label_4",
   # <index>
   "letter",
@@ -69,13 +75,20 @@ utils::globalVariables(c(
   "name_1",
   # <tables>
   # <.operation>
+  # <.pcs_operation>
   "name_3",
   # <tables>
   # <.operation>
   # <.part>
+  # <.pcs_operation>
+  # <.pcs_part>
   "name_4",
   # <tables>
   # <.part>
+  # <.pcs_part>
+  # <.pcs_approach>
+  # <.pcs_device>
+  # <.pcs_qualifier>
   "rowid",
   # <index>
   "subterm",
@@ -87,6 +100,13 @@ utils::globalVariables(c(
   "top",
   # <gt_pcs>
   # <gt_pcs2>
+  # <.pcs_section>
+  # <.pcs_system>
+  # <.pcs_operation>
+  # <.pcs_part>
+  # <.pcs_approach>
+  # <.pcs_device>
+  # <.pcs_qualifier>
   "value",
   NULL
 ))
