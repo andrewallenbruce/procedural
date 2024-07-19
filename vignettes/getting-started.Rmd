@@ -94,39 +94,8 @@ One of 34 possible values can be assigned to each character in a code: the integ
 
 
 ```{r}
-x <- pcs("02103D4")
-
-x$axes |>
-  gt(rowname_col = "axis") |>
-  cols_align(align = "center", columns = c(axis, value)) |>
-  tab_style(style = list(cell_fill(color = "lightgray",
-                                   alpha = 0.5),
-                         cell_text(weight = "bold")),
-            locations = cells_body(columns = value)) |>
-  tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
-             title = html(paste0("<b><u>", 
-                                 x$procedure$code, "</u></b> ", 
-                                 x$procedure$description))) |>
-  tab_footnote(
-    footnote = html(paste0("<b>Definition:</b> ", 
-    x$definitions$definition[1])),
-    locations = cells_body(columns = label, rows = 3)) |>
-  tab_footnote(
-    footnote = html(paste0("<b>Definition:</b> ", 
-    x$definitions$definition[2])),
-    locations = cells_body(columns = label, rows = 5)) |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  opt_table_outline(style = "none") |> 
-  tab_options(
-    table.width = pct(75),
-    heading.title.font.size = px(18),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12),
-    footnotes.marks = letters,
-    column_labels.hidden = TRUE)
+pcs("02103D4") |> 
+  gt_pcs()
 ```
 
 
@@ -174,38 +143,8 @@ The extensor tendon was then incised, dissected, and retracted out of the operat
 
 
 ```{r}
-x <- pcs("0LB50ZX")
-
-x$axes |>
-  gt(rowname_col = "axis") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  cols_align(align = "center", columns = c(axis, value)) |>
-  tab_style(style = list(cell_fill(color = "lightgray",
-                                   alpha = 0.5),
-                         cell_text(weight = "bold")),
-            locations = cells_body(columns = value)) |>
-  opt_all_caps() |>
-  opt_table_outline(style = "none") |>
-  tab_header(subtitle = html("<b><i>ICD-10-PCS 2024</i></b>"),
-             title = html(paste0("<b><u>", 
-                                 x$code, "</u></b> ", 
-                                 x$description))) |>
-  tab_footnote(
-    footnote = html(paste0("<b>Definition:</b> ", 
-    x$definitions$definition[1])),
-    locations = cells_body(columns = label, rows = 3)) |>
-  tab_footnote(
-    footnote = html(paste0("<b>Definition:</b> ", 
-    x$definitions$definition[2])),
-    locations = cells_body(columns = label, rows = 5)) |>
-  tab_options(
-    table.width = pct(75),
-    heading.title.font.size = px(18),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12),
-    column_labels.hidden = TRUE)
+pcs("0LB50ZX") |> 
+  gt_pcs()
 ```
 
 ## Medical and Surgical Related Sections
@@ -235,37 +174,8 @@ Sections 3-9 are differ only slightly. For example, in sections 5 and 6, the 5th
 
 
 ```{r}
-x <- pcs("5A02210")
-
-x$axes |>
-  gt(rowname_col = "axis") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  cols_align(align = "center", columns = c(axis, value)) |>
-  tab_style(style = list(cell_fill(color = "lightgray",
-                                   alpha = 0.5),
-                         cell_text(weight = "bold")),
-            locations = cells_body(columns = value)) |>
-  opt_all_caps() |>
-  opt_table_outline(style = "none") |>
-  tab_header(
-    title = html(paste0("<b>", x$code, "</b>  ", x$description)),
-    subtitle = tagList(tags$div(style = css(`text-align` = "right"), 
-                                tags$div(tags$strong("ICD-10-PCS 2024"))))) |>
-  tab_options(
-    stub.background.color = "#0B0B35",
-    stub.border.color = "white",
-    stub_row_group.border.color = "#0B0B35",
-    table.width = pct(75),
-    heading.title.font.size = px(16),
-    heading.subtitle.font.size = px(14),
-    heading.background.color = "white",
-    heading.border.bottom.color = "#0B0B35",
-    heading.align = "left",
-    table.font.color = "#0B0B35",
-    table.font.size = px(14),
-    table.border.bottom.color = "#0B0B35",
-    footnotes.font.size = px(12),
-    column_labels.hidden = TRUE)
+pcs("5A02210") |> 
+  gt_pcs2()
 ```
 
 
@@ -292,37 +202,13 @@ procedural::sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] 
 
 When coding for CT scans, the documentation must support all components for proper selection of the ICD-10-PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
 
-> **Example**: CT scan of brain
->> Technique: 2.5 mm thick axial images were obtained through the head with diatrizoate (high osmolar contrast). 
->> 0.625 mm thick axial images as well as coronal and sagittal enhanced images were also submitted for interpretation.
+> **Example**: CT scan of brain. Technique: 2.5 mm thick axial images were obtained through the head with diatrizoate (high osmolar contrast). 0.625 mm thick axial images as well as coronal and sagittal enhanced images were also submitted for interpretation.
 
-> **Findings**:
->> No intra- or extra-axial blood or fluid collection is present. There is no mass or shift of midline. Brain densities are normal. The 
->> ventricles and sulci are normal in size and configuration. Vascular structures are normal in appearance. The pituitary, orbits, and 
->> paranasal sinuses are unremarkable. The calvarium is intact.
-
+> **Findings**: No intra- or extra-axial blood or fluid collection is present. There is no mass or shift of midline. Brain densities are normal. The ventricles and sulci are normal in size and configuration. Vascular structures are normal in appearance. The pituitary, orbits, and paranasal sinuses are unremarkable. The calvarium is intact.
 
 ```{r}
-x <- pcs("B02000Z")
-
-x$axes |>
-  gt(rowname_col = "axis") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  cols_align(align = "center", columns = c(axis, value)) |>
-  tab_style(style = list(cell_fill(color = "lightgray",
-                                   alpha = 0.5),
-                         cell_text(weight = "bold")),
-            locations = cells_body(columns = value)) |>
-  opt_all_caps() |>
-  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
-             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
-  tab_options(
-    table.width = pct(55),
-    heading.title.font.size = px(20),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12))
+pcs("B02000Z") |> 
+  gt_pcs()
 ```
 
 
@@ -464,45 +350,13 @@ Within a defined code range, a character specifies the same type of information 
 
 For example, The __fifth__ axis of classification specifies the _Approach_ in sections 0 through 4 and 7 through 9 of the system.
 
-```{r echo=FALSE, eval=FALSE}
-tables() |> 
-  summarise(codes = sum(n_codes),
-            prop = codes / 78220, 
-            .by = c(section, system)) |>
-  left_join(sections()[c('code', 'label')], 
-            by = join_by(section == code)) |> 
-  left_join(systems()[c('code', 'label')], 
-            by = join_by(system == code)) |> 
-  select(section = label.x, 
-         code = system, 
-         system = label.y, 
-         codes, 
-         prop) |> 
-  gt(groupname_col = "section", 
-     rowname_col = "system") |>
-  fmt_percent(columns = prop, decimals = 2) |>
-  fmt_number(columns = codes, decimals = 0) |>
-  opt_table_font(font = google_font(name = "Rubik")) |> 
-  cols_align(align = "center", columns = code) |>
-  cols_label(code = "") |> 
-  tab_style(style = list(cell_fill(color = "lightgray", 
-                                   alpha = 0.5), 
-                         cell_text(weight = "bold")), 
-            locations = cells_body(columns = code)) |> 
-  opt_all_caps(locations = c("row_group")) |> 
-  opt_align_table_header(align = "left") |>
-  tab_header(title = html("<b>ICD-10-PCS</b> 2024")) |> 
-  tab_options(
-    column_labels.hidden = TRUE,
-    heading.title.font.size = px(22),
-    table.font.size = px(14),
-    column_labels.border.bottom.width = px(0),
-    column_labels.border.top.width = px(0),
-    row_group.font.size = px(16))
+# Example
+
+```{r}
+pcs("0016070") |> 
+  gt_pcs()
 ```
 
-
-# Example
 
 ```{r}
 x <- pcs("0016070")

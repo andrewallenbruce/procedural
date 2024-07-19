@@ -2,10 +2,12 @@
 #'
 #' @param x an object of class `pcs`.
 #'
-#' @returns description
+#' @returns a gt table
 #'
 #' @examples
 #' pcs("0G9000Z") |> gt_pcs()
+#'
+#' gt_pcs(pcs("0016070"))
 #'
 #' @autoglobal
 #'
