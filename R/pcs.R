@@ -54,6 +54,7 @@ pcs <- function(x = NULL) {
 }
 
 #' @autoglobal
+#'
 #' @noRd
 checks <- function(x = NULL) {
 
@@ -79,6 +80,7 @@ checks <- function(x = NULL) {
 
 
 #' @autoglobal
+#'
 #' @noRd
 .section <- function(x) { #1
 
@@ -102,6 +104,7 @@ checks <- function(x = NULL) {
   }
 
 #' @autoglobal
+#'
 #' @noRd
 .system <- function(x) { #2
 
@@ -131,6 +134,7 @@ checks <- function(x = NULL) {
 }
 
 #' @autoglobal
+#'
 #' @noRd
 .operation <- function(x) { #3
 
@@ -191,6 +195,7 @@ checks <- function(x = NULL) {
 
 # Construct Tail / Row ---------------------
 #' @autoglobal
+#'
 #' @noRd
 .part <- function(x) { #4
 
@@ -253,6 +258,7 @@ checks <- function(x = NULL) {
 
 # Row IDs begin ---------------------
 #' @autoglobal
+#'
 #' @noRd
 .approach <- function(x) { #5
 
@@ -328,6 +334,7 @@ checks <- function(x = NULL) {
 }
 
 #' @autoglobal
+#'
 #' @noRd
 .device <- function(x) { #6
 
@@ -397,6 +404,7 @@ checks <- function(x = NULL) {
 }
 
 #' @autoglobal
+#'
 #' @noRd
 .qualifier <- function(x) { #7
 
@@ -443,6 +451,7 @@ checks <- function(x = NULL) {
 }
 
 #' @autoglobal
+#'
 #' @noRd
 .finisher <- function(x) {
 
@@ -451,19 +460,19 @@ checks <- function(x = NULL) {
     x <- list(
 
       code = x$input,
+
       description = procedural::order(search = x$input)$description_code,
 
       axes = x$head,
 
       definitions = fuimus::null_if_empty(x$definitions),
 
-      includes = fuimus::null_if_empty(x$includes |>
-        tidyr::nest(includes = "includes") |>
-        dplyr::mutate(includes = purrr::map_chr(
-        includes, ~paste(.x$includes, collapse = ", ")
-        )
-      ))
-    ) |>
+      includes = fuimus::null_if_empty(
+        x$includes |>
+          tidyr::nest(includes = "includes") |>
+          dplyr::mutate(includes = purrr::map_chr(
+            includes, ~paste(.x$includes, collapse = ", "))))
+      ) |>
       purrr::compact()
   }
   return(x)

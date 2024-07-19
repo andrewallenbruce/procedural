@@ -83,6 +83,8 @@ gt_pcs <- function(x) {
 #' @examples
 #' pcs("0G9000Z") |> gt_pcs2()
 #'
+#' gt_pcs2(pcs("0016070"))
+#'
 #' @autoglobal
 #'
 #' @export

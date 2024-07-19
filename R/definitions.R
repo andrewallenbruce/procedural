@@ -266,7 +266,6 @@ devices <- function(system = NULL,
                     search = NULL) {
 
   dev <- get_pin("devices")
-
   col <- match.arg(col)
 
   if (!is.null(system)) {
