@@ -5,7 +5,6 @@ deploy:
 
 template:
   bootstrap: 5
-  bootswatch: simplex
   theme: tango
   bslib:
     font_scale: 1.1
@@ -26,7 +25,6 @@ home:
 navbar:
   structure:
     left:
-    - intro
     - reference
     - articles
     right:
@@ -40,10 +38,6 @@ navbar:
       icon: fas fa-home fa-lg
       text: ""
       href: index.html
-    intro:
-      icon: ~
-      text: Getting started
-      href: articles/getting-started.html
     reference:
       text: Reference
       href: reference/index.html

@@ -31,15 +31,15 @@ library(htmltools)
 
 > __ICD-10-PCS__, or the __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
 
-# Overview
+## Overview
 
-     * A PCS code is best understood as the _result of a process_, not an assigned number.
-     * All valid PCS codes are seven characters long. 
-     * Each character represents a distinguishing aspect of the procedure.
-     * Individual letters and numbers are called **values**.
-     * Values are selected in sequence to occupy the seven **axes** of a code.
-     * When selected, a value is thereafter referred to as a **character**.
-     * Once all seven axes are filled, the code is complete.
+   + A PCS code is best understood as the *result of a process*, not an assigned number.
+   + All valid PCS codes are seven characters long. 
+   + Each character represents a distinguishing aspect of the procedure.
+   + Individual letters and numbers are called **values**.
+   + Values are selected in sequence to occupy the seven **axes** of a code.
+   + When selected, a value is thereafter referred to as a **character**.
+   + Once all seven axes are filled, the code is complete.
 
 The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. Additionally, there are several **Appendices** and a list of coding **Guidelines**.
 
@@ -79,6 +79,8 @@ tibble(
     )
 ```   
 
+<br>
+
 ## Values
 
 There are 34 possible values that can be assigned to each character in a code: 
@@ -88,16 +90,18 @@ There are 34 possible values that can be assigned to each character in a code:
 The following is an example of a finished code:
 
 ```{r}
-gt_pcs2(pcs("02103D4"))
+gt_pcs(pcs("02103D4"))
 ```
 
 
 
 Choosing a specific value for each of the seven axes derives the code. Based on details about the procedure performed, values are assigned for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device** and **qualifier.** The meaning of each character is a function of its placement in the code sequence. As such, the same value in a different position alters the meaning of the code.
 
+<br>
+
 ## Sections
 
-ICD-10-PCS is composed of 17 sections in total. The numeric sections (0 - 9) comprise the **Medical and Surgical-Related** sections. The alphabetic sections (B, C, D, F, G, H, X) comprise the **Ancillary** sections. 
+ICD-10-PCS is composed of 17 sections in total. The numeric sections (0 - 9) comprise the **Medical and Surgical-Related** sections. The alphabetical sections (B, C, D, F, G, H, X) comprise the **Ancillary** sections. 
 
 The first section, creatively named **Medical and Surgical**, contains the majority of procedures typically reported in an inpatient setting.
 
@@ -107,7 +111,23 @@ sections()[3:4] |>
     group = dplyr::if_else(
       value %in% c("B", "C", "D", "F", "G", "H", "X"),
       "Ancillary",
-      "Medical & Surgical")
+      "Medical & Surgical") #,
+    # prop = c(0.87, 
+    #          0.038, 
+    #          0.0109, 
+    #          0.0162, 
+    #          0.0054, 
+    #          0.0007, 
+    #          0.0006, 
+    #          0.0013, 
+    #          0.0011, 
+    #          0.0011, 
+    #          0.0379, 
+    #          0.059, 
+    #          0.0261, 
+    #          0.0004, 
+    #          0.0008, 
+    #          0.0044)
     ) |>
   gt::gt(
     rowname_col = "value",
@@ -129,7 +149,7 @@ sections()[3:4] |>
     table.width = gt::pct(100),
     heading.title.font.size = gt::px(24),
     heading.align = "left",
-    table.font.color = "#0B0B45",
+    table.font.color = "black",
     table.font.size = gt::px(18),
     footnotes.font.size = gt::px(12),
     stub.background.color = "#0B0B35",
@@ -138,9 +158,11 @@ sections()[3:4] |>
     column_labels.hidden = TRUE)
 ```
 
-#### Coding Example
+<br>
 
-A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed. The example below is a mock post-op report:
+### Coding Example 1
+
+A PCS code is built by selecting the appropriate characters to describe the procedure by __intent__, the __approach__, and other __qualifying information__. The example below is a mock post-operative report:
 
 ```{r echo=FALSE}
 dplyr::tibble(x = c(
@@ -153,7 +175,7 @@ dplyr::tibble(x = c(
   gt::fmt_markdown() |>
   gt::tab_header(
     title = gt::md("**Operative Report:**"),
-    subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
+    # subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
     ) |>
   gt::tab_options(
     table.width = gt::pct(100),
@@ -200,11 +222,23 @@ dplyr::tibble(
     "The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated."
     ),
   y = c(
-    fuimus::color_text("<b>Body Part</b>", "#EE4B2B"), 
-    fuimus::color_text("<b>Approach</b>", "#EE4B2B"), 
-    fuimus::color_text("<b>Body System</b>", "#EE4B2B"), 
-    fuimus::color_text("<b>Root Operation</b>", "#EE4B2B"), 
-    "Routine Post-Op Care"
+    paste0(
+      "4. ", 
+      fuimus::color_text("<b>Body Part</b>", "#EE4B2B"), 
+      ": Wrist, right arm"), 
+    paste0(
+      "5. ",
+      fuimus::color_text("<b>Approach</b>", "#EE4B2B"),
+      ": Incision exposed site"), 
+    paste0(
+      "2. ",
+      fuimus::color_text("<b>Body System</b>", "#EE4B2B"),
+      ": Extensor tendon"), 
+    paste0(
+      "3. ",
+      fuimus::color_text("<b>Root Operation</b>", "#EE4B2B"),
+      ": Excision"), 
+    ""
     )
   ) |> 
   gt::gt(process_md = TRUE) |>
@@ -214,46 +248,30 @@ dplyr::tibble(
   gt::opt_all_caps() |>
   gt::fmt_markdown() |>
   gt::tab_header(
-    title = gt::md("**Operative Report:**"),
-    subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
+    title = gt::md("<span style='color:#0B0B45'><b>Operative Report:</b></span>"),
+    # subtitle = gt::md("<span style='color:#0B0B45'><i>Excision of Dorsal Ganglion, Right Wrist</i></span>")
     ) |>
   gt::tab_options(
     table.width = gt::pct(100),
     heading.title.font.size = gt::px(24),
     heading.subtitle.font.size = gt::px(21),
     heading.align = "left",
-    table.font.color = "#0B0B45",
+    table.font.color = "gray70",
     table.font.size = gt::px(16),
     footnotes.font.size = gt::px(12),
     column_labels.hidden = TRUE)
 ```
 
-
-
-
-
-   1. Section **0** Medical and Surgical
-   1. Body System **L** Tendons (Extensor tendon)
-   1. Root Operation **B** Excision (The tendon was excised and removed)
-   1. Body Part **5** Lower Arm, and Wrist, Right (The extensor tendon is located at the wrist level)
-   1. Approach **0** Open (An incision was performed and blunt dissection carried out through layers of tissue to expose site)
-   1. Device **Z** No Device
-   1. Qualifier **Z** No Qualifier
-
+These indicators give us the following code:
 
 ```{r}
-pcs("0LB50ZX") |> 
-  gt_pcs()
+gt_pcs(pcs("0LB50ZZ"))
 ```
 
 
-```{r}
-pcs("5A02210") |> 
-  gt_pcs2()
-```
+### Coding Example 2
 
-
-When coding for CT scans, the documentation must support all components for proper selection of the ICD-10-PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
+When coding for CT scans, the documentation must support all components of the PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
 
 > **Example**: CT scan of brain. Technique: 2.5 mm thick axial images were obtained through the head with diatrizoate (high osmolar contrast). 0.625 mm thick axial images as well as coronal and sagittal enhanced images were also submitted for interpretation.
 
@@ -264,20 +282,15 @@ pcs("B02000Z") |>
   gt_pcs()
 ```
 
+<br>
 
-Section X defines the 7th character as the New Technology Group. This letter changes each year that new technology codes are added to the system. 
-
-For example, Section X codes added for the first year have the 7th character value 1, New Technology Group 1. The next year that contains new Section X codes the 7th character value is 2, for New Technology Group 2, etc.
-
-
-# Index
-
+## Index
 
 The ICD-10-PCS Index can be used to access the Tables. The Index mirrors the structure of the Tables, so it follows a consistent pattern of organization and use of hierarchies.
 
 ## Main terms
 
-The Index is organized as an alphabetic lookup. Two types of main terms are listed in the Index:
+The Index is organized as an alphabetical lookup. Two types of main terms are listed in the Index:
 
    + Based on the value of the 3rd character
    + Common procedure terms
