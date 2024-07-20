@@ -33,15 +33,15 @@ library(htmltools)
 
 # Overview
 
-    * A PCS code is best understood as the _result of a process_, not an assigned number.
-    * All valid PCS codes are seven characters long. 
-    * Each character represents a distinguishing aspect of the procedure.
-    * Individual letters and numbers are called **values**.
-    * Values are selected in sequence to occupy the seven **axes** of a code.
-    * When selected, a value is thereafter referred to as a **character**.
-    * Once all seven axes are filled, the code is complete.
+     * A PCS code is best understood as the _result of a process_, not an assigned number.
+     * All valid PCS codes are seven characters long. 
+     * Each character represents a distinguishing aspect of the procedure.
+     * Individual letters and numbers are called **values**.
+     * Values are selected in sequence to occupy the seven **axes** of a code.
+     * When selected, a value is thereafter referred to as a **character**.
+     * Once all seven axes are filled, the code is complete.
 
-The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. Additionally, there are several **appendices** and a list of guidelines.
+The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. Additionally, there are several **Appendices** and a list of coding **Guidelines**.
 
 ```{r echo=FALSE, eval=FALSE}
 tibble(
@@ -93,21 +93,7 @@ gt_pcs2(pcs("02103D4"))
 
 
 
-Choosing a specific value for each of the seven axes derives the code. Based on details about the procedure performed, values are assigned for each character specifying the 
-
-   1. **Section**
-   1. **Body System**
-   1. **Root Operation**
-   1. **Body Part**
-   1. **Approach**
-   1. **Device** and 
-   1. **Qualifier.** 
-
-The meaning of each character is a function of its placement in the code sequence. As such, the same value in a different position completely alters the meaning of the code:
-
-```{r}
-gt_pcs2(pcs("02104D4"))
-```
+Choosing a specific value for each of the seven axes derives the code. Based on details about the procedure performed, values are assigned for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device** and **qualifier.** The meaning of each character is a function of its placement in the code sequence. As such, the same value in a different position alters the meaning of the code.
 
 ## Sections
 
@@ -141,49 +127,106 @@ sections()[3:4] |>
     ) |>
   gt::tab_options(
     table.width = gt::pct(100),
-    heading.title.font.size = gt::px(18),
-    heading.subtitle.font.size = gt::px(14),
+    heading.title.font.size = gt::px(24),
     heading.align = "left",
     table.font.color = "#0B0B45",
+    table.font.size = gt::px(18),
     footnotes.font.size = gt::px(12),
+    stub.background.color = "#0B0B35",
+    stub.border.color = "white",
+    stub_row_group.border.color = "#0B0B35",
     column_labels.hidden = TRUE)
 ```
 
 #### Coding Example
 
-A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed. The example below describes the excision of a dorsal ganglion located at the wrist level.
+A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed. The example below is a mock post-op report:
 
 ```{r echo=FALSE}
 dplyr::tibble(x = c(
-    "With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg.",
-    "A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field.",
-    "The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised.",
-    "Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position.",
-    "The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.")) |> 
-  gt::gt() |>
+    "With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg.<br><br> A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field.<br><br> The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised.<br><br> Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position.<br><br> The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.")) |> 
+  gt::gt(process_md = TRUE) |>
   gt::opt_table_font(
     font = gt::google_font(name = "Rubik")
     ) |>
   gt::opt_all_caps() |>
+  gt::fmt_markdown() |>
   gt::tab_header(
     title = gt::md("**Operative Report:**"),
     subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
     ) |>
   gt::tab_options(
     table.width = gt::pct(100),
-    heading.title.font.size = gt::px(18),
-    heading.subtitle.font.size = gt::px(14),
+    heading.title.font.size = gt::px(24),
+    heading.subtitle.font.size = gt::px(21),
     heading.align = "left",
     table.font.color = "#0B0B45",
+    table.font.size = gt::px(16),
     footnotes.font.size = gt::px(12),
     column_labels.hidden = TRUE)
 ```
 
 
-
+We can construct the PCS code for this procedure by extracting the relevant information from the operative report.
  
 
- 
+```{r echo=FALSE}
+dplyr::tibble(
+  x = c(
+    paste0(
+      "With the patient under adequate anesthesia, the ",
+      fuimus::color_text("<b>right</b>", "#EE4B2B"),
+      " upper extremity was prepped and draped in a sterile manner. The ",
+      fuimus::color_text("<b>arm</b>", "#EE4B2B"), 
+      " was exsanguinated and the tourniquet was elevated to 290 mm/Hg."),
+    
+    paste0(
+      "A ", 
+      fuimus::color_text("<b>transverse incision</b>", "#EE4B2B"), 
+      " was made over the dorsal ganglion. Using ",  
+      fuimus::color_text("<b>blunt dissection</b>", "#EE4B2B"), 
+      ", the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field."),
+    
+    paste0(
+      "The ", 
+      fuimus::color_text("<b>extensor tendon</b>", "#EE4B2B"), 
+      " was then incised, dissected, and retracted out of the operative field."), 
+    
+    paste0(  
+      "The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and ", 
+      fuimus::color_text("<b>excised.</b>", "#EE4B2B")
+      ),
+    
+    "The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated."
+    ),
+  y = c(
+    fuimus::color_text("<b>Body Part</b>", "#EE4B2B"), 
+    fuimus::color_text("<b>Approach</b>", "#EE4B2B"), 
+    fuimus::color_text("<b>Body System</b>", "#EE4B2B"), 
+    fuimus::color_text("<b>Root Operation</b>", "#EE4B2B"), 
+    "Routine Post-Op Care"
+    )
+  ) |> 
+  gt::gt(process_md = TRUE) |>
+  gt::opt_table_font(
+    font = gt::google_font(name = "Rubik")
+    ) |>
+  gt::opt_all_caps() |>
+  gt::fmt_markdown() |>
+  gt::tab_header(
+    title = gt::md("**Operative Report:**"),
+    subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
+    ) |>
+  gt::tab_options(
+    table.width = gt::pct(100),
+    heading.title.font.size = gt::px(24),
+    heading.subtitle.font.size = gt::px(21),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    table.font.size = gt::px(16),
+    footnotes.font.size = gt::px(12),
+    column_labels.hidden = TRUE)
+```
 
 
 
