@@ -19,6 +19,28 @@ x <- "0016070"
   .pcs_qualifier() |>
   .pcs_finisher()
 
+
+x <- "00" |>
+  .pcs_section() |>
+  .pcs_system() |>
+  .pcs_operation() |>
+  .pcs_part() |>
+  .pcs_approach() |>
+  .pcs_device() |>
+  .pcs_qualifier() |>
+  .pcs_finisher()
+
+.pcs_code_cli_error(x = x, n = 1)
+
+library(sdcHierarchies)
+
+
+hier_create(
+  root = paste0(x$head$value[1], " ", x$head$name[1], ": ", x$head$label[1]),
+  nodes = paste0(x$opt$value[2:17], " ", x$opt$name[2:17], ": ", x$opt$label[2:17])
+  ) |>
+  hier_display()
+
 # ADD-ONS ####
 
 # TODO Axis 3 Definition

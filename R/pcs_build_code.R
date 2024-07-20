@@ -5,17 +5,11 @@
 
   cl <- glue::glue_data(
     .x = x$opt,
-    "{.strong {.field <<value>>}} >=> <<label>>",
+    "{.strong {.field <<value>>}} : <<label>>",
     .open = "<<",
     .close = ">>")
 
-  pkg_rule <- cli::cli_rule(
-    "{.strong {.fn procedural::pcs}}",
-    right = "{.strong {.emph ICD-10-PCS 2024}}")
-
   if (x$opt$name[[1]] == "Section") {
-
-    pkg_rule
 
     cli::cli_bullets(c("!" = "No Section Selected"))
 
@@ -23,7 +17,7 @@
     cli::cli_li(cl)
     cli::cli_end()
 
-    return(invisible(NULL))
+    return(invisible(x))
 
   } else {
 
@@ -32,8 +26,6 @@
       "[{.strong {.field <<value>>}}] <<name>>: <<label>>",
       .open = "<<",
       .close = ">>")
-
-    pkg_rule
 
     cli::cli_bullets(
       c(" " = " ",
@@ -52,7 +44,7 @@
     cli::cli_ul(cl)
     cli::cli_end()
 
-    return(invisible(NULL))
+    return(invisible(x))
   }
 }
 
@@ -66,14 +58,13 @@
 
   input <- stringfish::sf_substr(x$input, n, n)
 
-  if (!input %in% fuimus::delister(x$opt["value"])) {
+  if (input %!in% fuimus::delister(x$opt["value"])) {
 
     cli::cli_abort(
       paste(
         "{.strong {.val {rlang::sym(input)}}} is an invalid",
         "{.val {rlang::sym(x$opt$name[[1]])}} value."),
       call = call)
-
   }
 }
 
@@ -130,6 +121,38 @@ pcs_code <- function(x = NULL) {
   return(xs)
 }
 
+pcs_code2 <- function(x = NULL) {
+
+  xs <- .pcs_section(x)
+  if (is.null(x)) return(xs)
+
+  x_chars <- stringfish::sf_nchar(x)
+
+  xs <- .pcs_system(xs)
+  if (x_chars == 1L) return(xs)
+
+  xs <- .pcs_operation(xs)
+  if (x_chars == 2L) return(xs)
+
+  xs <- .pcs_part(xs)
+  if (x_chars == 3L) return(xs)
+
+  xs <- .pcs_approach(xs)
+  if (x_chars == 4L) return(xs)
+
+  xs <- .pcs_device(xs)
+  if (x_chars == 5L) return(xs)
+
+  xs <- .pcs_qualifier(xs)
+  if (x_chars == 6L) return(xs)
+
+  xs <- .pcs_finisher(xs)
+
+  class(xs) <- c("pcs_code", "list")
+
+  return(xs)
+}
+
 # 0. Check
 #' @autoglobal
 #'
@@ -143,15 +166,11 @@ pcs_code <- function(x = NULL) {
 
   x <- stringfish::sf_toupper(as.character(x))
 
-  if (stringfish::sf_nchar(x) > 7L) {
+  if (stringfish::sf_nchar(x) > 7) {
     cli::cli_abort(
-      c(
-        "{.strong PCS} codes have {.strong 7} characters.",
-        "x" = "{.strong {.val {rlang::sym(x)}}} has {.strong {.val {nchar(x)}}}."
-      ),
+      "{.arg {arg}} must be {.strong 0-7} characters long.",
       arg = arg,
-      call = call
-    )
+      call = call)
   }
   return(list(input = x))
 }
@@ -165,20 +184,17 @@ pcs_code <- function(x = NULL) {
   x     <- .pcs_check(x)
   x$opt <- sections()
 
-  if (is.na(x$input)) {
-    .pcs_code_cli(x)
-    invisible(x)
-    }
+  if (is.na(x$input)) return(x)
 
   if (!is.na(x$input)) {
     step <- 1
-    .pcs_code_cli_error(x, step)
 
     x$head <- collapse::fsubset(
       x$opt,
       value %==% stringfish::sf_substr(x$input, step, step))
 
     class(x) <- c("pcs_section", "list")
+
     return(x)
   }
 }
@@ -197,20 +213,18 @@ pcs_code <- function(x = NULL) {
   x$opt <- system <- systems(
     stringfish::sf_substr(x$input, step, step))[2:5]
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 2
-    .pcs_code_cli_error(x, step)
 
     x$head <- collapse::rowbind(x$head,
       collapse::fsubset(system,
         value %==% stringfish::sf_substr(x$input, step, step))
     )
+
     class(x) <- c("pcs_system", "list")
+
     return(x)
   }
 }
@@ -240,14 +254,10 @@ pcs_code <- function(x = NULL) {
                        label = label_3) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 3
-    .pcs_code_cli_error(x, step)
 
     x$head <- collapse::rowbind(
       x$head,
@@ -281,14 +291,10 @@ pcs_code <- function(x = NULL) {
                        label = label_4) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 4
-    .pcs_code_cli_error(x, step)
 
     x$head <- collapse::rowbind(
       x$head,
@@ -322,14 +328,10 @@ pcs_code <- function(x = NULL) {
   x <- purrr::list_flatten(x)
   x$opt <- collapse::funique(x$select_5[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 5
-    .pcs_code_cli_error(x, step)
 
     x$select_5 <- collapse::fsubset(
       x$select_5,
@@ -355,16 +357,13 @@ pcs_code <- function(x = NULL) {
   step  <- 5
   x$opt <- collapse::funique(x$select_6[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 6
-    .pcs_code_cli_error(x, step)
 
-    x$select_6 <- collapse::fsubset(x$select_6,
+    x$select_6 <- collapse::fsubset(
+      x$select_6,
       value %==% stringfish::sf_substr(x$input, step, step))
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_6$rowid)
@@ -387,16 +386,13 @@ pcs_code <- function(x = NULL) {
   step  <- 6
   x$opt <- collapse::funique(x$select_7[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
-    .pcs_code_cli(x)
-    invisible(x)
-  }
+  if (stringfish::sf_nchar(x$input) == step) return(x)
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 7
-    .pcs_code_cli_error(x, step)
 
-    x$select_7 <- collapse::fsubset(x$select_7,
+    x$select_7 <- collapse::fsubset(
+      x$select_7,
       value %==% stringfish::sf_substr(x$input, step, step))
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_7$rowid)

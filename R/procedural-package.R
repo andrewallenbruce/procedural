@@ -5,5 +5,6 @@
 #' @importFrom zeallot %<-%
 #' @importFrom collapse %==%
 #' @importFrom collapse %iin%
+#' @importFrom collapse %!in%
 ## usethis namespace: end
 NULL

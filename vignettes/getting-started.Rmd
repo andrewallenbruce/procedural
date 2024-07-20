@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
   )
 ```
 
-```{r setup, message=FALSE, warning=FALSE}
+```{r setup, message=FALSE, warning=FALSE, echo=FALSE}
 library(procedural)
 library(fuimus)
 library(dplyr)
@@ -29,26 +29,21 @@ library(htmltools)
 ```
 
 
-__ICD-10-PCS__, or the __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
-
-<br>
+> __ICD-10-PCS__, or the __International Classification of Diseases, 10th Revision, Procedure Coding System__, is a procedure classification system developed by [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and adopted under [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act) for classifying procedures performed in hospital inpatient health care settings.
 
 # Overview
 
-WHO has maintained the International Classification of Diseases (ICD) for recording causes of death since 1893. It has updated the ICD periodically to reflect new discoveries in epidemiology and changes in medical understanding of disease. CMS contracted with 3M Health Information Systems in 1993 to design and develop a procedural classification system that would replace Volume 3 of ICD-9-CM. ICD-10-PCS was initially released in 1998 and is updated annually.
+    * A PCS code is best understood as the _result of a process_, not an assigned number.
+    * All valid PCS codes are seven characters long. 
+    * Each character represents a distinguishing aspect of the procedure.
+    * Individual letters and numbers are called **values**.
+    * Values are selected in sequence to occupy the seven **axes** of a code.
+    * When selected, a value is thereafter referred to as a **character**.
+    * Once all seven axes are filled, the code is complete.
 
-# Structure
+The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. Additionally, there are several **appendices** and a list of guidelines.
 
-An ICD-10-PCS code is best understood as the result of a process rather than as an assigned number.
-
-All valid codes in ICD-10-PCS are seven characters long. Each character represents an aspect of the procedure, as shown in the following diagram of characters from the main section of ICD-10-PCS, Medical and Surgical:
-
-Individual letters and numbers, called **values**, are selected in sequence to occupy the seven spaces of the code, called **characters**.
-
-
-
-
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 tibble(
   Axis = 1:7,
   Name = c(
@@ -84,54 +79,115 @@ tibble(
     )
 ```   
 
-
-
 ## Values
 
-One of 34 possible values can be assigned to each character in a code: the integers 0–9 and the alphabet (except I and O, because they are easily confused with the numbers 1 and 0). A finished code looks like the example below.
+There are 34 possible values that can be assigned to each character in a code: 
 
-> **02103D4** *Bypass coronary artery, one artery from coronary vein with intraluminal device, percutaneous approach*
+   * The integers **0–9** and all letters except **I** and **O** (as they are easily confused with 1 and 0). 
 
+The following is an example of a finished code:
 
 ```{r}
-pcs("02103D4") |> 
-  gt_pcs()
+gt_pcs2(pcs("02103D4"))
 ```
 
 
 
-Choosing a specific value for each of the seven characters derives this code. Based on details about the procedure performed, values for each character specifying the **section**, **body system**, **root operation**, **body part**, **approach**, **device**, and **qualifier** are assigned.
+Choosing a specific value for each of the seven axes derives the code. Based on details about the procedure performed, values are assigned for each character specifying the 
 
-Because the definition of each character is a function of its actual physical position in the code, the same value placed in a different position in the code means something totally different. 
+   1. **Section**
+   1. **Body System**
+   1. **Root Operation**
+   1. **Body Part**
+   1. **Approach**
+   1. **Device** and 
+   1. **Qualifier.** 
+
+The meaning of each character is a function of its placement in the code sequence. As such, the same value in a different position completely alters the meaning of the code:
+
+```{r}
+gt_pcs2(pcs("02104D4"))
+```
+
+## Sections
+
+ICD-10-PCS is composed of 17 sections in total. The numeric sections (0 - 9) comprise the **Medical and Surgical-Related** sections. The alphabetic sections (B, C, D, F, G, H, X) comprise the **Ancillary** sections. 
+
+The first section, creatively named **Medical and Surgical**, contains the majority of procedures typically reported in an inpatient setting.
+
+```{r echo=FALSE}
+sections()[3:4] |> 
+  dplyr::mutate(
+    group = dplyr::if_else(
+      value %in% c("B", "C", "D", "F", "G", "H", "X"),
+      "Ancillary",
+      "Medical & Surgical")
+    ) |>
+  gt::gt(
+    rowname_col = "value",
+    groupname_col = "group",
+    row_group_as_column = TRUE
+    ) |>
+  gt::cols_align(
+    align = "center", 
+    columns = value
+    ) |>
+  gt::opt_table_font(
+    font = gt::google_font(name = "Rubik")
+    ) |>
+  gt::opt_all_caps() |>
+  gt::tab_header(
+    title = gt::md("**ICD-10-PCS Sections**")
+    ) |>
+  gt::tab_options(
+    table.width = gt::pct(100),
+    heading.title.font.size = gt::px(18),
+    heading.subtitle.font.size = gt::px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = gt::px(12),
+    column_labels.hidden = TRUE)
+```
+
+#### Coding Example
+
+A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed. The example below describes the excision of a dorsal ganglion located at the wrist level.
+
+```{r echo=FALSE}
+dplyr::tibble(x = c(
+    "With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg.",
+    "A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field.",
+    "The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised.",
+    "Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position.",
+    "The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.")) |> 
+  gt::gt() |>
+  gt::opt_table_font(
+    font = gt::google_font(name = "Rubik")
+    ) |>
+  gt::opt_all_caps() |>
+  gt::tab_header(
+    title = gt::md("**Operative Report:**"),
+    subtitle = gt::md("*Excision of Dorsal Ganglion, Right Wrist*")
+    ) |>
+  gt::tab_options(
+    table.width = gt::pct(100),
+    heading.title.font.size = gt::px(18),
+    heading.subtitle.font.size = gt::px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = gt::px(12),
+    column_labels.hidden = TRUE)
+```
 
 
-## Organization
 
-ICD-10-PCS is composed of 17 sections, represented by the numbers 0-9 and the letters B-D, F-H and X. 
+ 
 
-The machinery of PCS is contained in three parts: the **Index**, the **Tables**, and the **List of Codes**. 
-
-
-Additionally, there are **Appendices** that contain information about the structure of the code set and the definitions of the values used in the code.
-
-There is also a list of guidelines in the ICD-10-PCS code book that instruct you on how to use the PCS code set.
-
-### Medical and Surgical Section
-
-The first section, Medical and Surgical, contains the majority of procedures typically reported in an inpatient setting.
-
-__Coding Example__
-
-The example below describes the excision of a dorsal ganglion located at the wrist level. A PCS code is built by selecting the appropriate characters to describe the _intent_, the _approach_, and other _qualifying information_ on how the procedure is performed.
-
-> Note: The purpose of the ICD-10-PCS code is to explain the purpose of the procedure by using every character to describe the way the procedure was performed.
+ 
 
 
-__Operative Report:__ *Excision of Dorsal Ganglion, Right Wrist*
 
-With the patient under adequate anesthesia, the right upper extremity was prepped and draped in a sterile manner. The arm was exsanguinated and the tourniquet was elevated to 290 mm/Hg. A transverse incision was made over the dorsal ganglion. Using blunt dissection the dorsal ulnar sensory nerve branches and radial sensory nerve branches were dissected and retracted out of the operative field. 
 
-The extensor tendon was then incised, dissected, and retracted out of the operative field. The ganglion was then further dissected to its origin from the dorsal distal scapholunate interosseus ligament and excised. Care was taken to protect ligament integrity. The wound was then infiltrated with 0.25% Marcaine. The tendons were allowed to resume their normal anatomical position. The skin was closed with 3-0 Prolene subcuticular stitch. Sterile dressings were applied. The tourniquet was deflated.
 
    1. Section **0** Medical and Surgical
    1. Body System **L** Tendons (Extensor tendon)
@@ -147,58 +203,12 @@ pcs("0LB50ZX") |>
   gt_pcs()
 ```
 
-## Medical and Surgical Related Sections
-
-Sections 0-9 of ICD-10-PCS comprise the Medical and Surgical Related sections. These sections include obstetrical procedures, administration of substances, measurement and monitoring of body functions, and extracorporeal therapies, as listed in the table below.
-
-```{r echo=FALSE}
-sections(0:9)[c('value', 'label')] |> 
-  gt(rowname_col = "value") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_header(title = md("**Medical and Surgical-Related Sections**")) |>
-  tab_options(
-    table.width = pct(75),
-    heading.title.font.size = px(18),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12),
-    column_labels.hidden = TRUE)
-```
-
-
-In sections 0, 1, and 2, all seven characters define the same aspects of the procedure.
-
-Sections 3-9 are differ only slightly. For example, in sections 5 and 6, the 5th character is defined as Duration instead of Approach, as in this code for _Intra-aortic Balloon Pump (IABP)_:
-
 
 ```{r}
 pcs("5A02210") |> 
   gt_pcs2()
 ```
 
-
-### Ancillary Sections
-
-Sections B - D and F - H comprise the ancillary sections:
-
-
-```{r, echo=FALSE}
-procedural::sections(c("B", "C", "D", "F", "G", "H", "X"))[c('value', 'label')] |> 
-  gt(rowname_col = "value") |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  opt_all_caps() |>
-  tab_header(title = md("**Ancillary Sections**")) |>
-  tab_options(
-    table.width = pct(75),
-    heading.title.font.size = px(18),
-    heading.subtitle.font.size = px(14),
-    heading.align = "left",
-    table.font.color = "#0B0B45",
-    footnotes.font.size = px(12),
-    column_labels.hidden = TRUE)
-```
 
 When coding for CT scans, the documentation must support all components for proper selection of the ICD-10-PCS code. The section for the first character will come from the Imaging section. The body system will be based on the area that is examined. The root type will be determined by the type of imaging (CT, MRI, X-ray). The body part is selected by determining the specific body area that was analyzed during the procedure. The contrast character is used to determine if high osmolar, low osmolar, or other type of contrast was used, if applicable. The qualifier character will be used to specify if enhanced or unenhanced images were taken.
 

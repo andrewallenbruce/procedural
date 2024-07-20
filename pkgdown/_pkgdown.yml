@@ -1,0 +1,93 @@
+url: https://andrewallenbruce.github.io/procedural/
+
+deploy:
+  install_metadata: true
+
+template:
+  bootstrap: 5
+  bootswatch: simplex
+  theme: tango
+  bslib:
+    font_scale: 1.1
+    line_height: 2
+    base_font: {google: "IBM Plex Sans"}
+    heading_font: {google: "Fira Sans"}
+    code_font: "Hack, mono"
+  includes:
+    in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
+
+home:
+  title: procedural • Tidy ICD-10-PCS Tools
+  description: >
+    Tidy tools for working with ICD-10-PCS procedure codes.
+  sidebar:
+    structure: [links, license, community, citation, authors, dev]
+
+navbar:
+  structure:
+    left:
+    - intro
+    - reference
+    - articles
+    right:
+    - home
+    - news
+    - github
+    - twitter
+    - linkedin
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      text: ""
+      href: index.html
+    intro:
+      icon: ~
+      text: Getting started
+      href: articles/getting-started.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      icon: far fa-newspaper fa-lg
+      href: news/index.html
+      text: ""
+      title: "Changelog"
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/andrewallenbruce/procedural
+    linkedin:
+      icon: fas fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/andrewallenbruce
+    twitter:
+      icon: fab fa-twitter fa-lg
+      href: https://twitter.com/andrewallbruce
+
+reference:
+
+- title: PCS Machinery
+  desc: >
+    ICD-10-PCS Building Blocks.
+  contents:
+  - code_range
+  - definitions
+  - devices
+  - includes
+  - index
+  - order
+  - pcs
+  - pcs_code
+  - rows
+  - sections
+  - systems
+
+- title: Presentation Options
+  desc: >
+    Tools for Visualization and Presentation.
+  contents:
+  - starts_with("gt_")
+
+- title: Validators
+  desc: >
+    Functions to validate inputs.
+  contents:
+  - starts_with("is_")
