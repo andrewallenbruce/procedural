@@ -29,24 +29,4 @@ x[which(is_section_code(pcs_code = x))]
 try(is_section_code(pcs_code = "01UB3K"))
 
 }
-\seealso{
-Other PCS code validators: 
-\code{\link{is_section_0}()},
-\code{\link{is_section_1}()},
-\code{\link{is_section_2}()},
-\code{\link{is_section_3}()},
-\code{\link{is_section_4}()},
-\code{\link{is_section_5}()},
-\code{\link{is_section_6}()},
-\code{\link{is_section_7}()},
-\code{\link{is_section_8}()},
-\code{\link{is_section_9}()},
-\code{\link{is_section_B}()},
-\code{\link{is_section_C}()},
-\code{\link{is_section_D}()},
-\code{\link{is_section_F}()},
-\code{\link{is_section_G}()},
-\code{\link{is_section_H}()},
-\code{\link{is_section_X}()}
-}
 \concept{PCS code validators}

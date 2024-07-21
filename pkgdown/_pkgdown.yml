@@ -10,7 +10,7 @@ template:
     font_scale: 1.1
     line_height: 2
     base_font: {google: "IBM Plex Sans"}
-    heading_font: {google: "Fira Sans"}
+    heading_font: {google: "Atkinson Hyperlegible"}
     code_font: "Hack, mono"
   includes:
     in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">

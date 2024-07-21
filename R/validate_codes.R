@@ -72,7 +72,7 @@ is_section_code <- function(section_value = substr(pcs_code, 1, 1)[1], pcs_code)
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_0 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -102,7 +102,7 @@ is_section_0 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_1 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -132,7 +132,7 @@ is_section_1 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_2 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -162,7 +162,7 @@ is_section_2 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_3 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -192,7 +192,7 @@ is_section_3 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_4 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -222,7 +222,7 @@ is_section_4 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_5 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -252,7 +252,7 @@ is_section_5 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_6 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -282,7 +282,7 @@ is_section_6 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_7 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -312,7 +312,7 @@ is_section_7 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_8 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -342,7 +342,7 @@ is_section_8 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_9 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -372,7 +372,7 @@ is_section_9 <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_B <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -402,7 +402,7 @@ is_section_B <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_C <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -432,7 +432,7 @@ is_section_C <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_D <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -462,7 +462,7 @@ is_section_D <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_F <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -492,7 +492,7 @@ is_section_F <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_G <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -522,7 +522,7 @@ is_section_G <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_H <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(
@@ -552,7 +552,7 @@ is_section_H <- function(pcs_code) {
 #'
 #' @autoglobal
 #'
-#' @export
+#' @noRd
 is_section_X <- function(pcs_code) {
   check_nchar(pcs_code, 7)
   stringfish::sf_grepl(

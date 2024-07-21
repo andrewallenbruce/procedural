@@ -144,3 +144,10 @@ gt_pcs2 <- function(x) {
       footnotes.font.size = gt::px(12),
       column_labels.hidden = TRUE)
 }
+
+#' @autoglobal
+#'
+#' @noRd
+vert_lab <- function(label) {
+  paste0("<vertical-text>", label, "</vertical-text>")
+}
