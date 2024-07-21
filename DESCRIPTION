@@ -2,8 +2,8 @@ Package: procedural
 Title: Tidy ICD-10-PCS interface
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrew.bruce@northstarrevenueintegrity.com", role = c("aut", "cre", "cph"))
-Maintainer: Andrew Bruce <andrew.bruce@northstarrevenueintegrity.com>
+    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Provides a tidy interface to the ICD-10-PCS procedure code
     system. The package includes a dataset of all ICD-10-PCS codes and
     their attributes, as well as functions to search and filter the
