@@ -2,7 +2,7 @@ Package: procedural
 Title: Tidy ICD-10-PCS interface
 Version: 0.0.1
 Authors@R: 
-    person("Andrew", "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
+    person(c("Andrew", "Allen"), "Bruce", , "andrewallenbruce@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewallenbruce@gmail.com>
 Description: Provides a tidy interface to the ICD-10-PCS procedure code
     system. The package includes a dataset of all ICD-10-PCS codes and
@@ -23,20 +23,19 @@ Imports:
     htmltools,
     pins,
     purrr,
-    rlang,
+    rlang (>= 1.1.0),
     stringfish,
     stringr,
     tidyr,
     vctrs,
     withr,
+    qs,
     zeallot
 Suggests: 
     fuimus,
     gt,
     gtExtras,
     knitr,
-    qs,
-    rmarkdown,
     roxyglobals,
     testthat (>= 3.0.0),
     tibble

@@ -6,5 +6,6 @@
 #' @importFrom collapse %==%
 #' @importFrom collapse %iin%
 #' @importFrom collapse %!in%
+#' @import rlang
 ## usethis namespace: end
 NULL

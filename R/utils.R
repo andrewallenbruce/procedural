@@ -7,20 +7,14 @@
 #' @noRd
 mount_board <- function(source = c("local", "remote")) {
 
+  gh_raw <- \(x) paste0("https://raw.githubusercontent.com/andrewallenbruce/", x)
+
   source <- match.arg(source)
 
-  switch(
-    source,
-    local  = pins::board_folder(
-      fs::path_package(
-        "extdata/pins",
-        package = "procedural")
-    ),
-    remote = pins::board_url(
-      fuimus::gh_raw(
-        "andrewallenbruce/procedural/master/inst/extdata/pins/")
-    )
-  )
+  switch(source,
+         local  = pins::board_folder(fs::path_package("extdata/pins", package = "procedural")),
+         remote = pins::board_url(gh_raw("procedural/master/inst/extdata/pins/")),
+         stop("Invalid source"))
 }
 
 #' List pins from a [pins][pins::pins-package] board

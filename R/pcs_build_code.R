@@ -182,6 +182,7 @@ pcs_code2 <- function(x = NULL) {
 .pcs_section <- function(x) {
 
   x     <- .pcs_check(x)
+  # .__sections
   x$opt <- sections()
 
   if (is.na(x$input)) return(x)
@@ -208,6 +209,7 @@ pcs_code2 <- function(x = NULL) {
   # stopifnot("`x` hasn't passed through `.pcs_section()`" = inherits(x, "pcs_section"))
 
   step  <- 1
+  # .__systems
   x$opt <- system <- systems(
     stringfish::sf_substr(x$input, step, step))[2:5]
 
@@ -239,6 +241,7 @@ pcs_code2 <- function(x = NULL) {
   )
 
   step   <- 2
+  # .__tables
   select <- get_pin("tables_rows") |>
     collapse::fsubset(
       system %==% stringfish::sf_substr(x$input, 1, step),
