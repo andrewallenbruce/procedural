@@ -9,7 +9,7 @@ template:
   bslib:
     font_scale: 1.1
     line_height: 2
-    base_font: {google: "IBM Plex Sans"}
+    base_font: {google: "Roboto Condensed"}
     heading_font: {google: "Atkinson Hyperlegible"}
     code_font: "Hack, mono"
   includes:

@@ -148,7 +148,7 @@ pcs_code2 <- function(x = NULL) {
 
   xs <- .pcs_finisher(xs)
 
-  class(xs) <- c("pcs_code", "list")
+  class(xs) <- unique(c("pcs", class(xs)))
 
   return(xs)
 }
@@ -205,9 +205,7 @@ pcs_code2 <- function(x = NULL) {
 #' @noRd
 .pcs_system <- function(x) {
 
-  stopifnot(
-    "`x` hasn't passed through `.pcs_section()`" = inherits(x, "pcs_section")
-    )
+  # stopifnot("`x` hasn't passed through `.pcs_section()`" = inherits(x, "pcs_section"))
 
   step  <- 1
   x$opt <- system <- systems(
