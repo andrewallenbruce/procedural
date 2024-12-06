@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   getting-started: getting-started.html
-last_built: 2024-07-21T14:06Z
+last_built: 2024-12-06T04:21Z
 urls:
   reference: https://andrewallenbruce.github.io/procedural/reference
   article: https://andrewallenbruce.github.io/procedural/articles
