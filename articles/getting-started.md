@@ -1,0 +1,419 @@
+# Getting started
+
+> **ICD-10-PCS**, or the **International Classification of Diseases,
+> 10th Revision, Procedure Coding System**, is a procedure
+> classification system developed by
+> [3M](https://www.3m.com/3M/en_US/health-information-systems-us/) and
+> adopted under
+> [HIPAA](https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act)
+> for classifying procedures performed in hospital inpatient health care
+> settings.
+
+### Overview
+
+- A PCS code is best understood as the *result of a process*, not an
+  assigned number.
+- All valid PCS codes are seven characters long.
+- Each character represents a distinguishing aspect of the procedure.
+- Individual letters and numbers are called **values**.
+- Values are selected in sequence to occupy the seven **axes** of a
+  code.
+- When selected, a value is thereafter referred to as a **character**.
+- Once all seven axes are filled, the code is complete.
+
+The machinery of PCS is contained in three parts: the **Index**, the
+**Tables**, and the **List of Codes**. Additionally, there are several
+**Appendices** and a list of coding **Guidelines**.
+
+  
+
+### Values
+
+There are 34 possible values that can be assigned to each character in a
+code:
+
+- The integers **0–9** and all letters except **I** and **O** (as they
+  are easily confused with 1 and 0).
+
+The following is an example of a finished code:
+
+``` r
+
+gt_pcs(pcs("02103D4"))
+#> Error in `get_pin()`:
+#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+#>   "zipcodes", not "sections".
+```
+
+Choosing a specific value for each of the seven axes derives the code.
+Based on details about the procedure performed, values are assigned for
+each character specifying the **section**, **body system**, **root
+operation**, **body part**, **approach**, **device** and **qualifier.**
+The meaning of each character is a function of its placement in the code
+sequence. As such, the same value in a different position alters the
+meaning of the code.
+
+  
+
+### Sections
+
+ICD-10-PCS is composed of 17 sections in total. The numeric sections
+(0 - 9) comprise the **Medical and Surgical-Related** sections. The
+alphabetical sections (B, C, D, F, G, H, X) comprise the **Ancillary**
+sections.
+
+The first section, creatively named **Medical and Surgical**, contains
+the majority of procedures typically reported in an inpatient setting.
+
+    #> Error in `get_pin()`:
+    #> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+    #>   "zipcodes", not "sections".
+
+  
+
+#### Coding Example 1
+
+A PCS code is built by selecting the appropriate characters to describe
+the procedure by **intent**, the **approach**, and other **qualifying
+information**. The example below is a mock post-operative report:
+
+[TABLE]
+
+We can construct the PCS code for this procedure by extracting the
+relevant information from the operative report.
+
+[TABLE]
+
+These indicators give us the following code:
+
+``` r
+
+gt_pcs(pcs("0LB50ZZ"))
+#> Error in `get_pin()`:
+#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+#>   "zipcodes", not "sections".
+```
+
+#### Coding Example 2
+
+When coding for CT scans, the documentation must support all components
+of the PCS code. The section for the first character will come from the
+Imaging section. The body system will be based on the area that is
+examined. The root type will be determined by the type of imaging (CT,
+MRI, X-ray). The body part is selected by determining the specific body
+area that was analyzed during the procedure. The contrast character is
+used to determine if high osmolar, low osmolar, or other type of
+contrast was used, if applicable. The qualifier character will be used
+to specify if enhanced or unenhanced images were taken.
+
+> **Example**: CT scan of brain. Technique: 2.5 mm thick axial images
+> were obtained through the head with diatrizoate (high osmolar
+> contrast). 0.625 mm thick axial images as well as coronal and sagittal
+> enhanced images were also submitted for interpretation.
+
+> **Findings**: No intra- or extra-axial blood or fluid collection is
+> present. There is no mass or shift of midline. Brain densities are
+> normal. The ventricles and sulci are normal in size and configuration.
+> Vascular structures are normal in appearance. The pituitary, orbits,
+> and paranasal sinuses are unremarkable. The calvarium is intact.
+
+``` r
+
+pcs("B02000Z") |> 
+  gt_pcs()
+#> Error in `get_pin()`:
+#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+#>   "zipcodes", not "sections".
+```
+
+  
+
+### Index
+
+The ICD-10-PCS Index can be used to access the Tables. The Index mirrors
+the structure of the Tables, so it follows a consistent pattern of
+organization and use of hierarchies.
+
+### Main terms
+
+The Index is organized as an alphabetical lookup. Two types of main
+terms are listed in the Index:
+
+- Based on the value of the 3rd character
+- Common procedure terms
+
+For the Medical and Surgical and Related sections, the root operation
+values are used as main terms in the Index. In other sections, the
+values representing the general type of procedure performed, such as
+nuclear medicine or imaging type, are listed as main terms.
+
+For the Medical and Surgical and Related sections, values such as
+excision, bypass, and transplantation are included as main terms in the
+index. The applicable body system entries are listed beneath the main
+term and refer to a specific table. For the ancillary sections, values
+such as fluoroscopy and positron emission tomography are listed as main
+terms.
+
+The index entry **Bypass** refers to the Medical and Surgical section
+tables for all applicable body systems, including anatomical regions and
+central nervous system:
+
+- Bypass
+  - by Body System
+    - Peritoneal Cavity 0W1G
+    - Spinal Canal 001U
+
+The Body System listings may be followed by entries for specific body
+parts:
+
+- Artery
+- Anterior Chamber
+  - Left 08133
+  - Right 08123
+- Axillary
+  - Left 03160
+  - Right 03150
+- Brachial
+  - Left 03180
+  - Right 03170
+- Common Carotid
+  - Left 031J0
+  - Right 031H0
+
+In the root operations change, insertion, removal, and revision, the
+device entries are further defined by the body part the device is
+inserted into/or on.
+
+### Common Procedure Terms
+
+The second type of term listed in the Index uses procedure names, such
+as “appendectomy” or “fundoplication”.
+
+These entries are listed as main terms, and refer to a table or tables
+from which a valid code can be constructed, as shown in the following
+example:
+
+- Cholecystectomy
+  - see Excision, Gallbladder 0FB4
+  - see Resection, Gallbladder 0FT4
+
+When two or more root operations are listed for a procedure, you must
+study the operative report to determine which root operation was
+documented as the purpose of the procedure.
+
+For example, excision means to cut out or off a portion of a body part,
+while resection means to cut out or off ALL of the body part. If all of
+the gallbladder is removed, code to resection of gallbladder.
+
+## Tables
+
+Tables are organized in a series, beginning with section 0, medical and
+surgical, and body system 0, central nervous, and proceeding in
+numerical order. Sections 0-9 are followed by sections B-D and F-H. The
+same convention is followed within each table for the second through the
+7th characters — numeric values in order first, followed by alphabetical
+values in order.
+
+The following examples use the Medical and Surgical section to describe
+the organization and format of the ICD-10-PCS tables.
+
+The Medical and Surgical section (1st character 0) is organized by its
+31 body system values. Each body system subdivision in the Medical and
+Surgical section contains an introductory table that lists the possible
+values for the remaining characters, given that body system.
+
+The Tables section is what is used to construct complete and valid
+codes. Based on the first three values of the code provided in the
+Index, the corresponding table can be located. The tables and characters
+are arranged by number, then by letter for each character.
+
+The root operation tables consist of four columns and a varying number
+of rows, as in the following example of the root operation Bypass, in
+the Central Nervous body system.
+
+Section Body System Root Operation
+
+The below operative report will describe ventriculoperitoneal (VP) shunt
+placement. The purpose of a VP shunt is for a valve to be placed into
+your head, with one catheter being placed in the cerebral ventricle and
+the other end in the peritoneal cavity. Patients who require a VP shunt
+tend to be diagnosed with hydrocephalus, which is a condition where
+there is an accumulation of cerebrospinal fluid (CSF) in the ventricles.
+The shunt removes the accumulated fluid from the brain into the
+peritoneal cavity.
+
+Operative Report: VP shunt placement
+
+The first incision was made at the level of the frontal area, and
+coagulation was used to control bleeding. Then, another incision was
+made at the level of the abdominal wall, and by using a tunneler, the
+peritoneal catheter was passed from the abdominal wall to the posterior
+parietal, where a small incision was also made and then up to the right
+frontal area. The catheter was primed, and the catheter used was a
+Bactiseal. Then, the programmable valve was set at 180 mm of water and
+was connected to the peritoneal catheter. At this point, using a
+previous bur hole, the Bactiseal ventricular catheter was soft passed
+into the ventricle and connected to the programmable valve. All of these
+areas of connection were then verified. Then, the peritoneal catheter
+was inserted into the peritoneal cavity, which was dissected in layers
+starting from the rectus muscle and then to the peritoneum. The catheter
+was introduced into the peritoneal cavity after verification of the
+dripping of CSF.
+
+00160J6 Bypass cerebral ventricle to peritoneal cavity with synthetic
+substitute, open approach
+
+When reviewing the description of the ICD-10-PCS code, you will notice
+the intent of the procedure is described with the root operation bypass,
+which is defined as altering the route of passage of the contents of a
+tubular body part. The highlighted keywords help determine the proper
+selection of the code, for example, the procedure required an incision
+in the frontal area and the abdominal wall to be able to insert the
+catheter. This will justify the character of “open” approach.
+
+The values for characters 1-3 are provided at the top of each table.
+Four columns contain the applicable values for characters 4-7, given the
+values in characters 1-3.
+
+A table may be separated into rows to specify the valid choices of
+values in characters 4-7. A code built using values from more than one
+row of a table is not a valid code. In the table above, there are only
+five choices for the 7th character of Body Part, U, Spinal Canal. You
+can’t cross the line to choose a 7th character from the row above.
+
+### Appendices
+
+There are many tables in ICD-10-PCS besides the tables used to construct
+the codes. The appendices in the ICD-10-PCS code book contain many
+helpful tables.
+
+#### Appendix A
+
+contains a table that defines all root operations in the ICD-10-PCS code
+book. It lists not only the definition, but also an explanation and
+example(s) for each root operation. The root operations are listed by
+character value, in numeric order, followed by alphabetical order. For
+example, Root Operations - Alteration is listed with Definition,
+Explanation, and Examples such as face lift and breast augmentation.
+
+#### Appendix B
+
+is a Body Part Key. This is a very helpful tool to help match a specific
+body part to a descriptor in ICD-10-PCS. It is listed in alphabetic
+order.
+
+#### Appendix C
+
+is a Device Key. Similar to the body part key, it matches a device to a
+descriptor in ICD-10-PCS. For example, Brachytherapy seeds leads to
+Radioactive Element.
+
+#### Appendix D
+
+is the Device Aggregation Table. This table crosswalks specific device
+character value definitions for specific root operation in a specific
+body system to the more general device character value to be used. For
+example, the specific device Autologous Arterial Tissue, for all
+applicable operations in the heart and great vessels, lower arteries,
+lower veins, upper arteries, and upper veins leads to a General Device
+of 7 Autologous Tissue Substitute.
+
+#### Appendix E
+
+contains the Character Meanings tables. This gives an overview of the
+codes for an entire system in one place.
+
+#### Appendix F
+
+contains the Substance Key. This table provides the substance term and
+then the corresponding ICD-10-PCS Value. For example, Seprafilm® has an
+ICD-10-PCS Value as an adhesion barrier.
+
+#### Appendix G
+
+contains Combination Clusters. This table is used for codes that require
+more than one ICD-10-PCS procedure code for correct reporting. An
+example is provided for insertion of a cardiac pacemaker lead into a
+coronary vein. The additional procedures describe the exact location of
+where the lead is inserted, which is required for correct reporting. The
+instructions in the Appendix specify that the first code in the cluster
+needs to be reported with one or more of the additional codes listed for
+all codes to be considered valid.
+
+Appendix H contains Non-OR Not Affecting MS-DRG Assignment codes.
+
+## Coding Conventions
+
+PCS codes are composed of **seven** alphanumeric characters. Each
+character contains up to **34** possible values. The seven characters
+that make up a complete code have specific meanings that vary for each
+of the **17** sections of the manual.
+
+Each value represents a specific option for the general character
+definition. 10 digits (`0-9`) and 24 letters (`A-H`, `J-N`, and `P-Z`)
+may be used in each character.
+
+> The letters `O` and `I` are not used so as to avoid confusion with the
+> digits `0` and `1`.
+
+### Axes
+
+Each character is an axis of classification that specifies information
+about the procedure performed.
+
+Within a defined code range, a character specifies the same type of
+information in that axis of classification.
+
+For example, The **fifth** axis of classification specifies the
+*Approach* in sections 0 through 4 and 7 through 9 of the system.
+
+## Example
+
+``` r
+
+pcs("0016070") |> 
+  gt_pcs()
+#> Error in `get_pin()`:
+#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+#>   "zipcodes", not "sections".
+```
+
+``` r
+
+x <- pcs("0016070")
+#> Error in `get_pin()`:
+#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
+#>   "zipcodes", not "sections".
+
+x$axes |>
+  gt(rowname_col = "axis") |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = c(axis, value)) |>
+  tab_style(style = list(cell_fill(color = "lightgray",
+                                   alpha = 0.5),
+                         cell_text(weight = "bold")),
+            locations = cells_body(columns = value)) |>
+  opt_all_caps() |>
+  tab_header(title = html("<b>ICD-10-PCS 2024</b>"),
+             subtitle = html(paste0("<b>", x$code, ": </b>", x$description))) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    fuimus::delister(x$definitions[1, 2]))),
+    locations = cells_body(columns = label, rows = 3)) |>
+  tab_footnote(
+    footnote = html(paste("<b>Includes:</b>", fuimus::delister(x$includes[1, 5]))),
+    locations = cells_body(columns = label, rows = 4)) |>
+  tab_footnote(
+    footnote = html(paste0("<b>Definition:</b> ", 
+    fuimus::delister(x$definitions[2, 2]))),
+    locations = cells_body(columns = label, rows = 5)) |>
+  tab_options(
+    table.width = pct(75),
+    heading.title.font.size = px(20),
+    heading.subtitle.font.size = px(14),
+    heading.align = "left",
+    table.font.color = "#0B0B45",
+    footnotes.font.size = px(12))
+#> Error:
+#> ! object 'x' not found
+```
