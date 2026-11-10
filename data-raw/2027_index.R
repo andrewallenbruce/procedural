@@ -17,22 +17,20 @@ index_profile <- xmlrectr::xml_profile(rows = "ICD10PCS.index/letter")
 index_spec <- xmlrectr::compile_xml_profile(index_profile, index_xml)
 xmlrectr::review_rectangle(index_spec)
 index_rect <- xmlrectr::rectangle_xml(index_xml, index_spec, parallel = TRUE)
-pcs_index <- collapse::ss(index_rect, j = c(1:2, 4:6, 8:15))
+pcs_index <- collapse::ss(index_rect, j = c(2L, 4:6, 8:14))
 usethis::use_data(pcs_index, overwrite = TRUE)
 
-index_split <- collapse::ss(
-  index_rect,
-  j = c(2L, 4:6, 8L, 10:15),
-  check = FALSE
-)
 index_split <- cheapr::col_c(
-  collapse::num_vars(index_split),
-  collapse::cat_vars(index_split)
-)
-index_split <- index_split |>
+  collapse::num_vars(pcs_index),
+  collapse::cat_vars(pcs_index)
+) |>
   collapse::rsplit(~record_index) |>
   rlang::set_names(c("3", LETTERS))
 
-index_split$A |>
+index_split$F |>
   # collapse::sbt(field == "level") |>
   print(n = 100)
+
+collapse::num_vars(pcs_index) |>
+  _$record_index |>
+  unique()

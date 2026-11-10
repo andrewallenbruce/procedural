@@ -19,5 +19,9 @@ define_profile <- xmlrectr::xml_profile(rows = "ICD10PCS.definitions/section")
 define_spec <- xmlrectr::compile_xml_profile(define_profile, define_xml)
 xmlrectr::review_rectangle(define_spec)
 define_rect <- xmlrectr::rectangle_xml(define_xml, define_spec, parallel = TRUE)
-pcs_definitions <- collapse::ss(define_rect, j = c(1:2, 4:6, 8:15))
+pcs_definitions <- collapse::ss(define_rect, j = c(2L, 4:6, 8:14))
 usethis::use_data(pcs_definitions, overwrite = TRUE)
+
+collapse::cat_vars(pcs_definitions) |>
+  _$document_id |>
+  unique()
