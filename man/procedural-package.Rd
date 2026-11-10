@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Andrew Allen Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
 
+Authors:
+\itemize{
+  \item Andrew Allen Bruce \email{andrewallenbruce@gmail.com} [copyright holder]
+}
+
 }
 \keyword{internal}

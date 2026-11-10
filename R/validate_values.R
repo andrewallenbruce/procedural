@@ -22,7 +22,7 @@
 #' @export
 is_section_value <- function(section_value) {
   check_nchar(section_value, 1)
-  stringfish::sf_grepl(section_value, "^[BCDFGHX0-9]$")
+  grepl("^[BCDFGHX0-9]$", section_value, perl = TRUE)
 }
 
 #' Validate System Values
@@ -49,5 +49,5 @@ is_section_value <- function(section_value) {
 #' @export
 is_system_value <- function(system_value) {
   check_nchar(system_value, 1)
-  stringfish::sf_grepl(system_value, "^[A-HJ-NP-Z0-9]$")
+  grepl("^[A-HJ-NP-Z0-9]$", system_value, perl = TRUE)
 }

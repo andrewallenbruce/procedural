@@ -1,6 +1,5 @@
 #' @export
 print.procedural <- function(x, ...) {
-
   withr::with_options(
     list(
       pillar.bold = TRUE,
@@ -16,7 +15,6 @@ print.procedural <- function(x, ...) {
 #'
 #' @noRd
 .add_class <- function(data) {
-
   data <- dplyr::as_tibble(data)
 
   class(data) <- unique(c("procedural", class(data)))

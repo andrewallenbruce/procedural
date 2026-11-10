@@ -13,7 +13,6 @@
 #'
 #' @export
 gt_pcs <- function(x) {
-
   stopifnot("`x` must be a `pcs` object" = inherits(x, "pcs"))
 
   x$axes |>
@@ -22,40 +21,42 @@ gt_pcs <- function(x) {
       align = "center",
       columns = c(axis, value)
     ) |>
-    gt::tab_style(style = list(
-      gt::cell_fill(
-        color = "lightgray",
-        alpha = 0.5),
-      gt::cell_text(weight = "bold")),
+    gt::tab_style(
+      style = list(
+        gt::cell_fill(
+          color = "lightgray",
+          alpha = 0.5
+        ),
+        gt::cell_text(weight = "bold")
+      ),
       locations = gt::cells_body(columns = value)
     ) |>
     gt::tab_header(
       subtitle = gt::html("<b><i>ICD-10-PCS 2024</i></b>"),
       title = gt::html(
-        paste0("<b><u>",
-               x$code,
-               "</u></b> ",
-               x$description)
+        paste0("<b><u>", x$code, "</u></b> ", x$description)
       )
     ) |>
     gt::tab_footnote(
       footnote = gt::html(
         paste0(
           "<b>Definition:</b> ",
-          x$definitions$definition[1])
+          x$definitions$definition[1]
+        )
       ),
       locations = gt::cells_body(
         columns = label,
-        rows = 3)
+        rows = 3
+      )
     ) |>
     gt::tab_footnote(
       footnote = gt::html(
-        paste0("<b>Definition:</b> ",
-               x$definitions$definition[2])
+        paste0("<b>Definition:</b> ", x$definitions$definition[2])
       ),
       locations = gt::cells_body(
         columns = label,
-        rows = 5)
+        rows = 5
+      )
     ) |>
     gt::opt_table_font(
       font = gt::google_font(name = "Rubik")
@@ -71,7 +72,8 @@ gt_pcs <- function(x) {
       table.font.color = "#0B0B45",
       footnotes.font.size = gt::px(12),
       footnotes.marks = letters,
-      column_labels.hidden = TRUE)
+      column_labels.hidden = TRUE
+    )
 }
 
 #' Return ICD-10-PCS Code as a `gt` Table
@@ -102,7 +104,8 @@ gt_pcs2 <- function(x) {
       style = list(
         gt::cell_fill(
           color = "lightgray",
-          alpha = 0.5),
+          alpha = 0.5
+        ),
         gt::cell_text(weight = "bold")
       ),
       locations = gt::cells_body(columns = value)
@@ -115,12 +118,14 @@ gt_pcs2 <- function(x) {
           "<b>",
           x$code,
           "</b>  ",
-          x$description)
+          x$description
+        )
       ),
       subtitle = htmltools::tagList(
         htmltools::tags$div(
           style = htmltools::css(
-            `text-align` = "right"),
+            `text-align` = "right"
+          ),
           htmltools::tags$div(
             htmltools::tags$strong("ICD-10-PCS 2024")
           )
@@ -142,7 +147,8 @@ gt_pcs2 <- function(x) {
       table.font.size = gt::px(14),
       table.border.bottom.color = "#0B0B35",
       footnotes.font.size = gt::px(12),
-      column_labels.hidden = TRUE)
+      column_labels.hidden = TRUE
+    )
 }
 
 #' @autoglobal

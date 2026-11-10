@@ -4,7 +4,7 @@
 \alias{is_section_code}
 \title{Validate Full PCS Codes by Section}
 \usage{
-is_section_code(section_value = substr(pcs_code, 1, 1)[1], pcs_code)
+is_section_code(section_value = substr(pcs_code, 1L, 1L)[1], pcs_code)
 }
 \arguments{
 \item{section_value}{\verb{<chr>} string}

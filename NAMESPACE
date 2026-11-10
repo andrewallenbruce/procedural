@@ -18,7 +18,9 @@ export(rows)
 export(sections)
 export(systems)
 import(rlang)
-importFrom(collapse,"%!in%")
-importFrom(collapse,"%==%")
-importFrom(collapse,"%iin%")
+importFrom(collapse,
+  "%!in%",
+  "%==%",
+  "%iin%"
+)
 importFrom(zeallot,"%<-%")

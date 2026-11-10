@@ -2,15 +2,14 @@
 #'
 #' @noRd
 .pcs_code_cli <- function(x) {
-
   cl <- glue::glue_data(
     .x = x$opt,
     "{.strong {.field <<value>>}} : <<label>>",
     .open = "<<",
-    .close = ">>")
+    .close = ">>"
+  )
 
   if (x$opt$name[[1]] == "Section") {
-
     cli::cli_bullets(c("!" = "No Section Selected"))
 
     cli::cli_h3("Select {.val {rlang::sym(x$opt$name[[1]])}}")
@@ -18,28 +17,21 @@
     cli::cli_end()
 
     return(invisible(x))
-
   } else {
-
     hd <- glue::glue_data(
       .x = x$head,
       "[{.strong {.field <<value>>}}] <<name>>: <<label>>",
       .open = "<<",
-      .close = ">>")
+      .close = ">>"
+    )
 
     cli::cli_bullets(
-      c(" " = " ",
-        " " = "Selected: {.field {rlang::sym(x$input)}}",
-        " "
-      )
+      c(" " = " ", " " = "Selected: {.field {rlang::sym(x$input)}}", " ")
     )
     cli::cli_ol(hd)
 
     cli::cli_bullets(
-      c(" ",
-        ">" = "{.emph Select} {.val {rlang::sym(x$opt$name[[1]])}}",
-        " "
-      )
+      c(" ", ">" = "{.emph Select} {.val {rlang::sym(x$opt$name[[1]])}}", " ")
     )
     cli::cli_ul(cl)
     cli::cli_end()
@@ -52,19 +44,19 @@
 #'
 #' @noRd
 .pcs_code_cli_error <- function(x, n) {
-
-  arg  <- rlang::caller_arg(x)
+  arg <- rlang::caller_arg(x)
   call <- rlang::caller_env()
 
   input <- stringfish::sf_substr(x$input, n, n)
 
   if (input %!in% fuimus::delister(x$opt["value"])) {
-
     cli::cli_abort(
       paste(
         "{.strong {.val {rlang::sym(input)}}} is an invalid",
-        "{.val {rlang::sym(x$opt$name[[1]])}} value."),
-      call = call)
+        "{.val {rlang::sym(x$opt$name[[1]])}} value."
+      ),
+      call = call
+    )
   }
 }
 
@@ -90,29 +82,42 @@
 #'
 #' @export
 pcs_code <- function(x = NULL) {
-
   xs <- .pcs_section(x)
-  if (is.null(x)) return(invisible(xs))
+  if (is.null(x)) {
+    return(invisible(xs))
+  }
 
   x_chars <- stringfish::sf_nchar(x)
 
   xs <- .pcs_system(xs)
-  if (x_chars == 1L) return(invisible(xs))
+  if (x_chars == 1L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_operation(xs)
-  if (x_chars == 2L) return(invisible(xs))
+  if (x_chars == 2L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_part(xs)
-  if (x_chars == 3L) return(invisible(xs))
+  if (x_chars == 3L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_approach(xs)
-  if (x_chars == 4L) return(invisible(xs))
+  if (x_chars == 4L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_device(xs)
-  if (x_chars == 5L) return(invisible(xs))
+  if (x_chars == 5L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_qualifier(xs)
-  if (x_chars == 6L) return(invisible(xs))
+  if (x_chars == 6L) {
+    return(invisible(xs))
+  }
 
   xs <- .pcs_finisher(xs)
 
@@ -122,29 +127,42 @@ pcs_code <- function(x = NULL) {
 }
 
 pcs_code2 <- function(x = NULL) {
-
   xs <- .pcs_section(x)
-  if (is.null(x)) return(xs)
+  if (is.null(x)) {
+    return(xs)
+  }
 
   x_chars <- stringfish::sf_nchar(x)
 
   xs <- .pcs_system(xs)
-  if (x_chars == 1L) return(xs)
+  if (x_chars == 1L) {
+    return(xs)
+  }
 
   xs <- .pcs_operation(xs)
-  if (x_chars == 2L) return(xs)
+  if (x_chars == 2L) {
+    return(xs)
+  }
 
   xs <- .pcs_part(xs)
-  if (x_chars == 3L) return(xs)
+  if (x_chars == 3L) {
+    return(xs)
+  }
 
   xs <- .pcs_approach(xs)
-  if (x_chars == 4L) return(xs)
+  if (x_chars == 4L) {
+    return(xs)
+  }
 
   xs <- .pcs_device(xs)
-  if (x_chars == 5L) return(xs)
+  if (x_chars == 5L) {
+    return(xs)
+  }
 
   xs <- .pcs_qualifier(xs)
-  if (x_chars == 6L) return(xs)
+  if (x_chars == 6L) {
+    return(xs)
+  }
 
   xs <- .pcs_finisher(xs)
 
@@ -158,11 +176,12 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_check <- function(x = NULL) {
-
-  arg  <- rlang::caller_arg(x)
+  arg <- rlang::caller_arg(x)
   call <- rlang::caller_env()
 
-  if (is.null(x)) return(list(input = NA_character_))
+  if (is.null(x)) {
+    return(list(input = NA_character_))
+  }
 
   x <- stringfish::sf_toupper(as.character(x))
 
@@ -170,7 +189,8 @@ pcs_code2 <- function(x = NULL) {
     cli::cli_abort(
       "{.arg {arg}} must be {.strong 0-7} characters long.",
       arg = arg,
-      call = call)
+      call = call
+    )
   }
   return(list(input = x))
 }
@@ -180,19 +200,21 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_section <- function(x) {
-
-  x     <- .pcs_check(x)
+  x <- .pcs_check(x)
   # .__sections
   x$opt <- sections()
 
-  if (is.na(x$input)) return(x)
+  if (is.na(x$input)) {
+    return(x)
+  }
 
   if (!is.na(x$input)) {
     step <- 1
 
     x$head <- collapse::fsubset(
       x$opt,
-      value %==% stringfish::sf_substr(x$input, step, step))
+      value %==% stringfish::sf_substr(x$input, step, step)
+    )
 
     class(x) <- c("pcs_section", "list")
 
@@ -205,22 +227,27 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_system <- function(x) {
-
   # stopifnot("`x` hasn't passed through `.pcs_section()`" = inherits(x, "pcs_section"))
 
-  step  <- 1
+  step <- 1
   # .__systems
   x$opt <- system <- systems(
-    stringfish::sf_substr(x$input, step, step))[2:5]
+    stringfish::sf_substr(x$input, step, step)
+  )[2:5]
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 2
 
-    x$head <- collapse::rowbind(x$head,
-      collapse::fsubset(system,
-        value %==% stringfish::sf_substr(x$input, step, step))
+    x$head <- collapse::rowbind(
+      x$head,
+      collapse::fsubset(
+        system,
+        value %==% stringfish::sf_substr(x$input, step, step)
+      )
     )
 
     class(x) <- c("pcs_system", "list")
@@ -235,27 +262,31 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_operation <- function(x) {
-
   stopifnot(
     "`x` hasn't passed through `.pcs_system()`" = inherits(x, "pcs_system")
   )
 
-  step   <- 2
+  step <- 2
   # .__tables
   select <- get_pin("tables_rows") |>
     collapse::fsubset(
       system %==% stringfish::sf_substr(x$input, 1, step),
       code_2,
-      name_3:rows)
+      name_3:rows
+    )
 
   x$opt <- operation <- select |>
-    collapse::fcompute(axis  = "3",
-                       name  = name_3,
-                       value = code_3,
-                       label = label_3) |>
+    collapse::fcompute(
+      axis = "3",
+      name = name_3,
+      value = code_3,
+      label = label_3
+    ) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 3
@@ -271,7 +302,8 @@ pcs_code2 <- function(x = NULL) {
     x$select <- collapse::fsubset(
       select,
       table %==% stringfish::sf_substr(x$input, 1, step),
-      name_4:rows)
+      name_4:rows
+    )
 
     return(x)
   }
@@ -283,16 +315,19 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_part <- function(x) {
-
-  step  <- 3
+  step <- 3
   x$opt <- part <- x$select |>
-    collapse::fcompute(axis  = "4",
-                       name  = name_4,
-                       value = code_4,
-                       label = label_4) |>
+    collapse::fcompute(
+      axis = "4",
+      name = name_4,
+      value = code_4,
+      label = label_4
+    ) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 4
@@ -302,13 +337,14 @@ pcs_code2 <- function(x = NULL) {
       collapse::fsubset(
         part,
         value %==% stringfish::sf_substr(x$input, step, step)
-        )
       )
+    )
 
     x$select <- collapse::fsubset(
       x$select,
       row %==% stringfish::sf_substr(x$input, 1, step),
-      rowid:rows) |>
+      rowid:rows
+    ) |>
       tidyr::unnest(rows) |>
       collapse::funique() |>
       collapse::frename(value = code)
@@ -323,20 +359,22 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_approach <- function(x) {
-
   step <- 4
   x$select <- collapse::rsplit(x$select, x$select$axis)
   x <- purrr::list_flatten(x)
   x$opt <- collapse::funique(x$select_5[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 5
 
     x$select_5 <- collapse::fsubset(
       x$select_5,
-      value %==% stringfish::sf_substr(x$input, step, step))
+      value %==% stringfish::sf_substr(x$input, step, step)
+    )
 
     x$id <- collapse::funique(x$select_5$rowid)
 
@@ -354,18 +392,20 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_device <- function(x) {
-
-  step  <- 5
+  step <- 5
   x$opt <- collapse::funique(x$select_6[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 6
 
     x$select_6 <- collapse::fsubset(
       x$select_6,
-      value %==% stringfish::sf_substr(x$input, step, step))
+      value %==% stringfish::sf_substr(x$input, step, step)
+    )
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_6$rowid)
 
@@ -383,18 +423,20 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_qualifier <- function(x) {
-
-  step  <- 6
+  step <- 6
   x$opt <- collapse::funique(x$select_7[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) return(x)
+  if (stringfish::sf_nchar(x$input) == step) {
+    return(x)
+  }
 
   if (stringfish::sf_nchar(x$input) > step) {
     step <- 7
 
     x$select_7 <- collapse::fsubset(
       x$select_7,
-      value %==% stringfish::sf_substr(x$input, step, step))
+      value %==% stringfish::sf_substr(x$input, step, step)
+    )
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_7$rowid)
 
@@ -411,9 +453,7 @@ pcs_code2 <- function(x = NULL) {
 #'
 #' @noRd
 .pcs_finisher <- function(x) {
-
   if (length(x$id) == 1) {
-
     x$head$axis <- as.integer(x$head$axis)
 
     x <- list(

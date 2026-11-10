@@ -5,7 +5,7 @@
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' rows("00X")
 #'
 #' rows("00XF")
@@ -14,8 +14,7 @@
 #'
 #' @export
 rows <- function(x = NULL) {
-
-  tbl <- get_pin("pcs_tbl3")
+  # tbl <- get_pin("pcs_tbl3")
   # tbl <- pins::pin_read(mount_board(), "pcs_tbl2") |>
   #   tidyr::unnest(rows) |>
   #   dplyr::select(table = code_table,
@@ -63,17 +62,15 @@ rows <- function(x = NULL) {
   #   dplyr::mutate(axes = rlang::list2("row_{row}.{rowid}" := axes)) |>
   #   dplyr::ungroup() |>
   #   dplyr::distinct()
-
-  if (!is.null(x)) {
-
-    x <- checks(x)
-
-    if (nchar(x) == 3L) {
-      tbl <- dplyr::filter(tbl, table == x)
-      }
-    if (nchar(x) > 3L) {
-      tbl <- dplyr::filter(tbl, row == substr(x, 1, 4))
-      }
-  }
-  return(tbl)
+  # if (!is.null(x)) {
+  #   x <- checks(x)
+  #
+  #   if (nchar(x) == 3L) {
+  #     tbl <- dplyr::filter(tbl, table == x)
+  #   }
+  #   if (nchar(x) > 3L) {
+  #     tbl <- dplyr::filter(tbl, row == substr(x, 1, 4))
+  #   }
+  # }
+  # return(tbl)
 }

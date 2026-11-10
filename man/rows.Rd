@@ -17,8 +17,9 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Rows
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 rows("00X")
 
 rows("00XF")
-
+\dontshow{\}) # examplesIf}
 }

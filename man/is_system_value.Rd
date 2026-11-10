@@ -26,7 +26,7 @@ try(is_system_value("XX"))
 
 }
 \seealso{
-Other PCS value validators: 
-\code{\link{is_section_value}()}
+Other PCS value validators:
+\code{\link[=is_section_value]{is_section_value()}}
 }
 \concept{PCS value validators}

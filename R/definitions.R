@@ -24,12 +24,13 @@
 #' @autoglobal
 #'
 #' @export
-definitions <- function(section = NULL,
-                        axis = NULL,
-                        col = c("value", "label", "name", "definition", "explanation"),
-                        search = NULL,
-                        display = FALSE) {
-
+definitions <- function(
+  section = NULL,
+  axis = NULL,
+  col = c("value", "label", "name", "definition", "explanation"),
+  search = NULL,
+  display = FALSE
+) {
   def <- get_pin("definitions")
   col <- match.arg(col)
 
@@ -46,17 +47,17 @@ definitions <- function(section = NULL,
 
   if (!is.null(search)) {
     def <- fuimus::srchcol(def, col = col, search = search)
-    }
+  }
 
   if (display) {
-
     def <- dplyr::mutate(
       def,
       definition = dplyr::if_else(
         !is.na(explanation),
         paste0(definition, ". ", explanation, "."),
-        definition)
-      ) |>
+        definition
+      )
+    ) |>
       dplyr::select(label, definition)
   }
   return(.add_class(def))
@@ -93,11 +94,12 @@ definitions <- function(section = NULL,
 #' @autoglobal
 #'
 #' @export
-includes <- function(section = NULL,
-                     axis = NULL,
-                     col = c("label", "name", "includes"),
-                     search = NULL) {
-
+includes <- function(
+  section = NULL,
+  axis = NULL,
+  col = c("label", "name", "includes"),
+  search = NULL
+) {
   includes <- get_pin("includes")
   col <- match.arg(col)
 
@@ -115,7 +117,7 @@ includes <- function(section = NULL,
 
   if (!is.null(search)) {
     includes <- fuimus::srchcol(includes, col = col, search = search)
-    }
+  }
   return(.add_class(includes))
 }
 
@@ -138,9 +140,10 @@ includes <- function(section = NULL,
 #' @autoglobal
 #'
 #' @export
-index <- function(search = NULL,
-                  col = c("term", "index", "verb", "value", "code")) {
-
+index <- function(
+  search = NULL,
+  col = c("term", "index", "verb", "value", "code")
+) {
   ind <- get_pin("index_v2") |>
     tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
     # dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
@@ -172,14 +175,17 @@ index <- function(search = NULL,
 #' @autoglobal
 #'
 #' @export
-order <- function(search = NULL,
-                  col = c("code",
-                          "table",
-                          "row",
-                          "description_code",
-                          "description_table",
-                          "order")) {
-
+order <- function(
+  search = NULL,
+  col = c(
+    "code",
+    "table",
+    "row",
+    "description_code",
+    "description_table",
+    "order"
+  )
+) {
   tbl <- get_pin("tables_order")
   col <- match.arg(col)
 
@@ -206,7 +212,6 @@ order <- function(search = NULL,
 #'
 #' @export
 code_range <- function(start, end) {
-
   start <- checks(start)
   end <- checks(end)
 
@@ -216,7 +221,7 @@ code_range <- function(start, end) {
 
   if (nchar(end) < 7L) {
     cli::cli_abort("{.var end} must be 7 characters long.")
-    }
+  }
 
   base <- get_pin("tables_order")[c('order', 'code', 'table', 'row')]
 
@@ -224,11 +229,11 @@ code_range <- function(start, end) {
   o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
 
   if (o_start > o_end) {
-
     cli::cli_abort(
       c(
         "{.val {start}} comes after {.val {end}}",
-        "x" = "{.val {o_start}} > {.val {o_end}}.")
+        "x" = "{.val {o_start}} > {.val {o_end}}."
+      )
     )
   }
   dplyr::filter(base, dplyr::between(order, o_start, o_end)) |> .add_class()
@@ -254,17 +259,20 @@ code_range <- function(start, end) {
 #' @autoglobal
 #'
 #' @export
-devices <- function(system = NULL,
-                    operation = NULL,
-                    device = NULL,
-                    col = c("device_name",
-                            "section",
-                            "system",
-                            "operation",
-                            "device",
-                            "includes"),
-                    search = NULL) {
-
+devices <- function(
+  system = NULL,
+  operation = NULL,
+  device = NULL,
+  col = c(
+    "device_name",
+    "section",
+    "system",
+    "operation",
+    "device",
+    "includes"
+  ),
+  search = NULL
+) {
   dev <- get_pin("devices")
   col <- match.arg(col)
 
@@ -272,12 +280,15 @@ devices <- function(system = NULL,
     system <- rlang::arg_match0(
       system,
       c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U")
-      )
+    )
     dev <- vctrs::vec_slice(dev, dev$system == system)
   }
 
   if (!is.null(operation)) {
-    operation <- rlang::arg_match0(operation, c("All applicable", "H", "R", "S", "V"))
+    operation <- rlang::arg_match0(
+      operation,
+      c("All applicable", "H", "R", "S", "V")
+    )
     dev <- vctrs::vec_slice(dev, dev$operation == operation)
   }
 

@@ -3,9 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom zeallot %<-%
-#' @importFrom collapse %==%
-#' @importFrom collapse %iin%
-#' @importFrom collapse %!in%
+#' @importFrom collapse %==% %iin% %!in%
 #' @import rlang
 ## usethis namespace: end
 NULL
