@@ -21,3 +21,20 @@ pcs_order <- cheapr::col_c(
   collapse::cat_vars(pcs_order)
 )
 usethis::use_data(pcs_order, overwrite = TRUE)
+
+library(collapse)
+pcs_order_table <- cheapr::row_c(
+  collapse::ss(pcs_order, pcs_order$valid %==% 0L),
+  collapse::ss(pcs_order, collapse::fmax(pcs_order$order))
+)
+
+pcs_order_table$lag <- cheapr::lag_(pcs_order_table$order, -1L)
+pcs_order_table$table <- ivs::iv(pcs_order_table$order, pcs_order_table$lag)
+pcs_order_table <- cheapr::sset(
+  pcs_order_table,
+  pcs_order_table$order != collapse::fmax(pcs_order_table$order),
+  j = c(1L, 7L, 3L)
+)
+pcs_order2 <- dplyr::left_join(pcs_order, pcs_order_table)
+pcs_order2$table <- vctrs::vec_fill_missing(pcs_order2$table)
+pcs_order2 |> tail()

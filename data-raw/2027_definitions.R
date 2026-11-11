@@ -22,6 +22,6 @@ define_rect <- xmlrectr::rectangle_xml(define_xml, define_spec, parallel = TRUE)
 pcs_definitions <- collapse::ss(define_rect, j = c(2L, 4:6, 8:14))
 usethis::use_data(pcs_definitions, overwrite = TRUE)
 
-collapse::cat_vars(pcs_definitions) |>
-  _$document_id |>
+pcs_definitions |>
+  collapse::rsplit(~record_index) |>
   unique()
