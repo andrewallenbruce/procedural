@@ -28,13 +28,25 @@ pcs_order_table <- cheapr::row_c(
   collapse::ss(pcs_order, collapse::fmax(pcs_order$order))
 )
 
-pcs_order_table$lag <- cheapr::lag_(pcs_order_table$order, -1L)
-pcs_order_table$table <- ivs::iv(pcs_order_table$order, pcs_order_table$lag)
+pcs_order_table$table <- ivs::iv(
+  pcs_order_table$order,
+  cheapr::lag_(pcs_order_table$order, -1L)
+)
 pcs_order_table <- cheapr::sset(
   pcs_order_table,
   pcs_order_table$order != collapse::fmax(pcs_order_table$order),
-  j = c(1L, 7L, 3L)
+  j = c(1L, 6L, 2L, 3L, 5L)
 )
+pcs_order_system <- pcs_order_table
+
+pcs_order_system$system <- substr(pcs_order_system$code, 1, 2)
+collapse::ss(pcs_order_system, j = c(1, 6, 4:5)) |>
+  collapse::fgroup_by(system) |>
+  collapse::fsummarise(
+    order = collapse::fmin(order),
+    description_long = collapse::fslice(description_long)
+  )
+
 pcs_order2 <- dplyr::left_join(pcs_order, pcs_order_table)
 pcs_order2$table <- vctrs::vec_fill_missing(pcs_order2$table)
-pcs_order2 |> tail()
+pcs_order2 |> collapse::colorderv(c("order", "table"))
