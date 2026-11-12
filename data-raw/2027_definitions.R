@@ -1,64 +1,93 @@
 library(xmlrectr)
 library(zuxml)
 
-pcs_xml <- fs::path(
+# data rectangling --------------------------------------------------------
+
+xml <- fs::path(
   "C:/Users/Andrew/Downloads",
   "zip-file-2-2027-code-tables-and-index"
 )
-define_xml <- fs::path(pcs_xml, "icd10pcs_definitions_2027", ext = "xml")
-define_xsd <- fs::path(pcs_xml, "icd10pcs_definitions", ext = "xsd")
-define_proposal <- xmlrectr::propose_xml_profile(define_xml, xsd = define_xsd)
-define_profile <- xmlrectr::xml_profile(rows = "ICD10PCS.definitions/section")
-define_spec <- xmlrectr::compile_xml_profile(define_profile, define_xml)
-define_rect <- xmlrectr::rectangle_xml(define_xml, define_spec, parallel = TRUE)
-pcs_definitions <- collapse::ss(define_rect, j = c(2L, 4:6, 8:14))
+def_xml <- fs::path(xml, "icd10pcs_definitions_2027", ext = "xml")
+def_xsd <- fs::path(xml, "icd10pcs_definitions", ext = "xsd")
+def_prop <- xmlrectr::propose_xml_profile(def_xml, xsd = def_xsd)
+def_prof <- xmlrectr::xml_profile(rows = "ICD10PCS.definitions/section")
+def_spec <- xmlrectr::compile_xml_profile(def_prof, def_xml)
+def_rect <- xmlrectr::rectangle_xml(def_xml, def_spec, parallel = TRUE)
+
+pcs_definitions <- collapse::ss(def_rect, j = c(2L, 4:6, 8:14))
 usethis::use_data(pcs_definitions, overwrite = TRUE)
 
-def_ <- collapse::ss(
+pcs_definitions |>
+  print(n = 100)
+
+# data transformation -----------------------------------------------------
+
+pcs_definitions$section <- cheapr::if_else_(
+  pcs_definitions$entity == "section" &
+    pcs_definitions$value_kind == "attribute",
+  pcs_definitions$value,
+  NA_character_
+)
+pcs_definitions$section <- vctrs::vec_fill_missing(pcs_definitions$section)
+pcs_definitions$name <- cheapr::lag_(
+  cheapr::if_else_(
+    pcs_definitions$entity == "section" & pcs_definitions$field == "title",
+    pcs_definitions$value,
+    NA_character_
+  ),
+  -1L
+)
+pcs_definitions$name <- vctrs::vec_fill_missing(pcs_definitions$name)
+pcs_definitions$axis <- cheapr::if_else_(
+  pcs_definitions$entity == "axis" & pcs_definitions$value_kind == "attribute",
+  pcs_definitions$value,
+  NA_character_
+)
+pcs_definitions$title <- cheapr::lag_(
+  cheapr::if_else_(
+    pcs_definitions$entity == "axis" & pcs_definitions$field == "title",
+    pcs_definitions$value,
+    NA_character_
+  ),
+  -1L
+)
+pcs_definitions <- collapse::colorderv(
   pcs_definitions,
-  j = c(1L, 3L, 2L, 4:5)
+  c("section", "name", "axis", "title")
+)
+pcs_definitions <- collapse::ss(
+  pcs_definitions,
+  pcs_definitions$entity %!=% "section",
+  j = c(1:6, 8:9)
 ) |>
   collapse::rsplit(~record_index)
 
-make_includes <- function(x, d) {
-  a <- collapse::ss(x, x$entity %==% "axis") |>
-    _$value |>
-    as.list() |>
-    rlang::set_names(c("axis", "title")) |>
-    list2DF()
-
-  d <- cheapr::col_c(d, a)
-
-  b <- collapse::ss(x, x$entity %!=% "axis")
-  b$field <- cheapr::if_else_(grepl("includes$", b$entity), "includes", "value")
-  b <- collapse::ss(b, j = -1L)
-  b <- collapse::av(
-    b,
-    entity = cheapr::if_else_(b$field == "value", b$value, NA_character_),
+pcs_definitions <- purrr::map(pcs_definitions, \(x) {
+  x[["axis"]] <- vctrs::vec_fill_missing(x[["axis"]])
+  x[["title"]] <- vctrs::vec_fill_missing(x[["title"]])
+  x <- collapse::ss(x, x[["entity"]] %!=% "axis")
+  x[["field"]] <- cheapr::if_else_(
+    x[["entity"]] == "axis/terms/includes",
+    "includes",
+    x[["field"]]
+  )
+  x <- collapse::av(
+    x,
+    term = cheapr::if_else_(
+      x[["entity"]] == "axis/terms/title",
+      1L,
+      NA_character_
+    ),
+    entry = cumsum(x[["entity"]] == "axis/terms/title"),
     pos = "front"
   )
-  b$entity <- vctrs::vec_fill_missing(b$entity)
-  b <- collapse::ss(b, b$field %!=% "value")
-  cheapr::col_c(d, b)
-}
+  collapse::av(x, run = vctrs::vec_identify_runs(x[["term"]]), pos = "front")
+})
 
-make_definition <- function(x, d) {
-  a <- collapse::ss(x, x$entity %==% "axis") |>
-    _$value |>
-    as.list() |>
-    rlang::set_names(c("axis", "title")) |>
-    list2DF()
+collapse::ss(pcs_definitions$`1`, pcs_definitions$`1`$term == 1L) |>
+  print(n = 200)
+pcs_definitions$`1` |> print(n = 200)
 
-  d <- cheapr::col_c(d, a)
-  b <- collapse::ss(x, x$entity %!=% "axis", -1L)
-  cheapr::col_c(
-    d,
-    cheapr::new_df(
-      value = collapse::ss(b, b$field %==% "value") |> _$value,
-      definition = collapse::ss(b, b$field %==% "definition") |> _$value
-    )
-  )
-}
 
 process_definitions <- function(x) {
   df <- collapse::ss(
@@ -82,32 +111,3 @@ process_definitions <- function(x) {
     }
   })
 }
-
-process_definitions(def_)
-x$`1` |> print(n = Inf)
-x <- def_[["1"]] |> print(n = Inf)
-
-def2 <- collapse::ss(def_[["2"]], 5:33, 3:4)
-def3 <- collapse::ss(def_[["2"]], 36:47, 3:4)
-
-df_1 <- cheapr::new_df(
-  section = "1",
-  name = "Obstetrics",
-  axis = 3L,
-  title = "Operation",
-  value = collapse::ss(def2, def2$field %==% "value") |> _$value,
-  definition = collapse::ss(def2, def2$field %==% "definition") |> _$value
-) |>
-  collapse::qTBL()
-
-df_2 <- cheapr::new_df(
-  section = "1",
-  name = "Obstetrics",
-  axis = 5L,
-  title = "Approach",
-  value = collapse::ss(def3, def3$field %==% "value") |> _$value,
-  definition = collapse::ss(def3, def3$field %==% "definition") |> _$value
-) |>
-  collapse::qTBL()
-
-definitions_obstetrics <- vctrs::vec_rbind(df_1, df_2)
