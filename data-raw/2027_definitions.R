@@ -86,28 +86,5 @@ pcs_definitions <- purrr::map(pcs_definitions, \(x) {
 
 collapse::ss(pcs_definitions$`1`, pcs_definitions$`1`$term == 1L) |>
   print(n = 200)
+
 pcs_definitions$`1` |> print(n = 200)
-
-
-process_definitions <- function(x) {
-  df <- collapse::ss(
-    x,
-    x$entity %==% "section"
-  ) |>
-    _$value |>
-    as.list() |>
-    rlang::set_names(c("section", "name")) |>
-    list2DF()
-
-  x <- collapse::ss(x, x$entity %!=% "section", -1L)
-  x <- collapse::av(x, entry = cumsum(x$field == "pos"), pos = "front")
-  x <- collapse::rsplit(x, ~entry)
-
-  purrr::map(x, \(x) {
-    if (collapse::anyv(grepl("includes$", x$entity), TRUE)) {
-      make_includes(x, df)
-    } else {
-      make_definition(x, df)
-    }
-  })
-}
