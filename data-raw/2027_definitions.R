@@ -1,5 +1,10 @@
+# load libraries ----------------------------------------------------------
+
 library(xmlrectr)
-library(zuxml)
+library(collapse)
+library(cheapr)
+library(vctrs)
+library(purrr)
 
 # data rectangling --------------------------------------------------------
 
@@ -9,71 +14,65 @@ xml <- fs::path(
 )
 def_xml <- fs::path(xml, "icd10pcs_definitions_2027", ext = "xml")
 def_xsd <- fs::path(xml, "icd10pcs_definitions", ext = "xsd")
-def_prop <- xmlrectr::propose_xml_profile(def_xml, xsd = def_xsd)
-def_prof <- xmlrectr::xml_profile(rows = "ICD10PCS.definitions/section")
-def_spec <- xmlrectr::compile_xml_profile(def_prof, def_xml)
-def_rect <- xmlrectr::rectangle_xml(def_xml, def_spec, parallel = TRUE)
-
-pcs_definitions <- collapse::ss(def_rect, j = c(2L, 4:6, 8:14))
-usethis::use_data(pcs_definitions, overwrite = TRUE)
-
-pcs_definitions |>
-  print(n = 100)
+def_prop <- propose_xml_profile(def_xml, xsd = def_xsd)
+def_prof <- xml_profile(rows = "ICD10PCS.definitions/section")
+def_spec <- compile_xml_profile(def_prof, def_xml)
+def_rect <- rectangle_xml(def_xml, def_spec, parallel = TRUE)
+x <- ss(def_rect, j = c(2L, 4:6, 8:14))
 
 # data transformation -----------------------------------------------------
 
-pcs_definitions$section <- cheapr::if_else_(
-  pcs_definitions$entity == "section" &
-    pcs_definitions$value_kind == "attribute",
-  pcs_definitions$value,
+x$section <- if_else_(
+  x$entity == "section" & x$value_kind == "attribute",
+  x$value,
+  NA_character_
+) |>
+  vec_fill_missing()
+x$name <- if_else_(
+  x$entity == "section" & x$field == "title",
+  x$value,
+  NA_character_
+) |>
+  lag_(-1L) |>
+  vec_fill_missing()
+x$axis <- if_else_(
+  x$entity == "axis" & x$value_kind == "attribute",
+  x$value,
   NA_character_
 )
-pcs_definitions$section <- vctrs::vec_fill_missing(pcs_definitions$section)
-pcs_definitions$name <- cheapr::lag_(
-  cheapr::if_else_(
-    pcs_definitions$entity == "section" & pcs_definitions$field == "title",
-    pcs_definitions$value,
-    NA_character_
-  ),
-  -1L
-)
-pcs_definitions$name <- vctrs::vec_fill_missing(pcs_definitions$name)
-pcs_definitions$axis <- cheapr::if_else_(
-  pcs_definitions$entity == "axis" & pcs_definitions$value_kind == "attribute",
-  pcs_definitions$value,
+x$title <- if_else_(
+  x$entity == "axis" & x$field == "title",
+  x$value,
   NA_character_
-)
-pcs_definitions$title <- cheapr::lag_(
-  cheapr::if_else_(
-    pcs_definitions$entity == "axis" & pcs_definitions$field == "title",
-    pcs_definitions$value,
-    NA_character_
-  ),
-  -1L
-)
-pcs_definitions <- collapse::colorderv(
-  pcs_definitions,
-  c("section", "name", "axis", "title")
-)
-pcs_definitions <- collapse::ss(
-  pcs_definitions,
-  pcs_definitions$entity %!=% "section",
+) |>
+  lag_(-1L)
+pcs_definitions <- colorderv(x, c("section", "name", "axis", "title"))
+
+# use_data ----------------------------------------------------------------
+
+usethis::use_data(pcs_definitions, overwrite = TRUE)
+
+# data transform ----------------------------------------------------------
+def = pcs_definitions
+def <- ss(
+  def,
+  def$entity %!=% "section",
   j = c(1:6, 8:9)
 ) |>
-  collapse::rsplit(~record_index)
+  rsplit(~record_index)
 
-pcs_definitions <- purrr::map(pcs_definitions, \(x) {
-  x[["axis"]] <- vctrs::vec_fill_missing(x[["axis"]])
-  x[["title"]] <- vctrs::vec_fill_missing(x[["title"]])
-  x <- collapse::ss(x, x[["entity"]] %!=% "axis")
-  x[["field"]] <- cheapr::if_else_(
+def <- map(def, \(x) {
+  x[["axis"]] <- vec_fill_missing(x[["axis"]])
+  x[["title"]] <- vec_fill_missing(x[["title"]])
+  x <- ss(x, x[["entity"]] %!=% "axis")
+  x[["field"]] <- if_else_(
     x[["entity"]] == "axis/terms/includes",
     "includes",
     x[["field"]]
   )
-  x <- collapse::av(
+  x <- av(
     x,
-    term = cheapr::if_else_(
+    term = if_else_(
       x[["entity"]] == "axis/terms/title",
       1L,
       NA_character_
@@ -81,10 +80,10 @@ pcs_definitions <- purrr::map(pcs_definitions, \(x) {
     entry = cumsum(x[["entity"]] == "axis/terms/title"),
     pos = "front"
   )
-  collapse::av(x, run = vctrs::vec_identify_runs(x[["term"]]), pos = "front")
+  av(x, run = vec_identify_runs(x[["term"]]), pos = "front")
 })
 
-collapse::ss(pcs_definitions$`1`, pcs_definitions$`1`$term == 1L) |>
+ss(def$`1`, def$`1`$term == 1L) |>
   print(n = 200)
 
 pcs_definitions$`1` |> print(n = 200)

@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{pcs_definitions}}{
 
-A data frame with 3,602 rows and 11 columns:
+A data frame with 3,602 rows and 15 columns:
 \describe{
 \item{record_index}{description}
 \item{entity}{description}
