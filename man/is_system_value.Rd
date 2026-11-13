@@ -4,10 +4,10 @@
 \alias{is_system_value}
 \title{Validate System Values}
 \usage{
-is_system_value(system_value)
+is_system_value(x)
 }
 \arguments{
-\item{system_value}{\verb{<chr>} string}
+\item{x}{\verb{<chr>} string}
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, otherwise \code{FALSE}
@@ -26,7 +26,8 @@ try(is_system_value("XX"))
 
 }
 \seealso{
-Other PCS value validators:
+Other PCS validators:
+\code{\link[=is_section_code]{is_section_code()}},
 \code{\link[=is_section_value]{is_section_value()}}
 }
-\concept{PCS value validators}
+\concept{PCS validators}

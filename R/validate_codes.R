@@ -1,11 +1,8 @@
 #' Validate Full PCS Codes by Section
 #'
 #' @param section_value `<chr>` string
-#'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' is_section_code(section_value = "0", pcs_code = "01UB3KZ")
 #'
@@ -16,11 +13,7 @@
 #' x[which(is_section_code(pcs_code = x))]
 #'
 #' try(is_section_code(pcs_code = "01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @export
 is_section_code <- function(
   section_value = substr(pcs_code, 1L, 1L)[1],
@@ -62,9 +55,7 @@ is_section_code <- function(
 #' Section 0 accounts for 87% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -73,11 +64,7 @@ is_section_code <- function(
 #' x[which(is_section_0(x))]
 #'
 #' try(is_section_0("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_0 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -93,9 +80,7 @@ is_section_0 <- function(pcs_code) {
 #' Section 1 accounts for 0.38% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -104,11 +89,7 @@ is_section_0 <- function(pcs_code) {
 #' x[which(is_section_1(x))]
 #'
 #' try(is_section_1("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_1 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -124,9 +105,7 @@ is_section_1 <- function(pcs_code) {
 #' Section 2 accounts for 1.09% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -136,10 +115,7 @@ is_section_1 <- function(pcs_code) {
 #'
 #' try(is_section_2("01UB3K"))
 #'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_2 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -155,9 +131,7 @@ is_section_2 <- function(pcs_code) {
 #' Section 3 accounts for 1.62% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -167,10 +141,7 @@ is_section_2 <- function(pcs_code) {
 #'
 #' try(is_section_3("01UB3K"))
 #'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_3 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -186,9 +157,7 @@ is_section_3 <- function(pcs_code) {
 #' Section 4 accounts for 0.54% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -197,11 +166,7 @@ is_section_3 <- function(pcs_code) {
 #' x[which(is_section_4(x))]
 #'
 #' try(is_section_4("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_4 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -217,9 +182,7 @@ is_section_4 <- function(pcs_code) {
 #' Section 5 accounts for 0.07% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -228,11 +191,7 @@ is_section_4 <- function(pcs_code) {
 #' x[which(is_section_5(x))]
 #'
 #' try(is_section_5("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_5 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -248,9 +207,7 @@ is_section_5 <- function(pcs_code) {
 #' Section 6 accounts for 0.06% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -259,11 +216,7 @@ is_section_5 <- function(pcs_code) {
 #' x[which(is_section_6(x))]
 #'
 #' try(is_section_6("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_6 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -279,9 +232,7 @@ is_section_6 <- function(pcs_code) {
 #' Section 7 accounts for 0.13% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -290,11 +241,7 @@ is_section_6 <- function(pcs_code) {
 #' x[which(is_section_7(x))]
 #'
 #' try(is_section_7("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_7 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -310,9 +257,7 @@ is_section_7 <- function(pcs_code) {
 #' Section 8 accounts for 0.11% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -321,11 +266,7 @@ is_section_7 <- function(pcs_code) {
 #' x[which(is_section_8(x))]
 #'
 #' try(is_section_8("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_8 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -341,9 +282,7 @@ is_section_8 <- function(pcs_code) {
 #' Section 9 accounts for 0.11% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -352,11 +291,7 @@ is_section_8 <- function(pcs_code) {
 #' x[which(is_section_9(x))]
 #'
 #' try(is_section_9("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_9 <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -372,9 +307,7 @@ is_section_9 <- function(pcs_code) {
 #' Section B accounts for 3.79% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -383,11 +316,7 @@ is_section_9 <- function(pcs_code) {
 #' x[which(is_section_B(x))]
 #'
 #' try(is_section_B("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_B <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -403,9 +332,7 @@ is_section_B <- function(pcs_code) {
 #' Section C accounts for 0.59% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -414,11 +341,7 @@ is_section_B <- function(pcs_code) {
 #' x[which(is_section_C(x))]
 #'
 #' try(is_section_C("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_C <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -434,9 +357,7 @@ is_section_C <- function(pcs_code) {
 #' Section D accounts for 2.61% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -445,11 +366,7 @@ is_section_C <- function(pcs_code) {
 #' x[which(is_section_D(x))]
 #'
 #' try(is_section_D("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_D <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -465,9 +382,7 @@ is_section_D <- function(pcs_code) {
 #' Section F accounts for 1.76% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -476,11 +391,7 @@ is_section_D <- function(pcs_code) {
 #' x[which(is_section_F(x))]
 #'
 #' try(is_section_F("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_F <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -496,9 +407,7 @@ is_section_F <- function(pcs_code) {
 #' Section G accounts for 0.04% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -507,11 +416,7 @@ is_section_F <- function(pcs_code) {
 #' x[which(is_section_G(x))]
 #'
 #' try(is_section_G("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_G <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -527,9 +432,7 @@ is_section_G <- function(pcs_code) {
 #' Section H accounts for 0.08% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -538,11 +441,7 @@ is_section_G <- function(pcs_code) {
 #' x[which(is_section_H(x))]
 #'
 #' try(is_section_H("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_H <- function(pcs_code) {
   check_nchar(pcs_code, 7)
@@ -558,9 +457,7 @@ is_section_H <- function(pcs_code) {
 #' Section X accounts for 0.44% of all PCS codes.
 #'
 #' @param pcs_code `<chr>` string
-#'
 #' @returns `<lgl>` `TRUE` if valid, otherwise `FALSE`
-#'
 #' @examples
 #' x <- c("00DN0ZZ", "01UB3KZ", "0BBBFBB")
 #'
@@ -569,11 +466,7 @@ is_section_H <- function(pcs_code) {
 #' x[which(is_section_X(x))]
 #'
 #' try(is_section_X("01UB3K"))
-#'
-#' @family PCS code validators
-#'
-#' @autoglobal
-#'
+#' @family PCS validators
 #' @noRd
 is_section_X <- function(pcs_code) {
   check_nchar(pcs_code, 7)

@@ -4,10 +4,10 @@
 \alias{is_section_value}
 \title{Validate Section Values}
 \usage{
-is_section_value(section_value)
+is_section_value(x)
 }
 \arguments{
-\item{section_value}{\verb{<chr>} string}
+\item{x}{\verb{<chr>} string}
 }
 \value{
 \verb{<lgl>} \code{TRUE} if valid, otherwise \code{FALSE}
@@ -26,7 +26,8 @@ try(is_section_value("XX"))
 
 }
 \seealso{
-Other PCS value validators:
+Other PCS validators:
+\code{\link[=is_section_code]{is_section_code()}},
 \code{\link[=is_system_value]{is_system_value()}}
 }
-\concept{PCS value validators}
+\concept{PCS validators}

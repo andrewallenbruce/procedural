@@ -86,4 +86,4 @@ def <- map(def, \(x) {
 ss(def$`1`, def$`1`$term == 1L) |>
   print(n = 200)
 
-pcs_definitions$`1` |> print(n = 200)
+def$`1` |> print(n = 200)

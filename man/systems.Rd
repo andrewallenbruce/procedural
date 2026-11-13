@@ -17,6 +17,7 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Body Systems
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 systems()
 
 systems("0")
@@ -24,5 +25,5 @@ systems("0")
 systems("2")
 
 systems("X")
-
+\dontshow{\}) # examplesIf}
 }

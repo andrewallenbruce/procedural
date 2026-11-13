@@ -27,6 +27,10 @@ is_section_code(pcs_code = x)
 x[which(is_section_code(pcs_code = x))]
 
 try(is_section_code(pcs_code = "01UB3K"))
-
 }
-\concept{PCS code validators}
+\seealso{
+Other PCS validators:
+\code{\link[=is_section_value]{is_section_value()}},
+\code{\link[=is_system_value]{is_system_value()}}
+}
+\concept{PCS validators}

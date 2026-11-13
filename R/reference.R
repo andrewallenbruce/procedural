@@ -5,7 +5,7 @@
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' sections()
 #'
 #' sections("0")
@@ -13,9 +13,6 @@
 #' sections("2")
 #'
 #' sections("X")
-#'
-#' @autoglobal
-#'
 #' @export
 sections <- function(x = NULL) {
   sec <- get_pin("sections")
@@ -36,7 +33,7 @@ sections <- function(x = NULL) {
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' systems()
 #'
 #' systems("0")
@@ -44,9 +41,6 @@ sections <- function(x = NULL) {
 #' systems("2")
 #'
 #' systems("X")
-#'
-#' @autoglobal
-#'
 #' @export
 systems <- function(x = NULL) {
   sys <- get_pin("systems")
