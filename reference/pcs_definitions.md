@@ -12,7 +12,7 @@ pcs_definitions
 
 ### `pcs_definitions`
 
-A data frame with 3,602 rows and 11 columns:
+A data frame with 3,602 rows and 15 columns:
 
 - record_index:
 
