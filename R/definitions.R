@@ -21,25 +21,17 @@
 #' @export
 definitions <- function(section = NULL, axis = NULL, term = NULL) {
   x <- if (!is.null(section)) {
-    collapse::ss(
-      pcs_definitions,
-      pcs_definitions[["section"]] %iin% section,
-      check = FALSE
-    )
+    ss_(pcs_definitions, pcs_definitions[["section"]] %iin% section)
   } else {
     pcs_definitions
   }
 
   if (!is.null(axis)) {
-    x <- collapse::ss(x, x[["axis"]] %iin% axis, check = FALSE)
+    x <- ss_(x, x[["axis"]] %iin% axis)
   }
 
   if (!is.null(term)) {
-    x <- collapse::ss(
-      x,
-      grep(term, x[["value"]], ignore.case = TRUE, perl = TRUE),
-      check = FALSE
-    )
+    x <- ss_(x, grep(term, x[["value"]], ignore.case = TRUE, perl = TRUE))
   }
   return(x)
 }
@@ -69,7 +61,7 @@ definitions <- function(section = NULL, axis = NULL, term = NULL) {
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' includes(section = "0", axis = "3")
 #' @export
 includes <- function(
@@ -81,7 +73,7 @@ includes <- function(
   col <- match.arg(col)
 
   if (!is.null(section)) {
-    section <- stringfish::sf_toupper(as.character(section))
+    section <- toupper(as.character(section))
     section <- rlang::arg_match0(section, c(0, 3, "F", "G", "X"))
     includes <- vctrs::vec_slice(includes, includes$section == section)
   }

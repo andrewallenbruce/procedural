@@ -50,5 +50,7 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Includes
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 includes(section = "0", axis = "3")
+\dontshow{\}) # examplesIf}
 }

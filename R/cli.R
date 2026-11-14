@@ -1,4 +1,3 @@
-#' @autoglobal
 #' @noRd
 .cli <- function(x) {
   cl <- glue::glue_data(
@@ -48,15 +47,14 @@
   }
 }
 
-#' @autoglobal
 #' @noRd
 .clierr <- function(x, n) {
   arg <- rlang::caller_arg(x)
   call <- rlang::caller_env()
 
-  put <- stringfish::sf_substr(x$input, n, n)
+  put <- substr(x$input, n, n)
 
-  if (!put %in% fuimus::delister(x$opt["value"])) {
+  if (!put %in% un_(x$opt["value"])) {
     cli::cli_abort(
       paste(
         "{.strong {.val {rlang::sym(put)}}} is an invalid",

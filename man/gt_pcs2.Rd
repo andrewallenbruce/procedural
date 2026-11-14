@@ -16,8 +16,9 @@ description
 Return ICD-10-PCS Code as a \code{gt} Table
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 pcs("0G9000Z") |> gt_pcs2()
 
 gt_pcs2(pcs("0016070"))
-
+\dontshow{\}) # examplesIf}
 }

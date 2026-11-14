@@ -13,8 +13,6 @@ xml <- fs::path(
   "zip-file-2-2027-code-tables-and-index"
 )
 def_xml <- fs::path(xml, "icd10pcs_definitions_2027", ext = "xml")
-def_xsd <- fs::path(xml, "icd10pcs_definitions", ext = "xsd")
-def_prop <- propose_xml_profile(def_xml, xsd = def_xsd)
 def_prof <- xml_profile(rows = "ICD10PCS.definitions/section")
 def_spec <- compile_xml_profile(def_prof, def_xml)
 def_rect <- rectangle_xml(def_xml, def_spec, parallel = TRUE)

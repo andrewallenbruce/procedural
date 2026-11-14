@@ -2,8 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom zeallot %<-%
-#' @importFrom collapse %==% %iin% %!in%
+#' @importFrom collapse %==% %!=% %iin% %!iin%
 #' @import rlang
 ## usethis namespace: end
 NULL

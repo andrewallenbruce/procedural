@@ -34,26 +34,24 @@ usethis::use_data(pcs_order, overwrite = TRUE)
 
 # data transformation -----------------------------------------------------
 o = pcs_order
-o_table <- row_c(ss(o, o$valid %==% 0L), ss(o, fmax(o$order)))
-o_table$table <- ivs::iv(o_table$order, lag_(o_table$order, -1L))
 
-o_table <- sset(
-  o_table,
-  o_table$order != fmax(o_table$order),
-  j = c(1L, 6L, 2:3, 5L)
-)
+o_table <- row_c(ss_(o, o$valid %==% 0L), ss_(o, fmax(o$order)))
+o_table <- ss_(o_table, col = c(1L, 3L))
+o_table$iv <- ivs::iv(o_table$order, lag_(o_table$order, -1L))
+o_table <- vctrs::vec_slice(o_table, o_table$order != fmax(o_table$order))
+o_table <- rlang::set_names(o_table, c("order", "table", "iv"))
 
 o_system <- o_table
+o_system$system <- substr(o_system$table, 1L, 2L)
+o_system <- ss_(o_system, col = c(1L, 4L)) |>
+  gby(system) |>
+  fsummarise(order = fmin(order))
 
-o_system$system <- substr(o_system$code, 1L, 2L)
+o_system$iv <- ivs::iv(o_system$order, cheapr::lag_(o_system$order, -1L))
+o_system$iv[nrow(o_system)] <- ivs::iv(80171L, 80174L)
+o_system |> tail()
 
-ss(o_system, j = c(1L, 6L, 4:5)) |>
-  fgroup_by(system) |>
-  fsummarise(
-    order = fmin(order),
-    description_long = fslice(description_long)
-  )
-
+ss_(pcs_order, grep("^XY", pcs_order$code))
 o2 <- dplyr::left_join(o, o_table)
 o2$table <- vec_fill_missing(o2$table)
 colorderv(o2, c("order", "table"))

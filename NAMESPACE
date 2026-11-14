@@ -18,8 +18,8 @@ export(sections)
 export(systems)
 import(rlang)
 importFrom(collapse,
-  "%!in%",
+  "%!=%",
+  "%!iin%",
   "%==%",
   "%iin%"
 )
-importFrom(zeallot,"%<-%")

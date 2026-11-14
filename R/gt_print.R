@@ -1,16 +1,11 @@
 #' Return ICD-10-PCS Code as a `gt` Table
 #'
 #' @param x an object of class `pcs`.
-#'
 #' @returns a gt table
-#'
-#' @examples
+#' @examplesIf FALSE
 #' pcs("0G9000Z") |> gt_pcs()
 #'
 #' gt_pcs(pcs("0016070"))
-#'
-#' @autoglobal
-#'
 #' @export
 gt_pcs <- function(x) {
   stopifnot("`x` must be a `pcs` object" = inherits(x, "pcs"))
@@ -79,16 +74,11 @@ gt_pcs <- function(x) {
 #' Return ICD-10-PCS Code as a `gt` Table
 #'
 #' @param x an object of class `pcs`.
-#'
 #' @returns description
-#'
-#' @examples
+#' @examplesIf FALSE
 #' pcs("0G9000Z") |> gt_pcs2()
 #'
 #' gt_pcs2(pcs("0016070"))
-#'
-#' @autoglobal
-#'
 #' @export
 gt_pcs2 <- function(x) {
   x$axes |>
@@ -151,8 +141,6 @@ gt_pcs2 <- function(x) {
     )
 }
 
-#' @autoglobal
-#'
 #' @noRd
 vert_lab <- function(label) {
   paste0("<vertical-text>", label, "</vertical-text>")

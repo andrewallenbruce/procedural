@@ -11,13 +11,21 @@ print.procedural <- function(x, ...) {
   invisible(x)
 }
 
-#' @keywords internal
-#'
 #' @noRd
 .add_class <- function(data) {
-  data <- dplyr::as_tibble(data)
+  data <- tibble::as_tibble(data)
 
   class(data) <- unique(c("procedural", class(data)))
 
   data
+}
+
+#' @noRd
+ss_ <- function(.data, row, col) {
+  collapse::ss(x = .data, i = row, j = col, check = FALSE)
+}
+
+#' @noRd
+un_ <- function(x) {
+  unlist(x, use.names = FALSE)
 }

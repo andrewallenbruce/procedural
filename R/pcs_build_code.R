@@ -47,9 +47,9 @@
   arg <- rlang::caller_arg(x)
   call <- rlang::caller_env()
 
-  input <- stringfish::sf_substr(x$input, n, n)
+  input <- substr(x$input, n, n)
 
-  if (input %!in% fuimus::delister(x$opt["value"])) {
+  if (input %!in% un_(x$opt["value"])) {
     cli::cli_abort(
       paste(
         "{.strong {.val {rlang::sym(input)}}} is an invalid",
@@ -87,7 +87,7 @@ pcs_code <- function(x = NULL) {
     return(invisible(xs))
   }
 
-  x_chars <- stringfish::sf_nchar(x)
+  x_chars <- nchar(x)
 
   xs <- .pcs_system(xs)
   if (x_chars == 1L) {
@@ -132,7 +132,7 @@ pcs_code2 <- function(x = NULL) {
     return(xs)
   }
 
-  x_chars <- stringfish::sf_nchar(x)
+  x_chars <- nchar(x)
 
   xs <- .pcs_system(xs)
   if (x_chars == 1L) {
@@ -183,9 +183,9 @@ pcs_code2 <- function(x = NULL) {
     return(list(input = NA_character_))
   }
 
-  x <- stringfish::sf_toupper(as.character(x))
+  x <- toupper(as.character(x))
 
-  if (stringfish::sf_nchar(x) > 7) {
+  if (nchar(x) > 7) {
     cli::cli_abort(
       "{.arg {arg}} must be {.strong 0-7} characters long.",
       arg = arg,
@@ -213,7 +213,7 @@ pcs_code2 <- function(x = NULL) {
 
     x$head <- collapse::fsubset(
       x$opt,
-      value %==% stringfish::sf_substr(x$input, step, step)
+      value %==% substr(x$input, step, step)
     )
 
     class(x) <- c("pcs_section", "list")
@@ -231,22 +231,20 @@ pcs_code2 <- function(x = NULL) {
 
   step <- 1
   # .__systems
-  x$opt <- system <- systems(
-    stringfish::sf_substr(x$input, step, step)
-  )[2:5]
+  x$opt <- system <- systems(substr(x$input, step, step))[2:5]
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 2
 
     x$head <- collapse::rowbind(
       x$head,
       collapse::fsubset(
         system,
-        value %==% stringfish::sf_substr(x$input, step, step)
+        value %==% substr(x$input, step, step)
       )
     )
 
@@ -270,7 +268,7 @@ pcs_code2 <- function(x = NULL) {
   # .__tables
   select <- get_pin("tables_rows") |>
     collapse::fsubset(
-      system %==% stringfish::sf_substr(x$input, 1, step),
+      system %==% substr(x$input, 1, step),
       code_2,
       name_3:rows
     )
@@ -284,24 +282,24 @@ pcs_code2 <- function(x = NULL) {
     ) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 3
 
     x$head <- collapse::rowbind(
       x$head,
       collapse::fsubset(
         operation,
-        value %==% stringfish::sf_substr(x$input, step, step)
+        value %==% substr(x$input, step, step)
       )
     )
 
     x$select <- collapse::fsubset(
       select,
-      table %==% stringfish::sf_substr(x$input, 1, step),
+      table %==% substr(x$input, 1, step),
       name_4:rows
     )
 
@@ -325,24 +323,24 @@ pcs_code2 <- function(x = NULL) {
     ) |>
     collapse::funique()
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 4
 
     x$head <- collapse::rowbind(
       x$head,
       collapse::fsubset(
         part,
-        value %==% stringfish::sf_substr(x$input, step, step)
+        value %==% substr(x$input, step, step)
       )
     )
 
     x$select <- collapse::fsubset(
       x$select,
-      row %==% stringfish::sf_substr(x$input, 1, step),
+      row %==% substr(x$input, 1, step),
       rowid:rows
     ) |>
       tidyr::unnest(rows) |>
@@ -364,16 +362,16 @@ pcs_code2 <- function(x = NULL) {
   x <- purrr::list_flatten(x)
   x$opt <- collapse::funique(x$select_5[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 5
 
     x$select_5 <- collapse::fsubset(
       x$select_5,
-      value %==% stringfish::sf_substr(x$input, step, step)
+      value %==% substr(x$input, step, step)
     )
 
     x$id <- collapse::funique(x$select_5$rowid)
@@ -395,16 +393,16 @@ pcs_code2 <- function(x = NULL) {
   step <- 5
   x$opt <- collapse::funique(x$select_6[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 6
 
     x$select_6 <- collapse::fsubset(
       x$select_6,
-      value %==% stringfish::sf_substr(x$input, step, step)
+      value %==% substr(x$input, step, step)
     )
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_6$rowid)
@@ -426,16 +424,16 @@ pcs_code2 <- function(x = NULL) {
   step <- 6
   x$opt <- collapse::funique(x$select_7[2:5])
 
-  if (stringfish::sf_nchar(x$input) == step) {
+  if (nchar(x$input) == step) {
     return(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > step) {
+  if (nchar(x$input) > step) {
     step <- 7
 
     x$select_7 <- collapse::fsubset(
       x$select_7,
-      value %==% stringfish::sf_substr(x$input, step, step)
+      value %==% substr(x$input, step, step)
     )
 
     x$id <- vctrs::vec_set_intersect(x$id, x$select_7$rowid)
