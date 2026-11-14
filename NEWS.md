@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9002
+
+* `definitions()` now returns full entries by default
+
+
 # procedural 0.0.1.9001
 
 * internal restructuring
