@@ -5,7 +5,7 @@ ICD-10-PCS Definitions
 ## Usage
 
 ``` r
-definitions(section = NULL, axis = NULL, term = NULL)
+definitions(section = NULL, axis = NULL, term = NULL, complete = TRUE)
 ```
 
 ## Arguments
@@ -40,6 +40,10 @@ definitions(section = NULL, axis = NULL, term = NULL)
 
   `<chr>` term to search for
 
+- complete:
+
+  `<lgl>` Return complete entries; default is TRUE
+
 ## Value
 
 a [tibble::tibble](https://tibble.tidyverse.org/reference/tibble.html)
@@ -48,19 +52,23 @@ containing the results
 ## Examples
 
 ``` r
+definitions(term = "drinnn")
+#> Error: term = "drinnn" returned 0 rows
 definitions(term = "drain")
-#> # A tibble: 9 × 6
-#>   entry section  axis name           field       value                          
-#>   <int> <chr>   <int> <chr>          <chr>       <chr>                          
-#> 1     9 0           3 Operation      definition  Cutting into a body part, with…
-#> 2    10 0           3 Operation      value       Drainage                       
-#> 3    10 0           3 Operation      explanation The qualifier DIAGNOSTIC is us…
-#> 4    10 0           3 Operation      includes    Thoracentesis, incision and dr…
-#> 5    22 0           3 Operation      includes    Drainage tube removal, cardiac…
-#> 6   397 0           6 Device         value       Drainage Device                
-#> 7   518 1           3 Operation      value       Drainage                       
-#> 8   702 F           5 Type Qualifier includes    Includes connective tissue mas…
-#> 9   816 X           3 Operation      definition  Cutting into a body part, with…
+#> # A tibble: 25 × 6
+#>    entry section  axis name      field       value                              
+#>    <int> <chr>   <int> <chr>     <chr>       <chr>                              
+#>  1     9 0           3 Operation value       Division                           
+#>  2     9 0           3 Operation definition  Cutting into a body part, without …
+#>  3     9 0           3 Operation explanation All or a portion of the body part …
+#>  4     9 0           3 Operation includes    Spinal cordotomy, osteotomy        
+#>  5    10 0           3 Operation value       Drainage                           
+#>  6    10 0           3 Operation definition  Taking or letting out fluids and/o…
+#>  7    10 0           3 Operation explanation The qualifier DIAGNOSTIC is used t…
+#>  8    10 0           3 Operation includes    Thoracentesis, incision and draina…
+#>  9    22 0           3 Operation value       Removal                            
+#> 10    22 0           3 Operation definition  Taking out or off a device from a …
+#> # ℹ 15 more rows
 definitions(section = "0", axis = 5)
 #> # A tibble: 14 × 6
 #>    entry section  axis name     field      value                                
@@ -80,10 +88,11 @@ definitions(section = "0", axis = 5)
 #> 13   367 0           5 Approach value      Via Natural or Artificial Opening Wi…
 #> 14   367 0           5 Approach definition Entry of instrumentation through a n…
 definitions(section = "B", term = "fluoro")
-#> # A tibble: 1 × 6
-#>   entry section  axis name  field value      
-#>   <int> <chr>   <int> <chr> <chr> <chr>      
-#> 1   603 B           3 Type  value Fluoroscopy
+#> # A tibble: 2 × 6
+#>   entry section  axis name  field      value                                    
+#>   <int> <chr>   <int> <chr> <chr>      <chr>                                    
+#> 1   603 B           3 Type  value      Fluoroscopy                              
+#> 2   603 B           3 Type  definition Single plane or bi-plane real time displ…
 definitions()
 #> # A tibble: 3,188 × 6
 #>    entry section  axis name      field       value                              
