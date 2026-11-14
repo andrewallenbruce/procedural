@@ -4,7 +4,7 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(section = NULL, axis = NULL, term = NULL)
+definitions(section = NULL, axis = NULL, term = NULL, complete = TRUE)
 }
 \arguments{
 \item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}}
@@ -23,6 +23,8 @@ definitions(section = NULL, axis = NULL, term = NULL)
 }}
 
 \item{term}{\verb{<chr>} term to search for}
+
+\item{complete}{\verb{<lgl>}  Return complete entries; default is TRUE}
 }
 \value{
 a \link[tibble:tibble]{tibble::tibble} containing the results
@@ -31,6 +33,7 @@ a \link[tibble:tibble]{tibble::tibble} containing the results
 ICD-10-PCS Definitions
 }
 \examples{
+definitions(term = "drinnn")
 definitions(term = "drain")
 definitions(section = "0", axis = 5)
 definitions(section = "B", term = "fluoro")

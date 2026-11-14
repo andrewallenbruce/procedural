@@ -12,26 +12,68 @@
 #'    * 6: Device
 #'    * 6: Device / Substance / Technology
 #' @param term `<chr>` term to search for
+#' @param complete `<lgl>`  Return complete entries; default is TRUE
 #' @returns a [tibble::tibble] containing the results
 #' @examples
+#' definitions(term = "drinnn")
 #' definitions(term = "drain")
 #' definitions(section = "0", axis = 5)
 #' definitions(section = "B", term = "fluoro")
 #' definitions()
 #' @export
-definitions <- function(section = NULL, axis = NULL, term = NULL) {
-  x <- if (!is.null(section)) {
-    ss_(pcs_definitions, pcs_definitions[["section"]] %iin% section)
+definitions <- function(
+  section = NULL,
+  axis = NULL,
+  term = NULL,
+  complete = TRUE
+) {
+  if (!is.null(section)) {
+    x <- ss_(
+      pcs_definitions,
+      pcs_definitions[["section"]] %iin% section
+    )
+    if (!nrow(x)) {
+      cli::cli_abort(
+        '{.pkg section = "{section}"} returned 0 rows',
+        call = rlang::caller_env()
+      )
+    }
   } else {
-    pcs_definitions
+    x <- pcs_definitions
   }
 
   if (!is.null(axis)) {
     x <- ss_(x, x[["axis"]] %iin% axis)
+    if (!nrow(x)) {
+      cli::cli_abort(
+        '{.pkg axis = "{axis}"} returned 0 rows',
+        call = rlang::caller_env()
+      )
+    }
   }
 
   if (!is.null(term)) {
-    x <- ss_(x, grep(term, x[["value"]], ignore.case = TRUE, perl = TRUE))
+    x <- ss_(
+      x,
+      grep(
+        term,
+        x[["value"]],
+        ignore.case = TRUE,
+        perl = TRUE
+      )
+    )
+    if (!nrow(x)) {
+      cli::cli_abort(
+        '{.pkg term = "{term}"} returned 0 rows',
+        call = rlang::caller_env()
+      )
+    }
+    if (complete) {
+      x <- ss_(
+        pcs_definitions,
+        pcs_definitions[["entry"]] %iin% unique(x$entry)
+      )
+    }
   }
   return(x)
 }
