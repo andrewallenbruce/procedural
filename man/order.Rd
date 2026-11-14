@@ -22,8 +22,8 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Order File
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 order(search = "00X")
-
 order(search = "Olfactory", col = "description_code")
-
+\dontshow{\}) # examplesIf}
 }

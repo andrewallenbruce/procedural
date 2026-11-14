@@ -4,38 +4,35 @@
 \alias{definitions}
 \title{ICD-10-PCS Definitions}
 \usage{
-definitions(
-  section = NULL,
-  axis = NULL,
-  col = c("value", "label", "name", "definition", "explanation"),
-  search = NULL,
-  display = FALSE
-)
+definitions(section = NULL, axis = NULL, term = NULL)
 }
 \arguments{
-\item{section}{PCS section: 0:9, B, C, F, G, H, X}
+\item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}}
 
-\item{axis}{PCS axis: 3, 4, 5}
+\item{axis}{\verb{<int>} PCS axis; one of \verb{3, 4, 5, 6}
+\itemize{
+\item 3: Operation
+\item 3: Type
+\item 4: Body Part
+\item 4: Qualifier
+\item 5: Approach
+\item 5: Type Qualifier
+\item 6: Substance
+\item 6: Device
+\item 6: Device / Substance / Technology
+}}
 
-\item{col}{column to search: "name", "value" (default), "label" "definition", "explanation"}
-
-\item{search}{string to search for in \code{col}}
-
-\item{display}{output for display, e.g. in \code{ggplot} or \code{gt}: \code{TRUE} or \code{FALSE} (default)}
+\item{term}{\verb{<chr>} term to search for}
 }
 \value{
-a \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble]{tibble::tibble} containing the results
 }
 \description{
 ICD-10-PCS Definitions
 }
 \examples{
-definitions(col = "label", search = "drain")
-
-definitions(section = "0", axis = "5")
-
-definitions(section = "B", col = "label", search = "fluoro")
-
-definitions(section = "B", col = "label", search = "fluoro", display = TRUE)
-
+definitions(term = "drain")
+definitions(section = "0", axis = 5)
+definitions(section = "B", term = "fluoro")
+definitions()
 }

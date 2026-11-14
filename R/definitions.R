@@ -1,66 +1,47 @@
 #' ICD-10-PCS Definitions
 #'
-#' @param section PCS section: 0:9, B, C, F, G, H, X
-#'
-#' @param axis PCS axis: 3, 4, 5
-#'
-#' @param col column to search: "name", "value" (default), "label" "definition", "explanation"
-#'
-#' @param search string to search for in `col`
-#'
-#' @param display output for display, e.g. in `ggplot` or `gt`: `TRUE` or `FALSE` (default)
-#'
-#' @template returns-default
-#'
+#' @param section `<chr>` PCS section; one of `0:9, B, C, F, G, H, X`
+#' @param axis `<int>` PCS axis; one of `3, 4, 5, 6`
+#'    * 3: Operation
+#'    * 3: Type
+#'    * 4: Body Part
+#'    * 4: Qualifier
+#'    * 5: Approach
+#'    * 5: Type Qualifier
+#'    * 6: Substance
+#'    * 6: Device
+#'    * 6: Device / Substance / Technology
+#' @param term `<chr>` term to search for
+#' @returns a [tibble::tibble] containing the results
 #' @examples
-#' definitions(col = "label", search = "drain")
-#'
-#' definitions(section = "0", axis = "5")
-#'
-#' definitions(section = "B", col = "label", search = "fluoro")
-#'
-#' definitions(section = "B", col = "label", search = "fluoro", display = TRUE)
-#'
-#' @autoglobal
-#'
+#' definitions(term = "drain")
+#' definitions(section = "0", axis = 5)
+#' definitions(section = "B", term = "fluoro")
+#' definitions()
 #' @export
-definitions <- function(
-  section = NULL,
-  axis = NULL,
-  col = c("value", "label", "name", "definition", "explanation"),
-  search = NULL,
-  display = FALSE
-) {
-  def <- get_pin("definitions")
-  col <- match.arg(col)
-
-  if (!is.null(section)) {
-    section <- stringfish::sf_toupper(as.character(section))
-    def <- vctrs::vec_slice(def, def$section == section)
+definitions <- function(section = NULL, axis = NULL, term = NULL) {
+  x <- if (!is.null(section)) {
+    collapse::ss(
+      pcs_definitions,
+      pcs_definitions[["section"]] %iin% section,
+      check = FALSE
+    )
+  } else {
+    pcs_definitions
   }
 
   if (!is.null(axis)) {
-    axis <- as.character(axis)
-    axis <- rlang::arg_match0(axis, c("3", "4", "5"))
-    def <- vctrs::vec_slice(def, def$axis == axis)
+    x <- collapse::ss(x, x[["axis"]] %iin% axis, check = FALSE)
   }
 
-  if (!is.null(search)) {
-    def <- fuimus::srchcol(def, col = col, search = search)
+  if (!is.null(term)) {
+    x <- collapse::ss(
+      x,
+      grep(term, x[["value"]], ignore.case = TRUE, perl = TRUE),
+      check = FALSE
+    )
   }
-
-  if (display) {
-    def <- dplyr::mutate(
-      def,
-      definition = dplyr::if_else(
-        !is.na(explanation),
-        paste0(definition, ". ", explanation, "."),
-        definition
-      )
-    ) |>
-      dplyr::select(label, definition)
-  }
-  return(.add_class(def))
+  return(x)
 }
 
 #' ICD-10-PCS Includes
@@ -90,9 +71,6 @@ definitions <- function(
 #'
 #' @examples
 #' includes(section = "0", axis = "3")
-#'
-#' @autoglobal
-#'
 #' @export
 includes <- function(
   section = NULL,
@@ -100,7 +78,6 @@ includes <- function(
   col = c("label", "name", "includes"),
   search = NULL
 ) {
-  includes <- get_pin("includes")
   col <- match.arg(col)
 
   if (!is.null(section)) {
@@ -130,25 +107,20 @@ includes <- function(
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' index(search = "Abdominohysterectomy")
-#'
 #' index(search = "Attain Ability")
-#'
 #' index(search = "radi*")
-#'
-#' @autoglobal
-#'
 #' @export
 index <- function(
   search = NULL,
   col = c("term", "index", "verb", "value", "code")
 ) {
-  ind <- get_pin("index_v2") |>
-    tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
-    # dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
-    # dplyr::rename(index = letter, type = verb) |>
-    dplyr::select(-c(letter, term_id))
+  # ind <- get_pin("index_v2") |>
+  # tidyr::unite("term", term, subterm, sep = ", ", na.rm = TRUE) |>
+  # dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
+  # dplyr::rename(index = letter, type = verb) |>
+  # dplyr::select(-c(letter, term_id))
 
   col <- match.arg(col)
 
@@ -164,16 +136,10 @@ index <- function(
 #'   "description_code", "description_table", "order"
 #'
 #' @param search string to search for in `col`
-#'
 #' @template returns-default
-#'
-#' @examples
+#' @examplesIf FALSE
 #' order(search = "00X")
-#'
 #' order(search = "Olfactory", col = "description_code")
-#'
-#' @autoglobal
-#'
 #' @export
 order <- function(
   search = NULL,
@@ -186,7 +152,6 @@ order <- function(
     "order"
   )
 ) {
-  tbl <- get_pin("tables_order")
   col <- match.arg(col)
 
   if (!is.null(search)) {
@@ -203,40 +168,36 @@ order <- function(
 #'
 #' @template returns-default
 #'
-#' @examples
+#' @examplesIf FALSE
 #' code_range("0G9000Z", "0G9100Z")
-#'
 #' code_range("0G9000Z", "10D20ZZ")
-#'
-#' @autoglobal
-#'
 #' @export
 code_range <- function(start, end) {
-  start <- checks(start)
-  end <- checks(end)
-
-  if (nchar(start) < 7L) {
-    cli::cli_abort("{.var start} must be 7 characters long.")
-  }
-
-  if (nchar(end) < 7L) {
-    cli::cli_abort("{.var end} must be 7 characters long.")
-  }
-
-  base <- get_pin("tables_order")[c('order', 'code', 'table', 'row')]
-
-  o_start <- dplyr::filter(base, code == start) |> dplyr::pull(order)
-  o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
-
-  if (o_start > o_end) {
-    cli::cli_abort(
-      c(
-        "{.val {start}} comes after {.val {end}}",
-        "x" = "{.val {o_start}} > {.val {o_end}}."
-      )
-    )
-  }
-  dplyr::filter(base, dplyr::between(order, o_start, o_end)) |> .add_class()
+  # start <- checks(start)
+  # end <- checks(end)
+  #
+  # if (nchar(start) < 7L) {
+  #   cli::cli_abort("{.var start} must be 7 characters long.")
+  # }
+  #
+  # if (nchar(end) < 7L) {
+  #   cli::cli_abort("{.var end} must be 7 characters long.")
+  # }
+  #
+  # base <- get_pin("tables_order")[c('order', 'code', 'table', 'row')]
+  #
+  # o_start <- dplyr::filter(base, code == start) |> dplyr::pull(order)
+  # o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
+  #
+  # if (o_start > o_end) {
+  #   cli::cli_abort(
+  #     c(
+  #       "{.val {start}} comes after {.val {end}}",
+  #       "x" = "{.val {o_start}} > {.val {o_end}}."
+  #     )
+  #   )
+  # }
+  # dplyr::filter(base, dplyr::between(order, o_start, o_end)) |> .add_class()
 }
 
 #' ICD-10-PCS Devices
@@ -255,9 +216,6 @@ code_range <- function(start, end) {
 #'
 #' @examples
 #' devices()
-#'
-#' @autoglobal
-#'
 #' @export
 devices <- function(
   system = NULL,

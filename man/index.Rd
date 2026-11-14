@@ -19,10 +19,9 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Index
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 index(search = "Abdominohysterectomy")
-
 index(search = "Attain Ability")
-
 index(search = "radi*")
-
+\dontshow{\}) # examplesIf}
 }

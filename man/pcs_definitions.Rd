@@ -9,10 +9,10 @@
 
 A data frame with 3,188 rows and 6 columns:
 \describe{
+\item{entry}{description}
 \item{section}{description}
-\item{name}{description}
 \item{axis}{description}
-\item{title}{description}
+\item{name}{description}
 \item{field}{description}
 \item{value}{description}
 ...

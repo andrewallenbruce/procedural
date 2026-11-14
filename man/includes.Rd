@@ -51,5 +51,4 @@ ICD-10-PCS Includes
 }
 \examples{
 includes(section = "0", axis = "3")
-
 }

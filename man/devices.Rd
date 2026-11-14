@@ -31,5 +31,4 @@ ICD-10-PCS Devices
 }
 \examples{
 devices()
-
 }

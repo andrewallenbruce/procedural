@@ -18,8 +18,8 @@ a \link[tibble:tibble-package]{tibble}
 Return a range of ICD-10-PCS codes
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 code_range("0G9000Z", "0G9100Z")
-
 code_range("0G9000Z", "10D20ZZ")
-
+\dontshow{\}) # examplesIf}
 }

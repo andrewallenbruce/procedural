@@ -28,78 +28,72 @@ x$section <- if_else_(
   NA_character_
 ) |>
   vec_fill_missing()
-x$name <- if_else_(
-  x$entity == "section" & x$field == "title",
-  x$value,
-  NA_character_
-) |>
-  lag_(-1L) |>
-  vec_fill_missing()
 x$axis <- if_else_(
   x$entity == "axis" & x$value_kind == "attribute",
   x$value,
   NA_character_
 )
-x$title <- if_else_(
+x$name <- if_else_(
   x$entity == "axis" & x$field == "title",
   x$value,
   NA_character_
 ) |>
   lag_(-1L)
-pcs_definitions <- colorderv(x, c("section", "name", "axis", "title"))
 
-# use_data ----------------------------------------------------------------
+x <- colorderv(x, c("section", "axis", "name"))
 
-usethis::use_data(pcs_definitions, overwrite = TRUE)
-
-# data transform ----------------------------------------------------------
-def = pcs_definitions
-def <- ss(
-  def,
-  def$entity %!=% "section",
-  j = c(1:6, 8:9)
-) |>
+x <- ss(x, x$entity %!=% "section", c(1:5, 7:8)) |>
   rsplit(~record_index)
 
-def <- map(def, \(x) {
-  x$axis <- vec_fill_missing(x$axis)
-  x$title <- vec_fill_missing(x$title)
+# map function ------------------------------------------------------------
 
-  x <- ss(x, x$entity %!=% "axis")
+process <- function(x) {
+  x$axis <- vec_fill_missing(x$axis)
+  x$name <- vec_fill_missing(x$name)
   x$field <- if_else_(
     x$entity == "axis/terms/includes",
     "includes",
     x$field
   )
-  x <- av(
-    x,
-    entry = x$entity == "axis/terms/title",
-    pos = "front"
-  )
-  x <- av(x, run = vec_identify_runs(x$entry), pos = "front")
+  x <- ss(x, x$entity %!=% "axis")
+  x$entry <- x$entity == "axis/terms/title"
+  x$run <- vec_identify_runs(x$entry)
 
-  runs <- ss(x, x$entry) |> fcount(run) |> sbt(N > 1L) |> _$run
+  runs <- ss(x, x$entry) |>
+    fcount(run) |>
+    sbt(N > 1L) |>
+    _$run
 
-  x$entry <- NULL
+  xrun <- ss(x, x$run %iin% runs)
+  x <- ss(x, x$run %!iin% runs)
 
-  x1 <- ss(x, x$run %!iin% runs)
-
-  x2 <- ss(x, x$run %iin% runs)
-
-  if (nrow(x2) != 0L) {
-    x2 <- x2 |>
-      fgroup_by(run) |>
-      fmutate(value = paste_(value, collapse = " | ")) |>
-      funique(cols = "run") |>
-      fungroup()
-
-    x1 <- vec_rbind(x1, x2) |>
+  if (nrow(xrun) > 0L) {
+    x <- rowbind(
+      x,
+      gby(xrun, run) |>
+        mtt(value = paste_(value, collapse = " | ")) |>
+        funique(cols = "run") |>
+        fungroup()
+    ) |>
       roworderv("run")
   }
 
-  x1$run <- NULL
-  x1$entity <- NULL
-  return(x1)
-})
+  gv(x, c("run", "entry", "entity")) <- NULL
 
-pcs_definitions <- collapse::rowbind(def) |> cheapr::unique_()
+  return(x)
+}
+
+# final steps -------------------------------------------------------------
+
+x <- map(x, process) |>
+  rowbind() |>
+  unique_()
+
+x <- av(x, entry = cumsum(x$field == "value"), pos = "front")
+x$axis <- as.integer(x$axis)
+
+pcs_definitions <- x
+
+# use_data ----------------------------------------------------------------
+
+usethis::use_data(pcs_definitions, overwrite = TRUE)
