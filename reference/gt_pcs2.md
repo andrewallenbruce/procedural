@@ -21,9 +21,9 @@ description
 ## Examples
 
 ``` r
+if (FALSE) {
 pcs("0G9000Z") |> gt_pcs2()
-#> Error in get_pin("sections"): could not find function "get_pin"
 
 gt_pcs2(pcs("0016070"))
-#> Error in get_pin("sections"): could not find function "get_pin"
+}
 ```

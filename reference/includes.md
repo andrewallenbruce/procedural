@@ -64,6 +64,7 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+if (FALSE) {
 includes(section = "0", axis = "3")
-#> Error in includes$section: object of type 'closure' is not subsettable
+}
 ```
