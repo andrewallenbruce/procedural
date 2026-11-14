@@ -14,11 +14,11 @@ pcs_definitions
 
 A data frame with 3,188 rows and 6 columns:
 
-- section:
+- entry:
 
   description
 
-- name:
+- section:
 
   description
 
@@ -26,7 +26,7 @@ A data frame with 3,188 rows and 6 columns:
 
   description
 
-- title:
+- name:
 
   description
 

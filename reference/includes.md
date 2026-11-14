@@ -65,5 +65,5 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 
 ``` r
 includes(section = "0", axis = "3")
-#> Error in get_pin("includes"): could not find function "get_pin"
+#> Error in includes$section: object of type 'closure' is not subsettable
 ```

@@ -25,12 +25,9 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+if (FALSE) {
 index(search = "Abdominohysterectomy")
-#> Error in get_pin("index_v2"): could not find function "get_pin"
-
 index(search = "Attain Ability")
-#> Error in get_pin("index_v2"): could not find function "get_pin"
-
 index(search = "radi*")
-#> Error in get_pin("index_v2"): could not find function "get_pin"
+}
 ```

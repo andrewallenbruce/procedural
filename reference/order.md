@@ -29,9 +29,8 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+if (FALSE) {
 order(search = "00X")
-#> Error in get_pin("tables_order"): could not find function "get_pin"
-
 order(search = "Olfactory", col = "description_code")
-#> Error in get_pin("tables_order"): could not find function "get_pin"
+}
 ```
