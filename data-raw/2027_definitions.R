@@ -62,28 +62,44 @@ def <- ss(
   rsplit(~record_index)
 
 def <- map(def, \(x) {
-  x[["axis"]] <- vec_fill_missing(x[["axis"]])
-  x[["title"]] <- vec_fill_missing(x[["title"]])
-  x <- ss(x, x[["entity"]] %!=% "axis")
-  x[["field"]] <- if_else_(
-    x[["entity"]] == "axis/terms/includes",
+  x$axis <- vec_fill_missing(x$axis)
+  x$title <- vec_fill_missing(x$title)
+
+  x <- ss(x, x$entity %!=% "axis")
+  x$field <- if_else_(
+    x$entity == "axis/terms/includes",
     "includes",
-    x[["field"]]
+    x$field
   )
   x <- av(
     x,
-    term = if_else_(
-      x[["entity"]] == "axis/terms/title",
-      1L,
-      NA_character_
-    ),
-    entry = cumsum(x[["entity"]] == "axis/terms/title"),
+    entry = x$entity == "axis/terms/title",
     pos = "front"
   )
-  av(x, run = vec_identify_runs(x[["term"]]), pos = "front")
+  x <- av(x, run = vec_identify_runs(x$entry), pos = "front")
+
+  runs <- ss(x, x$entry) |> fcount(run) |> sbt(N > 1L) |> _$run
+
+  x$entry <- NULL
+
+  x1 <- ss(x, x$run %!iin% runs)
+
+  x2 <- ss(x, x$run %iin% runs)
+
+  if (nrow(x2) != 0L) {
+    x2 <- x2 |>
+      fgroup_by(run) |>
+      fmutate(value = paste_(value, collapse = " | ")) |>
+      funique(cols = "run") |>
+      fungroup()
+
+    x1 <- vec_rbind(x1, x2) |>
+      roworderv("run")
+  }
+
+  x1$run <- NULL
+  x1$entity <- NULL
+  return(x1)
 })
 
-ss(def$`1`, def$`1`$term == 1L) |>
-  print(n = 200)
-
-def$`1` |> print(n = 200)
+pcs_definitions <- collapse::rowbind(def) |> cheapr::unique_()

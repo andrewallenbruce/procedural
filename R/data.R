@@ -37,19 +37,14 @@
 #' ICD-10-PCS Definitions File
 #'
 #' @format ## `pcs_definitions`
-#' A data frame with 3,602 rows and 15 columns:
+#' A data frame with 3,188 rows and 6 columns:
 #' \describe{
-#'   \item{record_index}{description}
-#'   \item{entity}{description}
-#'   \item{entity_index}{description}
+#'   \item{section}{description}
+#'   \item{name}{description}
+#'   \item{axis}{description}
+#'   \item{title}{description}
 #'   \item{field}{description}
 #'   \item{value}{description}
-#'   \item{value_kind}{description}
-#'   \item{source}{description}
-#'   \item{record_node_id}{description}
-#'   \item{entity_node_id}{description}
-#'   \item{parent_entity_node_id}{description}
-#'   \item{source_node_id}{description}
 #'   ...
 #' }
 #' @keywords internal
