@@ -22,6 +22,12 @@ is_section_code(section_value = substr(pcs_code, 1L, 1L)[1], pcs_code)
 
 `<lgl>` `TRUE` if valid, otherwise `FALSE`
 
+## See also
+
+Other PCS validators:
+[`is_section_value()`](https://andrewallenbruce.github.io/procedural/reference/is_section_value.md),
+[`is_system_value()`](https://andrewallenbruce.github.io/procedural/reference/is_system_value.md)
+
 ## Examples
 
 ``` r

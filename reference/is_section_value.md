@@ -5,12 +5,12 @@ The 17 valid PCS Section values are "B-D", "F-H", "X", and "0-9".
 ## Usage
 
 ``` r
-is_section_value(section_value)
+is_section_value(x)
 ```
 
 ## Arguments
 
-- section_value:
+- x:
 
   `<chr>` string
 
@@ -20,7 +20,8 @@ is_section_value(section_value)
 
 ## See also
 
-Other PCS value validators:
+Other PCS validators:
+[`is_section_code()`](https://andrewallenbruce.github.io/procedural/reference/is_section_code.md),
 [`is_system_value()`](https://andrewallenbruce.github.io/procedural/reference/is_system_value.md)
 
 ## Examples
@@ -36,5 +37,5 @@ x[which(is_section_value(x))]
 
 try(is_section_value("XX"))
 #> Error in is_section_value("XX") : 
-#>   `section_value` must be 1 character long.
+#>   `x` must be 1 character long.
 ```

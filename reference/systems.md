@@ -22,15 +22,13 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+if (FALSE) {
 systems()
-#> Error in get_pin("systems"): could not find function "get_pin"
 
 systems("0")
-#> Error in get_pin("systems"): could not find function "get_pin"
 
 systems("2")
-#> Error in get_pin("systems"): could not find function "get_pin"
 
 systems("X")
-#> Error in get_pin("systems"): could not find function "get_pin"
+}
 ```

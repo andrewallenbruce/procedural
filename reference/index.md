@@ -20,8 +20,6 @@ ICD-10-PCS Building Blocks.
   : Look up ICD-10-PCS Codes or Tables
 - [`pcs_code()`](https://andrewallenbruce.github.io/procedural/reference/pcs_code.md)
   : Look up ICD-10-PCS Codes or Tables
-- [`rows()`](https://andrewallenbruce.github.io/procedural/reference/rows.md)
-  : ICD-10-PCS Rows
 - [`sections()`](https://andrewallenbruce.github.io/procedural/reference/sections.md)
   : ICD-10-PCS Sections
 - [`systems()`](https://andrewallenbruce.github.io/procedural/reference/systems.md)

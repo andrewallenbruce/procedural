@@ -5,12 +5,12 @@ The 34 valid PCS System values are "A-H", "J-N", "P-Z", and "0-9".
 ## Usage
 
 ``` r
-is_system_value(system_value)
+is_system_value(x)
 ```
 
 ## Arguments
 
-- system_value:
+- x:
 
   `<chr>` string
 
@@ -20,7 +20,8 @@ is_system_value(system_value)
 
 ## See also
 
-Other PCS value validators:
+Other PCS validators:
+[`is_section_code()`](https://andrewallenbruce.github.io/procedural/reference/is_section_code.md),
 [`is_section_value()`](https://andrewallenbruce.github.io/procedural/reference/is_section_value.md)
 
 ## Examples
@@ -39,5 +40,5 @@ x[which(is_system_value(x))]
 
 try(is_system_value("XX"))
 #> Error in is_system_value("XX") : 
-#>   `system_value` must be 1 character long.
+#>   `x` must be 1 character long.
 ```

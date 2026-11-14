@@ -12,17 +12,21 @@ pcs_definitions
 
 ### `pcs_definitions`
 
-A data frame with 3,602 rows and 15 columns:
+A data frame with 3,188 rows and 6 columns:
 
-- record_index:
-
-  description
-
-- entity:
+- section:
 
   description
 
-- entity_index:
+- name:
+
+  description
+
+- axis:
+
+  description
+
+- title:
 
   description
 
@@ -31,29 +35,5 @@ A data frame with 3,602 rows and 15 columns:
   description
 
 - value:
-
-  description
-
-- value_kind:
-
-  description
-
-- source:
-
-  description
-
-- record_node_id:
-
-  description
-
-- entity_node_id:
-
-  description
-
-- parent_entity_node_id:
-
-  description
-
-- source_node_id:
 
   description
