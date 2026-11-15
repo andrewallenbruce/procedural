@@ -26,12 +26,11 @@ ss_ <- function(.data, row, col) {
 }
 
 #' @noRd
-un_ <- function(x) {
-  unlist(x, use.names = FALSE)
+any_ <- function(x) {
+  collapse::anyv(x = x, value = TRUE)
 }
 
 #' @noRd
-in_between <- function(x, min, max) {
-  # (x - min) * (max - x) >= 0L
-  cheapr::multiply_(x - min, max - x) >= 0L
+un_ <- function(x) {
+  unlist(x, use.names = FALSE)
 }

@@ -12,7 +12,7 @@
 #'    * 6: Device
 #'    * 6: Device / Substance / Technology
 #' @param term `<chr>` term to search for
-#' @param complete `<lgl>`  Return complete entries; default is TRUE
+#' @param complete `<lgl>`  Return complete entries; default is `TRUE`
 #' @returns a [tibble::tibble] containing the results
 #' @examples
 #' definitions(term = "drinnn")
@@ -33,10 +33,7 @@ definitions <- function(
       pcs_definitions[["section"]] %iin% section
     )
     if (!nrow(x)) {
-      cli::cli_abort(
-        '{.pkg section = "{section}"} returned 0 rows',
-        call = rlang::caller_env()
-      )
+      cli::cli_abort('{.pkg section = "{section}"} returned 0 rows')
     }
   } else {
     x <- pcs_definitions
@@ -45,10 +42,7 @@ definitions <- function(
   if (!is.null(axis)) {
     x <- ss_(x, x[["axis"]] %iin% axis)
     if (!nrow(x)) {
-      cli::cli_abort(
-        '{.pkg axis = "{axis}"} returned 0 rows',
-        call = rlang::caller_env()
-      )
+      cli::cli_abort('{.pkg axis = "{axis}"} returned 0 rows')
     }
   }
 
@@ -63,10 +57,7 @@ definitions <- function(
       )
     )
     if (!nrow(x)) {
-      cli::cli_abort(
-        '{.pkg term = "{term}"} returned 0 rows',
-        call = rlang::caller_env()
-      )
+      cli::cli_abort('{.pkg term = "{term}"} returned 0 rows')
     }
     if (complete) {
       x <- ss_(
@@ -78,69 +69,47 @@ definitions <- function(
   return(x)
 }
 
-#' ICD-10-PCS Includes
+#' Return a range of ICD-10-PCS codes
 #'
-#' @param section PCS section:
-#'    * `"0"` (Medical and Surgical),
-#'    * `"3"` (Administration)
-#'    * `"F"` (Physical Rehabilitation and Diagnostic Audiology)
-#'    * `"G"` (Mental Health)
-#'    * `"X"` (New Technology)
-#'
-#' @param axis PCS axis:
-#'    * `"3"`
-#'      * Operation (0:9, X)
-#'      * Type (B, C, F, G, H)
-#'    * `"4"`
-#'      * Qualifier (G)
-#'    * `"5"`
-#'      * Approach (0:4, 7:9, X)
-#'      * Type Qualifier (F)
-#'
-#' @param col column to search: `"name"`, `"label"` (default), `"includes"`
-#'
-#' @param search string to search for in `col`
-#'
-#' @template returns-default
-#'
-#' @examplesIf FALSE
-#' includes(section = "0", axis = "3")
+#' @param start,end `<chr>` Full 7-character ICD-10-PCS code.
+#' @returns a [tibble::tibble] containing the results
+#' @examples
+#' code_range("0G9000Z", "0G9100Z")
+#' code_range("0G9000Z", "10D20ZZ")
 #' @export
-includes <- function(
-  section = NULL,
-  axis = NULL,
-  col = c("label", "name", "includes"),
-  search = NULL
-) {
-  col <- match.arg(col)
-
-  if (!is.null(section)) {
-    section <- toupper(as.character(section))
-    section <- rlang::arg_match0(section, c(0, 3, "F", "G", "X"))
-    includes <- vctrs::vec_slice(includes, includes$section == section)
+code_range <- function(start, end) {
+  if (any_(nchar(c(start, end)) < 7L)) {
+    cli::cli_abort("{.var start} & {.var end} both must be 7 characters long.")
   }
 
-  if (!is.null(axis)) {
-    axis <- as.character(axis)
-    axis <- rlang::arg_match0(axis, c("3", "4", "5"))
-    includes <- vctrs::vec_slice(includes, includes$axis == axis)
+  o <- rlang::set_names(c(start, end), c("start", "end"))
+  i <- collapse::fmatch(o, pcs_order[["code"]])
+
+  if (anyNA(i)) {
+    # TODO if both are NA
+    o <- o[cheapr::which_na(i)]
+    cli::cli_abort('{.pkg {names(o)} = "{unname(o)}"} returned 0 rows')
   }
 
-  if (!is.null(search)) {
-    includes <- fuimus::srchcol(includes, col = col, search = search)
+  if (diff(i) <= 0L) {
+    cli::cli_abort(
+      c(
+        "x" = "{.pkg {start}} {.emph (#{o[1]})} comes after {.pkg {end}} {.emph (#{o[2]})}",
+        "i" = "Did you mean {.code code_range(start = {.val {end}}, end = {.val {start}})}"
+      )
+    )
   }
-  return(.add_class(includes))
+
+  ss_(pcs_order, cheapr::seq_(i[1L], i[2L]))
 }
+
 
 #' ICD-10-PCS Index
 #'
 #' @param col column to search: "term" (default), "index", "type", "value",
 #'   "code"
-#'
 #' @param search string to search for in `col`
-#'
 #' @template returns-default
-#'
 #' @examplesIf FALSE
 #' index(search = "Abdominohysterectomy")
 #' index(search = "Attain Ability")
@@ -168,7 +137,6 @@ index <- function(
 #'
 #' @param col column to search: "code" (default), "table", "row",
 #'   "description_code", "description_table", "order"
-#'
 #' @param search string to search for in `col`
 #' @template returns-default
 #' @examplesIf FALSE
@@ -193,45 +161,6 @@ order <- function(
     tbl <- fuimus::srchcol(tbl, col = col, search = search)
   }
   return(.add_class(tbl))
-}
-
-#' Return a range of ICD-10-PCS codes
-#'
-#' @param start,end Full 7-character ICD-10-PCS code.
-#' @param end 7-character ICD-10-PCS code.
-#' @template returns-default
-#' @examples
-#' code_range(start = "0G9000Z", end = "0G9100Z")
-#' code_range(start = "0G9000Z", end = "10D20ZZ")
-#' @export
-code_range <- function(start, end) {
-  if (any(nchar(c(start, end)) < 7L)) {
-    cli::cli_abort("{.var start} & {.var end} both must be 7 characters long.")
-  }
-
-  o <- ss_(
-    pcs_order,
-    pcs_order$code %iin% c(start, end)
-  ) |>
-    _$order
-
-  if (diff(o) <= 0L) {
-    cli::cli_abort(
-      c(
-        "x" = "{.pkg {start}} {.emph (#{o[1]})} comes after {.pkg {end}} {.emph (#{o[2]})}",
-        "i" = "Did you mean {.code code_range(start = {.val {end}}, end = {.val {start}})}"
-      )
-    )
-  }
-
-  ss_(
-    pcs_order,
-    in_between(
-      pcs_order$order,
-      o[1],
-      o[2]
-    )
-  )
 }
 
 #' ICD-10-PCS Devices
@@ -288,4 +217,53 @@ devices <- function(
     dev <- fuimus::srchcol(dev, col = col, search = search)
   }
   return(.add_class(dev))
+}
+
+#' ICD-10-PCS Includes
+#'
+#' @param section PCS section:
+#'    * `"0"` (Medical and Surgical),
+#'    * `"3"` (Administration)
+#'    * `"F"` (Physical Rehabilitation and Diagnostic Audiology)
+#'    * `"G"` (Mental Health)
+#'    * `"X"` (New Technology)
+#' @param axis PCS axis:
+#'    * `"3"`
+#'      * Operation (0:9, X)
+#'      * Type (B, C, F, G, H)
+#'    * `"4"`
+#'      * Qualifier (G)
+#'    * `"5"`
+#'      * Approach (0:4, 7:9, X)
+#'      * Type Qualifier (F)
+#' @param col column to search: `"name"`, `"label"` (default), `"includes"`
+#' @param search string to search for in `col`
+#' @template returns-default
+#' @examplesIf FALSE
+#' includes(section = "0", axis = "3")
+#' @export
+includes <- function(
+  section = NULL,
+  axis = NULL,
+  col = c("label", "name", "includes"),
+  search = NULL
+) {
+  col <- match.arg(col)
+
+  if (!is.null(section)) {
+    section <- toupper(as.character(section))
+    section <- rlang::arg_match0(section, c(0, 3, "F", "G", "X"))
+    includes <- vctrs::vec_slice(includes, includes$section == section)
+  }
+
+  if (!is.null(axis)) {
+    axis <- as.character(axis)
+    axis <- rlang::arg_match0(axis, c("3", "4", "5"))
+    includes <- vctrs::vec_slice(includes, includes$axis == axis)
+  }
+
+  if (!is.null(search)) {
+    includes <- fuimus::srchcol(includes, col = col, search = search)
+  }
+  return(.add_class(includes))
 }

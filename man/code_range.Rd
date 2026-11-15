@@ -7,17 +7,15 @@
 code_range(start, end)
 }
 \arguments{
-\item{start, end}{Full 7-character ICD-10-PCS code.}
-
-\item{end}{7-character ICD-10-PCS code.}
+\item{start, end}{\verb{<chr>} Full 7-character ICD-10-PCS code.}
 }
 \value{
-a \link[tibble:tibble-package]{tibble}
+a \link[tibble:tibble]{tibble::tibble} containing the results
 }
 \description{
 Return a range of ICD-10-PCS codes
 }
 \examples{
-code_range(start = "0G9000Z", end = "0G9100Z")
-code_range(start = "0G9000Z", end = "10D20ZZ")
+code_range("0G9000Z", "0G9100Z")
+code_range("0G9000Z", "10D20ZZ")
 }

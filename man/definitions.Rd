@@ -24,7 +24,7 @@ definitions(section = NULL, axis = NULL, term = NULL, complete = TRUE)
 
 \item{term}{\verb{<chr>} term to search for}
 
-\item{complete}{\verb{<lgl>}  Return complete entries; default is TRUE}
+\item{complete}{\verb{<lgl>}  Return complete entries; default is \code{TRUE}}
 }
 \value{
 a \link[tibble:tibble]{tibble::tibble} containing the results
