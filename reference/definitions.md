@@ -42,7 +42,7 @@ definitions(section = NULL, axis = NULL, term = NULL, complete = TRUE)
 
 - complete:
 
-  `<lgl>` Return complete entries; default is TRUE
+  `<lgl>` Return complete entries; default is `TRUE`
 
 ## Value
 
@@ -53,7 +53,7 @@ containing the results
 
 ``` r
 definitions(term = "drinnn")
-#> Error: term = "drinnn" returned 0 rows
+#> Error in definitions(term = "drinnn"): term = "drinnn" returned 0 rows
 definitions(term = "drain")
 #> # A tibble: 25 × 6
 #>    entry section  axis name      field       value                              
