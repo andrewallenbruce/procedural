@@ -29,14 +29,14 @@ definitions <- function(
 ) {
   if (!is.null(section)) {
     x <- ss_(
-      pcs_definitions,
-      pcs_definitions[["section"]] %iin% section
+      pcs::pcs_definitions,
+      pcs::pcs_definitions[["section"]] %iin% section
     )
     if (!nrow(x)) {
       cli::cli_abort('{.pkg section = "{section}"} returned 0 rows')
     }
   } else {
-    x <- pcs_definitions
+    x <- pcs::pcs_definitions
   }
 
   if (!is.null(axis)) {
@@ -61,8 +61,8 @@ definitions <- function(
     }
     if (complete) {
       x <- ss_(
-        pcs_definitions,
-        pcs_definitions[["entry"]] %iin% unique(x$entry)
+        pcs::pcs_definitions,
+        pcs::pcs_definitions[["entry"]] %iin% unique(x$entry)
       )
     }
   }
@@ -83,7 +83,7 @@ code_range <- function(start, end) {
   }
 
   o <- rlang::set_names(c(start, end), c("start", "end"))
-  i <- collapse::fmatch(o, pcs_order[["code"]])
+  i <- collapse::fmatch(o, pcs::pcs_order[["code"]])
 
   if (anyNA(i)) {
     # TODO if both are NA
@@ -100,7 +100,7 @@ code_range <- function(start, end) {
     )
   }
 
-  ss_(pcs_order, cheapr::seq_(i[1L], i[2L]))
+  ss_(pcs::pcs_order, cheapr::seq_(i[1L], i[2L]))
 }
 
 
@@ -124,13 +124,12 @@ index <- function(
   # dplyr::mutate(id = dplyr::row_number(), .before = 1) |>
   # dplyr::rename(index = letter, type = verb) |>
   # dplyr::select(-c(letter, term_id))
-
-  col <- match.arg(col)
-
-  if (!is.null(search)) {
-    ind <- fuimus::srchcol(ind, col = col, search = search)
-  }
-  return(.add_class(ind))
+  # col <- match.arg(col)
+  #
+  # if (!is.null(search)) {
+  #   ind <- fuimus::srchcol(ind, col = col, search = search)
+  # }
+  # return(.add_class(ind))
 }
 
 #' ICD-10-PCS Order File
@@ -154,13 +153,13 @@ order <- function(
     "order"
   )
 ) {
-  col <- match.arg(col)
-  tbl <- pcs_order
-
-  if (!is.null(search)) {
-    tbl <- fuimus::srchcol(tbl, col = col, search = search)
-  }
-  return(.add_class(tbl))
+  # col <- match.arg(col)
+  # tbl <- pcs_order
+  #
+  # if (!is.null(search)) {
+  #   tbl <- fuimus::srchcol(tbl, col = col, search = search)
+  # }
+  # return(.add_class(tbl))
 }
 
 #' ICD-10-PCS Devices
@@ -188,35 +187,35 @@ devices <- function(
   ),
   search = NULL
 ) {
-  dev <- get_pin("devices")
-  col <- match.arg(col)
-
-  if (!is.null(system)) {
-    system <- rlang::arg_match0(
-      system,
-      c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U")
-    )
-    dev <- vctrs::vec_slice(dev, dev$system == system)
-  }
-
-  if (!is.null(operation)) {
-    operation <- rlang::arg_match0(
-      operation,
-      c("All applicable", "H", "R", "S", "V")
-    )
-    dev <- vctrs::vec_slice(dev, dev$operation == operation)
-  }
-
-  if (!is.null(device)) {
-    device <- as.character(device)
-    device <- rlang::arg_match0(device, c(2, 4:7, "D", "J", "M", "P", "S"))
-    dev <- vctrs::vec_slice(dev, dev$device == device)
-  }
-
-  if (!is.null(search)) {
-    dev <- fuimus::srchcol(dev, col = col, search = search)
-  }
-  return(.add_class(dev))
+  # dev <- get_pin("devices")
+  # col <- match.arg(col)
+  #
+  # if (!is.null(system)) {
+  #   system <- rlang::arg_match0(
+  #     system,
+  #     c(2:6, 8:9, "B", "C", "D", "J", "P", "Q", "R", "S", "U")
+  #   )
+  #   dev <- vctrs::vec_slice(dev, dev$system == system)
+  # }
+  #
+  # if (!is.null(operation)) {
+  #   operation <- rlang::arg_match0(
+  #     operation,
+  #     c("All applicable", "H", "R", "S", "V")
+  #   )
+  #   dev <- vctrs::vec_slice(dev, dev$operation == operation)
+  # }
+  #
+  # if (!is.null(device)) {
+  #   device <- as.character(device)
+  #   device <- rlang::arg_match0(device, c(2, 4:7, "D", "J", "M", "P", "S"))
+  #   dev <- vctrs::vec_slice(dev, dev$device == device)
+  # }
+  #
+  # if (!is.null(search)) {
+  #   dev <- fuimus::srchcol(dev, col = col, search = search)
+  # }
+  # return(.add_class(dev))
 }
 
 #' ICD-10-PCS Includes
@@ -248,22 +247,22 @@ includes <- function(
   col = c("label", "name", "includes"),
   search = NULL
 ) {
-  col <- match.arg(col)
-
-  if (!is.null(section)) {
-    section <- toupper(as.character(section))
-    section <- rlang::arg_match0(section, c(0, 3, "F", "G", "X"))
-    includes <- vctrs::vec_slice(includes, includes$section == section)
-  }
-
-  if (!is.null(axis)) {
-    axis <- as.character(axis)
-    axis <- rlang::arg_match0(axis, c("3", "4", "5"))
-    includes <- vctrs::vec_slice(includes, includes$axis == axis)
-  }
-
-  if (!is.null(search)) {
-    includes <- fuimus::srchcol(includes, col = col, search = search)
-  }
-  return(.add_class(includes))
+  # col <- match.arg(col)
+  #
+  # if (!is.null(section)) {
+  #   section <- toupper(as.character(section))
+  #   section <- rlang::arg_match0(section, c(0, 3, "F", "G", "X"))
+  #   includes <- vctrs::vec_slice(includes, includes$section == section)
+  # }
+  #
+  # if (!is.null(axis)) {
+  #   axis <- as.character(axis)
+  #   axis <- rlang::arg_match0(axis, c("3", "4", "5"))
+  #   includes <- vctrs::vec_slice(includes, includes$axis == axis)
+  # }
+  #
+  # if (!is.null(search)) {
+  #   includes <- fuimus::srchcol(includes, col = col, search = search)
+  # }
+  # return(.add_class(includes))
 }
