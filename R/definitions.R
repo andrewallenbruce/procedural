@@ -187,6 +187,7 @@ order <- function(
   )
 ) {
   col <- match.arg(col)
+  tbl <- pcs_order
 
   if (!is.null(search)) {
     tbl <- fuimus::srchcol(tbl, col = col, search = search)
@@ -196,59 +197,52 @@ order <- function(
 
 #' Return a range of ICD-10-PCS codes
 #'
-#' @param start 7-character ICD-10-PCS code.
-#'
+#' @param start,end Full 7-character ICD-10-PCS code.
 #' @param end 7-character ICD-10-PCS code.
-#'
 #' @template returns-default
-#'
-#' @examplesIf FALSE
-#' code_range("0G9000Z", "0G9100Z")
-#' code_range("0G9000Z", "10D20ZZ")
+#' @examples
+#' code_range(start = "0G9000Z", end = "0G9100Z")
+#' code_range(start = "0G9000Z", end = "10D20ZZ")
 #' @export
 code_range <- function(start, end) {
-  # start <- checks(start)
-  # end <- checks(end)
-  #
-  # if (nchar(start) < 7L) {
-  #   cli::cli_abort("{.var start} must be 7 characters long.")
-  # }
-  #
-  # if (nchar(end) < 7L) {
-  #   cli::cli_abort("{.var end} must be 7 characters long.")
-  # }
-  #
-  # base <- get_pin("tables_order")[c('order', 'code', 'table', 'row')]
-  #
-  # o_start <- dplyr::filter(base, code == start) |> dplyr::pull(order)
-  # o_end <- dplyr::filter(base, code == end) |> dplyr::pull(order)
-  #
-  # if (o_start > o_end) {
-  #   cli::cli_abort(
-  #     c(
-  #       "{.val {start}} comes after {.val {end}}",
-  #       "x" = "{.val {o_start}} > {.val {o_end}}."
-  #     )
-  #   )
-  # }
-  # dplyr::filter(base, dplyr::between(order, o_start, o_end)) |> .add_class()
+  if (any(nchar(c(start, end)) < 7L)) {
+    cli::cli_abort("{.var start} & {.var end} both must be 7 characters long.")
+  }
+
+  o <- ss_(
+    pcs_order,
+    pcs_order$code %iin% c(start, end)
+  ) |>
+    _$order
+
+  if (diff(o) <= 0L) {
+    cli::cli_abort(
+      c(
+        "x" = "{.pkg {start}} {.emph (#{o[1]})} comes after {.pkg {end}} {.emph (#{o[2]})}",
+        "i" = "Did you mean {.code code_range(start = {.val {end}}, end = {.val {start}})}"
+      )
+    )
+  }
+
+  ss_(
+    pcs_order,
+    in_between(
+      pcs_order$order,
+      o[1],
+      o[2]
+    )
+  )
 }
 
 #' ICD-10-PCS Devices
 #'
 #' @param system PCS system character.
-#'
 #' @param operation PCS operation character.
-#'
 #' @param device PCS device character.
-#'
 #' @param col column to search: "device_name" (default), "section", "system", "operation", "device", "includes"
-#'
 #' @param search string to search for in `col`
-#'
 #' @template returns-default
-#'
-#' @examples
+#' @examplesIf FALSE
 #' devices()
 #' @export
 devices <- function(

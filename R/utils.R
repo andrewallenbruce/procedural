@@ -29,3 +29,9 @@ ss_ <- function(.data, row, col) {
 un_ <- function(x) {
   unlist(x, use.names = FALSE)
 }
+
+#' @noRd
+in_between <- function(x, min, max) {
+  # (x - min) * (max - x) >= 0L
+  cheapr::multiply_(x - min, max - x) >= 0L
+}

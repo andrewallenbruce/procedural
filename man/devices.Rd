@@ -30,5 +30,7 @@ a \link[tibble:tibble-package]{tibble}
 ICD-10-PCS Devices
 }
 \examples{
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 devices()
+\dontshow{\}) # examplesIf}
 }
