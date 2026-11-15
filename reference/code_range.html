@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">procedural</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +50,8 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
 
 
-<dl><dt id="arg-start">start<a class="anchor" aria-label="anchor" href="#arg-start"></a></dt>
-<dd><p>7-character ICD-10-PCS code.</p></dd>
+<dl><dt id="arg-start-end">start, end<a class="anchor" aria-label="anchor" href="#arg-start-end"></a></dt>
+<dd><p>Full 7-character ICD-10-PCS code.</p></dd>
 
 
 <dt id="arg-end">end<a class="anchor" aria-label="anchor" href="#arg-end"></a></dt>
@@ -65,10 +65,35 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span><span class="st">"0G9000Z"</span>, <span class="st">"0G9100Z"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span><span class="st">"0G9000Z"</span>, <span class="st">"10D20ZZ"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"0G9000Z"</span>, end <span class="op">=</span> <span class="st">"0G9100Z"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    order valid code    description_short                        description_long</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="text-decoration: underline;">35</span>883     1 0G9000Z Drainage of Pituitary Gland with Drain … Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="text-decoration: underline;">35</span>884     1 0G900ZX Drainage of Pituitary Gland, Open Appro… Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="text-decoration: underline;">35</span>885     1 0G900ZZ Drainage of Pituitary Gland, Open Appro… Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="text-decoration: underline;">35</span>886     1 0G9030Z Drainage of Pituitary Gland with Drain … Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="text-decoration: underline;">35</span>887     1 0G903ZX Drainage of Pituitary Gland, Percutaneo… Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="text-decoration: underline;">35</span>888     1 0G903ZZ Drainage of Pituitary Gland, Percutaneo… Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="text-decoration: underline;">35</span>889     1 0G9040Z Drain of Pituitary Gland with Drain Dev… Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">35</span>890     1 0G904ZX Drainage of Pituitary Gland, Perc Endo … Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>891     1 0G904ZZ Drainage of Pituitary Gland, Perc Endo … Drainage of Pit…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>892     1 0G9100Z Drainage of Pineal Body with Drainage D… Drainage of Pin…</span>
+<span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"0G9000Z"</span>, end <span class="op">=</span> <span class="st">"10D20ZZ"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 36,559 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    order valid code    description_short                        description_long</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1     0 001     Central Nervous System and Cranial Nerv… Central Nervous…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2     1 0016070 Bypass Cereb Vent to Nasophar with Auto… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3     1 0016071 Bypass Cereb Vent to Mastoid Sinus w Au… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4     1 0016072 Bypass Cereb Vent to Atrium with Autol … Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5     1 0016073 Bypass Cereb Vent to Blood Vess w Autol… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6     1 0016074 Bypass Cereb Vent to Pleural Cav w Auto… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7     1 0016075 Bypass Cereb Vent to Intestine with Aut… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8     1 0016076 Bypass Cereb Vent to Periton Cav w Auto… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9     1 0016077 Bypass Cereb Vent to Urinary Tract w Au… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10     1 0016078 Bypass Cereb Vent to Bone Mar with Auto… Bypass Cerebral…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 36,549 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

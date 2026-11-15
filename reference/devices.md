@@ -44,6 +44,7 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ## Examples
 
 ``` r
+if (FALSE) {
 devices()
-#> Error in get_pin("devices"): could not find function "get_pin"
+}
 ```

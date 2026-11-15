@@ -1,5 +1,10 @@
 # Changelog
 
+## procedural 0.0.1.9003
+
+- new implementation of
+  [`code_range()`](https://andrewallenbruce.github.io/procedural/reference/code_range.md)
+
 ## procedural 0.0.1.9002
 
 - [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
