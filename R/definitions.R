@@ -29,14 +29,14 @@ definitions <- function(
 ) {
   if (!is.null(section)) {
     x <- ss_(
-      pcs::pcs_definitions,
-      pcs::pcs_definitions[["section"]] %iin% section
+      procedural::pcs_definitions,
+      procedural::pcs_definitions[["section"]] %iin% section
     )
     if (!nrow(x)) {
       cli::cli_abort('{.pkg section = "{section}"} returned 0 rows')
     }
   } else {
-    x <- pcs::pcs_definitions
+    x <- procedural::pcs_definitions
   }
 
   if (!is.null(axis)) {
@@ -61,8 +61,8 @@ definitions <- function(
     }
     if (complete) {
       x <- ss_(
-        pcs::pcs_definitions,
-        pcs::pcs_definitions[["entry"]] %iin% unique(x$entry)
+        procedural::pcs_definitions,
+        procedural::pcs_definitions[["entry"]] %iin% unique(x$entry)
       )
     }
   }
@@ -83,7 +83,7 @@ code_range <- function(start, end) {
   }
 
   o <- rlang::set_names(c(start, end), c("start", "end"))
-  i <- collapse::fmatch(o, pcs::pcs_order[["code"]])
+  i <- collapse::fmatch(o, procedural::pcs_order[["code"]])
 
   if (anyNA(i)) {
     # TODO if both are NA
@@ -100,7 +100,7 @@ code_range <- function(start, end) {
     )
   }
 
-  ss_(pcs::pcs_order, cheapr::seq_(i[1L], i[2L]))
+  ss_(procedural::pcs_order, cheapr::seq_(i[1L], i[2L]))
 }
 
 

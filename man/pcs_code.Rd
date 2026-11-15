@@ -16,15 +16,9 @@ a \link[tibble:tibble-package]{tibble}
 Look up ICD-10-PCS Codes or Tables
 }
 \examples{
-
 pcs_code("0G9")
-
 pcs_code("0G90")
-
 pcs_code("0G900")
-
 pcs_code("0G9000")
-
 pcs_code("0G9000Z")
-
 }

@@ -1,5 +1,3 @@
-#' @autoglobal
-#'
 #' @noRd
 .pcs_code_cli <- function(x) {
   cl <- glue::glue_data(
@@ -40,8 +38,6 @@
   }
 }
 
-#' @autoglobal
-#'
 #' @noRd
 .pcs_code_cli_error <- function(x, n) {
   arg <- rlang::caller_arg(x)
@@ -63,23 +59,13 @@
 #' Look up ICD-10-PCS Codes or Tables
 #'
 #' @param x an alphanumeric character vector, can be 3 to 7 characters long.
-#'
 #' @template returns-default
-#'
 #' @examples
-#'
 #' pcs_code("0G9")
-#'
 #' pcs_code("0G90")
-#'
 #' pcs_code("0G900")
-#'
 #' pcs_code("0G9000")
-#'
 #' pcs_code("0G9000Z")
-#'
-#' @autoglobal
-#'
 #' @export
 pcs_code <- function(x = NULL) {
   xs <- .pcs_section(x)
@@ -172,8 +158,6 @@ pcs_code2 <- function(x = NULL) {
 }
 
 # 0. Check
-#' @autoglobal
-#'
 #' @noRd
 .pcs_check <- function(x = NULL) {
   arg <- rlang::caller_arg(x)
