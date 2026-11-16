@@ -22,7 +22,7 @@ containing the results
 ## Examples
 
 ``` r
-code_range("0G9000Z", "0G9100Z")
+code_range(start = "0G9000Z", end = "0G9100Z")
 #> # A tibble: 10 × 5
 #>    order valid code    description_short                        description_long
 #>    <int> <int> <chr>   <chr>                                    <chr>           
@@ -51,4 +51,13 @@ code_range("0G9000Z", "10D20ZZ")
 #>  9 35891     1 0G904ZZ Drainage of Pituitary Gland, Perc Endo … Drainage of Pit…
 #> 10 35892     1 0G9100Z Drainage of Pineal Body with Drainage D… Drainage of Pin…
 #> # ℹ 33,266 more rows
+code_range(start = "0G9000Z", end = "0G9000Z")
+#> # A tibble: 1 × 5
+#>   order valid code    description_short                         description_long
+#>   <int> <int> <chr>   <chr>                                     <chr>           
+#> 1 35883     1 0G9000Z Drainage of Pituitary Gland with Drain D… Drainage of Pit…
+try(code_range(start = "0G9100Z", end = "0G9000Z"))
+#> Error in code_range(start = "0G9100Z", end = "0G9000Z") : 
+#>   ✖ 0G9100Z (#35892) comes after 0G9000Z (#35883)
+#> ℹ Did you mean `code_range(start = "0G9000Z", end = "0G9100Z")` ?
 ```

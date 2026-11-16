@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">procedural</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span><span class="st">"0G9000Z"</span>, <span class="st">"0G9100Z"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"0G9000Z"</span>, end <span class="op">=</span> <span class="st">"0G9100Z"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    order valid code    description_short                        description_long</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
@@ -90,6 +90,15 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">35</span>891     1 0G904ZZ Drainage of Pituitary Gland, Perc Endo … Drainage of Pit…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">35</span>892     1 0G9100Z Drainage of Pineal Body with Drainage D… Drainage of Pin…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 33,266 more rows</span></span>
+<span class="r-in"><span><span class="fu">code_range</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"0G9000Z"</span>, end <span class="op">=</span> <span class="st">"0G9000Z"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   order valid code    description_short                         description_long</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">35</span>883     1 0G9000Z Drainage of Pituitary Gland with Drain D… Drainage of Pit…</span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">code_range</span><span class="op">(</span>start <span class="op">=</span> <span class="st">"0G9100Z"</span>, end <span class="op">=</span> <span class="st">"0G9000Z"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in code_range(start = "0G9100Z", end = "0G9000Z") : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">0G9100Z</span> <span style="font-style: italic;">(#35892)</span> comes after <span style="color: #0000BB;">0G9000Z</span> <span style="font-style: italic;">(#35883)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Did you mean `code_range(start = <span style="color: #0000BB;">"0G9000Z"</span>, end = <span style="color: #0000BB;">"0G9100Z"</span>)` ?</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
