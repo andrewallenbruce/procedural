@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9005
+
+* refactored `definitions` dataset
+
+
 # procedural 0.0.1.9004
 
 * hardened `code_range()`
