@@ -6,6 +6,8 @@ Return ICD-10-PCS Code as a `gt` Table
 
 ``` r
 gt_pcs(x)
+
+gt_pcs2(x)
 ```
 
 ## Arguments
@@ -23,7 +25,10 @@ a gt table
 ``` r
 if (FALSE) {
 pcs("0G9000Z") |> gt_pcs()
-
 gt_pcs(pcs("0016070"))
+}
+if (FALSE) {
+pcs("0G9000Z") |> gt_pcs2()
+gt_pcs2(pcs("0016070"))
 }
 ```

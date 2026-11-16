@@ -1,5 +1,9 @@
 # Changelog
 
+## procedural 0.0.1.9006
+
+- refactored internal `tables` dataset
+
 ## procedural 0.0.1.9005
 
 - refactored `definitions` dataset

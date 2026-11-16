@@ -30,11 +30,7 @@ ICD-10-PCS Building Blocks.
 Tools for Visualization and Presentation.
 
 - [`gt_pcs()`](https://andrewallenbruce.github.io/procedural/reference/gt_pcs.md)
-  :
-
-  Return ICD-10-PCS Code as a `gt` Table
-
-- [`gt_pcs2()`](https://andrewallenbruce.github.io/procedural/reference/gt_pcs2.md)
+  [`gt_pcs2()`](https://andrewallenbruce.github.io/procedural/reference/gt_pcs.md)
   :
 
   Return ICD-10-PCS Code as a `gt` Table

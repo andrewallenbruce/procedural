@@ -24,11 +24,8 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 if (FALSE) {
 sections()
-
 sections("0")
-
 sections("2")
-
 sections("X")
 }
 ```

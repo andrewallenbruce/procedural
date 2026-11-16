@@ -24,11 +24,8 @@ a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
 ``` r
 if (FALSE) {
 systems()
-
 systems("0")
-
 systems("2")
-
 systems("X")
 }
 ```
