@@ -90,12 +90,12 @@ process_table <- function(x) {
   rows <- purrr::map(rows, function(x) {
     cheapr::col_c(
       cheapr::fast_df(
-        pos = ss(x, x$field == "pos") |> _$value,
-        title = ss(x, x$field == "title") |> _$value
+        pos = collapse::ss(x, x$field %==% "pos") |> _$value,
+        title = collapse::ss(x, x$field %==% "title") |> _$value
       ),
       cheapr::fast_df(
-        code = ss(x, x$field == "code") |> _$value,
-        label = ss(x, x$field == "label") |> _$value
+        code = collapse::ss(x, x$field %==% "code") |> _$value,
+        label = collapse::ss(x, x$field %==% "label") |> _$value
       )
     )
   }) |>
@@ -103,7 +103,11 @@ process_table <- function(x) {
     collapse::qTBL()
 
   res <- collapse::rowbind(table, rows)
-  collapse::av(res, table = rep.int(x$table[1L], nrow(res)), pos = "front")
+  collapse::av(
+    res,
+    table = rep.int(x$table[1L], collapse::fnrow(res)),
+    pos = "front"
+  )
 }
 
 x <- purrr::map(x, process_table) |>
@@ -111,6 +115,21 @@ x <- purrr::map(x, process_table) |>
 
 x$pos <- as.integer(x$pos)
 pcs_tables <- x
+
+x <- procedural::pcs_order
+x <- collapse::ss(x, x$valid %==% 0L)
+x <- collapse::av(x, table = cumsum(x$valid == 0L), pos = "front")
+x <- collapse::ss(x, j = c(1L, 3L, 4L, 6L))
+x <- collapse::rnm(x, pos = "valid", label = "description_long")
+x <- collapse::av(
+  x,
+  title = rep.int("Table", collapse::fnrow(x)),
+  pos = "front"
+)
+x <- collapse::colorderv(x, c("table", "pos", "title"))
+pcs_tables <- collapse::rowbind(pcs_tables, x) |>
+  collapse::roworderv(c("table", "pos"))
+
 # use_data ----------------------------------------------------------------
 
 usethis::use_data(pcs_tables, overwrite = TRUE)

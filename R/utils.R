@@ -39,3 +39,8 @@ match_ <- function(x, tbl, ...) {
 un_ <- function(x) {
   unlist(x, use.names = FALSE)
 }
+
+#' @noRd
+name_ <- function(x, names = x, ...) {
+  rlang::set_names(x = x, nm = names, ...)
+}

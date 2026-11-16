@@ -16,6 +16,8 @@ a \link[tibble:tibble]{tibble::tibble} containing the results
 Return a range of ICD-10-PCS codes
 }
 \examples{
-code_range("0G9000Z", "0G9100Z")
+code_range(start = "0G9000Z", end = "0G9100Z")
 code_range("0G9000Z", "10D20ZZ")
+code_range(start = "0G9000Z", end = "0G9000Z")
+try(code_range(start = "0G9100Z", end = "0G9000Z"))
 }
