@@ -1,5 +1,9 @@
 # Changelog
 
+## procedural 0.0.1.9005
+
+- refactored `definitions` dataset
+
 ## procedural 0.0.1.9004
 
 - hardened
