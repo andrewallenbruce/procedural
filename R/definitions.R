@@ -15,7 +15,7 @@
 #' @param complete `<lgl>`  Return complete entries; default is `TRUE`
 #' @returns a [tibble::tibble] containing the results
 #' @examples
-#' definitions(term = "drinnn")
+#' try(definitions(term = "drinnn"))
 #' definitions(term = "drain")
 #' definitions(section = "0", axis = 5)
 #' definitions(section = "B", term = "fluoro")
@@ -51,7 +51,7 @@ definitions <- function(
       x,
       grep(
         term,
-        x[["value"]],
+        x[["term"]],
         ignore.case = TRUE,
         perl = TRUE
       )
@@ -83,19 +83,17 @@ code_range <- function(start, end) {
   }
 
   o <- rlang::set_names(c(start, end), c("start", "end"))
-  i <- collapse::fmatch(o, procedural::pcs_order[["code"]])
+  i <- match_(o, procedural::pcs_order[["code"]])
 
   if (anyNA(i)) {
-    # TODO if both are NA
-    o <- o[cheapr::which_na(i)]
-    cli::cli_abort('{.pkg {names(o)} = "{unname(o)}"} returned 0 rows')
+    cli::cli_abort("{.pkg {names(o[cheapr::which_na(i)])}} returned 0 rows")
   }
 
   if (diff(i) <= 0L) {
     cli::cli_abort(
       c(
-        "x" = "{.pkg {start}} {.emph (#{o[1]})} comes after {.pkg {end}} {.emph (#{o[2]})}",
-        "i" = "Did you mean {.code code_range(start = {.val {end}}, end = {.val {start}})}"
+        "x" = "{.pkg {start}} {.emph (#{i[1]})} comes after {.pkg {end}} {.emph (#{i[2]})}",
+        "i" = "Did you mean {.code code_range(start = {.val {end}}, end = {.val {start}})} ?"
       )
     )
   }

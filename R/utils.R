@@ -31,6 +31,11 @@ any_ <- function(x) {
 }
 
 #' @noRd
+match_ <- function(x, tbl, ...) {
+  collapse::fmatch(x = x, table = tbl, ...)
+}
+
+#' @noRd
 un_ <- function(x) {
   unlist(x, use.names = FALSE)
 }

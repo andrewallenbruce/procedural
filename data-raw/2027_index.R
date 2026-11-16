@@ -10,13 +10,14 @@ library(purrr)
 
 xml <- fs::path(
   "C:/Users/Andrew/Downloads",
-  "zip-file-2-2027-code-tables-and-index"
+  "zip-file-2-2027-code-tables-and-index",
+  "icd10pcs_index_2027",
+  ext = "xml"
 )
-ind_xml <- fs::path(xml, "icd10pcs_index_2027", ext = "xml")
-ind_prof <- xml_profile(rows = "ICD10PCS.index/letter")
-ind_spec <- compile_xml_profile(ind_prof, ind_xml)
-ind_rect <- rectangle_xml(ind_xml, ind_spec, parallel = TRUE)
-pcs_index <- ss(ind_rect, j = c(2L, 4:6, 8:14))
+prof <- xml_profile(rows = "ICD10PCS.index/letter")
+spec <- compile_xml_profile(prof, xml)
+rect <- rectangle_xml(xml, spec, parallel = TRUE)
+pcs_index <- ss(rect, j = c(2L, 4:6, 8:14))
 
 # use_data ----------------------------------------------------------------
 

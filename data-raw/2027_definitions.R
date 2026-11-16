@@ -89,13 +89,22 @@ process <- function(x) {
 
 # final steps -------------------------------------------------------------
 
-x <- map(x, process) |>
-  rowbind() |>
-  unique_()
-
+x <- map(x, process) |> rowbind() |> unique_()
 x <- av(x, entry = cumsum(x$field == "value"), pos = "front")
 x$axis <- as.integer(x$axis)
 
+term <- ss_(x, x$field %==% "value", c(1:4, 6L))
+term <- rnm(term, value = "term")
+x <- ss_(x, x$field %!=% "value")
+x <- join(
+  x,
+  term,
+  on = c("entry", "section", "axis", "name"),
+  multiple = TRUE,
+  overid = 0
+)
+x <- colorderv(x, c("entry", "section", "axis", "name", "term"))
+x$field <- stringr::str_to_title(x$field)
 pcs_definitions <- x
 
 # use_data ----------------------------------------------------------------

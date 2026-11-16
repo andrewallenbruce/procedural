@@ -33,7 +33,7 @@ a \link[tibble:tibble]{tibble::tibble} containing the results
 ICD-10-PCS Definitions
 }
 \examples{
-definitions(term = "drinnn")
+try(definitions(term = "drinnn"))
 definitions(term = "drain")
 definitions(section = "0", axis = 5)
 definitions(section = "B", term = "fluoro")
