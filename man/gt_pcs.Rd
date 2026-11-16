@@ -2,9 +2,12 @@
 % Please edit documentation in R/gt_print.R
 \name{gt_pcs}
 \alias{gt_pcs}
+\alias{gt_pcs2}
 \title{Return ICD-10-PCS Code as a \code{gt} Table}
 \usage{
 gt_pcs(x)
+
+gt_pcs2(x)
 }
 \arguments{
 \item{x}{an object of class \code{pcs}.}
@@ -18,7 +21,10 @@ Return ICD-10-PCS Code as a \code{gt} Table
 \examples{
 \dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 pcs("0G9000Z") |> gt_pcs()
-
 gt_pcs(pcs("0016070"))
+\dontshow{\}) # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
+pcs("0G9000Z") |> gt_pcs2()
+gt_pcs2(pcs("0016070"))
 \dontshow{\}) # examplesIf}
 }

@@ -51,7 +51,22 @@
 #' @keywords internal
 "pcs_definitions"
 
-# map function ------------------------------------------------------------
+#' ICD-10-PCS Definition Tables
+#'
+#' @format ## `table_definition`
+#' A data frame with 861 rows and 6 columns:
+#' \describe{
+#'   \item{entry}{Entry number}
+#'   \item{section}{PCS section character}
+#'   \item{pos}{PCS code position}
+#'   \item{name}{PCS code position name}
+#'   \item{term}{PCS code position term}
+#'   \item{field}{PCS code attribute category}
+#'   \item{value}{PCS code attribute description}
+#'   ...
+#' }
+#' @keywords internal
+"table_definition"
 
 #' ICD-10-PCS Index File
 #'

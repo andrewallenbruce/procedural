@@ -18,57 +18,99 @@ prof <- xml_profile(rows = "ICD10PCS.tabular/pcsTable")
 spec <- compile_xml_profile(prof, xml)
 rect <- rectangle_xml(xml, spec, parallel = TRUE)
 pcs_tables <- ss(rect, j = c(2L, 4:6, 8:14))
+# 375.43 sec elapsed
 
-# use_data ----------------------------------------------------------------
+# table_definition --------------------------------------------------------
 
-usethis::use_data(pcs_tables, overwrite = TRUE)
+def <- ss(x, x$field %==% "definition")
+i <- x$record_index %in_%
+  unique_(def$record_index) &
+  x$entity_index %in_% unique_(def$entity_index)
+def <- ss(x, i)
+i <- def$entity == "axis" & def$field != "values"
+def <- ss(def, i, c(1L, 4:5))
+pos <- ss(def, def$field %==% "pos", -2L)
+pos <- rnm(pos, value = "pos")
+pos$pos <- as.integer(pos$pos)
+title <- ss(def, def$field %==% "title", -2L)
+title <- rnm(title, value = "title")
+code <- ss(def, def$field %==% "code", -2L)
+code <- rnm(code, value = "code")
+label <- ss(def, def$field %==% "label", -2L)
+label <- rnm(label, value = "label")
+definition <- ss(def, def$field %==% "definition", -2L)
+definition <- rnm(definition, value = "definition")
+table_definition <- col_c(
+  entry = pos$record_index,
+  pos = pos$pos,
+  title = title$title,
+  code = code$code,
+  label = label$label,
+  definition = definition$definition
+) |>
+  collapse::qTBL()
+
+usethis::use_data(table_definition, overwrite = TRUE)
 
 # data transformation -----------------------------------------------------
-
-x <- ss(
-  pcs_tables,
-  pcs_tables$field %!=% "definition",
-  j = 1:6,
-  check = FALSE
-)
-
-x$field <- if_else_(
+x <- procedural::pcs_tables
+x <- collapse::ss(x, x$field %!=% "definition", c(1:2, 4:5))
+x <- collapse::rnm(x, table = "record_index")
+x$field <- cheapr::if_else_(
   x$field == "label/code",
   "code",
   x$field
 )
+x <- collapse::rsplit(x, ~table, keep.by = TRUE) # 918 tables
 
-x
-
-e <- ss(x, x$record_index %iin% 1:3) |> rsplit(~record_index)
-
-b <- e$`1` |> rsplit(~entity_index)
-
-b$`1` |> print(n = Inf)
-
-b0 <- ss(
-  b$`1`,
-  b$`1`$entity == "axis" & b$`1`$field != "values",
-  j = 2:3
-) |>
-  datawizard::data_rotate(colnames = TRUE) |>
-  qTBL() |>
-  collapse::rnm(label = "value")
-
-b0 <- av(b0, record = 1L, entry = NA_integer_, pos = "front")
-
-b1 <- ss(
-  b$`1`,
-  b$`1`$entity != "axis" & !b$`1`$field %in% c("codes", "values"),
-  j = 2:3
-)
-
-b1 <- av(b1, entry = cumsum(b1$field == "pos")) |>
-  tidyr::pivot_wider(
-    names_from = field,
-    values_from = value,
-    values_fn = list
+process_table <- function(x) {
+  table <- collapse::ss(
+    x,
+    x$entity == "axis" & x$field != "values",
+    3:4
   ) |>
-  tidyr::unnest_longer(c(pos, title, code, value))
+    collapse::rsplit(~field) |>
+    collapse::qTBL() |>
+    collapse::colorderv(c("pos", "title", "code", "label"))
 
-vctrs::vec_rbind(b0, b1)
+  rows <- collapse::ss(
+    x,
+    x$entity %!in_% c("axis", "pcsRow") & x$field != "values",
+    3:4
+  )
+
+  rows$field <- cheapr::if_else_(
+    rows$field == "value",
+    "label",
+    rows$field
+  )
+
+  rows <- collapse::av(rows, row = cumsum(rows$field == "pos"), pos = "front")
+  rows <- collapse::rsplit(rows, ~row)
+  rows <- purrr::map(rows, function(x) {
+    cheapr::col_c(
+      cheapr::fast_df(
+        pos = ss(x, x$field == "pos") |> _$value,
+        title = ss(x, x$field == "title") |> _$value
+      ),
+      cheapr::fast_df(
+        code = ss(x, x$field == "code") |> _$value,
+        label = ss(x, x$field == "label") |> _$value
+      )
+    )
+  }) |>
+    collapse::rowbind() |>
+    collapse::qTBL()
+
+  res <- collapse::rowbind(table, rows)
+  collapse::av(res, table = rep.int(x$table[1L], nrow(res)), pos = "front")
+}
+
+x <- purrr::map(x, process_table) |>
+  collapse::rowbind()
+
+x$pos <- as.integer(x$pos)
+pcs_tables <- x
+# use_data ----------------------------------------------------------------
+
+usethis::use_data(pcs_tables, overwrite = TRUE)

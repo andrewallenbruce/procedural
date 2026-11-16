@@ -4,7 +4,6 @@
 #' @returns a gt table
 #' @examplesIf FALSE
 #' pcs("0G9000Z") |> gt_pcs()
-#'
 #' gt_pcs(pcs("0016070"))
 #' @export
 gt_pcs <- function(x) {
@@ -71,14 +70,10 @@ gt_pcs <- function(x) {
     )
 }
 
-#' Return ICD-10-PCS Code as a `gt` Table
-#'
-#' @param x an object of class `pcs`.
-#' @returns description
 #' @examplesIf FALSE
 #' pcs("0G9000Z") |> gt_pcs2()
-#'
 #' gt_pcs2(pcs("0016070"))
+#' @rdname gt_pcs
 #' @export
 gt_pcs2 <- function(x) {
   x$axes |>

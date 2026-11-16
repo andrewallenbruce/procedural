@@ -17,7 +17,7 @@ xml <- fs::path(
 prof <- xml_profile(rows = "ICD10PCS.index/letter")
 spec <- compile_xml_profile(prof, xml)
 rect <- rectangle_xml(xml, spec, parallel = TRUE)
-pcs_index <- ss(rect, j = c(2L, 4:6, 8:14))
+x <- ss(rect, j = c(2L, 4:6, 8:14))
 
 # use_data ----------------------------------------------------------------
 

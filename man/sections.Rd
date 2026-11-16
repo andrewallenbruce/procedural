@@ -19,11 +19,8 @@ ICD-10-PCS Sections
 \examples{
 \dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 sections()
-
 sections("0")
-
 sections("2")
-
 sections("X")
 \dontshow{\}) # examplesIf}
 }
