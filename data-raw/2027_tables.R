@@ -1,6 +1,5 @@
 # load libraries ----------------------------------------------------------
 
-library(xmlrectr)
 library(collapse)
 library(cheapr)
 library(vctrs)
@@ -14,10 +13,10 @@ xml <- fs::path(
   "icd10pcs_tables_2027",
   ext = "xml"
 )
-prof <- xml_profile(rows = "ICD10PCS.tabular/pcsTable")
-spec <- compile_xml_profile(prof, xml)
-rect <- rectangle_xml(xml, spec, parallel = TRUE)
-x <- ss(rect, j = c(2L, 4:6, 8:14))
+prof <- xmlrectr::xml_profile(rows = "ICD10PCS.tabular/pcsTable")
+spec <- xmlrectr::compile_xml_profile(prof, sample = xml)
+rect <- xmlrectr::rectangle_xml(file = xml, spec, parallel = TRUE)
+x <- collapse::ss(rect, j = c(2L, 4:6, 8:14))
 # 375.43 sec elapsed
 
 # table_definition --------------------------------------------------------
@@ -116,14 +115,13 @@ x <- purrr::map(x, process_table) |>
 x$pos <- as.integer(x$pos)
 pcs_tables <- x
 
-x <- procedural::pcs_order
-x <- collapse::ss(x, x$valid %==% 0L)
-x <- collapse::av(x, table = cumsum(x$valid == 0L), pos = "front")
+x <- collapse::ss(procedural::pcs_order, procedural::pcs_order$valid %==% 0L)
+x <- collapse::av(x, table = collapse::fcumsum(x$valid == 0L), pos = "front")
 x <- collapse::ss(x, j = c(1L, 3L, 4L, 6L))
 x <- collapse::rnm(x, pos = "valid", label = "description_long")
 x <- collapse::av(
   x,
-  title = rep.int("Table", collapse::fnrow(x)),
+  title = rep.int("Table", nrow_(x)),
   pos = "front"
 )
 x <- collapse::colorderv(x, c("table", "pos", "title"))

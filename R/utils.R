@@ -19,6 +19,11 @@ nrow_ <- function(x) {
 }
 
 #' @noRd
+pull_ <- function(x, nm) {
+  x[[nm]]
+}
+
+#' @noRd
 un_ <- function(x) {
   unlist(x, use.names = FALSE)
 }

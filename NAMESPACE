@@ -7,8 +7,8 @@ export(device)
 export(includes)
 export(index)
 export(pcs_range)
-export(sections)
-export(systems)
+export(section)
+export(system)
 import(rlang, except = ":=")
 importFrom(cheapr,
   "%!in_%",

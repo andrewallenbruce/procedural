@@ -1,6 +1,5 @@
 # load libraries ----------------------------------------------------------
 
-library(xmlrectr)
 library(collapse)
 library(cheapr)
 library(vctrs)
@@ -14,96 +13,99 @@ xml <- fs::path(
   "icd10pcs_definitions_2027",
   ext = "xml"
 )
-prof <- xml_profile(rows = "ICD10PCS.definitions/section")
-spec <- compile_xml_profile(prof, xml)
-rect <- rectangle_xml(xml, spec, parallel = TRUE)
-x <- ss(rect, j = c(2L, 4:6, 8:14))
-
-# data transformation -----------------------------------------------------
-x <- av(
-  x,
-  section = if_else_(
-    x$entity == "section" & x$value_kind == "attribute",
-    x$value,
-    NA_character_
-  ) |>
-    vec_fill_missing(),
-  axis = if_else_(
-    x$entity == "axis" & x$value_kind == "attribute",
-    x$value,
-    NA_character_
-  ),
-  name = if_else_(
-    x$entity == "axis" & x$field == "title",
-    x$value,
-    NA_character_
-  ) |>
-    lag_(-1L),
-  pos = "front"
-)
-
-x <- ss(
-  x,
-  x$entity %!=% "section",
-  c(1:5, 7:8)
-) |>
-  rsplit(~record_index)
+prof <- xmlrectr::xml_profile(rows = "ICD10PCS.definitions/section")
+spec <- xmlrectr::compile_xml_profile(prof, xml)
+rect <- xmlrectr::rectangle_xml(xml, spec, parallel = TRUE)
+x <- collapse::ss(rect, j = c(2L, 4:6, 8:14))
 
 # map function ------------------------------------------------------------
 
 process <- function(x) {
-  x$axis <- vec_fill_missing(x$axis)
-  x$name <- vec_fill_missing(x$name)
-  x$field <- if_else_(
+  x$axis <- vctrs::vec_fill_missing(x$axis)
+  x$name <- vctrs::vec_fill_missing(x$name)
+  x$field <- cheapr::if_else_(
     x$entity == "axis/terms/includes",
     "includes",
     x$field
   )
-  x <- ss(x, x$entity %!=% "axis")
-  x$entry <- x$entity == "axis/terms/title"
-  x$run <- vec_identify_runs(x$entry)
+  x <- collapse::ss(x, x$entity %!=% "axis")
+  x <- collapse::av(x, entry = x$entity == "axis/terms/title")
+  x <- collapse::av(x, run = vctrs::vec_identify_runs(x$entry))
 
-  runs <- ss(x, x$entry) |>
-    fcount(run) |>
-    sbt(N > 1L) |>
+  runs <- collapse::ss(x, x$entry) |>
+    collapse::fcount(run) |>
+    collapse::sbt(N > 1L) |>
     _$run
 
-  xrun <- ss(x, x$run %iin% runs)
-  x <- ss(x, x$run %!iin% runs)
+  xrun <- collapse::ss(x, x$run %iin% runs)
+  x <- collapse::ss(x, x$run %!iin% runs)
 
-  if (nrow(xrun) > 0L) {
-    x <- rowbind(
+  if (nrow_(xrun)) {
+    x <- collapse::rowbind(
       x,
-      gby(xrun, run) |>
-        mtt(value = paste_(value, collapse = " | ")) |>
-        funique(cols = "run") |>
-        fungroup()
+      collapse::gby(xrun, run) |>
+        collapse::mtt(value = cheapr::paste_(value, collapse = " | ")) |>
+        collapse::funique(cols = "run") |>
+        collapse::fungroup()
     ) |>
-      roworderv("run")
+      collapse::roworderv("run")
   }
 
-  gv(x, c("run", "entry", "entity")) <- NULL
+  collapse::gv(x, c("run", "entry", "entity")) <- NULL
 
   return(x)
 }
 
-# final steps -------------------------------------------------------------
+# data transformation -----------------------------------------------------
+x <- collapse::av(
+  x,
+  section = cheapr::if_else_(
+    x$entity == "section" & x$value_kind == "attribute",
+    x$value,
+    NA_character_
+  ) |>
+    vctrs::vec_fill_missing(),
+  axis = cheapr::if_else_(
+    x$entity == "axis" & x$value_kind == "attribute",
+    x$value,
+    NA_character_
+  ),
+  name = cheapr::if_else_(
+    x$entity == "axis" & x$field == "title",
+    x$value,
+    NA_character_
+  ) |>
+    cheapr::lag_(-1L),
+  pos = "front"
+)
 
-x <- map(x, process) |> rowbind() |> unique_()
-x <- av(x, entry = cumsum(x$field == "value"), pos = "front")
+x <- collapse::ss(
+  x,
+  x$entity %!=% "section",
+  c(1:5, 7:8)
+) |>
+  collapse::rsplit(~record_index) |>
+  purrr::map(process) |>
+  collapse::rowbind() |>
+  cheapr::unique_()
+
+x <- collapse::av(x, entry = collapse::fcumsum(x$field == "value"))
 x$axis <- as.integer(x$axis)
 
-term <- ss_(x, x$field %==% "value", c(1:4, 6L))
-term <- rnm(term, value = "term")
-x <- ss_(x, x$field %!=% "value")
-x <- join(
-  x,
+term <- collapse::ss(x, x$field %==% "value", c(1:4, 6L))
+term <- collapse::rnm(term, value = "term")
+
+x <- collapse::join(
+  collapse::ss(x, x$field %!=% "value"),
   term,
   on = c("entry", "section", "axis", "name"),
   multiple = TRUE,
   overid = 0
-)
-x <- colorderv(x, c("entry", "section", "axis", "name", "term"))
+) |>
+  collapse::colorderv(
+    c("entry", "section", "axis", "name", "term")
+  )
+
 x$field <- stringr::str_to_title(x$field)
 pcs_definitions <- x
 
