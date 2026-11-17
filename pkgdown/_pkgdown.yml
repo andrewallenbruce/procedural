@@ -67,8 +67,8 @@ reference:
   - includes
   - index
   - pcs_range
-  - sections
-  - systems
+  - section
+  - system
 
 - title: Presentation Options
   desc: >

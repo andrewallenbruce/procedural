@@ -112,3 +112,36 @@ pcs_definitions <- x
 # use_data ----------------------------------------------------------------
 
 usethis::use_data(pcs_definitions, overwrite = TRUE)
+
+# table_definition --------------------------------------------------------
+
+# start with the parsed 2027_tables xml file
+def <- ss(x, x$field %==% "definition")
+i <- x$record_index %in_%
+  unique_(def$record_index) &
+  x$entity_index %in_% unique_(def$entity_index)
+def <- ss(x, i)
+i <- def$entity == "axis" & def$field != "values"
+def <- ss(def, i, c(1L, 4:5))
+pos <- ss(def, def$field %==% "pos", -2L)
+pos <- rnm(pos, value = "pos")
+pos$pos <- as.integer(pos$pos)
+title <- ss(def, def$field %==% "title", -2L)
+title <- rnm(title, value = "title")
+code <- ss(def, def$field %==% "code", -2L)
+code <- rnm(code, value = "code")
+label <- ss(def, def$field %==% "label", -2L)
+label <- rnm(label, value = "label")
+definition <- ss(def, def$field %==% "definition", -2L)
+definition <- rnm(definition, value = "definition")
+table_definition <- col_c(
+  entry = pos$record_index,
+  pos = pos$pos,
+  title = title$title,
+  code = code$code,
+  label = label$label,
+  definition = definition$definition
+) |>
+  collapse::qTBL()
+
+usethis::use_data(table_definition, overwrite = TRUE)

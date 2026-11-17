@@ -19,38 +19,6 @@ rect <- xmlrectr::rectangle_xml(file = xml, spec, parallel = TRUE)
 x <- collapse::ss(rect, j = c(2L, 4:6, 8:14))
 # 375.43 sec elapsed
 
-# table_definition --------------------------------------------------------
-
-def <- ss(x, x$field %==% "definition")
-i <- x$record_index %in_%
-  unique_(def$record_index) &
-  x$entity_index %in_% unique_(def$entity_index)
-def <- ss(x, i)
-i <- def$entity == "axis" & def$field != "values"
-def <- ss(def, i, c(1L, 4:5))
-pos <- ss(def, def$field %==% "pos", -2L)
-pos <- rnm(pos, value = "pos")
-pos$pos <- as.integer(pos$pos)
-title <- ss(def, def$field %==% "title", -2L)
-title <- rnm(title, value = "title")
-code <- ss(def, def$field %==% "code", -2L)
-code <- rnm(code, value = "code")
-label <- ss(def, def$field %==% "label", -2L)
-label <- rnm(label, value = "label")
-definition <- ss(def, def$field %==% "definition", -2L)
-definition <- rnm(definition, value = "definition")
-table_definition <- col_c(
-  entry = pos$record_index,
-  pos = pos$pos,
-  title = title$title,
-  code = code$code,
-  label = label$label,
-  definition = definition$definition
-) |>
-  collapse::qTBL()
-
-usethis::use_data(table_definition, overwrite = TRUE)
-
 # data transformation -----------------------------------------------------
 x <- procedural::pcs_tables
 x <- collapse::ss(x, x$field %!=% "definition", c(1:2, 4:5))
