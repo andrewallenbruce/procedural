@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9008
+
+* internal clean up
+
+
 # procedural 0.0.1.9007
 
 * removed usage of `pins` package altogether
