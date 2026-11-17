@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">procedural</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,10 +111,9 @@ with 1 and 0).</li>
 </ul>
 <p>The following is an example of a finished code:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gt_pcs.html">gt_pcs</a></span><span class="op">(</span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"02103D4"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">gt_pcs</span><span class="op">(</span><span class="fu">pcs</span><span class="op">(</span><span class="st">"02103D4"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gt_pcs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "gt_pcs"</span></span></code></pre></div>
 <p>Choosing a specific value for each of the seven axes derives the
 code. Based on details about the procedure performed, values are
 assigned for each character specifying the <strong>section</strong>,
@@ -136,9 +135,8 @@ sections. The alphabetical sections (B, C, D, F, G, H, X) comprise the
 <p>The first section, creatively named <strong>Medical and
 Surgical</strong>, contains the majority of procedures typically
 reported in an inpatient setting.</p>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `UseMethod()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no applicable method for 'mutate' applied to an object of class "NULL"</span></span></code></pre>
 <p><br></p>
 <div class="section level4">
 <h4 id="coding-example-1">Coding Example 1<a class="anchor" aria-label="anchor" href="#coding-example-1"></a>
@@ -1099,10 +1097,9 @@ relevant information from the operative report.</p>
 </div>
 <p>These indicators give us the following code:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gt_pcs.html">gt_pcs</a></span><span class="op">(</span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0LB50ZZ"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">gt_pcs</span><span class="op">(</span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0LB50ZZ"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gt_pcs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "gt_pcs"</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="coding-example-2">Coding Example 2<a class="anchor" aria-label="anchor" href="#coding-example-2"></a>
@@ -1131,11 +1128,10 @@ pituitary, orbits, and paranasal sinuses are unremarkable. The calvarium
 is intact.</p>
 </blockquote>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"B02000Z"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/gt_pcs.html">gt_pcs</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"B02000Z"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_pcs</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gt_pcs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "gt_pcs"</span></span></code></pre></div>
 <p><br></p>
 </div>
 </div>
@@ -1402,16 +1398,14 @@ of the system.</p>
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/gt_pcs.html">gt_pcs</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pcs</span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_pcs</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gt_pcs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "gt_pcs"</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pcs.html">pcs</a></span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `get_pin()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or</span></span>
-<span><span class="co">#&gt;   "zipcodes", not "sections".</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">pcs</span><span class="op">(</span><span class="st">"0016070"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pcs()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> could not find function "pcs"</span></span>
 <span></span>
 <span><span class="va">x</span><span class="op">$</span><span class="va">axes</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span> <span class="op">|&gt;</span></span>

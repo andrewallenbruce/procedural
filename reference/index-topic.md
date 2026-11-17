@@ -20,7 +20,7 @@ index(search = NULL, col = c("term", "index", "verb", "value", "code"))
 
 ## Value
 
-a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+tibble
 
 ## Examples
 

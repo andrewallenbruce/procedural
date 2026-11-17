@@ -40,9 +40,8 @@ The following is an example of a finished code:
 ``` r
 
 gt_pcs(pcs("02103D4"))
-#> Error in `get_pin()`:
-#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-#>   "zipcodes", not "sections".
+#> Error in `gt_pcs()`:
+#> ! could not find function "gt_pcs"
 ```
 
 Choosing a specific value for each of the seven axes derives the code.
@@ -65,9 +64,8 @@ sections.
 The first section, creatively named **Medical and Surgical**, contains
 the majority of procedures typically reported in an inpatient setting.
 
-    #> Error in `get_pin()`:
-    #> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-    #>   "zipcodes", not "sections".
+    #> Error in `UseMethod()`:
+    #> ! no applicable method for 'mutate' applied to an object of class "NULL"
 
   
 
@@ -89,9 +87,8 @@ These indicators give us the following code:
 ``` r
 
 gt_pcs(pcs("0LB50ZZ"))
-#> Error in `get_pin()`:
-#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-#>   "zipcodes", not "sections".
+#> Error in `gt_pcs()`:
+#> ! could not find function "gt_pcs"
 ```
 
 #### Coding Example 2
@@ -121,9 +118,8 @@ to specify if enhanced or unenhanced images were taken.
 
 pcs("B02000Z") |> 
   gt_pcs()
-#> Error in `get_pin()`:
-#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-#>   "zipcodes", not "sections".
+#> Error in `gt_pcs()`:
+#> ! could not find function "gt_pcs"
 ```
 
   
@@ -373,17 +369,15 @@ For example, The **fifth** axis of classification specifies the
 
 pcs("0016070") |> 
   gt_pcs()
-#> Error in `get_pin()`:
-#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-#>   "zipcodes", not "sections".
+#> Error in `gt_pcs()`:
+#> ! could not find function "gt_pcs"
 ```
 
 ``` r
 
 x <- pcs("0016070")
-#> Error in `get_pin()`:
-#> ! `pin` must be one of "coords_sf", "fips_geo", "zip_subset", or
-#>   "zipcodes", not "sections".
+#> Error in `pcs()`:
+#> ! could not find function "pcs"
 
 x$axes |>
   gt(rowname_col = "axis") |>

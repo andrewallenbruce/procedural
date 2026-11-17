@@ -17,7 +17,7 @@ systems(x = NULL)
 
 ## Value
 
-a [tibble](https://tibble.tidyverse.org/reference/tibble-package.html)
+tibble
 
 ## Examples
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## procedural 0.0.1.9008
+
+- internal clean up
+
 ## procedural 0.0.1.9007
 
 - removed usage of `pins` package altogether
@@ -14,18 +18,15 @@
 
 ## procedural 0.0.1.9004
 
-- hardened
-  [`code_range()`](https://andrewallenbruce.github.io/procedural/reference/code_range.md)
+- hardened `code_range()`
 
 ## procedural 0.0.1.9003
 
-- new implementation of
-  [`code_range()`](https://andrewallenbruce.github.io/procedural/reference/code_range.md)
+- new implementation of `code_range()`
 
 ## procedural 0.0.1.9002
 
-- [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
-  now returns full entries by default
+- `definitions()` now returns full entries by default
 
 ## procedural 0.0.1.9001
 
@@ -33,14 +34,11 @@
 
 ## procedural 0.0.1.9000
 
-- new
-  [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
-  implementation
+- new `definitions()` implementation
 - new version
 - onLoad pins
 - import standalones
-- refactored
-  [`pcs()`](https://andrewallenbruce.github.io/procedural/reference/pcs.md)
+- refactored `pcs()`
 
 ## procedural 0.0.1
 
