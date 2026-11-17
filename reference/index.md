@@ -14,9 +14,9 @@ ICD-10-PCS Building Blocks.
   : ICD-10-PCS Index
 - [`pcs_range()`](https://andrewallenbruce.github.io/procedural/reference/pcs_range.md)
   : Return a range of ICD-10-PCS codes
-- [`sections()`](https://andrewallenbruce.github.io/procedural/reference/sections.md)
+- [`section()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
   : ICD-10-PCS Sections
-- [`systems()`](https://andrewallenbruce.github.io/procedural/reference/systems.md)
+- [`system()`](https://andrewallenbruce.github.io/procedural/reference/system.md)
   : ICD-10-PCS Body Systems
 
 ## Presentation Options

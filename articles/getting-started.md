@@ -64,8 +64,8 @@ sections.
 The first section, creatively named **Medical and Surgical**, contains
 the majority of procedures typically reported in an inpatient setting.
 
-    #> Error in `UseMethod()`:
-    #> ! no applicable method for 'mutate' applied to an object of class "NULL"
+    #> Error in `sections()`:
+    #> ! could not find function "sections"
 
   
 
