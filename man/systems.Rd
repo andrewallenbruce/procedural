@@ -11,7 +11,7 @@ systems(x = NULL)
 If \code{NULL} (default), returns all 114 systems.}
 }
 \value{
-a \link[tibble:tibble-package]{tibble}
+tibble
 }
 \description{
 ICD-10-PCS Body Systems

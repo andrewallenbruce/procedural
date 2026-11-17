@@ -17,7 +17,7 @@ xml <- fs::path(
 prof <- xml_profile(rows = "ICD10PCS.tabular/pcsTable")
 spec <- compile_xml_profile(prof, xml)
 rect <- rectangle_xml(xml, spec, parallel = TRUE)
-pcs_tables <- ss(rect, j = c(2L, 4:6, 8:14))
+x <- ss(rect, j = c(2L, 4:6, 8:14))
 # 375.43 sec elapsed
 
 # table_definition --------------------------------------------------------

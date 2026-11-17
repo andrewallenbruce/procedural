@@ -2,7 +2,7 @@
 #'
 #' @param x ICD-10-PCS section value, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 17 sections.
-#' @template returns-default
+#' @returns tibble
 #' @examplesIf FALSE
 #' sections()
 #' sections("0")
@@ -10,22 +10,16 @@
 #' sections("X")
 #' @export
 sections <- function(x = NULL) {
-  sec <- get_pin("sections")
-
   if (!is.null(x)) {
     x <- toupper(as.character(x))
   }
-
-  sec <- fuimus::search_in_if(sec, sec$value, x)
-
-  return(sec)
 }
 
 #' ICD-10-PCS Body Systems
 #'
 #' @param x ICD-10-PCS body systems character, an alphanumeric code of length 1.
 #'    If `NULL` (default), returns all 114 systems.
-#' @template returns-default
+#' @returns tibble
 #' @examplesIf FALSE
 #' systems()
 #' systems("0")
@@ -33,13 +27,7 @@ sections <- function(x = NULL) {
 #' systems("X")
 #' @export
 systems <- function(x = NULL) {
-  sys <- get_pin("systems")
-
   if (!is.null(x)) {
     x <- toupper(as.character(x))
   }
-
-  sys <- fuimus::search_in_if(sys, sys$section, x)
-
-  return(sys)
 }

@@ -62,14 +62,11 @@ reference:
   desc: >
     ICD-10-PCS Building Blocks.
   contents:
-  - code_range
-  - definitions
-  - devices
+  - definition
+  - device
   - includes
   - index
-  - order
-  - pcs
-  - pcs_code
+  - pcs_range
   - sections
   - systems
 
@@ -77,10 +74,4 @@ reference:
   desc: >
     Tools for Visualization and Presentation.
   contents:
-  - starts_with("gt_")
-
-- title: Validators
-  desc: >
-    Functions to validate inputs.
-  contents:
-  - starts_with("is_")
+  - starts_with("as_gt")

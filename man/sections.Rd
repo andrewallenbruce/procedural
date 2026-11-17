@@ -11,7 +11,7 @@ sections(x = NULL)
 If \code{NULL} (default), returns all 17 sections.}
 }
 \value{
-a \link[tibble:tibble-package]{tibble}
+tibble
 }
 \description{
 ICD-10-PCS Sections
