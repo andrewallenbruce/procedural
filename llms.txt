@@ -684,6 +684,10 @@ occasionally assist with some of these duties.
 
 ICD-10-PCS Building Blocks.
 
+- [`section()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
+  [`system()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
+  [`table()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
+  : ICD-10-PCS Axes
 - [`definition()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   : ICD-10-PCS Definitions
@@ -691,10 +695,6 @@ ICD-10-PCS Building Blocks.
   : ICD-10-PCS Index
 - [`pcs_range()`](https://andrewallenbruce.github.io/procedural/reference/pcs_range.md)
   : Return a range of ICD-10-PCS codes
-- [`section()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
-  : ICD-10-PCS Sections
-- [`system()`](https://andrewallenbruce.github.io/procedural/reference/system.md)
-  : ICD-10-PCS Body Systems
 
 ## Presentation Options
 

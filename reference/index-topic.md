@@ -22,6 +22,37 @@ containing the results
 ## Examples
 
 ``` r
+index("Abdominohysterectomy")
+#> # A tibble: 2 × 6
+#>   entry letter term                 field     value             source          
+#>   <int> <chr>  <chr>                <chr>     <chr>             <chr>           
+#> 1     6 A      Abdominohysterectomy see       Resection, Uterus mainTerm/see    
+#> 2     6 A      Abdominohysterectomy see/codes 0UT9              mainTerm/see/co…
+index("Attain Ability")
+#> # A tibble: 6 × 6
+#>   entry letter term                   field   value                       source
+#>   <int> <chr>  <chr>                  <chr>   <chr>                       <chr> 
+#> 1   236 A      Attain Ability(R) lead level   1                           mainT…
+#> 2   236 A      Attain Ability(R) lead use     Cardiac Lead, Pacemaker in  mainT…
+#> 3   236 A      Attain Ability(R) lead use/tab 02H                         mainT…
+#> 4   236 A      Attain Ability(R) lead level   1                           mainT…
+#> 5   236 A      Attain Ability(R) lead use     Cardiac Lead, Defibrillato… mainT…
+#> 6   236 A      Attain Ability(R) lead use/tab 02H                         mainT…
+index("arthr*")
+#> # A tibble: 95 × 6
+#>    entry letter term        field   value                   source              
+#>    <int> <chr>  <chr>       <chr>   <chr>                   <chr>               
+#>  1   194 A      Arthrectomy level   1                       mainTerm/term/@level
+#>  2   194 A      Arthrectomy see     Excision, Upper Joints  mainTerm/term/see   
+#>  3   194 A      Arthrectomy see/tab 0RB                     mainTerm/term/see/t…
+#>  4   194 A      Arthrectomy level   1                       mainTerm/term/@level
+#>  5   194 A      Arthrectomy see     Resection, Upper Joints mainTerm/term/see   
+#>  6   194 A      Arthrectomy see/tab 0RT                     mainTerm/term/see/t…
+#>  7   194 A      Arthrectomy level   1                       mainTerm/term/@level
+#>  8   194 A      Arthrectomy see     Excision, Lower Joints  mainTerm/term/see   
+#>  9   194 A      Arthrectomy see/tab 0SB                     mainTerm/term/see/t…
+#> 10   194 A      Arthrectomy level   1                       mainTerm/term/@level
+#> # ℹ 85 more rows
 index()
 #> # A tibble: 61,866 × 6
 #>    entry letter term                            field     value           source
@@ -37,7 +68,4 @@ index()
 #>  9     7 A      Abdominoplasty                  level     1               mainT…
 #> 10     7 A      Abdominoplasty                  see       Alteration, Ab… mainT…
 #> # ℹ 61,856 more rows
-# index(term = "Abdominohysterectomy")
-# index(term = "Attain Ability")
-# index(term = "radi*")
 ```

@@ -1,5 +1,12 @@
 # Changelog
 
+## procedural 0.0.1.9012
+
+- added
+  [`table()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
+- added
+  [`index()`](https://andrewallenbruce.github.io/procedural/reference/index.md)
+
 ## procedural 0.0.1.9011
 
 - [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
