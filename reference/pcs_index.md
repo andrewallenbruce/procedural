@@ -12,17 +12,17 @@ pcs_index
 
 ### `pcs_index`
 
-A data frame with 65,333 rows and 11 columns:
+A data frame with 61,866 rows and 6 columns:
 
-- record_index:
-
-  description
-
-- entity:
+- entry:
 
   description
 
-- entity_index:
+- letter:
+
+  description
+
+- term:
 
   description
 
@@ -34,26 +34,6 @@ A data frame with 65,333 rows and 11 columns:
 
   description
 
-- value_kind:
-
-  description
-
 - source:
-
-  description
-
-- record_node_id:
-
-  description
-
-- entity_node_id:
-
-  description
-
-- parent_entity_node_id:
-
-  description
-
-- source_node_id:
 
   description

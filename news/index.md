@@ -1,5 +1,10 @@
 # Changelog
 
+## procedural 0.0.1.9011
+
+- [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
+  added
+
 ## procedural 0.0.1.9010
 
 - io refactoring

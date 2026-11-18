@@ -5,11 +5,8 @@
 ICD-10-PCS Building Blocks.
 
 - [`definition()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
+  [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   : ICD-10-PCS Definitions
-- [`device()`](https://andrewallenbruce.github.io/procedural/reference/device.md)
-  : ICD-10-PCS Devices
-- [`includes()`](https://andrewallenbruce.github.io/procedural/reference/includes.md)
-  : ICD-10-PCS Includes
 - [`index()`](https://andrewallenbruce.github.io/procedural/reference/index-topic.md)
   : ICD-10-PCS Index
 - [`pcs_range()`](https://andrewallenbruce.github.io/procedural/reference/pcs_range.md)

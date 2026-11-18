@@ -18,26 +18,22 @@ A data frame with 861 rows and 6 columns:
 
   Entry number
 
-- section:
-
-  PCS section character
-
 - pos:
 
   PCS code position
 
-- name:
+- title:
 
   PCS code position name
 
-- term:
+- code:
 
   PCS code position term
 
-- field:
+- label:
 
   PCS code attribute category
 
-- value:
+- definition:
 
   PCS code attribute description

@@ -12,48 +12,24 @@ pcs_tables
 
 ### `pcs_tables`
 
-A data frame with 113,280 rows and 11 columns:
+A data frame with 34,790 rows and 5 columns:
 
-- record_index:
-
-  description
-
-- entity:
+- table:
 
   description
 
-- entity_index:
+- pos:
 
   description
 
-- field:
+- title:
 
   description
 
-- value:
+- code:
 
   description
 
-- value_kind:
-
-  description
-
-- source:
-
-  description
-
-- record_node_id:
-
-  description
-
-- entity_node_id:
-
-  description
-
-- parent_entity_node_id:
-
-  description
-
-- source_node_id:
+- label:
 
   description

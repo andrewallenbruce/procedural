@@ -12,7 +12,7 @@ pcs_definitions
 
 ### `pcs_definitions`
 
-A data frame with 2,212 rows and 7 columns:
+A data frame with 320 rows and 6 columns:
 
 - entry:
 
@@ -34,10 +34,6 @@ A data frame with 2,212 rows and 7 columns:
 
   PCS code position term
 
-- field:
+- definition:
 
-  PCS code attribute category
-
-- value:
-
-  PCS code attribute description
+  PCS code definition attribute
