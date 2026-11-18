@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9012
+
+* added `table()`
+* added `index()`
+
+
 # procedural 0.0.1.9011
 
 * `includes()` added
