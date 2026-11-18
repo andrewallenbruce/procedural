@@ -7,19 +7,14 @@
 \format{
 \subsection{\code{pcs_index}}{
 
-A data frame with 65,333 rows and 11 columns:
+A data frame with 61,866 rows and 6 columns:
 \describe{
-\item{record_index}{description}
-\item{entity}{description}
-\item{entity_index}{description}
+\item{entry}{description}
+\item{letter}{description}
+\item{term}{description}
 \item{field}{description}
 \item{value}{description}
-\item{value_kind}{description}
 \item{source}{description}
-\item{record_node_id}{description}
-\item{entity_node_id}{description}
-\item{parent_entity_node_id}{description}
-\item{source_node_id}{description}
 ...
 }
 }

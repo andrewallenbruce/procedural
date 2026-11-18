@@ -4,24 +4,20 @@
 \alias{index}
 \title{ICD-10-PCS Index}
 \usage{
-index(search = NULL, col = c("term", "index", "verb", "value", "code"))
+index(term = NULL)
 }
 \arguments{
-\item{search}{string to search for in \code{col}}
-
-\item{col}{column to search: "term" (default), "index", "type", "value",
-"code"}
+\item{term}{\verb{<chr>} term to search for}
 }
 \value{
-tibble
+a \link[tibble:tibble]{tibble::tibble} containing the results
 }
 \description{
 ICD-10-PCS Index
 }
 \examples{
-\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
-index(search = "Abdominohysterectomy")
-index(search = "Attain Ability")
-index(search = "radi*")
-\dontshow{\}) # examplesIf}
+index()
+# index(term = "Abdominohysterectomy")
+# index(term = "Attain Ability")
+# index(term = "radi*")
 }

@@ -7,19 +7,13 @@
 \format{
 \subsection{\code{pcs_tables}}{
 
-A data frame with 113,280 rows and 11 columns:
+A data frame with 34,790 rows and 5 columns:
 \describe{
-\item{record_index}{description}
-\item{entity}{description}
-\item{entity_index}{description}
-\item{field}{description}
-\item{value}{description}
-\item{value_kind}{description}
-\item{source}{description}
-\item{record_node_id}{description}
-\item{entity_node_id}{description}
-\item{parent_entity_node_id}{description}
-\item{source_node_id}{description}
+\item{table}{description}
+\item{pos}{description}
+\item{title}{description}
+\item{code}{description}
+\item{label}{description}
 ...
 }
 }

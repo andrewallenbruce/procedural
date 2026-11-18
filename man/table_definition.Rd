@@ -10,12 +10,11 @@
 A data frame with 861 rows and 6 columns:
 \describe{
 \item{entry}{Entry number}
-\item{section}{PCS section character}
 \item{pos}{PCS code position}
-\item{name}{PCS code position name}
-\item{term}{PCS code position term}
-\item{field}{PCS code attribute category}
-\item{value}{PCS code attribute description}
+\item{title}{PCS code position name}
+\item{code}{PCS code position term}
+\item{label}{PCS code attribute category}
+\item{definition}{PCS code attribute description}
 ...
 }
 }

@@ -35,7 +35,10 @@ process_order <- function(path) {
     col_types = "icicc"
   )
 
-  class(x) <- cheapr::setdiff_(class(x), "spec_tbl_df")
+  class(x) <- cheapr::setdiff_(
+    class(x),
+    "spec_tbl_df"
+  )
 
   cheapr::col_c(
     collapse::num_vars(x),

@@ -16,19 +16,13 @@
 #' ICD-10-PCS Tables File
 #'
 #' @format ## `pcs_tables`
-#' A data frame with 113,280 rows and 11 columns:
+#' A data frame with 34,790 rows and 5 columns:
 #' \describe{
-#'   \item{record_index}{description}
-#'   \item{entity}{description}
-#'   \item{entity_index}{description}
-#'   \item{field}{description}
-#'   \item{value}{description}
-#'   \item{value_kind}{description}
-#'   \item{source}{description}
-#'   \item{record_node_id}{description}
-#'   \item{entity_node_id}{description}
-#'   \item{parent_entity_node_id}{description}
-#'   \item{source_node_id}{description}
+#'   \item{table}{description}
+#'   \item{pos}{description}
+#'   \item{title}{description}
+#'   \item{code}{description}
+#'   \item{label}{description}
 #'   ...
 #' }
 #' @keywords internal
@@ -37,19 +31,34 @@
 #' ICD-10-PCS Definitions File
 #'
 #' @format ## `pcs_definitions`
-#' A data frame with 2,212 rows and 7 columns:
+#' A data frame with 320 rows and 6 columns:
 #' \describe{
 #'   \item{entry}{Entry number}
 #'   \item{section}{PCS section character}
 #'   \item{axis}{PCS code position}
 #'   \item{name}{PCS code position name}
 #'   \item{term}{PCS code position term}
-#'   \item{field}{PCS code attribute category}
-#'   \item{value}{PCS code attribute description}
+#'   \item{definition}{PCS code definition attribute}
 #'   ...
 #' }
 #' @keywords internal
 "pcs_definitions"
+
+#' ICD-10-PCS Definitions File
+#'
+#' @format ## `pcs_includes`
+#' A data frame with 641 rows and 6 columns:
+#' \describe{
+#'   \item{entry}{Entry number}
+#'   \item{section}{PCS section character}
+#'   \item{axis}{PCS code position}
+#'   \item{name}{PCS code position name}
+#'   \item{term}{PCS code position term}
+#'   \item{includes}{PCS code includes attribute}
+#'   ...
+#' }
+#' @keywords internal
+"pcs_includes"
 
 #' ICD-10-PCS Definition Tables
 #'
@@ -57,12 +66,11 @@
 #' A data frame with 861 rows and 6 columns:
 #' \describe{
 #'   \item{entry}{Entry number}
-#'   \item{section}{PCS section character}
 #'   \item{pos}{PCS code position}
-#'   \item{name}{PCS code position name}
-#'   \item{term}{PCS code position term}
-#'   \item{field}{PCS code attribute category}
-#'   \item{value}{PCS code attribute description}
+#'   \item{title}{PCS code position name}
+#'   \item{code}{PCS code position term}
+#'   \item{label}{PCS code attribute category}
+#'   \item{definition}{PCS code attribute description}
 #'   ...
 #' }
 #' @keywords internal
@@ -71,19 +79,14 @@
 #' ICD-10-PCS Index File
 #'
 #' @format ## `pcs_index`
-#' A data frame with 65,333 rows and 11 columns:
+#' A data frame with 61,866 rows and 6 columns:
 #' \describe{
-#'   \item{record_index}{description}
-#'   \item{entity}{description}
-#'   \item{entity_index}{description}
+#'   \item{entry}{description}
+#'   \item{letter}{description}
+#'   \item{term}{description}
 #'   \item{field}{description}
 #'   \item{value}{description}
-#'   \item{value_kind}{description}
 #'   \item{source}{description}
-#'   \item{record_node_id}{description}
-#'   \item{entity_node_id}{description}
-#'   \item{parent_entity_node_id}{description}
-#'   \item{source_node_id}{description}
 #'   ...
 #' }
 #' @keywords internal

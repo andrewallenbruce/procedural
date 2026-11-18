@@ -2,9 +2,12 @@
 % Please edit documentation in R/definition.R
 \name{definition}
 \alias{definition}
+\alias{includes}
 \title{ICD-10-PCS Definitions}
 \usage{
-definition(section = NULL, axis = NULL, term = NULL, complete = TRUE)
+definition(section = NULL, axis = NULL, term = NULL)
+
+includes(section = NULL, axis = NULL, term = NULL)
 }
 \arguments{
 \item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}}
@@ -23,8 +26,6 @@ definition(section = NULL, axis = NULL, term = NULL, complete = TRUE)
 }}
 
 \item{term}{\verb{<chr>} term to search for}
-
-\item{complete}{\verb{<lgl>}  Return complete entries; default is \code{TRUE}}
 }
 \value{
 a \link[tibble:tibble]{tibble::tibble} containing the results
@@ -38,4 +39,11 @@ definition(term = "drain")
 definition(section = "0", axis = 5)
 definition(section = "B", term = "fluoro")
 definition()
+
+try(includes(section = "B"))
+includes(term = "drain")
+includes(section = "0", axis = 6)
+includes(section = "3", term = "pro")
+includes()
+
 }

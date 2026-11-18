@@ -15,10 +15,58 @@ definition_file <- fs::path(
 )
 
 x <- procedural:::process_definitions(definition_file)
-x
-# use_data ----------------------------------------------------------------
+
+x <- collapse::ss(
+  procedural::pcs_definitions,
+  procedural::pcs_definitions$field %==% "Definition",
+  colnames(procedural::pcs_definitions) %!=% "field"
+)
+
+x <- collapse::rnm(x, value = "definition")
+
+y <- collapse::ss(
+  procedural::pcs_definitions,
+  procedural::pcs_definitions$field %==% "Explanation",
+  colnames(procedural::pcs_definitions) %!=% "field"
+)
+
+x <- collapse::join(x, y, on = c("entry", "section", "axis", "name", "term"))
+x$definition <- cheapr::paste_(x$definition, ".")
+x$definition <- cheapr::if_else_(
+  !cheapr::is_na(x$value),
+  cheapr::paste_(x$definition, " ", x$value, "."),
+  x$definition
+)
+pcs_definitions <- collapse::ss(x, j = -7L)
+## use_data ---------------------------------------------------------------
 
 usethis::use_data(pcs_definitions, overwrite = TRUE)
+
+# includes ----------------------------------------------------------------
+
+x <- collapse::ss(
+  procedural::pcs_definitions,
+  procedural::pcs_definitions$field %==% "Includes",
+  colnames(procedural::pcs_definitions) %!=% "field"
+)
+
+x <- collapse::rnm(x, value = "includes")
+i <- cheapr::counts(x$entry)
+i <- collapse::ss(i, i$count > 1L) |> _$key
+x <- collapse::rowbind(
+  collapse::ss(x, x$entry %!iin% i),
+  collapse::ss(x, x$entry %iin% i) |>
+    collapse::gby(entry, term) |>
+    collapse::mtt(includes = cheapr::paste_(includes, collapse = " | ")) |>
+    collapse::fungroup() |>
+    collapse::funique()
+) |>
+  collapse::roworderv(c("entry"))
+
+pcs_includes <- x
+## use_data ---------------------------------------------------------------
+
+usethis::use_data(pcs_includes, overwrite = TRUE)
 
 # table_definition --------------------------------------------------------
 

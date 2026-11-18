@@ -7,15 +7,14 @@
 \format{
 \subsection{\code{pcs_definitions}}{
 
-A data frame with 2,212 rows and 7 columns:
+A data frame with 320 rows and 6 columns:
 \describe{
 \item{entry}{Entry number}
 \item{section}{PCS section character}
 \item{axis}{PCS code position}
 \item{name}{PCS code position name}
 \item{term}{PCS code position term}
-\item{field}{PCS code attribute category}
-\item{value}{PCS code attribute description}
+\item{definition}{PCS code definition attribute}
 ...
 }
 }

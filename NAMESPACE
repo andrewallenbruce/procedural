@@ -3,7 +3,6 @@
 export(as_gt)
 export(as_gt2)
 export(definition)
-export(device)
 export(includes)
 export(index)
 export(pcs_range)
