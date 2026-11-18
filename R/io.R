@@ -1,5 +1,27 @@
 #' @noRd
-process_order_file <- function(path) {
+process_xml <- function(path, profile = c("index", "tables", "definitions")) {
+  collapse::ss(
+    xmlrectr::rectangle_xml(
+      file = path,
+      xmlrectr::compile_xml_profile(
+        profile = xmlrectr::xml_profile(
+          rows = switch(
+            rlang::arg_match(profile),
+            index = "ICD10PCS.index/letter",
+            tables = "ICD10PCS.tabular/pcsTable",
+            definitions = "ICD10PCS.definitions/section"
+          )
+        ),
+        sample = path
+      ),
+      parallel = TRUE
+    ),
+    j = c(2L, 4:6, 8:14)
+  )
+}
+
+#' @noRd
+process_order <- function(path) {
   x <- readr::read_fwf(
     file = path,
     readr::fwf_cols(
@@ -22,71 +44,92 @@ process_order_file <- function(path) {
 }
 
 #' @noRd
-process_index_file <- function(path) {
+process_index <- function(path) {
+  x <- process_xml(path, profile = "index")
+  x <- collapse::ss(x, j = c(2:5, 7L))
+
+  # create letter column ----------------------------------------------------
+  x <- collapse::av(
+    x,
+    letter = cheapr::if_else_(
+      x$entity == "letter",
+      x$value,
+      NA_character_
+    ) |>
+      vctrs::vec_fill_missing(),
+    pos = "front"
+  )
+  x <- collapse::ss(x, x$entity %!=% "letter", -2L)
+
+  # create entry/term columns -----------------------------------------------
+  x <- collapse::av(
+    x,
+    entry = collapse::fcumsum(x$source == "mainTerm/title"),
+    term = cheapr::if_else_(
+      x$source == "mainTerm/title",
+      x$value,
+      NA_character_
+    ) |>
+      vctrs::vec_fill_missing(),
+    pos = "front"
+  )
+
   collapse::ss(
-    xmlrectr::rectangle_xml(
-      file = path,
-      xmlrectr::compile_xml_profile(
-        profile = xmlrectr::xml_profile(rows = "ICD10PCS.index/letter"),
-        sample = path
-      ),
-      parallel = TRUE
-    ),
-    j = c(2L, 4:6, 8:14)
+    x,
+    x$source %!=% "mainTerm/title",
+    c(1L, 3L, 2L, 5:7)
   )
 }
 
 #' @noRd
-process_tables_file <- function(path) {
-  x <- xmlrectr::rectangle_xml(
-    file = path,
-    spec = xmlrectr::compile_xml_profile(
-      profile = xmlrectr::xml_profile(rows = "ICD10PCS.tabular/pcsTable"),
-      sample = path
-    ),
-    parallel = TRUE
-  )
-
-  x <- collapse::ss(x, j = c(2L, 4:6, 8:14))
+process_tables <- function(path) {
+  x <- process_xml(path, profile = "tables")
   x <- collapse::ss(x, x$field %!=% "definition", c(1:2, 4:5))
-  x <- collapse::rnm(x, table = "record_index")
+  collapse::setrename(x, table = "record_index")
+
   x$field <- cheapr::if_else_(
     x$field == "label/code",
     "code",
     x$field
   )
-  x <- collapse::rsplit(x, ~table, keep.by = TRUE) # 918 tables
+  x <- collapse::rsplit(x, ~table, keep.by = TRUE)
+  x <- purrr::map(x, map_tables) |>
+    collapse::rowbind()
 
-  # map function ------------------------------------------------------------
-  process_table <- function(x) {
-    table <- collapse::ss(
-      x,
-      x$entity == "axis" & x$field != "values",
-      3:4
-    ) |>
-      collapse::rsplit(~field) |>
-      collapse::qTBL() |>
-      collapse::colorderv(c("pos", "title", "code", "label"))
+  collapse::settfmv(x, "pos", as.integer)
+  return(x)
+}
 
-    rows <- collapse::ss(
-      x,
-      x$entity %!in_% c("axis", "pcsRow") & x$field != "values",
-      3:4
-    )
+#' @noRd
+map_tables <- function(x) {
+  table <- collapse::ss(
+    x,
+    whichv_(x$entity == "axis" & x$field != "values"),
+    3:4
+  ) |>
+    collapse::rsplit(~field) |>
+    collapse::qTBL() |>
+    collapse::colorderv(c("pos", "title", "code", "label"))
 
-    rows$field <- cheapr::if_else_(
-      rows$field == "value",
-      "label",
-      rows$field
-    )
+  rows <- collapse::ss(
+    x,
+    whichv_(x$entity %!in_% c("axis", "pcsRow") & x$field != "values"),
+    3:4
+  )
 
-    rows <- collapse::av(
-      rows,
-      row = collapse::fcumsum(rows$field == "pos"),
-      pos = "front"
-    )
-    rows <- collapse::rsplit(rows, ~row)
-    rows <- purrr::map(rows, function(x) {
+  rows$field <- cheapr::if_else_(
+    rows$field == "value",
+    "label",
+    rows$field
+  )
+
+  rows <- collapse::av(
+    rows,
+    row = collapse::fcumsum(rows$field == "pos"),
+    pos = "front"
+  )
+  rows <- collapse::rsplit(rows, ~row) |>
+    purrr::map(function(x) {
       cheapr::col_c(
         cheapr::fast_df(
           pos = collapse::ss(x, x$field %==% "pos") |> pull_("value"),
@@ -98,41 +141,20 @@ process_tables_file <- function(path) {
         )
       )
     }) |>
-      collapse::rowbind() |>
-      collapse::qTBL()
+    collapse::rowbind() |>
+    collapse::qTBL()
 
-    res <- collapse::rowbind(table, rows)
-    collapse::av(
-      res,
-      table = rep.int(x$table[1L], collapse::fnrow(res)),
-      pos = "front"
-    )
-  }
-  # end function ------------------------------------------------------------
-
-  x <- purrr::map(x, process_table) |>
-    collapse::rowbind()
-
-  collapse::settfmv(x, "pos", as.integer)
-
-  return(x)
+  res <- collapse::rowbind(table, rows)
+  collapse::av(
+    res,
+    table = rep.int(x$table[1L], collapse::fnrow(res)),
+    pos = "front"
+  )
 }
 
 #' @noRd
-process_definition_file <- function(path) {
-  x <- xmlrectr::rectangle_xml(
-    file = path,
-    spec = xmlrectr::compile_xml_profile(
-      profile = xmlrectr::xml_profile(
-        rows = "ICD10PCS.definitions/section"
-      ),
-      sample = path
-    ),
-    parallel = TRUE
-  )
-
-  x <- collapse::ss(x, j = c(2L, 4:6, 8:14))
-
+process_definitions <- function(path) {
+  x <- process_xml(path, profile = "definitions")
   x <- collapse::av(
     x,
     section = cheapr::if_else_(
@@ -155,77 +177,69 @@ process_definition_file <- function(path) {
     pos = "front"
   )
 
-  # map function ------------------------------------------------------------
-  process_definition <- function(x) {
-    x$axis <- vctrs::vec_fill_missing(x$axis)
-    x$name <- vctrs::vec_fill_missing(x$name)
-    x$field <- cheapr::if_else_(
-      x$entity == "axis/terms/includes",
-      "includes",
-      x$field
-    )
-    x <- collapse::ss(x, x$entity %!=% "axis")
-    x <- collapse::av(x, entry = x$entity == "axis/terms/title")
-    x <- collapse::av(x, run = vctrs::vec_identify_runs(x$entry))
-
-    # runs <- collapse::ss(x, x$entry) |> pull_("run") |> cheapr::counts()
-    # runs <- collapse::ss(runs, runs$count > 1L) |> pull_("key")
-
-    runs <- collapse::ss(x, x$entry) |>
-      collapse::fcount(run) |>
-      collapse::sbt(N > 1L) |>
-      _$run
-
-    xrun <- collapse::ss(x, x$run %iin% runs)
-    x <- collapse::ss(x, x$run %!iin% runs)
-
-    if (nrow_(xrun)) {
-      x <- collapse::rowbind(
-        x,
-        collapse::gby(xrun, run) |>
-          collapse::mtt(value = cheapr::paste_(value, collapse = " | ")) |>
-          collapse::funique(cols = "run") |>
-          collapse::fungroup()
-      ) |>
-        collapse::roworderv("run")
-    }
-
-    collapse::gv(x, c("run", "entry", "entity")) <- NULL
-
-    return(x)
-  }
-  # end function -----------------------------------------------------
-
-  x <- collapse::ss(
-    x,
-    x$entity %!=% "section",
-    c(1:5, 7:8)
-  ) |>
-    collapse::rsplit(~record_index) |>
-    purrr::map(process_definition, .progress = TRUE) |>
+  x <- collapse::ss(x, x$entity %!=% "section", c(1:5, 7:8))
+  x <- collapse::rsplit(x, ~record_index)
+  x <- purrr::map(x, map_definitions) |>
     collapse::rowbind() |>
     cheapr::unique_()
 
-  x <- collapse::av(
-    x,
-    entry = collapse::fcumsum(x$field == "value")
-  )
+  x <- collapse::av(x, entry = collapse::fcumsum(x$field == "value"))
   collapse::settfmv(x, "axis", as.integer)
 
-  term <- collapse::ss(x, x$field %==% "value", c(1:4, 6L))
-  collapse::setrename(term, value = "term")
+  term <- collapse::ss(x, x$field %==% "value", -4L)
+  term <- collapse::rnm(term, value = "term")
+  # term <- collapse::ss(x, x$field %==% "value", -4L)
+  # collapse::setrename(term, value = "term")
 
+  x <- collapse::ss(x, x$field %!=% "value")
   x <- collapse::join(
-    collapse::ss(x, x$field %!=% "value"),
+    x,
     term,
     on = c("entry", "section", "axis", "name"),
     multiple = TRUE,
     overid = 0
   ) |>
-    collapse::colorderv(
-      c("entry", "section", "axis", "name", "term")
-    )
+    collapse::colorderv(c("entry", "section", "axis", "name", "term"))
 
   collapse::settfmv(x, "field", stringr::str_to_title)
+  return(x)
+}
+
+#' @noRd
+map_definitions <- function(x) {
+  x$axis <- vctrs::vec_fill_missing(x$axis)
+  x$name <- vctrs::vec_fill_missing(x$name)
+  x$field <- cheapr::if_else_(
+    x$entity == "axis/terms/includes",
+    "includes",
+    x$field
+  )
+  x <- collapse::ss(x, x$entity %!=% "axis")
+  x <- collapse::av(x, entry = x$entity == "axis/terms/title")
+  x <- collapse::av(x, run = vctrs::vec_identify_runs(x$entry))
+
+  # runs <- collapse::ss(x, x$entry) |> pull_("run") |> cheapr::counts()
+  # runs <- collapse::ss(runs, runs$count > 1L) |> pull_("key")
+
+  runs <- collapse::ss(x, x$entry) |>
+    collapse::fcount(run) |>
+    collapse::sbt(N > 1L) |>
+    _$run
+
+  xrun <- collapse::ss(x, x$run %iin% runs)
+  x <- collapse::ss(x, x$run %!iin% runs)
+
+  if (nrow_(xrun) > 0L) {
+    x <- collapse::rowbind(
+      x,
+      collapse::gby(xrun, run) |>
+        collapse::mtt(value = cheapr::paste_(value, collapse = " | ")) |>
+        collapse::funique(cols = "run") |>
+        collapse::fungroup()
+    ) |>
+      collapse::roworderv("run")
+  }
+
+  collapse::gv(x, c("run", "entry", "entity")) <- NULL
   return(x)
 }

@@ -6,6 +6,7 @@
 #' @importFrom collapse %!=%
 #' @importFrom collapse %iin%
 #' @importFrom collapse %!iin%
+#' @importFrom collapse %!in%
 #' @importFrom cheapr %in_%
 #' @importFrom cheapr %!in_%
 #' @import rlang, except = ":="

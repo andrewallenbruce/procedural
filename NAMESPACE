@@ -17,6 +17,7 @@ importFrom(cheapr,
 importFrom(collapse,
   "%!=%",
   "%!iin%",
+  "%!in%",
   "%==%",
   "%iin%"
 )

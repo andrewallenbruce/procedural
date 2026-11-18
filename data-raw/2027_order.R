@@ -12,7 +12,7 @@ order_file <- fs::path(
   "icd10pcs_order_2027",
   ext = "txt"
 )
-x <- process_order_file(order_file)
+x <- procedural:::process_order(order_file)
 # use_data ----------------------------------------------------------------
 
 usethis::use_data(pcs_order, overwrite = TRUE)

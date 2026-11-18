@@ -4,8 +4,18 @@ ss_ <- function(.data, row, col) {
 }
 
 #' @noRd
+all_ <- function(x) {
+  collapse::allv(x = x, value = TRUE)
+}
+
+#' @noRd
 any_ <- function(x) {
   collapse::anyv(x = x, value = TRUE)
+}
+
+#' @noRd
+whichv_ <- function(x, negate = FALSE) {
+  collapse::whichv(x = x, value = TRUE, invert = negate)
 }
 
 #' @noRd
