@@ -62,12 +62,13 @@ reference:
   desc: >
     ICD-10-PCS Building Blocks.
   contents:
+  - section
+  - system
+  - table
   - definition
   - includes
   - index
   - pcs_range
-  - section
-  - system
 
 - title: Presentation Options
   desc: >

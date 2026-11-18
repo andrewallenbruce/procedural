@@ -10,5 +10,6 @@
 #' @importFrom cheapr %in_%
 #' @importFrom cheapr %!in_%
 #' @import rlang, except = ":="
+#' @import S7
 ## usethis namespace: end
 NULL

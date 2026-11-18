@@ -16,8 +16,8 @@ a \link[tibble:tibble]{tibble::tibble} containing the results
 ICD-10-PCS Index
 }
 \examples{
+index("Abdominohysterectomy")
+index("Attain Ability")
+index("arthr*")
 index()
-# index(term = "Abdominohysterectomy")
-# index(term = "Attain Ability")
-# index(term = "radi*")
 }

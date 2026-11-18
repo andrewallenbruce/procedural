@@ -8,6 +8,8 @@ export(index)
 export(pcs_range)
 export(section)
 export(system)
+export(table)
+import(S7)
 import(rlang, except = ":=")
 importFrom(cheapr,
   "%!in_%",
