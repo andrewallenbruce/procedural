@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">procedural</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,19 +53,18 @@
 
 
 <dl><dt id="arg-section">section<a class="anchor" aria-label="anchor" href="#arg-section"></a></dt>
-<dd><p><code>&lt;chr&gt;</code> PCS section; one of <code>0:9, B, C, F, G, H, X</code></p></dd>
+<dd><p><code>&lt;chr&gt;</code> PCS section; one of <code>0:9, B, C, F, G, H, X</code></p><ul><li><p>Operation: <code>0:9, X</code></p></li>
+<li><p>Approach: <code>0:4, 7:9, X</code></p></li>
+<li><p>Type: <code>B, C, F, G, H</code></p></li>
+<li><p>Type Qualifier: <code>F</code></p></li>
+<li><p>Qualifier: <code>G</code></p></li>
+</ul></dd>
 
 
 <dt id="arg-axis">axis<a class="anchor" aria-label="anchor" href="#arg-axis"></a></dt>
-<dd><p><code>&lt;int&gt;</code> PCS axis; one of <code>3, 4, 5, 6</code></p><ul><li><p>3: Operation</p></li>
-<li><p>3: Type</p></li>
-<li><p>4: Body Part</p></li>
-<li><p>4: Qualifier</p></li>
-<li><p>5: Approach</p></li>
-<li><p>5: Type Qualifier</p></li>
-<li><p>6: Substance</p></li>
-<li><p>6: Device</p></li>
-<li><p>6: Device / Substance / Technology</p></li>
+<dd><p><code>&lt;int&gt;</code> PCS axis; one of <code>3, 4, 5</code></p><ul><li><p><code>3</code>: Operation (91) | Type (46)</p></li>
+<li><p><code>4</code>: Qualifier (15)</p></li>
+<li><p><code>5</code>: Approach (39) | Type Qualifier (129)</p></li>
 </ul></dd>
 
 

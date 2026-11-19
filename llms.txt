@@ -692,7 +692,7 @@ ICD-10-PCS Building Blocks.
   [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   : ICD-10-PCS Definitions
 - [`index()`](https://andrewallenbruce.github.io/procedural/reference/index-topic.md)
-  : ICD-10-PCS Index
+  : PCS Alphabetic Index
 - [`pcs_range()`](https://andrewallenbruce.github.io/procedural/reference/pcs_range.md)
   : Return a range of ICD-10-PCS codes
 

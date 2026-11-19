@@ -64,18 +64,18 @@ system()
 #> # ℹ 74 more rows
 
 table()
-#> # A tibble: 2,754 × 5
-#>    table   pos title       code  label                                    
-#>    <int> <int> <chr>       <chr> <chr>                                    
-#>  1     1     1 Section     0     Medical and Surgical                     
-#>  2     1     2 Body System 0     Central Nervous System and Cranial Nerves
-#>  3     1     3 Operation   1     Bypass                                   
-#>  4     2     1 Section     0     Medical and Surgical                     
-#>  5     2     2 Body System 0     Central Nervous System and Cranial Nerves
-#>  6     2     3 Operation   2     Change                                   
-#>  7     3     1 Section     0     Medical and Surgical                     
-#>  8     3     2 Body System 0     Central Nervous System and Cranial Nerves
-#>  9     3     3 Operation   5     Destruction                              
-#> 10     4     1 Section     0     Medical and Surgical                     
-#> # ℹ 2,744 more rows
+#> # A tibble: 3,672 × 5
+#>    table   pos title       code  label                                          
+#>    <int> <int> <chr>       <chr> <chr>                                          
+#>  1     1     0 Table       001   Central Nervous System and Cranial Nerves, Byp…
+#>  2     1     1 Section     0     Medical and Surgical                           
+#>  3     1     2 Body System 0     Central Nervous System and Cranial Nerves      
+#>  4     1     3 Operation   1     Bypass                                         
+#>  5     2     0 Table       002   Central Nervous System and Cranial Nerves, Cha…
+#>  6     2     1 Section     0     Medical and Surgical                           
+#>  7     2     2 Body System 0     Central Nervous System and Cranial Nerves      
+#>  8     2     3 Operation   2     Change                                         
+#>  9     3     0 Table       005   Central Nervous System and Cranial Nerves, Des…
+#> 10     3     1 Section     0     Medical and Surgical                           
+#> # ℹ 3,662 more rows
 ```
