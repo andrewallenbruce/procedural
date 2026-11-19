@@ -35,6 +35,6 @@ system <- function(x = NULL) {
 table <- function(x = NULL) {
   collapse::ss(
     procedural::pcs_tables,
-    procedural::pcs_tables$pos %iin% 1:3
+    procedural::pcs_tables$pos %iin% 0:3
   )
 }

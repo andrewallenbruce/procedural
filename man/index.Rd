@@ -2,7 +2,7 @@
 % Please edit documentation in R/index.R
 \name{index}
 \alias{index}
-\title{ICD-10-PCS Index}
+\title{PCS Alphabetic Index}
 \usage{
 index(term = NULL)
 }
@@ -13,7 +13,15 @@ index(term = NULL)
 a \link[tibble:tibble]{tibble::tibble} containing the results
 }
 \description{
-ICD-10-PCS Index
+The Alphabetic Index maps clinician-documented terminology to PCS tables and
+codes.
+}
+\details{
+Unlike the ICD-10-CM index, most entries do not end at a complete code.
+Rather, they point to a PCS table or row (the first three or four
+characters), and the coder completes the remaining characters inside that
+table. Look up the term, follow it to the table, then build and verify the
+full seven-character code on its code page.
 }
 \examples{
 index("Abdominohysterectomy")

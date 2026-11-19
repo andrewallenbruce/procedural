@@ -1,16 +1,15 @@
 #' ICD-10-PCS Definitions
 #'
 #' @param section `<chr>` PCS section; one of `0:9, B, C, F, G, H, X`
-#' @param axis `<int>` PCS axis; one of `3, 4, 5, 6`
-#'    * 3: Operation
-#'    * 3: Type
-#'    * 4: Body Part
-#'    * 4: Qualifier
-#'    * 5: Approach
-#'    * 5: Type Qualifier
-#'    * 6: Substance
-#'    * 6: Device
-#'    * 6: Device / Substance / Technology
+#'    * Operation: `0:9, X`
+#'    * Approach: `0:4, 7:9, X`
+#'    * Type: `B, C, F, G, H`
+#'    * Type Qualifier: `F`
+#'    * Qualifier: `G`
+#' @param axis `<int>` PCS axis; one of `3, 4, 5`
+#'    * `3`: Operation (91) | Type (46)
+#'    * `4`: Qualifier (15)
+#'    * `5`: Approach (39) | Type Qualifier (129)
 #' @param term `<chr>` term to search for
 #' @returns a [tibble::tibble] containing the results
 #' @examples

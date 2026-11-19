@@ -10,19 +10,20 @@ definition(section = NULL, axis = NULL, term = NULL)
 includes(section = NULL, axis = NULL, term = NULL)
 }
 \arguments{
-\item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}}
-
-\item{axis}{\verb{<int>} PCS axis; one of \verb{3, 4, 5, 6}
+\item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}
 \itemize{
-\item 3: Operation
-\item 3: Type
-\item 4: Body Part
-\item 4: Qualifier
-\item 5: Approach
-\item 5: Type Qualifier
-\item 6: Substance
-\item 6: Device
-\item 6: Device / Substance / Technology
+\item Operation: \verb{0:9, X}
+\item Approach: \verb{0:4, 7:9, X}
+\item Type: \verb{B, C, F, G, H}
+\item Type Qualifier: \code{F}
+\item Qualifier: \code{G}
+}}
+
+\item{axis}{\verb{<int>} PCS axis; one of \verb{3, 4, 5}
+\itemize{
+\item \code{3}: Operation (91) | Type (46)
+\item \code{4}: Qualifier (15)
+\item \code{5}: Approach (39) | Type Qualifier (129)
 }}
 
 \item{term}{\verb{<chr>} term to search for}
