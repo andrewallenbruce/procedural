@@ -1,6 +1,26 @@
 #' @noRd
-ss_ <- function(.data, row, col) {
-  collapse::ss(x = .data, i = row, j = col, check = FALSE)
+av_ <- function(.data, ..., where = "front") {
+  collapse::av(x = .data, ..., pos = where)
+}
+
+#' @noRd
+ss_ <- function(.data, row, col, safe = TRUE) {
+  collapse::ss(x = .data, i = row, j = col, check = safe)
+}
+
+#' @noRd
+csum_ <- function(x, ...) {
+  collapse::fcumsum(x = x, ...)
+}
+
+#' @noRd
+ifelse_ <- function(cond, if_true, if_false, if_na = NULL) {
+  cheapr::if_else_(
+    condition = cond,
+    true = if_true,
+    false = if_false,
+    na = if_na
+  )
 }
 
 #' @noRd

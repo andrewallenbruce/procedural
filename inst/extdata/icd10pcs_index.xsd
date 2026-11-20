@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	attributeFormDefault="unqualified"
+	elementFormDefault="unqualified"
+	id="pcs_index"
+	version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			ICD-10-PCS Index Document Definition
+			Last Updated: 6 June 2011
+		</xsd:documentation>
+		<xsd:documentation>
+			The ICD-10-PCS Index XML provides the content displayed in the PCS 
+		    index portion of the pcs_year.pdf. The XML file follows the PDF closely, so 
+			interpretation of the XML can most easily be obtained by comparing the XML
+			file with the PDF for the same version.
+		</xsd:documentation>
+		<xsd:documentation>
+			The PCS index is a tree of terms with references to other terms, to
+			PCS code tables, to codes within a PCS code table, or to individual
+			PCS codes. The tree begins with up to 26 branches, one for each letter
+			of the alphabet, identified with "letter" tags. Within each letter,
+			the the terms are identified as "mainTerm" and are generally displayed
+			bold in the PDF document. Main terms may have subterms, which in turn
+			may have further subterms. The current maximum depth is nine levels.
+			The terms are generally in alphabetical order at each level, 
+			but there are may be exceptions. Subterms under the main term or under
+			each other are identified by "term" tags, with a "level" attribute.
+		</xsd:documentation>
+		<xsd:documentation>
+			A mainTerm or a term will contain a "title" representing the term text.
+			It may then refer to other information in the document. A "tab" tag
+			contains the three-character identification of a PCS table. A "codes"
+			tag starts with the three-character identification of a PCS table and
+			may contain further restrictions on the codes related to the term.
+			Documents which do not wish to direct the user any deeper than the
+			table may display only the first three characters and thereby treat
+			the "codes" tag the same as a "tab" tag. The "code" tag refers to a
+			single, complete, valid PCS code. The "see" tag refers at least to a
+			main term, and possibly (after commas) to terms at lower levels.
+			A "use" tag refers to synonyms used in the index, but which are not
+			themselves main terms. Not all terms will have one of these references.
+			Terms with or without references may contain subterms.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element type="xsd:string" name="title"/>
+	<xsd:element type="xsd:string" name="version"/>
+	<xsd:element type="xsd:string" name="code"/>
+	<xsd:element type="xsd:string" name="codes"/>
+	<xsd:element type="xsd:string" name="tab"/>
+<!--	<xsd:element type="xsd:string" name="use"/>  -->
+
+	<xsd:element name="see">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="codes" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="tab" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="use">
+		<xsd:complexType mixed="true">
+			<xsd:sequence>
+				<xsd:element ref="tab" minOccurs="0" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:group name="termGroup">
+		<xsd:sequence>
+			<xsd:element ref="see" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="use" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="code" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="codes" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="tab" minOccurs="0" maxOccurs="1"/>
+			<xsd:element ref="term" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:group>
+
+	<xsd:element name="term">
+		<xsd:complexType>
+			<xsd:sequence>
+			<xsd:element ref="title" minOccurs="0" maxOccurs="1"/>
+				<xsd:group ref="termGroup"/>
+			</xsd:sequence>
+			<xsd:attribute name="level" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="1"/>
+						<xsd:maxInclusive value="9"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="mainTerm">
+		<xsd:complexType>
+			<xsd:sequence>
+			<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+				<xsd:group ref="termGroup"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="letter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="mainTerm" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ICD10PCS.index">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="version" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+<!--				<xsd:element ref="letter" minOccurs="1" maxOccurs="26"/>  -->
+				<xsd:element ref="letter" minOccurs="1" maxOccurs="99"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

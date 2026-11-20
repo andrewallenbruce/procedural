@@ -1,0 +1,174 @@
+Section 0               Medical and Surgical
+Axis 4                  Body Part
+Row         Add         
+Term        Add         Subarachnoid Space, Intracranial
+Includes    Add         Cisterna Magna
+ 
+Axis 6                  Device
+Row         Add         
+Term        Add         Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed for Fusion in Lower Joints
+Includes    Add         aprevo(R)
+ 
+Row         Add         
+Term        Add         Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed for Fusion in Upper Joints
+Includes    Add         aprevo(R)
+ 
+Section 3               Administration
+Axis 6                  Substance
+Row         Add         
+Term        Add         Antineoplastic
+Includes    Add         Amivantamab Monoclonal Antibody
+Includes    Add         Lurbinectedin
+Includes    Add         RYBREVANT (tm) (Amivantamab Monoclonal Antibody)
+Includes    Add         ZEPZELCA(tm) (Lurbinectedin)
+ 
+Row                     
+Term                    Globulin
+Includes    Add         GAMUNEX-C
+Includes    Add         hdIVIG (high-dose intravenous immunoglobulin)
+Includes    Add         High-dose intravenous immunoglobulin (hdIVIG)
+Includes    Add         Octagam 10%
+ 
+Row                     
+Term                    Other Therapeutic Substance
+Includes    Add         Anacaulase-bcdb
+Includes    Add         Bromelain-enriched Proteolytic Enzyme
+Includes    Add         Collagenase SANTYL Ointment
+Includes    Add         COSELA(tm) (Trilaciclib)
+Includes    Add         ENSPRYNG(tm) (Satralizumab-mwge)
+Includes    Add         Fostamatinib
+Includes    Add         NexoBrid(tm)
+Includes    Add         SANTYL Ointment
+Includes    Add         Satralizumab-mwge
+Includes    Add         TAVALISSE(R)
+Includes    Add         Trilaciclib
+ 
+Row                     
+Term                    Vasopressor
+Includes    Add         Terlipressin
+Includes    Add         TERLIVAZ(R) (Terlipressin)
+ 
+Section X               New Technology
+Axis 6                  Device / Substance / Technology
+Row         Delete      
+Term        Delete      Amivantamab Monoclonal Antibody
+Includes    Delete      RYBREVANT(tm)
+ 
+Row         Delete      
+Term        Delete      Anacaulase-bcdb
+Includes    Delete      Bromelain-enriched Proteolytic Enzyme
+Includes    Delete      NexoBrid(tm)
+ 
+Row         Delete      
+Term        Delete      Antibiotic-eluting Bone Void Filler
+Includes    Delete      CERAMENT(R) G
+ 
+Row         Delete      
+Term        Delete      High-Dose Intravenous Immune Globulin
+Includes    Delete      GAMUNEX-C, for COVID-19 treatment
+Includes    Delete      hdIVIG (high-dose intravenous immunoglobulin), for COVID-19 treatment
+Includes    Delete      High-dose intravenous immunoglobulin (hdIVIG), for COVID-19 treatment
+Includes    Delete      Octagam 10%, for COVID-19 treatment
+ 
+Row         Delete      
+Term        Delete      Interbody Fusion Device, Custom-Made Anatomically Designed in New Technology
+Includes    Delete      aprevo(tm)
+ 
+Row         Delete      
+Term        Delete      Lurbinectedin
+Includes    Delete      ZEPZELCA(tm)
+ 
+Row         Delete      
+Term        Delete      Satralizumab-mwge
+Includes    Delete      ENSPRYNG(tm)
+ 
+Row         Delete      
+Term        Delete      Terlipressin
+Includes    Delete      TERLIVAZ(R)
+ 
+Row         Delete      
+Term        Delete      Tixagevimab and Cilgavimab Monoclonal Antibody
+Includes    Delete      EVUSHELD(tm)
+ 
+Row         Delete      
+Term        Delete      Trilaciclib
+Includes    Delete      COSELA(tm)
+ 
+Row         Add         
+Term        Add         Bioprosthetic Valve, Balloon-expandable with Dock in New Technology
+Includes    Add         SAPIEN M3 TMVR system
+ 
+Row         Add         
+Term        Add         Branched Intraluminal Device, Integrated System Extension in New Technology
+Includes    Add         NEXUS(R) Aortic Arch Stent Graft System
+ 
+Row         Add         
+Term        Add         Branched Intraluminal Device, Integrated System with Innominate Branch in New Technology
+Includes    Add         NEXUS(R) Aortic Arch Stent Graft System
+ 
+Row         Add         
+Term        Add         Branched Intraluminal Device, with Conical Collar in New Technology
+Includes    Add         Arcevo(tm) LSA Hybrid Stent Graft System
+ 
+Row         Add         
+Term        Add         Carbon/PEEK Spinal Stabilization Device in New Technology
+Includes    Add         CMORE(R) Cervicothoracic (CT) System
+ 
+Row         Add         
+Term        Add         Contractility Modulation Device with Defibrillator Generator in New Technology
+Includes    Add         CCM-D (Cardiac Contractility Modulation-Defibrillator) System
+Includes    Add         Impulse Dynamics CCM-D System (CCM-D)
+ 
+Row         Add         
+Term        Add         Elamipretide
+Includes    Add         FORZINITY(tm)
+ 
+Row         Add         
+Term        Add         Etuvetidigene Autotemcel
+Includes    Add         WASKYRA(tm)
+ 
+Row         Add         
+Term        Add         Gentamicin-eluting Bone Void Filler
+Includes    Add         CERAMENT(R) G
+ 
+Row         Add         
+Term        Add         Intraluminal Device(s), Small-diameter in New Technology
+Includes    Add         MicroStent Peripheral Vascular Stent System
+ 
+Row         Add         
+Term        Add         Landiolol Antiarrhythmic
+Includes    Add         RAPIBLYK(tm)
+ 
+Row         Add         
+Term        Add         Leadless Neurostimulator Generator in New Technology
+Includes    Add         SetPoint System
+ 
+Row         Add         
+Term        Add         Lunsotogene Parvec-cwha via Intracochlear Infusion
+Includes    Add         Lunsotogene Parvec
+Includes    Add         Otarmeni(tm)
+ 
+Row         Add         
+Term        Add         Narsoplimab Monoclonal Antibody
+Includes    Add         YARTEMLEA(R)
+ 
+Row         Add         
+Term        Add         Recombinant Human Bone Morphogenetic Protein-2 with Collagen Scaffold
+Includes    Add         INFUSE(tm) Bone Graft
+ 
+Row         Add         
+Term        Add         Synthetic Substitute, Size-Adjustable in New Technology
+Includes    Add         Autus(tm) Size-adjustable Valve
+ 
+Row         Add         
+Term        Add         Temporary Intraluminal Device, Venous Angle Decompression using Impeller Pump in New Technology
+Includes    Add         eLym(tm) System
+Includes    Add         WhiteSwell eLym(tm) System
+ 
+Row         Add         
+Term        Add         Vancomycin-eluting Bone Void Filler
+Includes    Add         CERAMENT(R) V
+ 
+Row         Add         
+Term        Add         Zooplastic Tissue, with Integrated Native Leaflet Clipping Locators in New Technology
+Includes    Add         Trilogy(tm) TAVR-AR (Transcatheter Aortic Valve Replacement-Aortic Regurgitation) System

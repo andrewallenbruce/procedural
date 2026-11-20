@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema
+	attributeFormDefault="unqualified"
+	elementFormDefault="unqualified"
+	id="pcs_definitions"
+	version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			ICD-10-PCS Reference Section Definition
+			Last Updated: 6 June 2011
+		</xsd:documentation>
+		<xsd:documentation>
+			The ICD-10-PCS Definitions XML provides the content displayed in the PCS 
+		    reference portion of the pcs_year.pdf. The XML file mostly follows the PDF, so 
+			interpretation of the XML can most easily be obtained by comparing the XML
+			file with the PDF for the same version.
+		</xsd:documentation>
+		<xsd:documentation>
+			The reference section in the PDF consists of four parts: the definitions,
+			the body part key, the device key, and the device aggregation table.
+			Since the body part key and the device key are merely reverse sorts of
+			the body part and device definitions respectively, they are not 
+			explicitly represented in the XML file, as that would be repeating
+			content already provided in the definition section. The XML file
+			contains definitions in "section" tags, and the device aggregation
+			table in a "deviceAggregation" tag.
+		</xsd:documentation>
+		<xsd:documentation>
+			The meaning of different axes of classification in a PCS code depend on 
+			which section the code is found in. The section is identified by the
+			first character of the code. Definitions of terms must therefore depend on 
+			section, so the top level tag for definitions is the "section" tag, 
+			with a "code" attribute to identify what value is found in the first 
+			character of a code to denote the section, and a "title" sub-tag to 
+			provide the standard name of the section.
+		</xsd:documentation>
+		<xsd:documentation>
+			Within a section, for each axis of classification with definitions, an
+			"axis" tag introduces the axis. Its "pos" attribute defines its place
+			in the code structure (a number from 1 through 7) and its "title"
+			sub-tag gives its standard name. Each defined term then follows within
+			a "term" tag. The "title" sub-tag of the term gives its PCS label,
+			which may then be followed by "definition", "explanation" and/or
+			"includes" tags. The "definition", if present, gives the precise
+			PCS definition of the term. The "explanation", if present, provides
+			further elaboration, and "includes", if present, gives a common
+			terminology synonym that the coder may encounter in the medical record.
+			Note that a term may have more than one "includes".
+		</xsd:documentation>
+		<xsd:documentation>
+			The deviceAggregation section serves to identify the relationships
+			between a specific devices (as used by insertion and other operations)
+			and their general counterparts (as used by removal and other operations).
+			Each such relationship is specified by an "aggregate" tag. The specific
+			devices in the aggregate are identified by "device", "operation" and
+			"bodySys", which list the specific device name, the operation or operations
+			in which it may be specified, and the body systems it may be used with,
+			respectively. The associated general device is given by the "parent"
+			tag, whose "value" attribute gives the PCS sixth-character value
+			to use and whose text gives the general device name.
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element type="xsd:string" name="title"/>
+	<xsd:element type="xsd:string" name="version"/>
+	<xsd:element type="xsd:string" name="definition"/>
+	<xsd:element type="xsd:string" name="explanation"/>
+	<xsd:element type="xsd:string" name="includes"/>
+	<xsd:element type="xsd:string" name="device"/>
+	<xsd:element type="xsd:string" name="operation"/>
+	<xsd:element type="xsd:string" name="bodySys"/>
+
+	<xsd:element name="parent">
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="xsd:string">
+					<xsd:attribute name="value" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:pattern value="[0-9A-HJ-NP-Z]"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="terms">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="unbounded"/>
+				<xsd:element ref="definition" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="explanation" minOccurs="0" maxOccurs="1"/>
+				<xsd:element ref="includes" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="axis">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="terms" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="pos" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="1"/>
+						<xsd:maxInclusive value="7"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="aggregate">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="device" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="operation" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="bodySys" minOccurs="1" maxOccurs="unbounded"/>
+				<xsd:element ref="parent" minOccurs="1" maxOccurs="1"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="section">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="axis" minOccurs="1" maxOccurs="7"/>
+			</xsd:sequence>
+			<xsd:attribute name="code" use="required">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:pattern value="[0-9A-HJ-NP-Z]"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="deviceAggregation">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="aggregate" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="ICD10PCS.definitions">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="version" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="title" minOccurs="1" maxOccurs="1"/>
+				<xsd:element ref="section" minOccurs="1" maxOccurs="unbounded"/>
+				<xsd:element ref="deviceAggregation" minOccurs="1" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

@@ -1,0 +1,152 @@
+Add:         028F3Z0 Division of Aortic Valve, Percutaneous Approach, Native Leaflet
+Add:         028F3Z1 Division of Aortic Valve, Percutaneous Approach, Prosthetic Leaflet
+Add:         028G3Z0 Division of Mitral Valve, Percutaneous Approach, Native Leaflet
+Add:         028G3Z1 Division of Mitral Valve, Percutaneous Approach, Prosthetic Leaflet
+Add:         0RGA0E0 Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Open Approach
+Add:         0RGA0EJ Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Open Approach
+Add:         0RGA3E0 Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Approach
+Add:         0RGA3EJ Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Approach
+Add:         0RGA4E0 Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0RGA4EJ Fusion of Thoracolumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG00E0 Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Open Approach
+Add:         0SG00EJ Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Open Approach
+Add:         0SG03E0 Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG03EJ Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG04E0 Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG04EJ Fusion of Lumbar Vertebral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG10E0 Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Open Approach
+Add:         0SG10EJ Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Open Approach
+Add:         0SG13E0 Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG13EJ Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG14E0 Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG14EJ Fusion of 2 or more Lumbar Vertebral Joints with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG30E0 Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Open Approach
+Add:         0SG30EJ Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Open Approach
+Add:         0SG33E0 Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG33EJ Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Approach
+Add:         0SG34E0 Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Anterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0SG34EJ Fusion of Lumbosacral Joint with Interbody Fusion Device, Custom-Made Anatomically and Virtually Designed, Posterior Approach, Anterior Column, Percutaneous Endoscopic Approach
+Add:         0W99003 Drainage of Right Pleural Cavity with Drainage Device, Active Mechanical Clearance, Open Approach
+Add:         0W99303 Drainage of Right Pleural Cavity with Drainage Device, Active Mechanical Clearance, Percutaneous Approach
+Add:         0W99403 Drainage of Right Pleural Cavity with Drainage Device, Active Mechanical Clearance, Percutaneous Endoscopic Approach
+Add:         0W9B003 Drainage of Left Pleural Cavity with Drainage Device, Active Mechanical Clearance, Open Approach
+Add:         0W9B303 Drainage of Left Pleural Cavity with Drainage Device, Active Mechanical Clearance, Percutaneous Approach
+Add:         0W9B403 Drainage of Left Pleural Cavity with Drainage Device, Active Mechanical Clearance, Percutaneous Endoscopic Approach
+Add:         0W9C003 Drainage of Mediastinum with Drainage Device, Active Mechanical Clearance, Open Approach
+Add:         0W9C303 Drainage of Mediastinum with Drainage Device, Active Mechanical Clearance, Percutaneous Approach
+Add:         0W9C403 Drainage of Mediastinum with Drainage Device, Active Mechanical Clearance, Percutaneous Endoscopic Approach
+Add:         30233S5 Transfusion of High-Dose Immune Globulin into Peripheral Vein, Percutaneous Approach
+Add:         30243S5 Transfusion of High-Dose Immune Globulin into Central Vein, Percutaneous Approach
+Add:         3E00XGF Introduction of Other Enzymatic/Chemical Agent into Skin and Mucous Membranes, External Approach
+Add:         3E01XGF Introduction of Other Enzymatic/Chemical Agent into Subcutaneous Tissue, External Approach
+Add:         5A0527D Assistance with Circulatory Decompression using Impeller Pump, Continuous
+Add:         5A1D701 Performance of Urinary Filtration, Intermittent, Less than 6 Hours Per Day, Selective Cytopheresis
+Add:         5A1D801 Performance of Urinary Filtration, Prolonged Intermittent, 6-18 hours Per Day, Selective Cytopheresis
+Add:         5A1D901 Performance of Urinary Filtration, Continuous, Greater than 18 hours Per Day, Selective Cytopheresis
+Add:         B85A2ZZ Other Imaging of Right Choroid using Fluorescing Agent
+Add:         B85B2ZZ Other Imaging of Left Choroid using Fluorescing Agent
+Add:         B85G2ZZ Other Imaging of Right Retinal Vessel using Fluorescing Agent
+Add:         B85H2ZZ Other Imaging of Left Retinal Vessel using Fluorescing Agent
+Add:         X0HQ05C Insertion of Leadless Neurostimulator Generator into Vagus Nerve, Open Approach, New Technology Group 12
+Add:         X27P3NC Dilation of Right Anterior Tibial Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X27Q3NC Dilation of Left Anterior Tibial Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X27R3NC Dilation of Right Posterior Tibial Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X27S3NC Dilation of Left Posterior Tibial Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X27T3NC Dilation of Right Peroneal Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X27U3NC Dilation of Left Peroneal Artery with Intraluminal Device(s), Small-diameter, Percutaneous Approach, New Technology Group 12
+Add:         X28M3DC Division of Ventricular Septum using Transcatheter Septal Scoring Technique, Percutaneous Approach, New Technology Group 12
+Add:         X2H43MC Insertion of Temporary Intraluminal Device, Venous Angle Decompression using Impeller Pump into Left Innominate Vein, Percutaneous Approach, New Technology Group 12
+Delete:      X2KB317 Bypass Right Radial Artery using Thermal Resistance Energy, Percutaneous Approach, New Technology Group 7
+Delete:      X2KC317 Bypass Left Radial Artery using Thermal Resistance Energy, Percutaneous Approach, New Technology Group 7
+Add:         X2RF3LC Replacement of Aortic Valve using Zooplastic Tissue, with Integrated Native Leaflet Clipping Locators, Percutaneous Approach, New Technology Group 12
+Add:         X2RG3FC Replacement of Mitral Valve with Balloon-expandable Bioprosthetic Valve with Dock, Percutaneous Approach, New Technology Group 12
+Add:         X2RH0GC Replacement of Pulmonary Valve using Size-Adjustable Synthetic Substitute, Open Approach, New Technology Group 12
+Add:         X2VJ3HC Restriction of Thoracic Aorta, Ascending and Arch using Branched Intraluminal Device, Integrated System with Innominate Branch, Percutaneous Approach, New Technology Group 12
+Add:         X2VW3JC Restriction of Thoracic Aorta, Descending using Branched Intraluminal Device, Integrated System Extension, Percutaneous Approach, New Technology Group 12
+Add:         X2VX0KC Restriction of Thoracic Aorta, Arch using Branched Intraluminal Device, with Conical Collar, Open Approach, New Technology Group 12
+Delete:      XD2G4V7 Monitoring of Upper GI Oxygen Saturation, Percutaneous Endoscopic Approach, New Technology Group 7
+Delete:      XD2G8V7 Monitoring of Upper GI Oxygen Saturation, Via Natural or Artificial Opening Endoscopic, New Technology Group 7
+Delete:      XD2H4V7 Monitoring of Lower GI Oxygen Saturation, Percutaneous Endoscopic Approach, New Technology Group 7
+Delete:      XD2H8V7 Monitoring of Lower GI Oxygen Saturation, Via Natural or Artificial Opening Endoscopic, New Technology Group 7
+Add:         XEZ5XKC Computer-Aided Triage and Notification for Imaging Abnormalities in Computed Tomography of Chest, Abdomen and Pelvis, New Technology Group 12
+Add:         XEZD3QC Pericardial Cavity Access using Blunt-tip Concealed Needle with Mechanical Gripping Mechanism, Percutaneous Approach, New Technology Group 12
+Add:         XEZJ3NC Coronary Artery Access using Image-Guided Crossing and Re-entry System, Percutaneous Approach, New Technology Group 12
+Add:         XEZU3HC Computer-Aided Guidance for Intraprocedural Navigation using Ultrasound Imaging with Continuous Needle Tracking in Spinal Canal, Percutaneous Approach, New Technology Group 12
+Add:         XEZZXJC High Dimensional Mixture-of-Experts Computer-aided Assessment of Inflammatory Response and Organ Function, for Notification and Triage, New Technology Group 12
+Add:         XEZZXLC Computer-Aided Detection and Notification for Imaging Abnormalities in Echocardiography, New Technology Group 12
+Add:         XEZZXMC Computer-Aided Detection and Notification for Abnormalities in Electrocardiogram, New Technology Group 12
+Add:         XEZZXPC Cardiac Conduction Mechanism, Computer-aided Guidance for Three Dimensional Intraprocedural Navigation using Fluoroscopic Imaging, New Technology Group 12
+Add:         XEZZXRC Computer-Aided Detection and Notification of Cardiac Abnormalities using Vital Signs, New Technology Group 12
+Add:         XEZZXSC Cardiac Conduction Mechanism, Computer-aided Intraprocedural Visualization for Guidance, New Technology Group 12
+Add:         XFJB3CC Inspection of Hepatobiliary Duct using Single-use Choledochoscope, Percutaneous Approach, New Technology Group 12
+Add:         XFJB4CC Inspection of Hepatobiliary Duct using Single-use Choledochoscope, Percutaneous Endoscopic Approach, New Technology Group 12
+Add:         XFJB8BC Inspection of Hepatobiliary Duct using Single-use Cholangioscope, Via Natural or Artificial Opening Endoscopic Approach, New Technology Group 12
+Add:         XFJD3CC Inspection of Pancreatic Duct using Single-use Choledochoscope, Percutaneous Approach, New Technology Group 12
+Add:         XFJD4CC Inspection of Pancreatic Duct using Single-use Choledochoscope, Percutaneous Endoscopic Approach, New Technology Group 12
+Add:         XFJD8BC Inspection of Pancreatic Duct using Single-use Cholangioscope, Via Natural or Artificial Opening Endoscopic Approach, New Technology Group 12
+Add:         XHH80JC Insertion of Contractility Modulation Device with Defibrillator Generator into Chest Subcutaneous Tissue and Fascia, Open Approach, New Technology Group 12
+Delete:      XRGA0R7 Fusion of Thoracolumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Open Approach, New Technology Group 7
+Delete:      XRGA3R7 Fusion of Thoracolumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Approach, New Technology Group 7
+Delete:      XRGA4R7 Fusion of Thoracolumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Endoscopic Approach, New Technology Group 7
+Delete:      XRGB0R7 Fusion of Lumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Open Approach, New Technology Group 7
+Delete:      XRGB3R7 Fusion of Lumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Approach, New Technology Group 7
+Delete:      XRGB4R7 Fusion of Lumbar Vertebral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Endoscopic Approach, New Technology Group 7
+Delete:      XRGC0R7 Fusion of 2 or more Lumbar Vertebral Joints using Custom-Made Anatomically Designed Interbody Fusion Device, Open Approach, New Technology Group 7
+Delete:      XRGC3R7 Fusion of 2 or more Lumbar Vertebral Joints using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Approach, New Technology Group 7
+Delete:      XRGC4R7 Fusion of 2 or more Lumbar Vertebral Joints using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Endoscopic Approach, New Technology Group 7
+Delete:      XRGD0R7 Fusion of Lumbosacral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Open Approach, New Technology Group 7
+Delete:      XRGD3R7 Fusion of Lumbosacral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Approach, New Technology Group 7
+Delete:      XRGD4R7 Fusion of Lumbosacral Joint using Custom-Made Anatomically Designed Interbody Fusion Device, Percutaneous Endoscopic Approach, New Technology Group 7
+Add:         XRH10NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervical Vertebral Joint, Open Approach, New Technology Group 12
+Add:         XRH13NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervical Vertebral Joint, Percutaneous Approach, New Technology Group 12
+Add:         XRH14NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervical Vertebral Joint, Percutaneous Endoscopic Approach, New Technology Group 12
+Add:         XRH20NC Insertion of Carbon/PEEK Spinal Stabilization Device into 2 or more Cervical Vertebral Joints, Open Approach, New Technology Group 12
+Add:         XRH23NC Insertion of Carbon/PEEK Spinal Stabilization Device into 2 or more Cervical Vertebral Joints, Percutaneous Approach, New Technology Group 12
+Add:         XRH24NC Insertion of Carbon/PEEK Spinal Stabilization Device into 2 or more Cervical Vertebral Joints, Percutaneous Endoscopic Approach, New Technology Group 12
+Add:         XRH40NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervicothoracic Vertebral Joint, Open Approach, New Technology Group 12
+Add:         XRH43NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervicothoracic Vertebral Joint, Percutaneous Approach, New Technology Group 12
+Add:         XRH44NC Insertion of Carbon/PEEK Spinal Stabilization Device into Cervicothoracic Vertebral Joint, Percutaneous Endoscopic Approach, New Technology Group 12
+Add:         XRH60NC Insertion of Carbon/PEEK Spinal Stabilization Device into Thoracic Vertebral Joint, Open Approach, New Technology Group 12
+Add:         XRH63NC Insertion of Carbon/PEEK Spinal Stabilization Device into Thoracic Vertebral Joint, Percutaneous Approach, New Technology Group 12
+Add:         XRH64NC Insertion of Carbon/PEEK Spinal Stabilization Device into Thoracic Vertebral Joint, Percutaneous Endoscopic Approach, New Technology Group 12
+Delete:      XW00X27 Introduction of Anacaulase-bcdb into Skin, External Approach, New Technology Group 7
+Add:         XW0134C Introduction of Elamipretide into Subcutaneous Tissue, Percutaneous Approach, New Technology Group 12
+Delete:      XW01397 Introduction of Satralizumab-mwge into Subcutaneous Tissue, Percutaneous Approach, New Technology Group 7
+Delete:      XW01X27 Introduction of Anacaulase-bcdb into Subcutaneous Tissue, External Approach, New Technology Group 7
+Delete:      XW023X7 Introduction of Tixagevimab and Cilgavimab Monoclonal Antibody into Muscle, Percutaneous Approach, New Technology Group 7
+Delete:      XW03367 Introduction of Terlipressin into Peripheral Vein, Percutaneous Approach, New Technology Group 7
+Add:         XW0336C Introduction of Landiolol Antiarrhythmic into Peripheral Vein, Percutaneous Approach, New Technology Group 12
+Delete:      XW03377 Introduction of Trilaciclib into Peripheral Vein, Percutaneous Approach, New Technology Group 7
+Add:         XW0337C Introduction of Zimislecel Allogeneic Stem Cell-Derived Islet Cell Therapy into Peripheral Vein, Percutaneous Approach, New Technology Group 12
+Delete:      XW03387 Introduction of Lurbinectedin into Peripheral Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW033B7 Introduction of Amivantamab Monoclonal Antibody into Peripheral Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW04367 Introduction of Terlipressin into Central Vein, Percutaneous Approach, New Technology Group 7
+Add:         XW0436C Introduction of Landiolol Antiarrhythmic into Central Vein, Percutaneous Approach, New Technology Group 12
+Delete:      XW04377 Introduction of Trilaciclib into Central Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW04387 Introduction of Lurbinectedin into Central Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW043B7 Introduction of Amivantamab Monoclonal Antibody into Central Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW0DXR7 Introduction of Fostamatinib into Mouth and Pharynx, External Approach, New Technology Group 7
+Revise from: XW0E33B Introduction of DB-OTO via Intracochlear Infusion into Ear(s), Percutaneous Approach, New Technology Group 11
+Revise to:   XW0E33B Introduction of Lunsotogene Parvec-cwha via Intracochlear Infusion into Ear(s), Percutaneous Approach, New Technology Group 11
+Delete:      XW0G7R7 Introduction of Fostamatinib into Upper GI, Via Natural or Artificial Opening, New Technology Group 7
+Delete:      XW0H7R7 Introduction of Fostamatinib into Lower GI, Via Natural or Artificial Opening, New Technology Group 7
+Add:         XW0Q35C Introduction of Ifezuntirgene Inilparvovec into Cranial Cavity and Brain, Percutaneous Approach, New Technology Group 12
+Add:         XW0U0CC Introduction of Recombinant Human Bone Morphogenetic Protein-2 with Collagen Scaffold into Joints, Open Approach, New Technology Group 12
+Add:         XW0V0BC Introduction of Vancomycin-eluting Bone Void Filler into Bones, Open Approach, New Technology Group 12
+Revise from: XW0V0P7 Introduction of Antibiotic-eluting Bone Void Filler into Bones, Open Approach, New Technology Group 7
+Revise to:   XW0V0P7 Introduction of Gentamicin-eluting Bone Void Filler into Bones, Open Approach, New Technology Group 7
+Delete:      XW133D7 Transfusion of High-Dose Intravenous Immune Globulin into Peripheral Vein, Percutaneous Approach, New Technology Group 7
+Delete:      XW133F8 Transfusion of OTL-103 into Peripheral Vein, Percutaneous Approach, New Technology Group 8
+Delete:      XW143D7 Transfusion of High-Dose Intravenous Immune Globulin into Central Vein, Percutaneous Approach, New Technology Group 7
+Revise from: XW143F8 Transfusion of OTL-103 into Central Vein, Percutaneous Approach, New Technology Group 8
+Revise to:   XW143F8 Transfusion of Etuvetidigene Autotemcel into Central Vein, Percutaneous Approach, New Technology Group 8
+Add:         XXE2XHC Measurement of Cardiac Conduction Mechanism, Computer-aided Mapping for Planning, New Technology Group 12
+Delete:      XXE5XR7 Measurement of Infection, Mechanical Initial Specimen Diversion Technique Using Active Negative Pressure, New Technology Group 7
+Delete:      XXE5XT7 Measurement of Intracranial Arterial Flow, Whole Blood mRNA, New Technology Group 7
+
+Codes
+  79193 codes in icd10pcs_codes_2026.txt
+  79256 codes in icd10pcs_codes_2027.txt
+    101 additions
+     38 deletions
+      3 revisions
