@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9014
+
+* document the processing pipeline
+* updated S7 version
+
+
 # procedural 0.0.1.9013
 
 * added source archive to extdata/
