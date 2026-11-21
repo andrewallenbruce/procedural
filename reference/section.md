@@ -16,7 +16,7 @@ table(x = NULL)
 
 - x:
 
-  alphanumeric code; default is`NULL`
+  alphanumeric code; default is `NULL`
 
 ## Value
 
