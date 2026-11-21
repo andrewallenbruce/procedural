@@ -1,28 +1,14 @@
 #' @noRd
 pkg_files <- function(ext = NULL) {
-  x <- system.file(
-    "extdata",
-    package = "procedural"
-  )
+  x <- system.file("extdata", package = "procedural")
   if (x == "") {
     return(NULL)
   }
-  x <- list.files(
-    x,
-    full.names = TRUE,
-    ignore.case = TRUE
-  )
+  x <- list.files(x, full.names = TRUE, ignore.case = TRUE)
   if (length(x) == 0L) {
     return(NULL)
   }
-  x <- split(
-    x,
-    sub(
-      ".*[.]([[:alnum:]]+)$",
-      "\\1",
-      x
-    )
-  )
+  x <- split(x, sub(".*[.]([[:alnum:]]+)$", "\\1", x))
   if (!is.null(ext)) {
     i <- match_(ext, names(x))
     if (cheapr::all_na(i, recursive = FALSE)) {
@@ -90,14 +76,14 @@ process_order <- function() {
     col_types = "icicc"
   )
 
-  class(x) <- cheapr::setdiff_(
-    class(x),
-    "spec_tbl_df"
-  )
+  class(x) <- cheapr::setdiff_(class(x), "spec_tbl_df")
 
-  collapse::gv(
-    collapse::num_vars(x),
-    collapse::cat_vars(x)
+  collapse::ss(
+    x,
+    j = cheapr::c_(
+      collapse::num_vars(x, 3L),
+      collapse::cat_vars(x, 3L)
+    )
   )
 }
 
@@ -132,7 +118,8 @@ process_index <- function(xml = FALSE) {
       x$value,
       NA_character_
     ) |>
-      vctrs::vec_fill_missing())
+      vctrs::vec_fill_missing()
+  )
 
   ss_(x, x$source %!=% "mainTerm/title", c(1L, 3L, 2L, 5:7))
 }

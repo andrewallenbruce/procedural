@@ -1,6 +1,6 @@
 #' ICD-10-PCS Axes
 #'
-#' @param x alphanumeric code; default is`NULL`
+#' @param x alphanumeric code; default is `NULL`
 #' @returns tibble
 #' @examples
 #' section()

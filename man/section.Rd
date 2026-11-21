@@ -13,7 +13,7 @@ system(x = NULL)
 table(x = NULL)
 }
 \arguments{
-\item{x}{alphanumeric code; default is\code{NULL}}
+\item{x}{alphanumeric code; default is \code{NULL}}
 }
 \value{
 tibble
