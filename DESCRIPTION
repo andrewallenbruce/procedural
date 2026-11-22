@@ -25,12 +25,12 @@ Suggests:
     gt (>= 1.4.0),
     htmltools (>= 0.5.9),
     knitr (>= 1.5.2),
+    nanoparquet (>= 0.5.2),
     purrr (>= 1.2.2),
     readr (>= 2.2.0),
     testthat (>= 3.3.2),
     tibble (>= 3.3.1),
-    xmlrectr (>= 0.1.0),
-    stringr
+    xmlrectr (>= 0.1.0)
 VignetteBuilder: 
     knitr
 Config/roxygen2/markdown: TRUE

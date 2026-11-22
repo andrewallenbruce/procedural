@@ -1,34 +1,13 @@
-# load libraries ----------------------------------------------------------
+library(procedural)
 
-library(collapse)
-library(cheapr)
-library(vctrs)
-library(purrr)
+# definitions -------------------------------------------------------------
 
-# data rectangling --------------------------------------------------------
+x <- process_definitions()
+y <- collapse::ss(x, x$field %==% "Explanation", colnames(x) %!=% "field")
+# y <- collapse::rnm(y, value = "explanation")
 
-definition_file <- fs::path(
-  "C:/Users/Andrew/Downloads",
-  "zip-file-2-2027-code-tables-and-index",
-  "icd10pcs_definitions_2027",
-  ext = "xml"
-)
-
-x <- procedural:::process_definitions(definition_file)
-
-x <- collapse::ss(
-  procedural::pcs_definitions,
-  procedural::pcs_definitions$field %==% "Definition",
-  colnames(procedural::pcs_definitions) %!=% "field"
-)
-
+x <- collapse::ss(x, x$field %==% "Definition", colnames(x) %!=% "field")
 x <- collapse::rnm(x, value = "definition")
-
-y <- collapse::ss(
-  procedural::pcs_definitions,
-  procedural::pcs_definitions$field %==% "Explanation",
-  colnames(procedural::pcs_definitions) %!=% "field"
-)
 
 x <- collapse::join(x, y, on = c("entry", "section", "axis", "name", "term"))
 x$definition <- cheapr::paste_(x$definition, ".")
@@ -38,47 +17,19 @@ x$definition <- cheapr::if_else_(
   x$definition
 )
 pcs_definitions <- collapse::ss(x, j = -7L)
-## use_data ---------------------------------------------------------------
 
 usethis::use_data(pcs_definitions, overwrite = TRUE)
 
 # includes ----------------------------------------------------------------
 
-x <- collapse::ss(
-  procedural::pcs_definitions,
-  procedural::pcs_definitions$field %==% "Includes",
-  colnames(procedural::pcs_definitions) %!=% "field"
-)
-
-x <- collapse::rnm(x, value = "includes")
-i <- cheapr::counts(x$entry)
-i <- collapse::ss(i, i$count > 1L) |> _$key
-x <- collapse::rowbind(
-  collapse::ss(x, x$entry %!iin% i),
-  collapse::ss(x, x$entry %iin% i) |>
-    collapse::gby(entry, term) |>
-    collapse::mtt(includes = cheapr::paste_(includes, collapse = " | ")) |>
-    collapse::fungroup() |>
-    collapse::funique()
-) |>
-  collapse::roworderv(c("entry"))
-
+x <- process_includes()
 pcs_includes <- x
-## use_data ---------------------------------------------------------------
-
 usethis::use_data(pcs_includes, overwrite = TRUE)
 
 # table_definition --------------------------------------------------------
 
 # start with the parsed 2027 tables XML file
-tables_file <- fs::path(
-  "C:/Users/Andrew/Downloads",
-  "zip-file-2-2027-code-tables-and-index",
-  "icd10pcs_tables_2027",
-  ext = "xml"
-)
-
-x <- procedural:::process_xml(tables_file, profile = "tables")
+x <- process_tables(xml = TRUE)
 d <- collapse::ss(x, x$field %==% "definition")
 i <- whichv_(
   x$record_index %in_%

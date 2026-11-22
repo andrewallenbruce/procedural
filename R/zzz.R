@@ -1,4 +1,4 @@
-utils::globalVariables(c("N", "run", "value"))
+utils::globalVariables(c("N", "run", "value", "entry", "term"))
 
 .onLoad <- function(...) {
   cheapr::set_threads(4L)

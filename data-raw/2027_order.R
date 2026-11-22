@@ -1,20 +1,5 @@
-# load libraries ----------------------------------------------------------
-
-library(collapse)
-library(cheapr)
-library(vctrs)
-library(purrr)
-
-# data rectangling --------------------------------------------------------
-order_file <- fs::path(
-  "C:/Users/Andrew/Downloads",
-  "zip-file-4-2027-icd-10-pcs-order-file-long-and-abbreviated-titles",
-  "icd10pcs_order_2027",
-  ext = "txt"
-)
-x <- procedural:::process_order(order_file)
-# use_data ----------------------------------------------------------------
-
+library(procedural)
+x <- process_order()
 usethis::use_data(pcs_order, overwrite = TRUE)
 
 # data transformation -----------------------------------------------------
