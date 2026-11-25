@@ -1,5 +1,9 @@
 # Changelog
 
+## procedural 0.0.1.9018
+
+- added `load_parquet()` helper
+
 ## procedural 0.0.1.9017
 
 - removed processed xml/txt files in `extdata`
