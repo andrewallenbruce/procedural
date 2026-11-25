@@ -3,23 +3,18 @@ library(procedural)
 # definitions -------------------------------------------------------------
 
 x <- process_definitions()
-y <- collapse::ss(x, x$field %==% "Explanation", colnames(x) %!=% "field")
-y <- collapse::rnm(y, value = "explanation")
-pcs_explanations <- y
+usethis::use_data(pcs_definitions, overwrite = TRUE)
+
+
+# explanations ------------------------------------------------------------
+
+x <- process_explanation()
 usethis::use_data(pcs_explanations, overwrite = TRUE)
 
-
-x <- process_definitions()
-x <- collapse::ss(x, x$field %==% "Definition", colnames(x) %!=% "field")
-x <- collapse::rnm(x, value = "definition")
-pcs_definitions <- x
-
-usethis::use_data(pcs_definitions, overwrite = TRUE)
 
 # includes ----------------------------------------------------------------
 
 x <- process_includes()
-pcs_includes <- x
 usethis::use_data(pcs_includes, overwrite = TRUE)
 
 # table_definition --------------------------------------------------------

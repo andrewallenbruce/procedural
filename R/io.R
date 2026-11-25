@@ -322,7 +322,7 @@ process_definitions_file <- function(xml = FALSE) {
       )
   )
   x <- collapse::rsplit(x, ~record_index)
-  x <- purrr::map(x, map_definitions)
+  x <- purrr::map(x, map_definitions_file)
   x <- collapse::rowbind(x)
 
   x <- av_(x, entry = csum_(x$field == "value"))
@@ -346,7 +346,7 @@ process_definitions_file <- function(xml = FALSE) {
 }
 
 #' @noRd
-map_definitions <- function(x) {
+map_definitions_file <- function(x) {
   x$axis <- fill_(x$axis)
   x$name <- fill_(x$name)
   x$field <- ifelse_(
@@ -380,10 +380,7 @@ map_definitions <- function(x) {
 }
 
 #' @noRd
-process_includes <- function(xml = FALSE) {
-  if (xml) {
-    return(parse_xml(profile = "definitions"))
-  }
+process_includes <- function() {
   x <- process_definitions_file()
   x <- ss_(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
@@ -403,12 +400,17 @@ process_includes <- function(xml = FALSE) {
 }
 
 #' @noRd
-process_explanation <- function(xml = FALSE) {
-  if (xml) {
-    return(parse_xml(profile = "definitions"))
-  }
+process_explanation <- function() {
   x <- process_definitions_file()
   x <- ss_(x, x$field %==% "Explanation", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
+  return(x)
+}
+
+#' @noRd
+process_definitions <- function() {
+  x <- process_definitions_file()
+  x <- ss_(x, x$field %==% "Definition", colnames(x) %!=% "field")
+  collapse::setrename(x, value = "definition")
   return(x)
 }
