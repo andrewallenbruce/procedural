@@ -13,7 +13,7 @@ pkg_files <- function(ext = NULL) {
   if (!is.null(ext)) {
     i <- match_(ext, names(x))
     if (cheapr::all_na(i, recursive = FALSE)) {
-      stop(paste0("No files with file extension", ext, " found"))
+      stop(paste0("No files with extension `.", ext, "` found"))
     }
     x <- x[[i]]
   }
@@ -89,14 +89,14 @@ parse_txt <- function(profile = c("order", "conversion")) {
           file = path_,
           col_types = "c",
           col_names = c(
-            "current",
-            "curr_title",
-            "year",
-            "prior",
+            "current_code",
+            "current_title",
+            "year_effective",
+            "prior_code",
             "prior_title",
             "change",
             "comment",
-            "mday"
+            "mday_effective"
           ),
           show_col_types = FALSE,
           num_threads = 4L
@@ -112,7 +112,13 @@ parse_txt <- function(profile = c("order", "conversion")) {
 
 #' @noRd
 load_parquet <- function(
-  profile = c("index", "tables", "definitions", "order", "conversion")
+  profile = c(
+    "index",
+    "tables",
+    "definitions",
+    "order",
+    "conversion"
+  )
 ) {
   parq_ <- pkg_files(ext = "parquet")
   prof_ <- rlang::arg_match(profile)
@@ -149,18 +155,33 @@ process_conversion <- function(txt = FALSE) {
   x <- load_parquet(profile = "conversion")
   x <- av_(
     x,
-    date = readr::parse_date(cheapr::paste_(
-      x$year,
-      "-",
-      gsub(
-        ".",
+    date_effective = as.Date(
+      cheapr::paste_(
+        x$year_effective,
         "-",
-        ifelse_(cheapr::is_na(x$mday), x$comment, x$mday),
-        fixed = TRUE
-      )
-    ))
+        gsub(
+          ".",
+          "-",
+          ifelse_(
+            cheapr::is_na(x$mday_effective),
+            x$comment,
+            x$mday_effective
+          ),
+          fixed = TRUE
+        )
+      ),
+      format = "%Y-%m-%d"
+    )
   )
-  collapse::gv(x, c("date", "change", "current", "prior"))
+  collapse::setrename(
+    x,
+    current_code = "current",
+    prior_code = "prior",
+    date_effective = "date",
+    year_effective = "year"
+  )
+  collapse::settfmv(x, "year", as.integer)
+  collapse::gv(x, c("year", "date", "change", "current", "prior"))
 }
 
 #' @noRd

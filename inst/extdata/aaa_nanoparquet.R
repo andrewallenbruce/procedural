@@ -20,6 +20,16 @@ nanoparquet::write_parquet(
   # schema = nanoparquet::infer_parquet_schema(x)
 )
 
+nanoparquet::write_parquet(
+  x,
+  file = fs::path_abs(fs::path(
+    "inst/extdata",
+    "icd10pcs_conversion_2027",
+    ext = "parquet"
+  )),
+  schema = nanoparquet::infer_parquet_schema(x)
+)
+
 nanoparquet::read_parquet(pkg_files(ext = "parquet"))
 
 purrr::map(
