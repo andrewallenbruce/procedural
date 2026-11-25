@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9019
+
+* refactored `definitions()`, `explanations()`, `includes()`
+* refactoring `io` functions
+* added `explanation()`
+
+
 # procedural 0.0.1.9018
 
 * added `load_parquet()` helper
