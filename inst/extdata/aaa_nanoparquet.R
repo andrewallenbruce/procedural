@@ -3,14 +3,21 @@
 # x <- process_definitions(xml = TRUE) #   4.28 sec
 # x <- process_tables(xml = TRUE)      # 366.71 sec / ~6.11 min
 
+nanoparquet::infer_parquet_schema(x) |> str()
 nanoparquet::write_parquet(
   x,
   file = fs::path_abs(fs::path(
     "inst/extdata",
-    "icd10pcs_tables_2027",
+    "icd10pcs_conversion_2027",
     ext = "parquet"
   )),
-  schema = nanoparquet::infer_parquet_schema(x)
+  schema = nanoparquet::parquet_schema(
+    date = "DATE",
+    change = "STRING",
+    current = "STRING",
+    prior = "STRING"
+  )
+  # schema = nanoparquet::infer_parquet_schema(x)
 )
 
 nanoparquet::read_parquet(pkg_files(ext = "parquet"))

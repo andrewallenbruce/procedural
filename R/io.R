@@ -174,7 +174,6 @@ process_index <- function(xml = FALSE) {
   x <- av_(
     x,
     entry = csum_(x$source == "mainTerm/title"),
-    # term = cheapr::val_replace(x$source, "mainTerm/title", x$value),
     term = ifelse_(
       x$source == "mainTerm/title",
       x$value,
@@ -201,9 +200,6 @@ process_tables <- function(xml = FALSE) {
   )
   x <- ss_(x, x$field %!iin% c("definition", "values"), c(1:2, 4:5))
   collapse::setrename(x, table = "record_index")
-
-  # collapse::recode_char(x$field, `label/code` = "code", set = TRUE)
-  # x$field <- ifelse_(x$field == "label/code", "code", x$field)
   x$field <- cheapr::val_replace(x$field, "label/code", "code")
 
   x <- ss_(x, col = 3:4)
@@ -231,8 +227,6 @@ map_tables <- function(x) {
   row <- ss_(x, x$entity %!iin% c("axis", "pcsRow"))
   row <- av_(row, row = csum_(row$field == "pos"))
   row$field <- cheapr::val_replace(row$field, "value", "label")
-  # collapse::recode_char(row$field, value = "label", set = TRUE)
-  # row$field <- ifelse_(row$field == "value", "label", row$field)
 
   row <- collapse::rsplit(row, ~row) |>
     purrr::map(function(x) {
