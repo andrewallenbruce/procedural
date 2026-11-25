@@ -1,122 +1,117 @@
-#' ICD-10-PCS Definitions
+#' ICD-10-PCS Code Addenda
 #'
-#' @param section `<chr>` PCS section; one of `0:9, B, C, F, G, H, X`
-#'    * Operation: `0:9, X`
-#'    * Approach: `0:4, 7:9, X`
-#'    * Type: `B, C, F, G, H`
-#'    * Type Qualifier: `F`
-#'    * Qualifier: `G`
-#' @param axis `<int>` PCS axis; one of `3, 4, 5`
-#'    * `3`: Operation (91) | Type (46)
-#'    * `4`: Qualifier (15)
-#'    * `5`: Approach (39) | Type Qualifier (129)
-#' @param term `<chr>` term to search for
+#' @param section `<chr>` PCS section
+#' @param axis `<int>` PCS axis
+#' @param term `<chr>` PCS term
 #' @returns a [tibble::tibble] containing the results
 #' @examples
-#' try(definition(term = "drinnn"))
-#' definition(term = "drain")
-#' definition(section = "0", axis = 5)
-#' definition(section = "B", term = "fluoro")
-#' definition()
+#' try(definitions(term = "drinnn"))
+#' definitions(term = "drain")
+#' definitions(section = "0", axis = 5)
+#' definitions(section = "B", term = "fluoro")
+#' definitions()
+#'
 #'
 #' @export
-definition <- function(section = NULL, axis = NULL, term = NULL) {
+definitions <- function(section = NULL, axis = NULL, term = NULL) {
   check_string(section, allow_empty = FALSE, allow_null = TRUE)
   check_number_whole(axis, allow_null = TRUE)
   check_string(term, allow_empty = FALSE, allow_null = TRUE)
+
+  x <- procedural::pcs_definitions
+
   if (!is.null(section)) {
-    x <- ss_(
-      procedural::pcs_definitions,
-      procedural::pcs_definitions[["section"]] %iin% section
-    )
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg section = "{section}"} returned 0 rows')
-    }
-  } else {
-    x <- procedural::pcs_definitions
+    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    x <- ss_(x, x[["section"]] %iin% section)
   }
 
   if (!is.null(axis)) {
+    axis <- as.character(axis)
+    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
     x <- ss_(x, x[["axis"]] %iin% axis)
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg axis = "{axis}"} returned 0 rows')
-    }
   }
 
   if (!is.null(term)) {
-    x <- ss_(
-      x,
-      grep(
-        term,
-        x[["term"]],
-        ignore.case = TRUE,
-        perl = TRUE
-      )
-    )
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg term = "{term}"} returned 0 rows')
+    i <- grep(term, x[["term"]], ignore.case = TRUE, perl = TRUE)
+    if (!length(i)) {
+      cli::cli_abort("{.pkg term} {.val {term}} returned 0 results")
     }
+    x <- ss_(x, i)
   }
   return(x)
 }
 
 #' @examples
-#' try(includes(section = "B"))
+#' try(includes(section = "3", axis = 5))
 #' includes(term = "drain")
-#' includes(section = "0", axis = 6)
+#' includes(section = "0", axis = 6, term = "^art")
 #' includes(section = "3", term = "pro")
 #' includes()
 #'
+#'
 #' @export
-#' @rdname definition
+#' @rdname definitions
 includes <- function(section = NULL, axis = NULL, term = NULL) {
   check_string(section, allow_empty = FALSE, allow_null = TRUE)
   check_number_whole(axis, allow_null = TRUE)
   check_string(term, allow_empty = FALSE, allow_null = TRUE)
+
+  x <- procedural::pcs_includes
+
   if (!is.null(section)) {
-    x <- ss_(
-      procedural::pcs_includes,
-      procedural::pcs_includes[["section"]] %iin% section
-    )
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg section = "{section}"} returned 0 rows')
-    }
-  } else {
-    x <- procedural::pcs_includes
+    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    x <- ss_(x, x[["section"]] %iin% section)
   }
 
   if (!is.null(axis)) {
+    axis <- as.character(axis)
+    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
     x <- ss_(x, x[["axis"]] %iin% axis)
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg axis = "{axis}"} returned 0 rows')
-    }
   }
 
   if (!is.null(term)) {
-    x <- ss_(
-      x,
-      grep(
-        term,
-        x[["term"]],
-        ignore.case = TRUE,
-        perl = TRUE
-      )
-    )
-    if (!nrow_(x)) {
-      cli::cli_abort('{.pkg term = "{term}"} returned 0 rows')
+    i <- grep(term, x[["term"]], ignore.case = TRUE, perl = TRUE)
+    if (!length(i)) {
+      cli::cli_abort("{.pkg term} {.val {term}} returned 0 results")
     }
+    x <- ss_(x, i)
   }
   return(x)
 }
 
 #' @examples
-#' explanation()
+#' try(explanations(section = "B"))
+#' explanations(term = "drain")
+#' explanations(section = "X", axis = 3, term = "destruction")
+#' explanations()
+#'
 #'
 #' @export
-#' @rdname definition
-explanation <- function(section = NULL, axis = NULL, term = NULL) {
+#' @rdname definitions
+explanations <- function(section = NULL, axis = NULL, term = NULL) {
   check_string(section, allow_empty = FALSE, allow_null = TRUE)
   check_number_whole(axis, allow_null = TRUE)
   check_string(term, allow_empty = FALSE, allow_null = TRUE)
-  procedural::pcs_explanations
+
+  x <- procedural::pcs_explanations
+
+  if (!is.null(section)) {
+    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    x <- ss_(x, x[["section"]] %iin% section)
+  }
+
+  if (!is.null(axis)) {
+    axis <- as.character(axis)
+    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
+    x <- ss_(x, x[["axis"]] %iin% axis)
+  }
+
+  if (!is.null(term)) {
+    i <- grep(term, x[["term"]], ignore.case = TRUE, perl = TRUE)
+    if (!length(i)) {
+      cli::cli_abort("{.pkg term} {.val {term}} returned 0 results")
+    }
+    x <- ss_(x, i)
+  }
+  return(x)
 }

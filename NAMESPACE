@@ -2,8 +2,8 @@
 
 export(as_gt)
 export(as_gt2)
-export(definition)
-export(explanation)
+export(definitions)
+export(explanations)
 export(includes)
 export(index)
 export(pcs_range)

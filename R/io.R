@@ -199,7 +199,15 @@ process_index <- function(xml = FALSE) {
   ss_(
     x,
     x$source %!=% "mainTerm/title",
-    colnames(x) %iin% c("entry", "letter", "term", "field", "value", "source")
+    colnames(x) %iin%
+      c(
+        "entry",
+        "letter",
+        "term",
+        "field",
+        "value",
+        "source"
+      )
   )
 }
 
