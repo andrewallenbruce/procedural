@@ -2,18 +2,18 @@
 pkg_files <- function(ext = NULL) {
   x <- system.file("extdata", package = "procedural")
   if (x == "") {
-    return(NULL)
+    stop("No extdata found")
   }
   x <- list.files(x, full.names = TRUE, ignore.case = TRUE)
   if (length(x) == 0L) {
-    return(NULL)
+    stop("No files found")
   }
   # split by file path ext
   x <- split(x, sub(".*[.]([[:alnum:]]+)$", "\\1", x))
   if (!is.null(ext)) {
     i <- match_(ext, names(x))
     if (cheapr::all_na(i, recursive = FALSE)) {
-      return(NULL)
+      stop(paste0("No files with file extension", ext, " found"))
     }
     x <- x[[i]]
   }
@@ -22,10 +22,11 @@ pkg_files <- function(ext = NULL) {
 
 #' @noRd
 parse_xml <- function(profile = c("index", "tables", "definitions")) {
+  xmls_ <- pkg_files(ext = "xml")
   prof_ <- rlang::arg_match(profile)
   path_ <- grep(
     paste0("icd10pcs_", prof_),
-    pkg_files(ext = "xml"),
+    xmls_,
     value = TRUE,
     perl = TRUE
   )
@@ -55,10 +56,11 @@ parse_xml <- function(profile = c("index", "tables", "definitions")) {
 
 #' @noRd
 parse_txt <- function(profile = c("order", "conversion")) {
+  txts_ <- pkg_files(ext = "txt")
   prof_ <- rlang::arg_match(profile)
   path_ <- grep(
     paste0("icd10pcs_", prof_, "_"),
-    pkg_files(ext = "txt"),
+    txts_,
     value = TRUE,
     perl = TRUE
   )
@@ -112,11 +114,11 @@ parse_txt <- function(profile = c("order", "conversion")) {
 load_parquet <- function(
   profile = c("index", "tables", "definitions", "order", "conversion")
 ) {
+  parq_ <- pkg_files(ext = "parquet")
   prof_ <- rlang::arg_match(profile)
-  file_ <- pkg_files(ext = "parquet")
   path_ <- grep(
     cheapr::paste_("icd10pcs_", prof_),
-    file_,
+    parq_,
     value = TRUE,
     perl = TRUE
   )
