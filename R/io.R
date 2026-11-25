@@ -167,7 +167,11 @@ process_index <- function(xml = FALSE) {
     return(parse_xml(profile = "index"))
   }
   x <- load_parquet(profile = "index")
-  x <- ss_(x, col = c(2:5, 7L))
+
+  x <- ss_(
+    x,
+    col = colnames(x) %iin% c("entity", "field", "value", "source")
+  )
 
   # create letter column ----------------------------------------------------
   x <- av_(
@@ -179,7 +183,7 @@ process_index <- function(xml = FALSE) {
     ))
   )
 
-  x <- ss_(x, x$entity %!=% "letter", -2L)
+  x <- ss_(x, x$entity %!=% "letter", colnames(x) %!=% "entity")
 
   # create entry/term columns -----------------------------------------------
   x <- av_(
@@ -192,7 +196,11 @@ process_index <- function(xml = FALSE) {
     ))
   )
 
-  ss_(x, x$source %!=% "mainTerm/title", c(1L, 3L, 2L, 5:7))
+  ss_(
+    x,
+    x$source %!=% "mainTerm/title",
+    colnames(x) %iin% c("entry", "letter", "term", "field", "value", "source")
+  )
 }
 
 #' @noRd
@@ -200,12 +208,19 @@ process_tables <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "tables"))
   }
+
   x <- load_parquet(profile = "tables")
-  x <- ss_(x, x$field %!iin% c("definition", "values"), c(1:2, 4:5))
+
+  x <- ss_(
+    x,
+    x$field %!iin% c("definition", "values"),
+    colnames(x) %iin% c("record_index", "entity", "field", "value")
+  )
+
   collapse::setrename(x, table = "record_index")
+
   x$field <- cheapr::val_replace(x$field, "label/code", "code")
 
-  x <- ss_(x, col = 3:4)
   x <- collapse::rsplit(x, ~table, keep.by = TRUE)
   x <- purrr::map(x, map_tables)
   x <- collapse::rowbind(x)
@@ -216,18 +231,25 @@ process_tables <- function(xml = FALSE) {
 
 #' @noRd
 map_tables <- function(x) {
-  tab <- ss_(x, x$entity %==% "axis") |>
+  tab <- ss_(
+    x,
+    x$entity %==% "axis",
+    colnames(x) %!iin% c("table", "entity")
+  ) |>
     collapse::rsplit(~field) |>
     collapse::qTBL() |>
     collapse::colorderv(c("pos", "title", "code", "label"))
 
   grab <- \(x, n) {
     ss_(x, x[["field"]] %==% n) |>
-      pull_("value") |>
-      name_(n)
+      pull_("value")
   }
 
-  row <- ss_(x, x$entity %!iin% c("axis", "pcsRow"))
+  row <- ss_(
+    x,
+    x$entity %!iin% c("axis", "pcsRow"),
+    colnames(x) %!iin% c("table", "entity")
+  )
   row <- av_(row, row = csum_(row$field == "pos"))
   row$field <- cheapr::val_replace(row$field, "value", "label")
 
@@ -237,21 +259,21 @@ map_tables <- function(x) {
         .args = list(
           cheapr::fast_df(
             .args = list(
-              grab(x, "pos"),
-              grab(x, "title")
+              pos = grab(x, "pos"),
+              title = grab(x, "title")
             )
           ),
           cheapr::fast_df(
             .args = list(
-              grab(x, "code"),
-              grab(x, "label")
+              code = grab(x, "code"),
+              label = grab(x, "label")
             )
           )
         )
       )
     })
 
-  row <- collapse::rowbind(table, collapse::rowbind(row))
+  row <- collapse::rowbind(tab, collapse::rowbind(row))
   av_(row, table = rep.int(x$table[1L], nrow_(row)))
 }
 
@@ -260,7 +282,10 @@ process_definitions <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
+
   x <- load_parquet(profile = "definitions")
+
+  # create section/axis/name columns ----------------------------------------
   x <- av_(
     x,
     section = fill_(
@@ -285,17 +310,20 @@ process_definitions <- function(xml = FALSE) {
     )
   )
 
-  COLS <- c(
-    "section",
-    "axis",
-    "name",
-    "record_index",
-    "entity",
-    "field",
-    "value"
+  x <- ss_(
+    x,
+    x$entity %!=% "section",
+    colnames(x) %iin%
+      c(
+        "section",
+        "axis",
+        "name",
+        "record_index",
+        "entity",
+        "field",
+        "value"
+      )
   )
-
-  x <- ss_(x, x$entity %!=% "section", colnames(x) %iin% COLS)
   x <- collapse::rsplit(x, ~record_index)
   x <- purrr::map(x, map_definitions)
   x <- collapse::rowbind(x)
@@ -312,7 +340,8 @@ process_definitions <- function(xml = FALSE) {
     term,
     on = c("entry", "section", "axis", "name"),
     multiple = TRUE,
-    overid = 0
+    overid = 0L,
+    verbose = 0L
   )
 
   substr(x$field, 1L, 1L) <- toupper(substr(x$field, 1L, 1L))
@@ -332,13 +361,8 @@ map_definitions <- function(x) {
   x <- av_(x, entry = x$entity == "axis/terms/title")
   x <- av_(x, run = vctrs::vec_identify_runs(x$entry))
 
-  # runs <- ss_(x, x$entry) |> pull_("run") |> cheapr::counts()
-  # runs <- ss_(runs, runs$count > 1L) |> pull_("key")
-
-  runs <- ss_(x, x$entry) |>
-    collapse::fcount(run) |>
-    collapse::sbt(N > 1L) |>
-    pull_("run")
+  runs <- ss_(x, x$entry) |> pull_("run") |> cheapr::counts()
+  runs <- ss_(runs, runs$count > 1L) |> pull_("key")
 
   xrun <- ss_(x, x$run %iin% runs)
   x <- ss_(x, x$run %!iin% runs)
