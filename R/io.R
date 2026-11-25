@@ -172,12 +172,11 @@ process_index <- function(xml = FALSE) {
   # create letter column ----------------------------------------------------
   x <- av_(
     x,
-    letter = ifelse_(
+    letter = fill_(ifelse_(
       x$entity == "letter",
       x$value,
       NA_character_
-    ) |>
-      fill_()
+    ))
   )
 
   x <- ss_(x, x$entity %!=% "letter", -2L)
@@ -186,12 +185,11 @@ process_index <- function(xml = FALSE) {
   x <- av_(
     x,
     entry = csum_(x$source == "mainTerm/title"),
-    term = ifelse_(
+    term = fill_(ifelse_(
       x$source == "mainTerm/title",
       x$value,
       NA_character_
-    ) |>
-      fill_()
+    ))
   )
 
   ss_(x, x$source %!=% "mainTerm/title", c(1L, 3L, 2L, 5:7))
@@ -340,7 +338,7 @@ map_definitions <- function(x) {
   runs <- ss_(x, x$entry) |>
     collapse::fcount(run) |>
     collapse::sbt(N > 1L) |>
-    _$run
+    pull_("run")
 
   xrun <- ss_(x, x$run %iin% runs)
   x <- ss_(x, x$run %!iin% runs)
@@ -365,12 +363,14 @@ process_includes <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
-  x <- load_parquet(profile = "definitions")
-  x <- collapse::ss(x, x$field %==% "Includes", colnames(x) %!=% "field")
+  # x <- load_parquet(profile = "definitions")
+  # FIXME
+  x <- process_definitions()
+  x <- ss_(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
 
   i <- cheapr::counts(x$entry)
-  i <- collapse::ss(i, i$count > 1L) |> _$key
+  i <- ss_(i, i$count > 1L) |> pull_("key")
 
   collapse::rowbind(
     collapse::ss(x, x$entry %!iin% i),
@@ -381,4 +381,16 @@ process_includes <- function(xml = FALSE) {
       collapse::funique()
   ) |>
     collapse::roworderv(c("entry"))
+}
+
+#' @noRd
+process_explanation <- function(xml = FALSE) {
+  if (xml) {
+    return(parse_xml(profile = "definitions"))
+  }
+  # FIXME
+  x <- process_definitions()
+  x <- ss_(x, x$field %==% "Explanation", colnames(x) %!=% "field")
+  collapse::setrename(x, value = "includes")
+  return(x)
 }

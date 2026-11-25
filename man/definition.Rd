@@ -3,11 +3,14 @@
 \name{definition}
 \alias{definition}
 \alias{includes}
+\alias{explanation}
 \title{ICD-10-PCS Definitions}
 \usage{
 definition(section = NULL, axis = NULL, term = NULL)
 
 includes(section = NULL, axis = NULL, term = NULL)
+
+explanation(section = NULL, axis = NULL, term = NULL)
 }
 \arguments{
 \item{section}{\verb{<chr>} PCS section; one of \verb{0:9, B, C, F, G, H, X}
@@ -46,5 +49,7 @@ includes(term = "drain")
 includes(section = "0", axis = 6)
 includes(section = "3", term = "pro")
 includes()
+
+explanation()
 
 }

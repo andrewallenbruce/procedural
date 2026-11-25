@@ -108,3 +108,15 @@ includes <- function(section = NULL, axis = NULL, term = NULL) {
   }
   return(x)
 }
+
+#' @examples
+#' explanation()
+#'
+#' @export
+#' @rdname definition
+explanation <- function(section = NULL, axis = NULL, term = NULL) {
+  check_string(section, allow_empty = FALSE, allow_null = TRUE)
+  check_number_whole(axis, allow_null = TRUE)
+  check_string(term, allow_empty = FALSE, allow_null = TRUE)
+  procedural::pcs_explanations
+}

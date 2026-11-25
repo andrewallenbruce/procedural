@@ -3,11 +3,11 @@
 \docType{data}
 \name{pcs_includes}
 \alias{pcs_includes}
-\title{ICD-10-PCS Definitions File}
+\title{ICD-10-PCS Definitions File: Includes}
 \format{
 \subsection{\code{pcs_includes}}{
 
-A data frame with 641 rows and 6 columns:
+A data frame with 710 rows and 6 columns:
 \describe{
 \item{entry}{Entry number}
 \item{section}{PCS section character}
@@ -23,6 +23,6 @@ A data frame with 641 rows and 6 columns:
 pcs_includes
 }
 \description{
-ICD-10-PCS Definitions File
+ICD-10-PCS Definitions File: Includes
 }
 \keyword{internal}

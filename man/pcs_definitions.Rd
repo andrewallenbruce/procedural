@@ -3,11 +3,11 @@
 \docType{data}
 \name{pcs_definitions}
 \alias{pcs_definitions}
-\title{ICD-10-PCS Definitions File}
+\title{ICD-10-PCS Definitions File: Definitions}
 \format{
 \subsection{\code{pcs_definitions}}{
 
-A data frame with 320 rows and 6 columns:
+A data frame with 324 rows and 6 columns:
 \describe{
 \item{entry}{Entry number}
 \item{section}{PCS section character}
@@ -23,6 +23,6 @@ A data frame with 320 rows and 6 columns:
 pcs_definitions
 }
 \description{
-ICD-10-PCS Definitions File
+ICD-10-PCS Definitions File: Definitions
 }
 \keyword{internal}

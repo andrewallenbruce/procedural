@@ -28,10 +28,10 @@
 #' @keywords internal
 "pcs_tables"
 
-#' ICD-10-PCS Definitions File
+#' ICD-10-PCS Definitions File: Definitions
 #'
 #' @format ## `pcs_definitions`
-#' A data frame with 320 rows and 6 columns:
+#' A data frame with 324 rows and 6 columns:
 #' \describe{
 #'   \item{entry}{Entry number}
 #'   \item{section}{PCS section character}
@@ -44,10 +44,10 @@
 #' @keywords internal
 "pcs_definitions"
 
-#' ICD-10-PCS Definitions File
+#' ICD-10-PCS Definitions File: Includes
 #'
 #' @format ## `pcs_includes`
-#' A data frame with 641 rows and 6 columns:
+#' A data frame with 710 rows and 6 columns:
 #' \describe{
 #'   \item{entry}{Entry number}
 #'   \item{section}{PCS section character}
@@ -59,6 +59,22 @@
 #' }
 #' @keywords internal
 "pcs_includes"
+
+#' ICD-10-PCS Definitions File: Explanations
+#'
+#' @format ## `pcs_explanations`
+#' A data frame with 60 rows and 6 columns:
+#' \describe{
+#'   \item{entry}{Entry number}
+#'   \item{section}{PCS section character}
+#'   \item{axis}{PCS code position}
+#'   \item{name}{PCS code position name}
+#'   \item{term}{PCS code position term}
+#'   \item{includes}{PCS code includes attribute}
+#'   ...
+#' }
+#' @keywords internal
+"pcs_explanations"
 
 #' ICD-10-PCS Definition Tables
 #'

@@ -4,19 +4,15 @@ library(procedural)
 
 x <- process_definitions()
 y <- collapse::ss(x, x$field %==% "Explanation", colnames(x) %!=% "field")
-# y <- collapse::rnm(y, value = "explanation")
+y <- collapse::rnm(y, value = "explanation")
+pcs_explanations <- y
+usethis::use_data(pcs_explanations, overwrite = TRUE)
 
+
+x <- process_definitions()
 x <- collapse::ss(x, x$field %==% "Definition", colnames(x) %!=% "field")
 x <- collapse::rnm(x, value = "definition")
-
-x <- collapse::join(x, y, on = c("entry", "section", "axis", "name", "term"))
-x$definition <- cheapr::paste_(x$definition, ".")
-x$definition <- cheapr::if_else_(
-  !cheapr::is_na(x$value),
-  cheapr::paste_(x$definition, " ", x$value, "."),
-  x$definition
-)
-pcs_definitions <- collapse::ss(x, j = -7L)
+pcs_definitions <- x
 
 usethis::use_data(pcs_definitions, overwrite = TRUE)
 
