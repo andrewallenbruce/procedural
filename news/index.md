@@ -1,5 +1,14 @@
 # Changelog
 
+## procedural 0.0.1.9019
+
+- refactored
+  [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md),
+  [`explanations()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md),
+  [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+- refactoring `io` functions
+- added `explanation()`
+
 ## procedural 0.0.1.9018
 
 - added `load_parquet()` helper
@@ -34,7 +43,7 @@
 
 ## procedural 0.0.1.9011
 
-- [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
+- [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
   added
 
 ## procedural 0.0.1.9010
@@ -71,7 +80,8 @@
 
 ## procedural 0.0.1.9002
 
-- `definitions()` now returns full entries by default
+- [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+  now returns full entries by default
 
 ## procedural 0.0.1.9001
 
@@ -79,7 +89,9 @@
 
 ## procedural 0.0.1.9000
 
-- new `definitions()` implementation
+- new
+  [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+  implementation
 - new version
 - onLoad pins
 - import standalones

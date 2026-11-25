@@ -8,10 +8,10 @@ ICD-10-PCS Building Blocks.
   [`system()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
   [`table()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
   : ICD-10-PCS Axes
-- [`definition()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
-  [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
-  [`explanation()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
-  : ICD-10-PCS Definitions
+- [`definitions()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+  [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+  [`explanations()`](https://andrewallenbruce.github.io/procedural/reference/definitions.md)
+  : ICD-10-PCS Code Addenda
 - [`index()`](https://andrewallenbruce.github.io/procedural/reference/index-topic.md)
   : PCS Alphabetic Index
 - [`pcs_range()`](https://andrewallenbruce.github.io/procedural/reference/pcs_range.md)
