@@ -65,8 +65,7 @@ reference:
   - section
   - system
   - table
-  - definition
-  - includes
+  - definitions
   - index
   - pcs_range
 
