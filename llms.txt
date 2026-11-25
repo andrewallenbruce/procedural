@@ -690,6 +690,7 @@ ICD-10-PCS Building Blocks.
   : ICD-10-PCS Axes
 - [`definition()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   [`includes()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
+  [`explanation()`](https://andrewallenbruce.github.io/procedural/reference/definition.md)
   : ICD-10-PCS Definitions
 - [`index()`](https://andrewallenbruce.github.io/procedural/reference/index-topic.md)
   : PCS Alphabetic Index

@@ -1,6 +1,6 @@
-# ICD-10-PCS Definitions File
+# ICD-10-PCS Definitions File: Definitions
 
-ICD-10-PCS Definitions File
+ICD-10-PCS Definitions File: Definitions
 
 ## Usage
 
@@ -12,7 +12,7 @@ pcs_definitions
 
 ### `pcs_definitions`
 
-A data frame with 320 rows and 6 columns:
+A data frame with 324 rows and 6 columns:
 
 - entry:
 

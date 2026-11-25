@@ -8,6 +8,8 @@ ICD-10-PCS Definitions
 definition(section = NULL, axis = NULL, term = NULL)
 
 includes(section = NULL, axis = NULL, term = NULL)
+
+explanation(section = NULL, axis = NULL, term = NULL)
 ```
 
 ## Arguments
@@ -52,13 +54,13 @@ try(definition(term = "drinnn"))
 #> Error in definition(term = "drinnn") : 
 #>   term = "drinnn" returned 0 rows
 definition(term = "drain")
-#> # A tibble: 2 × 6
+#> # A data frame: 2 × 6
 #>   entry section  axis name      term     definition                             
 #>   <int> <chr>   <int> <chr>     <chr>    <chr>                                  
 #> 1    10 0           3 Operation Drainage Taking or letting out fluids and/or ga…
 #> 2   518 1           3 Operation Drainage Taking or letting out fluids and/or ga…
 definition(section = "0", axis = 5)
-#> # A tibble: 7 × 6
+#> # A data frame: 7 × 6
 #>   entry section  axis name     term                                   definition
 #>   <int> <chr>   <int> <chr>    <chr>                                  <chr>     
 #> 1   361 0           5 Approach External                               Procedure…
@@ -69,12 +71,12 @@ definition(section = "0", axis = 5)
 #> 6   366 0           5 Approach Via Natural or Artificial Opening End… Entry of …
 #> 7   367 0           5 Approach Via Natural or Artificial Opening Wit… Entry of …
 definition(section = "B", term = "fluoro")
-#> # A tibble: 1 × 6
+#> # A data frame: 1 × 6
 #>   entry section  axis name  term        definition                              
 #>   <int> <chr>   <int> <chr> <chr>       <chr>                                   
 #> 1   603 B           3 Type  Fluoroscopy Single plane or bi-plane real time disp…
 definition()
-#> # A tibble: 320 × 6
+#> # A data frame: 324 × 6
 #>    entry section  axis name      term        definition                         
 #>    <int> <chr>   <int> <chr>     <chr>       <chr>                              
 #>  1     1 0           3 Operation Alteration  Modifying the anatomic structure o…
@@ -87,7 +89,7 @@ definition()
 #>  8     8 0           3 Operation Dilation    Expanding an orifice or the lumen …
 #>  9     9 0           3 Operation Division    Cutting into a body part, without …
 #> 10    10 0           3 Operation Drainage    Taking or letting out fluids and/o…
-#> # ℹ 310 more rows
+#> # ℹ 314 more rows
 
 try(includes(section = "B"))
 #> Error in includes(section = "B") : 
@@ -135,4 +137,20 @@ includes()
 #>  9     9 0           3 Operation Division    Spinal cordotomy, osteotomy        
 #> 10    10 0           3 Operation Drainage    Thoracentesis, incision and draina…
 #> # ℹ 631 more rows
+
+explanation()
+#> # A data frame: 60 × 6
+#>    entry section  axis name      term        explanation                        
+#>    <int> <chr>   <int> <chr>     <chr>       <chr>                              
+#>  1     1 0           3 Operation Alteration  Principal purpose is to improve ap…
+#>  2     2 0           3 Operation Bypass      Rerouting contents of a body part …
+#>  3     3 0           3 Operation Change      All CHANGE procedures are coded us…
+#>  4     5 0           3 Operation Creation    Used for gender reassignment surge…
+#>  5     6 0           3 Operation Destruction None of the body part is physicall…
+#>  6     7 0           3 Operation Detachment  The body part value is the site of…
+#>  7     8 0           3 Operation Dilation    The orifice can be a natural orifi…
+#>  8     9 0           3 Operation Division    All or a portion of the body part …
+#>  9    10 0           3 Operation Drainage    The qualifier DIAGNOSTIC is used t…
+#> 10    11 0           3 Operation Excision    The qualifier DIAGNOSTIC is used t…
+#> # ℹ 50 more rows
 ```
