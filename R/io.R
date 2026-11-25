@@ -240,10 +240,7 @@ map_tables <- function(x) {
     collapse::qTBL() |>
     collapse::colorderv(c("pos", "title", "code", "label"))
 
-  grab <- \(x, n) {
-    ss_(x, x[["field"]] %==% n) |>
-      pull_("value")
-  }
+  grab <- \(x, n) pull_(ss_(x, x[["field"]] %==% n), "value")
 
   row <- ss_(
     x,
@@ -278,7 +275,7 @@ map_tables <- function(x) {
 }
 
 #' @noRd
-process_definitions <- function(xml = FALSE) {
+process_definitions_file <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
@@ -387,9 +384,7 @@ process_includes <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
-  # x <- load_parquet(profile = "definitions")
-  # FIXME
-  x <- process_definitions()
+  x <- process_definitions_file()
   x <- ss_(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
 
@@ -412,8 +407,7 @@ process_explanation <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
-  # FIXME
-  x <- process_definitions()
+  x <- process_definitions_file()
   x <- ss_(x, x$field %==% "Explanation", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
   return(x)
