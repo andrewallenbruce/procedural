@@ -9,6 +9,11 @@ ss_ <- function(.data, row, col, safe = TRUE) {
 }
 
 #' @noRd
+fill_ <- function(.data, ...) {
+  vctrs::vec_fill_missing(x = .data, ...)
+}
+
+#' @noRd
 csum_ <- function(x, ...) {
   collapse::fcumsum(x = x, ...)
 }

@@ -109,12 +109,30 @@ parse_txt <- function(profile = c("order", "conversion")) {
 }
 
 #' @noRd
-process_order <- function() {
-  x <- parse_txt(profile = "order")
+load_parquet <- function(
+  profile = c("index", "tables", "definitions", "order", "conversion")
+) {
+  prof_ <- rlang::arg_match(profile)
+  file_ <- pkg_files(ext = "parquet")
+  path_ <- grep(
+    cheapr::paste_("icd10pcs_", prof_),
+    file_,
+    value = TRUE,
+    perl = TRUE
+  )
+  nanoparquet::read_parquet(file = path_)
+}
+
+#' @noRd
+process_order <- function(txt = FALSE) {
+  if (txt) {
+    return(parse_txt(profile = "order"))
+  }
+  x <- load_parquet(profile = "order")
   collapse::gv(x, "description_short") <- NULL
-  collapse::ss(
+  ss_(
     x,
-    j = cheapr::c_(
+    row = cheapr::c_(
       collapse::num_vars(x, 3L),
       collapse::cat_vars(x, 3L)
     )
@@ -122,8 +140,11 @@ process_order <- function() {
 }
 
 #' @noRd
-process_conversion <- function() {
-  x <- parse_txt(profile = "conversion")
+process_conversion <- function(txt = FALSE) {
+  if (txt) {
+    return(parse_txt(profile = "conversion"))
+  }
+  x <- load_parquet(profile = "conversion")
   x <- av_(
     x,
     date = readr::parse_date(cheapr::paste_(
@@ -145,17 +166,8 @@ process_index <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "index"))
   }
-  x <- ss_(
-    nanoparquet::read_parquet(
-      file = grep(
-        "icd10pcs_index",
-        pkg_files(ext = "parquet"),
-        value = TRUE,
-        perl = TRUE
-      )
-    ),
-    col = c(2:5, 7L)
-  )
+  x <- load_parquet(profile = "index")
+  x <- ss_(x, col = c(2:5, 7L))
 
   # create letter column ----------------------------------------------------
   x <- av_(
@@ -165,7 +177,7 @@ process_index <- function(xml = FALSE) {
       x$value,
       NA_character_
     ) |>
-      vctrs::vec_fill_missing()
+      fill_()
   )
 
   x <- ss_(x, x$entity %!=% "letter", -2L)
@@ -179,7 +191,7 @@ process_index <- function(xml = FALSE) {
       x$value,
       NA_character_
     ) |>
-      vctrs::vec_fill_missing()
+      fill_()
   )
 
   ss_(x, x$source %!=% "mainTerm/title", c(1L, 3L, 2L, 5:7))
@@ -190,14 +202,7 @@ process_tables <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "tables"))
   }
-  x <- nanoparquet::read_parquet(
-    file = grep(
-      "icd10pcs_tables",
-      pkg_files(ext = "parquet"),
-      value = TRUE,
-      perl = TRUE
-    )
-  )
+  x <- load_parquet(profile = "tables")
   x <- ss_(x, x$field %!iin% c("definition", "values"), c(1:2, 4:5))
   collapse::setrename(x, table = "record_index")
   x$field <- cheapr::val_replace(x$field, "label/code", "code")
@@ -257,18 +262,10 @@ process_definitions <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
-  x <- nanoparquet::read_parquet(
-    file = grep(
-      "icd10pcs_definitions",
-      pkg_files(ext = "parquet"),
-      value = TRUE,
-      perl = TRUE
-    )
-  )
-
+  x <- load_parquet(profile = "definitions")
   x <- av_(
     x,
-    section = vctrs::vec_fill_missing(
+    section = fill_(
       ifelse_(
         x$entity == "section" & x$value_kind == "attribute",
         x$value,
@@ -326,8 +323,8 @@ process_definitions <- function(xml = FALSE) {
 
 #' @noRd
 map_definitions <- function(x) {
-  x$axis <- vctrs::vec_fill_missing(x$axis)
-  x$name <- vctrs::vec_fill_missing(x$name)
+  x$axis <- fill_(x$axis)
+  x$name <- fill_(x$name)
   x$field <- ifelse_(
     x$entity == "axis/terms/includes",
     "includes",
@@ -368,15 +365,7 @@ process_includes <- function(xml = FALSE) {
   if (xml) {
     return(parse_xml(profile = "definitions"))
   }
-  x <- nanoparquet::read_parquet(
-    file = grep(
-      "icd10pcs_definitions",
-      pkg_files(ext = "parquet"),
-      value = TRUE,
-      perl = TRUE
-    )
-  )
-
+  x <- load_parquet(profile = "definitions")
   x <- collapse::ss(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
 
