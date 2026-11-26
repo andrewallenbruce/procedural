@@ -1,4 +1,536 @@
-source(here::here("data-raw", "pins_functions.R"))
+#' ICD-10-PCS Approaches
+#' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
+#'    If `NULL` (default), returns all 17 sections.
+#'
+#' @template returns-default
+#'
+#' @examples
+#'
+#' approaches()
+#'
+#' approaches("0")
+#'
+#' approaches("X")
+#'
+#' @autoglobal
+#'
+#' @export
+approaches <- function(x = NULL) {
+  app <- data.frame(
+    axis = 5L,
+    name = "Approach",
+    value = c(0, 3, 4, 7, 8, "F", "X"),
+    label = c(
+      'Open',
+      'Percutaneous',
+      'Percutaneous Endoscopic',
+      'Via Natural or Artificial Opening',
+      'Via Natural or Artificial Opening Endoscopic',
+      'Via Natural or Artificial Opening With Percutaneous Endoscopic Assistance',
+      'External'
+    )
+  )
+
+  if (!is.null(x)) {
+    x <- stringfish::sf_touppertoupper(as.character(x))
+
+    x <- rlang::arg_match0(x, c(0, 3, 4, 7, 8, "F", "X"))
+
+    app <- fuimus::search_in_if(app, app$value, x)
+  }
+  return(app)
+}
+
+#' @noRd
+.axisnames <- function(x) {
+  if (is.numeric(x)) {
+    x <- as.character(x)
+  }
+
+  if (stringfish::sf_grepl("[[:lower:]]*", x)) {
+    x <- stringfish::sf_toupper(x)
+  }
+
+  x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+
+  if (nchar(x) > 1L) {
+    x <- fuimus::splitter(x)[1]
+  }
+
+  switch(
+    x,
+    "0" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Part",
+      "Approach",
+      "Device",
+      "Qualifier"
+    ),
+    "1" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Part",
+      "Approach",
+      "Device",
+      "Qualifier"
+    ),
+    "2" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Part",
+      "Approach",
+      "Device",
+      "Qualifier"
+    ),
+    "3" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body System / Region",
+      "Approach",
+      "Substance",
+      "Qualifier"
+    ),
+    "4" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body System / Region",
+      "Approach",
+      "Function / Device",
+      "Qualifier"
+    ),
+    "5" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body System",
+      "Duration",
+      "Function",
+      "Qualifier"
+    ),
+    "6" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body System",
+      "Duration",
+      "Qualifier",
+      "Qualifier"
+    ),
+    "7" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Region",
+      "Approach",
+      "Method",
+      "Qualifier"
+    ),
+    "8" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Region",
+      "Approach",
+      "Method",
+      "Qualifier"
+    ),
+    "9" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Region",
+      "Approach",
+      "Method",
+      "Qualifier"
+    ),
+    "B" = c(
+      "Section",
+      "Body System",
+      "Root Type",
+      "Body Part",
+      "Contrast",
+      "Qualifier",
+      "Qualifier"
+    ),
+    "C" = c(
+      "Section",
+      "Body System",
+      "Root Type",
+      "Body Part",
+      "Radionuclide",
+      "Qualifier",
+      "Qualifier"
+    ),
+    "D" = c(
+      "Section",
+      "Body System",
+      "Modality",
+      "Treatment Site",
+      "Modality Qualifier",
+      "Isotope",
+      "Qualifier"
+    ),
+    "F" = c(
+      "Section",
+      "Section Qualifier",
+      "Root Type",
+      "Body System / Region",
+      "Type Qualifier",
+      "Equipment",
+      "Qualifier"
+    ),
+    "G" = c(
+      "Section",
+      "Body System",
+      "Root Type",
+      "Qualifier",
+      "Qualifier",
+      "Qualifier",
+      "Qualifier"
+    ),
+    "H" = c(
+      "Section",
+      "Body System",
+      "Root Type",
+      "Qualifier",
+      "Qualifier",
+      "Qualifier",
+      "Qualifier"
+    ),
+    "X" = c(
+      "Section",
+      "Body System",
+      "Operation",
+      "Body Part",
+      "Approach",
+      "Device / Substance / Technology",
+      "Qualifier"
+    )
+  )
+}
+
+
+#' ICD-10-PCS Axes by Section
+#'
+#' @param x ICD-10-PCS section character, an alphanumeric code of length 1.
+#'
+#' @template returns-default
+#'
+#' @examplesIf interactive()
+#' axes("0")
+#'
+#' axes("X")
+#'
+#' @autoglobal
+#'
+#' @noRd
+axes <- function(x) {
+  x <- toupper(as.character(x))
+
+  x <- rlang::arg_match(x, c(0:9, LETTERS[c(2:4, 6:8, 24)]))
+
+  if (nchar(x) > 1L) {
+    x <- fuimus::splitter(x)[1]
+  }
+
+  if (x == "0") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Part",
+        "Approach",
+        "Device",
+        "Qualifier"
+      ),
+      value = c("0", rep(NA, 6)),
+      label = c("Medical and Surgical", rep(NA, 6))
+    ))
+  }
+
+  if (x == "1") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Part",
+        "Approach",
+        "Device",
+        "Qualifier"
+      ),
+      value = c("1", rep(NA, 6)),
+      label = c("Obstetrics", rep(NA, 6))
+    ))
+  }
+
+  if (x == "2") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Region",
+        "Approach",
+        "Device",
+        "Qualifier"
+      ),
+      value = c("2", rep(NA, 6)),
+      label = c("Placement", rep(NA, 6))
+    ))
+  }
+
+  if (x == "3") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body System / Region",
+        "Approach",
+        "Substance",
+        "Qualifier"
+      ),
+      value = c("3", rep(NA, 6)),
+      label = c("Administration", rep(NA, 6))
+    ))
+  }
+
+  if (x == "4") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body System / Region",
+        "Approach",
+        "Function / Device",
+        "Qualifier"
+      ),
+      value = c("4", rep(NA, 6)),
+      label = c("Measurement and Monitoring", rep(NA, 6))
+    ))
+  }
+
+  if (x == "5") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body System",
+        "Duration",
+        "Function",
+        "Qualifier"
+      ),
+      value = c("5", rep(NA, 6)),
+      label = c(
+        "Extracorporeal or Systemic Assistance and Performance",
+        rep(NA, 6)
+      )
+    ))
+  }
+
+  if (x == "6") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body System",
+        "Duration",
+        "Qualifier",
+        "Qualifier"
+      ),
+      value = c("6", rep(NA, 6)),
+      label = c("Extracorporeal or Systemic Therapies", rep(NA, 6))
+    ))
+  }
+
+  if (x == "7") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Region",
+        "Approach",
+        "Method",
+        "Qualifier"
+      ),
+      value = c("7", rep(NA, 6)),
+      label = c("Osteopathic", rep(NA, 6))
+    ))
+  }
+
+  if (x == "8") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Region",
+        "Approach",
+        "Method",
+        "Qualifier"
+      ),
+      value = c("8", rep(NA, 6)),
+      label = c("Other Procedures", rep(NA, 6))
+    ))
+  }
+
+  if (x == "9") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Region",
+        "Approach",
+        "Method",
+        "Qualifier"
+      ),
+      value = c("9", rep(NA, 6)),
+      label = c("Chiropractic", rep(NA, 6))
+    ))
+  }
+
+  if (x == "B") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Type",
+        "Body Part",
+        "Contrast",
+        "Qualifier",
+        "Qualifier"
+      ),
+      value = c("B", rep(NA, 6)),
+      label = c("Imaging", rep(NA, 6))
+    ))
+  }
+
+  if (x == "C") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Type",
+        "Body Part",
+        "Radionuclide",
+        "Qualifier",
+        "Qualifier"
+      ),
+      value = c("C", rep(NA, 6)),
+      label = c("Nuclear Medicine", rep(NA, 6))
+    ))
+  }
+
+  if (x == "D") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Modality",
+        "Treatment Site",
+        "Modality Qualifier",
+        "Isotope",
+        "Qualifier"
+      ),
+      value = c("D", rep(NA, 6)),
+      label = c("Radiation Therapy", rep(NA, 6))
+    ))
+  }
+
+  if (x == "F") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Section Qualifier",
+        "Root Type",
+        "Body System / Region",
+        "Type Qualifier",
+        "Equipment",
+        "Qualifier"
+      ),
+      value = c("F", rep(NA, 6)),
+      label = c("Physical Rehabilitation and Diagnostic Audiology", rep(NA, 6))
+    ))
+  }
+
+  if (x == "G") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Type",
+        "Qualifier",
+        "Qualifier",
+        "Qualifier",
+        "Qualifier"
+      ),
+      value = c("G", rep(NA, 6)),
+      label = c("Mental Health", rep(NA, 6))
+    ))
+  }
+
+  if (x == "H") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Type",
+        "Qualifier",
+        "Qualifier",
+        "Qualifier",
+        "Qualifier"
+      ),
+      value = c("H", rep(NA, 6)),
+      label = c("Substance Abuse Treatment", rep(NA, 6))
+    ))
+  }
+
+  if (x == "X") {
+    return(dplyr::tibble(
+      axis = c(1:7),
+      name = c(
+        "Section",
+        "Body System",
+        "Root Operation",
+        "Body Part",
+        "Approach",
+        "Device / Substance / Technology",
+        "Qualifier"
+      ),
+      value = c("X", rep(NA, 6)),
+      label = c("New Technology", rep(NA, 6))
+    ))
+  }
+}
 
 ######################### Sections
 sections <- dplyr::tibble(
@@ -40,37 +572,40 @@ msg <- data.frame(
   axis = "2",
   name = "Body System",
   value = c(0:9, LETTERS[c(2:4, 6:8, 10:14, 16:25)]),
-  label = c("Central Nervous System and Cranial Nerves",
-            "Peripheral Nervous System",
-            "Heart and Great Vessels",
-            "Upper Arteries",
-            "Lower Arteries",
-            "Upper Veins",
-            "Lower Veins",
-            "Lymphatic and Hemic Systems",
-            "Eye",
-            "Ear, Nose, Sinus",
-            "Respiratory System",
-            "Mouth and Throat",
-            "Gastrointestinal System",
-            "Hepatobiliary System and Pancreas",
-            "Endocrine System",
-            "Skin and Breast",
-            "Subcutaneous Tissue and Fascia",
-            "Muscles",
-            "Tendons",
-            "Bursae and Ligaments",
-            "Head and Facial Bones",
-            "Upper Bones",
-            "Lower Bones",
-            "Upper Joints",
-            "Lower Joints",
-            "Urinary System",
-            "Female Reproductive System",
-            "Male Reproductive System",
-            "Anatomical Regions, General",
-            "Anatomical Regions, Upper Extremities",
-            "Anatomical Regions, Lower Extremities"))
+  label = c(
+    "Central Nervous System and Cranial Nerves",
+    "Peripheral Nervous System",
+    "Heart and Great Vessels",
+    "Upper Arteries",
+    "Lower Arteries",
+    "Upper Veins",
+    "Lower Veins",
+    "Lymphatic and Hemic Systems",
+    "Eye",
+    "Ear, Nose, Sinus",
+    "Respiratory System",
+    "Mouth and Throat",
+    "Gastrointestinal System",
+    "Hepatobiliary System and Pancreas",
+    "Endocrine System",
+    "Skin and Breast",
+    "Subcutaneous Tissue and Fascia",
+    "Muscles",
+    "Tendons",
+    "Bursae and Ligaments",
+    "Head and Facial Bones",
+    "Upper Bones",
+    "Lower Bones",
+    "Upper Joints",
+    "Lower Joints",
+    "Urinary System",
+    "Female Reproductive System",
+    "Male Reproductive System",
+    "Anatomical Regions, General",
+    "Anatomical Regions, Upper Extremities",
+    "Anatomical Regions, Lower Extremities"
+  )
+)
 
 # Obstetrics
 obs <- data.frame(
@@ -78,7 +613,8 @@ obs <- data.frame(
   axis = "2",
   name = "Body System",
   value = "0",
-  label = "Pregnancy")
+  label = "Pregnancy"
+)
 
 # Placement
 plc <- data.frame(
@@ -86,8 +622,8 @@ plc <- data.frame(
   axis = "2",
   name = "Body System",
   value = c("W", "Y"),
-  label = c("Anatomical Regions",
-            "Anatomical Orifices"))
+  label = c("Anatomical Regions", "Anatomical Orifices")
+)
 
 # Administration
 adm <- data.frame(
@@ -95,9 +631,12 @@ adm <- data.frame(
   axis = "2",
   name = "Body System",
   value = c("0", "C", "E"),
-  label = c("Circulatory",
-            "Indwelling Device",
-            "Physiological Systems and Anatomical Regions"))
+  label = c(
+    "Circulatory",
+    "Indwelling Device",
+    "Physiological Systems and Anatomical Regions"
+  )
+)
 
 # Measurement and Monitoring
 mam <- data.frame(
@@ -105,8 +644,8 @@ mam <- data.frame(
   axis = "2",
   name = "Body System",
   value = c("A", "B"),
-  label = c("Physiological Systems",
-            "Physiological Devices"))
+  label = c("Physiological Systems", "Physiological Devices")
+)
 
 # Extracorporeal or Systemic Assistance and Performance
 xpr <- data.frame(
@@ -114,7 +653,8 @@ xpr <- data.frame(
   axis = "2",
   name = "Body System",
   value = "A",
-  label = "Physiological Systems")
+  label = "Physiological Systems"
+)
 
 # Extracorporeal or Systemic Therapies
 xth <- data.frame(
@@ -122,7 +662,8 @@ xth <- data.frame(
   axis = "2",
   name = "Body System",
   value = "A",
-  label = "Physiological Systems")
+  label = "Physiological Systems"
+)
 
 # Osteopathic
 ost <- data.frame(
@@ -130,7 +671,8 @@ ost <- data.frame(
   axis = "2",
   name = "Body System",
   value = "W",
-  label = "Anatomical Regions")
+  label = "Anatomical Regions"
+)
 
 # Other Procedures
 otp <- data.frame(
@@ -138,8 +680,8 @@ otp <- data.frame(
   axis = "2",
   name = "Body System",
   value = c("C", "E"),
-  label = c("Indwelling Device",
-            "Physiological Systems and Anatomical Regions"))
+  label = c("Indwelling Device", "Physiological Systems and Anatomical Regions")
+)
 
 # Chiropractic
 chi <- data.frame(
@@ -147,84 +689,91 @@ chi <- data.frame(
   axis = "2",
   name = "Body System",
   value = "W",
-  label = "Anatomical Regions")
+  label = "Anatomical Regions"
+)
 
 # Imaging
 img <- data.frame(
   section = "B",
   axis = "2",
   name = "Body System",
-  value = c(0, 2:5, 7:9,
-            LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]),
-  label = c("Central Nervous System",
-            "Heart",
-            "Upper Arteries",
-            "Lower Arteries",
-            "Veins",
-            "Lymphatic System",
-            "Eye",
-            "Ear, Nose, Mouth and Throat",
-            "Respiratory System",
-            "Gastrointestinal System",
-            "Hepatobiliary System and Pancreas",
-            "Endocrine System",
-            "Skin, Subcutaneous Tissue and Breast",
-            "Connective Tissue",
-            "Skull and Facial Bones",
-            "Non-Axial Upper Bones",
-            "Non-Axial Lower Bones",
-            "Axial Skeleton, Except Skull and Facial Bones",
-            "Urinary System",
-            "Female Reproductive System",
-            "Male Reproductive System",
-            "Anatomical Regions",
-            "Fetus and Obstetrical"))
+  value = c(0, 2:5, 7:9, LETTERS[c(2, 4, 6:8, 12, 14, 16:18, 20:23, 25)]),
+  label = c(
+    "Central Nervous System",
+    "Heart",
+    "Upper Arteries",
+    "Lower Arteries",
+    "Veins",
+    "Lymphatic System",
+    "Eye",
+    "Ear, Nose, Mouth and Throat",
+    "Respiratory System",
+    "Gastrointestinal System",
+    "Hepatobiliary System and Pancreas",
+    "Endocrine System",
+    "Skin, Subcutaneous Tissue and Breast",
+    "Connective Tissue",
+    "Skull and Facial Bones",
+    "Non-Axial Upper Bones",
+    "Non-Axial Lower Bones",
+    "Axial Skeleton, Except Skull and Facial Bones",
+    "Urinary System",
+    "Female Reproductive System",
+    "Male Reproductive System",
+    "Anatomical Regions",
+    "Fetus and Obstetrical"
+  )
+)
 
 # Nuclear Medicine
 nuc <- data.frame(
   section = "C",
   axis = "2",
   name = "Body System",
-  value = c(0, 2, 5, 7:9,
-            LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]),
-  label = c("Central Nervous System",
-            "Heart",
-            "Veins",
-            "Lymphatic and Hematologic System",
-            "Eye",
-            "Ear, Nose, Mouth and Throat",
-            "Respiratory System",
-            "Gastrointestinal System",
-            "Hepatobiliary System and Pancreas",
-            "Endocrine System",
-            "Skin, Subcutaneous Tissue and Breast",
-            "Musculoskeletal System",
-            "Urinary System",
-            "Male Reproductive System",
-            "Anatomical Regions"))
+  value = c(0, 2, 5, 7:9, LETTERS[c(2, 4, 6:8, 16, 20, 22:23)]),
+  label = c(
+    "Central Nervous System",
+    "Heart",
+    "Veins",
+    "Lymphatic and Hematologic System",
+    "Eye",
+    "Ear, Nose, Mouth and Throat",
+    "Respiratory System",
+    "Gastrointestinal System",
+    "Hepatobiliary System and Pancreas",
+    "Endocrine System",
+    "Skin, Subcutaneous Tissue and Breast",
+    "Musculoskeletal System",
+    "Urinary System",
+    "Male Reproductive System",
+    "Anatomical Regions"
+  )
+)
 
 # Radiation Therapy
 rad <- data.frame(
   section = "D",
   axis = "2",
   name = "Body System",
-  value = c(0, 7:9,
-            LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]),
-  label = c("Central and Peripheral Nervous System",
-            "Lymphatic and Hematologic System",
-            "Eye",
-            "Ear, Nose, Mouth and Throat",
-            "Respiratory System",
-            "Gastrointestinal System",
-            "Hepatobiliary System and Pancreas",
-            "Endocrine System",
-            "Skin",
-            "Breast",
-            "Musculoskeletal System",
-            "Urinary System",
-            "Female Reproductive System",
-            "Male Reproductive System",
-            "Anatomical Regions"))
+  value = c(0, 7:9, LETTERS[c(2, 4, 6:8, 13, 16, 20:23)]),
+  label = c(
+    "Central and Peripheral Nervous System",
+    "Lymphatic and Hematologic System",
+    "Eye",
+    "Ear, Nose, Mouth and Throat",
+    "Respiratory System",
+    "Gastrointestinal System",
+    "Hepatobiliary System and Pancreas",
+    "Endocrine System",
+    "Skin",
+    "Breast",
+    "Musculoskeletal System",
+    "Urinary System",
+    "Female Reproductive System",
+    "Male Reproductive System",
+    "Anatomical Regions"
+  )
+)
 
 # Physical Rehabilitation and Diagnostic Audiology
 phy <- data.frame(
@@ -232,7 +781,8 @@ phy <- data.frame(
   axis = "2",
   name = "Section Qualifier",
   value = c("0", "1"),
-  label = c("Rehabilitation", "Diagnostic Audiology"))
+  label = c("Rehabilitation", "Diagnostic Audiology")
+)
 
 # Mental Health
 men <- data.frame(
@@ -240,7 +790,8 @@ men <- data.frame(
   axis = "2",
   name = "Body System",
   value = "Z",
-  label = "None")
+  label = "None"
+)
 
 # Substance Abuse Treatment
 sub <- data.frame(
@@ -248,34 +799,54 @@ sub <- data.frame(
   axis = "2",
   name = "Body System",
   value = "Z",
-  label = "None")
+  label = "None"
+)
 
 # New Technology
 new <- data.frame(
   section = "X",
   axis = "2",
   name = "Body System",
-  value = c(0, 2, # D, F, H, K, N, R, T, W, X, Y
-            LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]),
-  label = c("Nervous System",
-            "Cardiovascular System",
-            "Gastrointestinal System",
-            "Hepatobiliary System and Pancreas",
-            "Skin, Subcutaneous Tissue, Fascia and Breast",
-            "Muscles, Tendons, Bursae and Ligaments",
-            "Bones",
-            "Joints",
-            "Urinary System",
-            "Anatomical Regions",
-            "Physiological Systems",
-            "Extracorporeal"))
+  value = c(
+    0,
+    2, # D, F, H, K, N, R, T, W, X, Y
+    LETTERS[c(4, 6, 8, 11, 14, 18, 20, 23:25)]
+  ),
+  label = c(
+    "Nervous System",
+    "Cardiovascular System",
+    "Gastrointestinal System",
+    "Hepatobiliary System and Pancreas",
+    "Skin, Subcutaneous Tissue, Fascia and Breast",
+    "Muscles, Tendons, Bursae and Ligaments",
+    "Bones",
+    "Joints",
+    "Urinary System",
+    "Anatomical Regions",
+    "Physiological Systems",
+    "Extracorporeal"
+  )
+)
 
-sys <- vctrs::vec_rbind(msg, obs, plc,
-                        adm, mam, xpr,
-                        xth, ost, otp,
-                        chi, img, nuc,
-                        rad, phy, men,
-                        sub, new) |>
+sys <- vctrs::vec_rbind(
+  msg,
+  obs,
+  plc,
+  adm,
+  mam,
+  xpr,
+  xth,
+  ost,
+  otp,
+  chi,
+  img,
+  nuc,
+  rad,
+  phy,
+  men,
+  sub,
+  new
+) |>
   dplyr::tibble()
 
 pin_update(

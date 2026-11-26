@@ -1,28 +1,47 @@
-# load libraries ----------------------------------------------------------
+library(procedural)
 
-library(collapse)
-library(cheapr)
-library(vctrs)
-library(purrr)
-
-# data rectangling --------------------------------------------------------
-index_file <- fs::path(
-  "C:/Users/Andrew/Downloads",
-  "zip-file-2-2027-code-tables-and-index",
-  "icd10pcs_index_2027",
-  ext = "xml"
+x <- process_index()
+x <- av_(
+  x,
+  id = collapse::seq_row(x),
+  lvl = as.integer(ifelse_(x$field == "level", x$value, NA))
 )
 
-x <- procedural:::process_index(index_file)
-# use_data ----------------------------------------------------------------
 
-usethis::use_data(pcs_index, overwrite = TRUE)
+av_(
+  L,
+  level = as.integer(ifelse_(
+    L$field == "level",
+    L$value,
+    NA_character_
+  ))
+)
 
-# data transformation -----------------------------------------------------
-x <- procedural::pcs_index
+Entry <- ss_(x, x$field %==% "level") |> pull_("entry") |> cheapr::unique_()
+
+ss_(x, x$entry %iin% Entry)
+
+X <- ss_(x, x$field %!=% "level")
+X <- av_(X, level = rep.int(NA_integer_, nrow_(X)))
+L <- av_(
+  L,
+  level = as.integer(ifelse_(
+    L$field == "level",
+    L$value,
+    NA_character_
+  ))
+)
+
+rbind_(X, L) |>
+  rorderv_(c("entry")) |>
+  print(n = 200)
+ss_(X, X$entry %iin% cheapr::unique_(L$entry))
+
 x <- collapse::rsplit(x, ~letter, keep.by = TRUE)
 
-# Simple Example: letter == "3" -------------------------------------------
+# data transformation -----------------------------------------------------
+
+## Simple Example: letter == "3" -------------------------------------------
 x3 <- collapse::av(
   x$`3`,
   entry = collapse::fcumsum(x$`3`$source == "mainTerm/title"),
@@ -36,7 +55,7 @@ x3 <- collapse::av(
 )
 x3 <- collapse::ss(x3, x3$source %!=% "mainTerm/title", c(1L, 3L, 2L, 5:6))
 
-# Level Example: letter == "G" --------------------------------------------
+## Level Example: letter == "G" --------------------------------------------
 xG <- collapse::av(
   x$G,
   entry = collapse::fcumsum(x$G$source == "mainTerm/title"),
@@ -64,3 +83,7 @@ xG <- collapse::ss(xG, xG$entry %!iin% has_level)
 
 cheapr::unique_(xG_level$field)
 xG_level |> print(n = 100)
+
+# use_data ----------------------------------------------------------------
+
+usethis::use_data(pcs_index, overwrite = TRUE)

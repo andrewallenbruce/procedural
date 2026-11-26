@@ -19,6 +19,16 @@ csum_ <- function(x, ...) {
 }
 
 #' @noRd
+rbind_ <- function(..., id = NULL, use_names = TRUE, fill_in = FALSE) {
+  collapse::rowbind(..., idcol = id, use.names = use_names, fill = fill_in)
+}
+
+#' @noRd
+rorderv_ <- function(x, columns = NULL, ...) {
+  collapse::roworderv(X = x, cols = columns, ...)
+}
+
+#' @noRd
 ifelse_ <- function(cond, if_true, if_false, if_na = NULL) {
   cheapr::if_else_(
     condition = cond,

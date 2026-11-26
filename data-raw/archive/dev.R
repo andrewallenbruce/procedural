@@ -1,12 +1,50 @@
+# DEBUG ####
+
+x <- NULL
+x <- "0"
+x <- "00"
+x <- "001"
+x <- "0016"
+x <- "00160"
+x <- "001607"
+x <- "0016070"
+
+
+.pcs_section(x) |>
+  .pcs_system() |>
+  .pcs_operation() |>
+  .pcs_part() |>
+  .pcs_approach() |>
+  .pcs_device() |>
+  .pcs_qualifier() |>
+  .pcs_finisher()
+
+
+x <- "00" |>
+  .pcs_section() |>
+  .pcs_system() |>
+  .pcs_operation() |>
+  .pcs_part() |>
+  .pcs_approach() |>
+  .pcs_device() |>
+  .pcs_qualifier() |>
+  .pcs_finisher()
+
+.pcs_code_cli_error(x = x, n = 1)
+
 definitions(axis = "3") |>
   dplyr::count(section, value) |>
   dplyr::select(section, value) |>
   tidyr::nest(values = c(value)) |>
   dplyr::mutate(values = purrr::map(values, ~ .x$value)) |>
-  dplyr::mutate(values = purrr::map_chr(values, ~ paste0("'", .x, "'", collapse = ", ")),
-                section = purrr::map_chr(section, ~ paste0("'", .x, "'", collapse = ", "))) |>
-  dplyr::mutate(values = paste("c(", values, ")", sep = ""),
-                section = paste0(section, " =")) |>
+  dplyr::mutate(
+    values = purrr::map_chr(values, ~ paste0("'", .x, "'", collapse = ", ")),
+    section = purrr::map_chr(section, ~ paste0("'", .x, "'", collapse = ", "))
+  ) |>
+  dplyr::mutate(
+    values = paste("c(", values, ")", sep = ""),
+    section = paste0(section, " =")
+  ) |>
   tidyr::unite("definition", section, values, sep = " ")
 
 includes(axis = "4") |>
@@ -14,10 +52,14 @@ includes(axis = "4") |>
   dplyr::select(section, label) |>
   tidyr::nest(labels = c(label)) |>
   dplyr::mutate(labels = purrr::map(labels, ~ .x$label)) |>
-  dplyr::mutate(labels = purrr::map_chr(labels, ~ paste0("'", .x, "'", collapse = ", ")),
-                section = purrr::map_chr(section, ~ paste0("'", .x, "'", collapse = ", "))) |>
-  dplyr::mutate(labels = paste("c(", labels, ")", sep = ""),
-                section = paste0(section, " =")) |>
+  dplyr::mutate(
+    labels = purrr::map_chr(labels, ~ paste0("'", .x, "'", collapse = ", ")),
+    section = purrr::map_chr(section, ~ paste0("'", .x, "'", collapse = ", "))
+  ) |>
+  dplyr::mutate(
+    labels = paste("c(", labels, ")", sep = ""),
+    section = paste0(section, " =")
+  ) |>
   tidyr::unite("includes", section, labels, sep = " ")
 
 pcs("F14Z01Z")
@@ -55,7 +97,17 @@ checks("F14Z01Z") |> .def_op()
 
 paste0("(", pat1, "|", pat2, ")")
 
-x <- c('T1503', 'G0478', '81301', '69641', '0583F', '0779T', '0000V', 'D6964', 'B0123')
+x <- c(
+  'T1503',
+  'G0478',
+  '81301',
+  '69641',
+  '0583F',
+  '0779T',
+  '0000V',
+  'D6964',
+  'B0123'
+)
 
 stringfish::sf_grepl(x, "(^\\d{4}[AFMTU0-9]$|^[A-CEGHJ-MP-V]\\d{4}$)")
 

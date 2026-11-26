@@ -1,4 +1,45 @@
-#' @autoglobal
+tables() |>
+  group_by(section) |>
+  summarise(codes = sum(n_codes), prop = codes / 78220) |>
+  rename(code = section) |>
+  left_join(sections()[c('code', 'label')], by = join_by(code)) |>
+  select(code, label, codes, prop) |>
+  mutate(id = row_number(), .before = 1) |>
+  gt(rowname_col = "id") |>
+  fmt_percent(columns = prop, decimals = 1) |>
+  fmt_number(columns = codes, decimals = 0) |>
+  opt_table_font(font = google_font(name = "Rubik")) |>
+  cols_align(align = "center", columns = code) |>
+  cols_hide(c(codes, prop)) |>
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgray", alpha = 0.5),
+      cell_text(weight = "bold")
+    ),
+    locations = cells_body(columns = code)
+  ) |>
+  opt_all_caps() |>
+  opt_align_table_header(align = "left") |>
+  tab_header(title = md("**ICD-10-PCS 2024** Sections")) |>
+  cols_nanoplot(
+    columns = codes,
+    plot_type = "bar",
+    new_col_label = "# of Codes",
+    options = nanoplot_options(
+      data_bar_fill_color = "#0B0B45",
+      data_bar_stroke_color = "#0B0B45",
+      interactive_data_values = FALSE
+    )
+  ) |>
+  tab_style(
+    style = cell_borders(
+      sides = c("left"),
+      weight = "5px",
+      color = "lightgray"
+    ),
+    locations = cells_body(columns = nanoplots)
+  )
+
 #' @noRd
 .def_op <- function(x) {
   op <- definitions(
@@ -24,7 +65,6 @@
   op[2]
 }
 
-#' @autoglobal
 #' @noRd
 .inc_part <- function(x, y) {
   search <- paste0(
@@ -64,7 +104,6 @@
     tibble::deframe()
 }
 
-#' @autoglobal
 #' @noRd
 .def_ap <- function(x, y) {
   search <- paste0("(", paste0(unique(y), collapse = "|"), ")")
@@ -74,7 +113,6 @@
     tibble::deframe()
 }
 
-#' @autoglobal
 #' @noRd
 .vc_ln <- function(x, y) {
   len_vec <- x |> purrr::map_int(dplyr::n_distinct)
@@ -82,7 +120,6 @@
   rep(NA, max(len_vec) - unname(len_vec[y]))
 }
 
-#' @autoglobal
 #' @noRd
 tables <- function(x) {
   x <- checks(x)
@@ -174,7 +211,6 @@ tables <- function(x) {
     dplyr::group_split(.keep = FALSE)
 }
 
-#' @autoglobal
 #' @noRd
 .m_axis <- function(x) {
   len_vec <- x |> purrr::map_int(dplyr::n_distinct)
@@ -208,7 +244,6 @@ tables <- function(x) {
     )
 }
 
-#' @autoglobal
 #' @noRd
 .pcs_gt <- function(data) {
   clrs <- c("#0B0B45", "grey70")

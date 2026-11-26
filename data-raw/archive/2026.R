@@ -34,19 +34,3 @@ readr::write_csv(
   pcs_index_rect,
   fs::path(pcs_xml, "icd10pcs_index_2027", ext = "csv")
 )
-
-cheapr::overview(pcs_index_rect)
-collapse::num_vars(pcs_index_rect)
-collapse::cat_vars(pcs_index_rect)
-ind_split <- collapse::ss(pcs_index_rect, j = c(2, 4:6, 8, 10:15))
-ind_split <- cheapr::col_c(
-  collapse::num_vars(ind_split),
-  collapse::cat_vars(ind_split)
-)
-ind <- ind_split |>
-  collapse::rsplit(~record_index) |>
-  rlang::set_names(c("3", LETTERS))
-
-ind$A |>
-  # collapse::sbt(field == "level") |>
-  print(n = 100)

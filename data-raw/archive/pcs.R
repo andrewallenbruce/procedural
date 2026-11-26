@@ -77,9 +77,9 @@ checks <- function(x = NULL) {
     return(list(input = NA_character_))
   }
 
-  x <- stringfish::sf_toupper(as.character(x))
+  x <- toupper(as.character(x))
 
-  if (stringfish::sf_nchar(x) > 7L) {
+  if (nchar(x) > 7L) {
     cli::cli_abort(
       c(
         "{.strong PCS} codes have {.strong 7} characters.",
@@ -113,7 +113,7 @@ checks <- function(x = NULL) {
     .clierr(x, 1)
 
     x$head <- x$opt[
-      which(x$opt$value == stringfish::sf_substr(x$input, 1, 1)),
+      which(x$opt$value == substr(x$input, 1, 1)),
     ]
 
     # x$opt <- NULL
@@ -129,23 +129,23 @@ checks <- function(x = NULL) {
   #2
 
   # Filter to section
-  x$opt <- system <- systems(stringfish::sf_substr(x$input, 1, 1))[2:5]
+  x$opt <- system <- systems(substr(x$input, 1, 1))[2:5]
 
   # Return all systems
-  if (stringfish::sf_nchar(x$input) == 1L) {
+  if (nchar(x$input) == 1L) {
     .cli(x)
     invisible(x)
   }
 
   # Return selected system
-  if (stringfish::sf_nchar(x$input) > 1L) {
+  if (nchar(x$input) > 1L) {
     .clierr(x, 2)
 
     x$head <- vctrs::vec_rbind(
       x$head,
       vctrs::vec_slice(
         system,
-        system$value == stringfish::sf_substr(x$input, 2, 2)
+        system$value == substr(x$input, 2, 2)
       )
     )
 
@@ -163,7 +163,7 @@ checks <- function(x = NULL) {
 
   # Filter to system
   select <- get_pin("tables_rows") |>
-    dplyr::filter(system == stringfish::sf_substr(x$input, 1, 2)) |>
+    dplyr::filter(system == substr(x$input, 1, 2)) |>
     dplyr::select(code_2, name_3:rows)
 
   # Create operation object
@@ -173,24 +173,24 @@ checks <- function(x = NULL) {
     dplyr::distinct()
 
   # Return all operations
-  if (stringfish::sf_nchar(x$input) == 2L) {
+  if (nchar(x$input) == 2L) {
     .cli(x)
     invisible(x)
   }
 
   # Return selected operation
-  if (stringfish::sf_nchar(x$input) > 2L) {
+  if (nchar(x$input) > 2L) {
     .clierr(x, 3)
 
     # TODO Axis 3 Definition
     x$definitions <- switch(
-      stringfish::sf_substr(x$input, 1, 1),
-      'D' = dplyr::tibble(label = character(0), definition = character(0)),
+      substr(x$input, 1, 1),
+      D = dplyr::tibble(label = character(0), definition = character(0)),
       definitions(
-        section = stringfish::sf_substr(x$input, 1, 1),
+        section = substr(x$input, 1, 1),
         axis = "3",
         col = "value",
-        search = stringfish::sf_substr(x$input, 3, 3),
+        search = substr(x$input, 3, 3),
         display = TRUE
       )
     )
@@ -200,14 +200,14 @@ checks <- function(x = NULL) {
       x$head,
       vctrs::vec_slice(
         operation,
-        operation$value == stringfish::sf_substr(x$input, 3, 3)
+        operation$value == substr(x$input, 3, 3)
       )
     )
 
     # Filtered pin to pass on
     x$select <- vctrs::vec_slice(
       select,
-      select$table == stringfish::sf_substr(x$input, 1, 3)
+      select$table == substr(x$input, 1, 3)
     ) |>
       dplyr::select(name_4:rows)
 
@@ -231,35 +231,35 @@ checks <- function(x = NULL) {
     dplyr::distinct()
 
   # Return all parts
-  if (stringfish::sf_nchar(x$input) == 3L) {
+  if (nchar(x$input) == 3L) {
     .cli(x)
     invisible(x)
   }
 
   # Return selected part
-  if (stringfish::sf_nchar(x$input) > 3L) {
+  if (nchar(x$input) > 3L) {
     .clierr(x, 4)
 
     x$head <- vctrs::vec_rbind(
       x$head,
       vctrs::vec_slice(
         part,
-        part$value == stringfish::sf_substr(x$input, 4, 4)
+        part$value == substr(x$input, 4, 4)
       )
     )
 
     # TODO Axis 4 Includes
     x$includes <- switch(
-      stringfish::sf_substr(x$input, 1, 1),
-      "0" = ,
-      "3" = ,
-      "F" = ,
-      "G" = ,
-      "X" = includes(
-        section = stringfish::sf_substr(x$input, 1, 1),
+      substr(x$input, 1, 1),
+      `0` = ,
+      `3` = ,
+      F = ,
+      G = ,
+      X = includes(
+        section = substr(x$input, 1, 1),
         axis = "4",
         col = "label",
-        search = fuimus::delister(x$head[4, 4])
+        search = unlist(x$head[4, 4], use.names = FALSE)
       ),
       dplyr::tibble(
         section = character(0),
@@ -272,7 +272,7 @@ checks <- function(x = NULL) {
 
     x$select <- vctrs::vec_slice(
       x$select,
-      x$select$row == stringfish::sf_substr(x$input, 1, 4)
+      x$select$row == substr(x$input, 1, 4)
     ) |>
       dplyr::select(rowid:rows) |>
       tidyr::unnest(rows) |>
@@ -297,20 +297,20 @@ checks <- function(x = NULL) {
   x$opt <- collapse::funique(x$select$`5`[c("axis", "name", "value", "label")])
 
   # Return all approaches
-  if (stringfish::sf_nchar(x$input) == 4L) {
+  if (nchar(x$input) == 4L) {
     .cli(x)
     invisible(x)
   }
 
   # Return selected approach
-  if (stringfish::sf_nchar(x$input) > 4L) {
+  if (nchar(x$input) > 4L) {
     .clierr(x, 5)
 
     x <- purrr::list_flatten(x)
 
     x$select_5 <- vctrs::vec_slice(
       x$select_5,
-      x$select_5$value == stringfish::sf_substr(x$input, 5, 5)
+      x$select_5$value == substr(x$input, 5, 5)
     )
 
     x$id <- collapse::funique(x$select_5$rowid)
@@ -336,23 +336,23 @@ checks <- function(x = NULL) {
 
     # TODO Axis 5 Definition
     x$definitions <- switch(
-      stringfish::sf_substr(x$input, 1, 1),
-      "0" = ,
-      "1" = ,
-      "2" = ,
-      "3" = ,
-      "4" = ,
-      "7" = ,
-      "8" = ,
-      "9" = ,
-      "F" = ,
-      "X" = vctrs::vec_rbind(
+      substr(x$input, 1, 1),
+      `0` = ,
+      `1` = ,
+      `2` = ,
+      `3` = ,
+      `4` = ,
+      `7` = ,
+      `8` = ,
+      `9` = ,
+      F = ,
+      X = vctrs::vec_rbind(
         x$definitions,
         definitions(
-          section = stringfish::sf_substr(x$input, 1, 1),
+          section = substr(x$input, 1, 1),
           axis = "5",
           col = "value",
-          search = stringfish::sf_substr(x$input, 5, 5),
+          search = substr(x$input, 5, 5),
           # col = "label",
           # search = delister(x$head[5, 4])
           display = TRUE
@@ -374,21 +374,23 @@ checks <- function(x = NULL) {
 .device <- function(x) {
   #6
 
-  x$opt <- collapse::funique(x$select_6[c("axis", "name", "value", "label")])
+  x$opt <- collapse::funique(
+    x$select_6[c("axis", "name", "value", "label")]
+  )
 
   # Return all devices
-  if (stringfish::sf_nchar(x$input) == 5L) {
+  if (nchar(x$input) == 5L) {
     .cli(x)
     invisible(x)
   }
 
   # Return selected device
-  if (stringfish::sf_nchar(x$input) > 5L) {
+  if (nchar(x$input) > 5L) {
     .clierr(x, 6)
 
     x$select_6 <- vctrs::vec_slice(
       x$select_6,
-      x$select_6$value == stringfish::sf_substr(x$input, 6, 6)
+      x$select_6$value == substr(x$input, 6, 6)
     )
 
     x$id <- vctrs::vec_set_intersect(
@@ -417,15 +419,15 @@ checks <- function(x = NULL) {
 
     # TODO Axis 6 Includes
     x$includes <- switch(
-      stringfish::sf_substr(x$input, 1, 1),
-      "0" = ,
-      "3" = ,
-      "F" = ,
-      "G" = ,
-      "X" = vctrs::vec_rbind(
+      substr(x$input, 1, 1),
+      `0` = ,
+      `3` = ,
+      F = ,
+      G = ,
+      X = vctrs::vec_rbind(
         x$includes,
         includes(
-          section = stringfish::sf_substr(x$input, 1, 1),
+          section = substr(x$input, 1, 1),
           axis = "4",
           col = "label",
           search = fuimus::delister(x$head[6, 4])
@@ -453,20 +455,22 @@ checks <- function(x = NULL) {
 .qualifier <- function(x) {
   #7
 
-  x$opt <- collapse::funique(x$select_7[c("axis", "name", "value", "label")])
+  x$opt <- collapse::funique(
+    x$select_7[c("axis", "name", "value", "label")]
+  )
 
   # Return all devices
-  if (stringfish::sf_nchar(x$input) == 6L) {
+  if (nchar(x$input) == 6L) {
     .cli(x)
     invisible(x)
   }
 
-  if (stringfish::sf_nchar(x$input) > 6L) {
+  if (nchar(x$input) > 6L) {
     .clierr(x, 7)
 
     x$select_7 <- vctrs::vec_slice(
       x$select_7,
-      x$select_7$value == stringfish::sf_substr(x$input, 7, 7)
+      x$select_7$value == substr(x$input, 7, 7)
     )
 
     x$id <- vctrs::vec_set_intersect(

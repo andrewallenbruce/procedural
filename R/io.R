@@ -21,96 +21,6 @@ pkg_files <- function(ext = NULL) {
 }
 
 #' @noRd
-parse_xml <- function(profile = c("index", "tables", "definitions")) {
-  xmls_ <- pkg_files(ext = "xml")
-  prof_ <- rlang::arg_match(profile)
-  path_ <- grep(
-    paste0("icd10pcs_", prof_),
-    xmls_,
-    value = TRUE,
-    perl = TRUE
-  )
-  if (is.null(path_) || length(path_) != 1L) {
-    return(NULL)
-  }
-
-  collapse::ss(
-    xmlrectr::rectangle_xml(
-      file = path_,
-      xmlrectr::compile_xml_profile(
-        profile = xmlrectr::xml_profile(
-          rows = switch(
-            prof_,
-            index = "ICD10PCS.index/letter",
-            tables = "ICD10PCS.tabular/pcsTable",
-            definitions = "ICD10PCS.definitions/section"
-          )
-        ),
-        sample = path_
-      ),
-      parallel = TRUE
-    ),
-    j = c(2L, 4:6, 8:14)
-  )
-}
-
-#' @noRd
-parse_txt <- function(profile = c("order", "conversion")) {
-  txts_ <- pkg_files(ext = "txt")
-  prof_ <- rlang::arg_match(profile)
-  path_ <- grep(
-    paste0("icd10pcs_", prof_, "_"),
-    txts_,
-    value = TRUE,
-    perl = TRUE
-  )
-  if (is.null(path_) || length(path_) != 1L) {
-    return(NULL)
-  }
-
-  x <- switch(
-    prof_,
-    order = readr::read_fwf(
-      file = path_,
-      readr::fwf_cols(
-        order = c(1L, 5L),
-        code = c(6L, 13L),
-        valid = 14:15,
-        description_short = c(16L, 76L),
-        description = c(77L, NA_integer_)
-      ),
-      show_col_types = FALSE,
-      col_types = "icicc",
-      num_threads = 4L
-    ),
-    conversion = suppressWarnings(
-      collapse::ss(
-        readr::read_tsv(
-          file = path_,
-          col_types = "c",
-          col_names = c(
-            "current_code",
-            "current_title",
-            "year_effective",
-            "prior_code",
-            "prior_title",
-            "change",
-            "comment",
-            "mday_effective"
-          ),
-          show_col_types = FALSE,
-          num_threads = 4L
-        ),
-        -1L
-      )
-    )
-  )
-
-  class(x) <- cheapr::setdiff_(class(x), "spec_tbl_df")
-  return(x)
-}
-
-#' @noRd
 load_parquet <- function(
   profile = c(
     "index",
@@ -132,10 +42,7 @@ load_parquet <- function(
 }
 
 #' @noRd
-process_order <- function(txt = FALSE) {
-  if (txt) {
-    return(parse_txt(profile = "order"))
-  }
+process_order <- function() {
   x <- load_parquet(profile = "order")
   collapse::gv(x, "description_short") <- NULL
   ss_(
@@ -148,10 +55,7 @@ process_order <- function(txt = FALSE) {
 }
 
 #' @noRd
-process_conversion <- function(txt = FALSE) {
-  if (txt) {
-    return(parse_txt(profile = "conversion"))
-  }
+process_conversion <- function() {
   x <- load_parquet(profile = "conversion")
   x <- av_(
     x,
@@ -185,16 +89,9 @@ process_conversion <- function(txt = FALSE) {
 }
 
 #' @noRd
-process_index <- function(xml = FALSE) {
-  if (xml) {
-    return(parse_xml(profile = "index"))
-  }
+process_index <- function() {
   x <- load_parquet(profile = "index")
-
-  x <- ss_(
-    x,
-    col = colnames(x) %iin% c("entity", "field", "value", "source")
-  )
+  x <- ss_(x, col = colnames(x) %iin% c("entity", "field", "value", "source"))
 
   # create letter column ----------------------------------------------------
   x <- av_(
@@ -219,34 +116,26 @@ process_index <- function(xml = FALSE) {
     ))
   )
 
+  x <- ss_(x, x$source %!=% "mainTerm/title")
+
+  x <- av_(
+    x,
+    id = collapse::seq_row(x),
+    lv = as.integer(ifelse_(x$field == "level", x$value, NA))
+  )
+
   ss_(
     x,
-    x$source %!=% "mainTerm/title",
-    colnames(x) %iin%
-      c(
-        "entry",
-        "letter",
-        "term",
-        "field",
-        "value",
-        "source"
-      )
+    col = colnames(x) %iin%
+      c("id", "entry", "letter", "lv", "term", "field", "value", "source")
   )
 }
 
 #' @noRd
-process_tables <- function(xml = FALSE) {
-  if (xml) {
-    return(parse_xml(profile = "tables"))
-  }
-
+process_tables <- function() {
   x <- load_parquet(profile = "tables")
-
-  x <- ss_(
-    x,
-    x$field %!iin% c("definition", "values"),
-    colnames(x) %iin% c("record_index", "entity", "field", "value")
-  )
+  i <- colnames(x) %iin% c("record_index", "entity", "field", "value")
+  x <- ss_(x, x$field %!iin% c("definition", "values"), i)
 
   collapse::setrename(x, table = "record_index")
 
@@ -254,7 +143,7 @@ process_tables <- function(xml = FALSE) {
 
   x <- collapse::rsplit(x, ~table, keep.by = TRUE)
   x <- purrr::map(x, map_tables)
-  x <- collapse::rowbind(x)
+  x <- rbind_(x)
 
   collapse::settfmv(x, "pos", as.integer)
   return(x)
@@ -301,16 +190,12 @@ map_tables <- function(x) {
       )
     })
 
-  row <- collapse::rowbind(tab, collapse::rowbind(row))
+  row <- rbind_(tab, rbind_(row))
   av_(row, table = rep.int(x$table[1L], nrow_(row)))
 }
 
 #' @noRd
-process_definitions_file <- function(xml = FALSE) {
-  if (xml) {
-    return(parse_xml(profile = "definitions"))
-  }
-
+definitions_file <- function() {
   x <- load_parquet(profile = "definitions")
 
   # create section/axis/name columns ----------------------------------------
@@ -354,7 +239,7 @@ process_definitions_file <- function(xml = FALSE) {
   )
   x <- collapse::rsplit(x, ~record_index)
   x <- purrr::map(x, map_definitions_file)
-  x <- collapse::rowbind(x)
+  x <- rbind_(x)
 
   x <- av_(x, entry = csum_(x$field == "value"))
   collapse::settfmv(x, "axis", as.integer)
@@ -396,14 +281,14 @@ map_definitions_file <- function(x) {
   x <- ss_(x, x$run %!iin% runs)
 
   if (nrow_(xrun) > 0L) {
-    x <- collapse::rowbind(
+    x <- rbind_(
       x,
       collapse::gby(xrun, run) |>
         collapse::mtt(value = cheapr::paste_(value, collapse = " | ")) |>
         collapse::funique(cols = "run") |>
         collapse::fungroup()
     ) |>
-      collapse::roworderv("run")
+      rorderv_(c("run"))
   }
 
   collapse::gv(x, c("run", "entry", "entity")) <- NULL
@@ -412,27 +297,27 @@ map_definitions_file <- function(x) {
 
 #' @noRd
 process_includes <- function() {
-  x <- process_definitions_file()
+  x <- definitions_file()
   x <- ss_(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
 
   i <- cheapr::counts(x$entry)
   i <- ss_(i, i$count > 1L) |> pull_("key")
 
-  collapse::rowbind(
-    collapse::ss(x, x$entry %!iin% i),
-    collapse::ss(x, x$entry %iin% i) |>
+  rbind_(
+    ss_(x, x$entry %!iin% i),
+    ss_(x, x$entry %iin% i) |>
       collapse::gby(entry, term) |>
       collapse::mtt(includes = cheapr::paste_(includes, collapse = " | ")) |>
       collapse::fungroup() |>
       collapse::funique()
   ) |>
-    collapse::roworderv(c("entry"))
+    rorderv_(c("entry"))
 }
 
 #' @noRd
 process_explanation <- function() {
-  x <- process_definitions_file()
+  x <- definitions_file()
   x <- ss_(x, x$field %==% "Explanation", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
   return(x)
@@ -440,7 +325,7 @@ process_explanation <- function() {
 
 #' @noRd
 process_definitions <- function() {
-  x <- process_definitions_file()
+  x <- definitions_file()
   x <- ss_(x, x$field %==% "Definition", colnames(x) %!=% "field")
   collapse::setrename(x, value = "definition")
   return(x)
