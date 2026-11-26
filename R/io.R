@@ -91,16 +91,21 @@ process_conversion <- function() {
 #' @noRd
 process_index <- function() {
   x <- load_parquet(profile = "index")
-  x <- ss_(x, col = colnames(x) %iin% c("entity", "field", "value", "source"))
+  x <- ss_(
+    x,
+    col = match_(c("entity", "field", "value", "source"), colnames(x))
+  )
 
   # create letter column ----------------------------------------------------
   x <- av_(
     x,
-    letter = fill_(ifelse_(
-      x$entity == "letter",
-      x$value,
-      NA_character_
-    ))
+    letter = fill_(
+      ifelse_(
+        x$entity == "letter",
+        x$value,
+        NA_character_
+      )
+    )
   )
 
   x <- ss_(x, x$entity %!=% "letter", colnames(x) %!=% "entity")
@@ -109,33 +114,51 @@ process_index <- function() {
   x <- av_(
     x,
     entry = csum_(x$source == "mainTerm/title"),
-    term = fill_(ifelse_(
-      x$source == "mainTerm/title",
-      x$value,
-      NA_character_
-    ))
+    term = fill_(
+      ifelse_(
+        x$source == "mainTerm/title",
+        x$value,
+        NA_character_
+      )
+    )
   )
 
   x <- ss_(x, x$source %!=% "mainTerm/title")
 
   x <- av_(
     x,
-    id = collapse::seq_row(x),
-    lv = as.integer(ifelse_(x$field == "level", x$value, NA))
+    row = collapse::seq_row(x),
+    lvl = as.integer(ifelse_(x$field == "level", x$value, NA)),
+    lid = csum_(x$field == "level")
   )
 
   ss_(
     x,
-    col = colnames(x) %iin%
-      c("id", "entry", "letter", "lv", "term", "field", "value", "source")
+    col = match_(
+      c(
+        "row",
+        "entry",
+        "letter",
+        "lvl",
+        "lid",
+        "field",
+        "value",
+        "source",
+        "term"
+      ),
+      colnames(x)
+    )
   )
 }
 
 #' @noRd
 process_tables <- function() {
   x <- load_parquet(profile = "tables")
-  i <- colnames(x) %iin% c("record_index", "entity", "field", "value")
-  x <- ss_(x, x$field %!iin% c("definition", "values"), i)
+  x <- ss_(
+    x,
+    x$field %!iin% c("definition", "values"),
+    match_(c("record_index", "entity", "field", "value"), colnames(x))
+  )
 
   collapse::setrename(x, table = "record_index")
 

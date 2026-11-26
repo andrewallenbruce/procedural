@@ -1,41 +1,38 @@
 library(procedural)
-
+library(tibble)
 x <- process_index()
-x <- av_(
-  x,
-  id = collapse::seq_row(x),
-  lvl = as.integer(ifelse_(x$field == "level", x$value, NA))
-)
-
-
+x |> print(n = 50)
+g <- collapse::GRP(x, ~entry)
 av_(
-  L,
-  level = as.integer(ifelse_(
-    L$field == "level",
-    L$value,
-    NA_character_
-  ))
-)
+  g,
+  # lvl = fill_(g$lv),
+  lvN = csum_(g$field == "level")
+) |>
+  print(n = 50)
 
-Entry <- ss_(x, x$field %==% "level") |> pull_("entry") |> cheapr::unique_()
+collapse::fgroup_by(x, entry) |>
+  collapse::mtt(
+    lvl = fill_(lv),
+    lid = csum_(field == "level") / 10 + entry,
+    lid = as.character(lid),
+    lid = ifelse_(cheapr::is_na(lvl), NA_character_, lid),
+    lvl = NULL
+  ) |>
+  print(n = 50)
 
-ss_(x, x$entry %iin% Entry)
 
-X <- ss_(x, x$field %!=% "level")
-X <- av_(X, level = rep.int(NA_integer_, nrow_(X)))
-L <- av_(
-  L,
-  level = as.integer(ifelse_(
-    L$field == "level",
-    L$value,
-    NA_character_
-  ))
-)
+level_by_entry <- ss_(
+  x,
+  cheapr::which_not_na(x$lv),
+  colnames(x) %iin% c("id", "entry", "lv")
+) |>
+  collapse::funique()
 
-rbind_(X, L) |>
-  rorderv_(c("entry")) |>
-  print(n = 200)
-ss_(X, X$entry %iin% cheapr::unique_(L$entry))
+av_(level_by_entry, id2 = cheapr::lag_(level_by_entry$id, -1L))
+collapse::rsplit(level_by_entry, ~entry)
+
+# Entry <- ss_(x, x$field %==% "level") |> pull_("entry") |> cheapr::unique_()
+# ss_(x, x$entry %iin% Entry)
 
 x <- collapse::rsplit(x, ~letter, keep.by = TRUE)
 
