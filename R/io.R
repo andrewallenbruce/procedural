@@ -128,9 +128,16 @@ process_index <- function() {
   x <- av_(
     x,
     row = collapse::seq_row(x),
-    lvl = as.integer(ifelse_(x$field == "level", x$value, NA)),
-    lid = csum_(x$field == "level")
+    lvl = as.integer(ifelse_(x$field == "level", x$value, NA))
   )
+
+  x <- collapse::fgroup_by(x, entry) |>
+    collapse::mtt(
+      lvl = fill_(lvl),
+      lid = csum_(field == "level"),
+      lid = ifelse_(cheapr::is_na(lvl), NA_integer_, lid)
+    ) |>
+    collapse::fungroup()
 
   ss_(
     x,
@@ -143,12 +150,62 @@ process_index <- function() {
         "lid",
         "field",
         "value",
-        "source",
-        "term"
+        "term",
+        "source"
       ),
       colnames(x)
     )
   )
+}
+
+#' @noRd
+index_non_level <- function(x) {
+  non <- ss_(
+    x,
+    cheapr::is_na(x$lvl) & cheapr::is_na(x$lid),
+    colnames(x) %!iin% c("lvl", "lid", "source")
+  )
+  i <- cheapr::counts(non$entry)
+  i <- pull_(ss_(i, i$count > 1L), "key")
+
+  non_single <- ss_(non, non$entry %!iin% i)
+
+  non_single <- collapse::rsplit(non_single, ~field)
+  collapse::setrename(non_single$code, value = "code")
+  collapse::setrename(non_single$codes, value = "code")
+  collapse::setrename(non_single$tab, value = "code")
+  collapse::setrename(non_single$see, value = "see")
+  collapse::setrename(non_single$use, value = "use")
+  non_single$code <- rbind_(non_single$code, non_single$codes, non_single$tab)
+  non_single$codes <- non_single$tab <- NULL
+
+  non_single <- collapse::join(
+    non_single$code,
+    non_single$see,
+    how = "full",
+    on = c("row", "entry", "letter", "term"),
+    verbose = 0L,
+    overid = 0L
+  ) |>
+    collapse::join(
+      non_single$use,
+      how = "full",
+      on = c("row", "entry", "letter", "term"),
+      verbose = 0L,
+      overid = 0L
+    ) |>
+    collapse::colorderv(c(
+      "row",
+      "entry",
+      "letter",
+      "term",
+      "see",
+      "use",
+      "code"
+    )) |>
+    rorderv_(c("letter", "row", "entry"))
+
+  non_multi <- ss_(non, non$entry %iin% i)
 }
 
 #' @noRd
@@ -249,17 +306,12 @@ definitions_file <- function() {
   x <- ss_(
     x,
     x$entity %!=% "section",
-    colnames(x) %iin%
-      c(
-        "section",
-        "axis",
-        "name",
-        "record_index",
-        "entity",
-        "field",
-        "value"
-      )
+    match_(
+      c("section", "axis", "name", "record_index", "entity", "field", "value"),
+      colnames(x)
+    )
   )
+
   x <- collapse::rsplit(x, ~record_index)
   x <- purrr::map(x, map_definitions_file)
   x <- rbind_(x)
@@ -297,8 +349,8 @@ map_definitions_file <- function(x) {
   x <- av_(x, entry = x$entity == "axis/terms/title")
   x <- av_(x, run = vctrs::vec_identify_runs(x$entry))
 
-  runs <- ss_(x, x$entry) |> pull_("run") |> cheapr::counts()
-  runs <- ss_(runs, runs$count > 1L) |> pull_("key")
+  runs <- cheapr::counts(pull_(ss_(x, x$entry), "run"))
+  runs <- pull_(ss_(runs, runs$count > 1L), "key")
 
   xrun <- ss_(x, x$run %iin% runs)
   x <- ss_(x, x$run %!iin% runs)
