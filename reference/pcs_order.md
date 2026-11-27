@@ -12,7 +12,7 @@ pcs_order
 
 ### `pcs_order`
 
-A data frame with 80,174 rows and 5 columns:
+A data frame with 80,174 rows and 4 columns:
 
 - order:
 
@@ -26,10 +26,6 @@ A data frame with 80,174 rows and 5 columns:
 
   ICD-10-PCS code
 
-- description_short:
-
-  code description, short
-
-- description_long:
+- description:
 
   code description, long

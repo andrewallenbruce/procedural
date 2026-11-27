@@ -5,16 +5,16 @@ PCS Axes of Classification
 ## Usage
 
 ``` r
-table(x = NULL)
+table(code = NULL)
 
-section(x = NULL)
+section(code = NULL)
 
-system(x = NULL)
+system(code = NULL)
 ```
 
 ## Arguments
 
-- x:
+- code:
 
   alphanumeric code; default is `NULL`
 

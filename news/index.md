@@ -1,5 +1,11 @@
 # Changelog
 
+## procedural 0.0.1.9021
+
+- simplified `definition` and `tables` function families
+- reprocessed `order` file
+- cleaned up `io` code flow
+
 ## procedural 0.0.1.9020
 
 - renaming, restructuring, rewriting
