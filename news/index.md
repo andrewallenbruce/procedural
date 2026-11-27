@@ -1,5 +1,9 @@
 # Changelog
 
+## procedural 0.0.1.9020
+
+- renaming, restructuring, rewriting
+
 ## procedural 0.0.1.9019
 
 - refactored
@@ -37,7 +41,7 @@
 ## procedural 0.0.1.9012
 
 - added
-  [`table()`](https://andrewallenbruce.github.io/procedural/reference/section.md)
+  [`table()`](https://andrewallenbruce.github.io/procedural/reference/table.md)
 - added
   [`index()`](https://andrewallenbruce.github.io/procedural/reference/index.md)
 
