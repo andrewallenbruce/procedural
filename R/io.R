@@ -159,14 +159,53 @@ process_index <- function() {
 
   list(
     non = index_non_level(x),
-    lvl = ss_(
-      x,
-      cheapr::intersect_(
-        cheapr::which_not_na(x$lvl),
-        cheapr::which_not_na(x$lid)
-      ),
-      colnames(x) %!iin% c("source")
-    )
+    lvl = index_levels(x)
+  )
+}
+
+#' @noRd
+index_levels <- function(x) {
+  x <- ss_(
+    x,
+    cheapr::intersect_(
+      cheapr::which_not_na(x$lvl),
+      cheapr::which_not_na(x$lid)
+    ),
+    colnames(x) %!iin% c("source")
+  )
+
+  collapse::gv(x, "field") <- cheapr::val_match(
+    x$field,
+    "code" ~ "use::code",
+    "tab" ~ "see::tab",
+    "see/tab" ~ "see::tab",
+    "codes" ~ "see::codes",
+    "see/codes" ~ "see::codes",
+    "use/tab" ~ "use::tab",
+    .default = x$field
+  )
+
+  lvl4_ <- collapse::funique(ss_(x, x$lvl %==% 4L)$entry)
+  lvl_4 <- ss_(x, x$entry %iin% lvl4_)
+  non_4 <- ss_(x, x$entry %!iin% lvl4_)
+
+  lvl3_ <- collapse::funique(ss_(non_4, non_4$lvl %==% 3L)$entry)
+  lvl_3 <- ss_(non_4, non_4$entry %iin% lvl3_)
+  non_3 <- ss_(non_4, non_4$entry %!iin% lvl3_)
+
+  lvl2_ <- collapse::funique(ss_(non_3, non_3$lvl %==% 2L)$entry)
+  lvl_2 <- ss_(non_3, non_3$entry %iin% lvl2_)
+  non_2 <- ss_(non_3, non_3$entry %!iin% lvl2_)
+
+  lvl1_ <- collapse::funique(ss_(non_2, non_2$lvl %==% 1L)$entry)
+  lvl_1 <- ss_(non_2, non_2$entry %iin% lvl1_)
+  lvl_1 <- ss_(lvl_1, lvl_1$field %!=% "level", colnames(lvl_1) %!iin% c("lvl"))
+
+  list(
+    `4` = lvl_4,
+    `3` = lvl_3,
+    `2` = lvl_2,
+    `1` = lvl_1
   )
 }
 
