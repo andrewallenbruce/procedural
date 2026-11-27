@@ -28,13 +28,13 @@ definitions <- function(section = NULL, axis = NULL, term = NULL) {
   x <- procedural::pcs_definitions
 
   if (!is.null(section)) {
-    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    section <- rlang::arg_match(section, funique_(x[["section"]]))
     x <- ss_(x, x[["section"]] %iin% section)
   }
 
   if (!is.null(axis)) {
     axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
+    axis <- rlang::arg_match(axis, as.character(funique_(x[["axis"]])))
     x <- ss_(x, x[["axis"]] %iin% axis)
   }
 
@@ -58,18 +58,13 @@ includes <- function(section = NULL, axis = NULL, term = NULL) {
   x <- procedural::pcs_includes
 
   if (!is.null(section)) {
-    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    section <- rlang::arg_match(section, funique_(x[["section"]]))
     x <- ss_(x, x[["section"]] %iin% section)
   }
 
   if (!is.null(axis)) {
     axis <- as.character(axis)
-    axis <- rlang::arg_match(
-      axis,
-      as.character(
-        collapse::funique(x[["axis"]])
-      )
-    )
+    axis <- rlang::arg_match(axis, as.character(funique_(x[["axis"]])))
     x <- ss_(x, x[["axis"]] %iin% axis)
   }
 
@@ -93,13 +88,13 @@ explanations <- function(section = NULL, axis = NULL, term = NULL) {
   x <- procedural::pcs_explanations
 
   if (!is.null(section)) {
-    section <- rlang::arg_match(section, collapse::funique(x[["section"]]))
+    section <- rlang::arg_match(section, funique_(x[["section"]]))
     x <- ss_(x, x[["section"]] %iin% section)
   }
 
   if (!is.null(axis)) {
     axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
+    axis <- rlang::arg_match(axis, as.character(funique_(x[["axis"]])))
     x <- ss_(x, x[["axis"]] %iin% axis)
   }
 

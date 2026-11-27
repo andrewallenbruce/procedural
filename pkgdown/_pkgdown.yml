@@ -7,10 +7,10 @@ template:
   bootstrap: 5
   theme: tango
   bslib:
-    font_scale: 1.15
+    font_scale: 1.6
     line_height: 2
-    base_font: {google: "Roboto Condensed"}
-    heading_font: {google: "Atkinson Hyperlegible"}
+    base_font: {google: "Inter"}
+    heading_font: {google: "Fraunces"}
     code_font: "Hack, mono"
   includes:
     in_header: <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hack-font@3/build/web/hack-subset.css">
@@ -33,7 +33,24 @@ navbar:
     - github
     - twitter
     - linkedin
+    - lightswitch
   components:
+    search:
+      search: []
+    lightswitch:
+      icon: fa-sun
+      aria-label: Light switch
+      id: lightswitch
+      menu:
+      - text: Light
+        theme: light
+        icon: fa-sun
+      - text: Dark
+        theme: dark
+        icon: fa-moon
+      - text: Auto
+        theme: auto
+        icon: fa-adjust
     home:
       icon: fas fa-home fa-lg
       text: ""

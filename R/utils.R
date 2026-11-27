@@ -39,6 +39,16 @@ ifelse_ <- function(cond, if_true, if_false, if_na = NULL) {
 }
 
 #' @noRd
+count_ <- function(x, ...) {
+  cheapr::counts(x = x, ...)
+}
+
+#' @noRd
+funique_ <- function(x, ...) {
+  collapse::funique(x, ...)
+}
+
+#' @noRd
 all_ <- function(x) {
   collapse::allv(x = x, value = TRUE)
 }

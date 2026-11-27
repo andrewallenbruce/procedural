@@ -6,14 +6,14 @@
 \alias{system}
 \title{PCS Axes of Classification}
 \usage{
-table(x = NULL)
+table(code = NULL)
 
-section(x = NULL)
+section(code = NULL)
 
-system(x = NULL)
+system(code = NULL)
 }
 \arguments{
-\item{x}{alphanumeric code; default is \code{NULL}}
+\item{code}{alphanumeric code; default is \code{NULL}}
 }
 \value{
 tibble

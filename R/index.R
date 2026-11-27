@@ -26,7 +26,7 @@ index <- function(letter = NULL, term = NULL) {
   x <- procedural::pcs_index
 
   if (!is.null(letter)) {
-    letter <- rlang::arg_match(letter, collapse::funique(x[["letter"]]))
+    letter <- rlang::arg_match(letter, funique_(x[["letter"]]))
     x <- ss_(x, x[["letter"]] %iin% letter)
   }
 

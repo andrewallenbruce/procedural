@@ -45,38 +45,20 @@ load_parquet <- function(
 process_order <- function() {
   x <- load_parquet(profile = "order")
   collapse::gv(x, "description_short") <- NULL
-  ss_(
-    x,
-    row = cheapr::c_(
-      collapse::num_vars(x, 3L),
-      collapse::cat_vars(x, 3L)
-    )
-  )
+  collapse::setrename(x, description_long = "description")
+  i <- cheapr::c_(collapse::num_vars(x, 3L), collapse::cat_vars(x, 3L))
+  ss_(x, col = i)
 }
 
 #' @noRd
 process_conversion <- function() {
   x <- load_parquet(profile = "conversion")
-  x <- av_(
-    x,
-    date_effective = as.Date(
-      cheapr::paste_(
-        x$year_effective,
-        "-",
-        gsub(
-          ".",
-          "-",
-          ifelse_(
-            cheapr::is_na(x$mday_effective),
-            x$comment,
-            x$mday_effective
-          ),
-          fixed = TRUE
-        )
-      ),
-      format = "%Y-%m-%d"
-    )
-  )
+
+  m <- ifelse_(cheapr::is_na(x$mday_effective), x$comment, x$mday_effective)
+  m <- gsub(".", "-", m, fixed = TRUE)
+  m <- cheapr::paste_(x$year_effective, "-", m)
+  x <- av_(x, date_effective = as.Date(m, format = "%Y-%m-%d"))
+
   collapse::setrename(
     x,
     current_code = "current",
@@ -84,6 +66,7 @@ process_conversion <- function() {
     date_effective = "date",
     year_effective = "year"
   )
+
   collapse::settfmv(x, "year", as.integer)
   collapse::gv(x, c("year", "date", "change", "current", "prior"))
 }
@@ -91,10 +74,8 @@ process_conversion <- function() {
 #' @noRd
 process_index <- function() {
   x <- load_parquet(profile = "index")
-  x <- ss_(
-    x,
-    col = match_(c("entity", "field", "value", "source"), colnames(x))
-  )
+  COLS <- c("entity", "field", "value", "source")
+  x <- ss_(x, col = match_(COLS, colnames(x)))
 
   # create letter column ----------------------------------------------------
   x <- av_(
@@ -139,23 +120,19 @@ process_index <- function() {
     ) |>
     collapse::fungroup()
 
-  x <- ss_(
-    x,
-    col = match_(
-      c(
-        "row",
-        "entry",
-        "letter",
-        "lvl",
-        "lid",
-        "field",
-        "value",
-        "term",
-        "source"
-      ),
-      colnames(x)
-    )
+  COLS <- c(
+    "row",
+    "entry",
+    "letter",
+    "lvl",
+    "lid",
+    "field",
+    "value",
+    "term",
+    "source"
   )
+
+  x <- ss_(x, col = match_(COLS, colnames(x)))
 
   list(
     non = index_non_level(x),
@@ -165,14 +142,11 @@ process_index <- function() {
 
 #' @noRd
 index_levels <- function(x) {
-  x <- ss_(
-    x,
-    cheapr::intersect_(
-      cheapr::which_not_na(x$lvl),
-      cheapr::which_not_na(x$lid)
-    ),
-    colnames(x) %!iin% c("source")
+  i <- cheapr::intersect_(
+    cheapr::which_not_na(x$lvl),
+    cheapr::which_not_na(x$lid)
   )
+  x <- ss_(x, i, colnames(x) %!iin% c("source"))
 
   collapse::gv(x, "field") <- cheapr::val_match(
     x$field,
@@ -185,19 +159,19 @@ index_levels <- function(x) {
     .default = x$field
   )
 
-  lvl4_ <- collapse::funique(ss_(x, x$lvl %==% 4L)$entry)
+  lvl4_ <- funique_(ss_(x, x$lvl %==% 4L)$entry)
   lvl_4 <- ss_(x, x$entry %iin% lvl4_)
   non_4 <- ss_(x, x$entry %!iin% lvl4_)
 
-  lvl3_ <- collapse::funique(ss_(non_4, non_4$lvl %==% 3L)$entry)
+  lvl3_ <- funique_(ss_(non_4, non_4$lvl %==% 3L)$entry)
   lvl_3 <- ss_(non_4, non_4$entry %iin% lvl3_)
   non_3 <- ss_(non_4, non_4$entry %!iin% lvl3_)
 
-  lvl2_ <- collapse::funique(ss_(non_3, non_3$lvl %==% 2L)$entry)
+  lvl2_ <- funique_(ss_(non_3, non_3$lvl %==% 2L)$entry)
   lvl_2 <- ss_(non_3, non_3$entry %iin% lvl2_)
   non_2 <- ss_(non_3, non_3$entry %!iin% lvl2_)
 
-  lvl1_ <- collapse::funique(ss_(non_2, non_2$lvl %==% 1L)$entry)
+  lvl1_ <- funique_(ss_(non_2, non_2$lvl %==% 1L)$entry)
   lvl_1 <- ss_(non_2, non_2$entry %iin% lvl1_)
   lvl_1 <- ss_(lvl_1, lvl_1$field %!=% "level", colnames(lvl_1) %!iin% c("lvl"))
 
@@ -211,17 +185,12 @@ index_levels <- function(x) {
 
 #' @noRd
 index_non_level <- function(x) {
-  non <- ss_(
-    x,
-    cheapr::intersect_(
-      cheapr::which_na(x$lvl),
-      cheapr::which_na(x$lid)
-    ),
-    colnames(x) %!iin% c("lvl", "lid", "source")
-  )
+  i <- cheapr::intersect_(cheapr::which_na(x$lvl), cheapr::which_na(x$lid))
 
-  i <- cheapr::counts(non$entry)
-  i <- collapse::funique(pull_(ss_(i, i$count > 1L), "key"))
+  non <- ss_(x, i, colnames(x) %!iin% c("lvl", "lid", "source"))
+
+  i <- count_(non$entry)
+  i <- funique_(pull_(ss_(i, i$count > 1L), "key"))
 
   single <- ss_(non, non$entry %!iin% i)
   multi <- ss_(non, non$entry %iin% i)
@@ -307,11 +276,9 @@ index_non_level <- function(x) {
 #' @noRd
 process_tables <- function() {
   x <- load_parquet(profile = "tables")
-  x <- ss_(
-    x,
-    x$field %!iin% c("definition", "values"),
-    match_(c("record_index", "entity", "field", "value"), colnames(x))
-  )
+  COLS <- c("record_index", "entity", "field", "value")
+  i <- match_(COLS, colnames(x))
+  x <- ss_(x, x$field %!iin% c("definition", "values"), i)
 
   collapse::setrename(x, table = "record_index")
 
@@ -399,15 +366,17 @@ definitions_file <- function() {
     )
   )
 
-  x <- ss_(
-    x,
-    x$entity %!=% "section",
-    match_(
-      c("section", "axis", "name", "record_index", "entity", "field", "value"),
-      colnames(x)
-    )
+  COLS <- c(
+    "section",
+    "axis",
+    "name",
+    "record_index",
+    "entity",
+    "field",
+    "value"
   )
 
+  x <- ss_(x, x$entity %!=% "section", match_(COLS, colnames(x)))
   x <- collapse::rsplit(x, ~record_index)
   x <- purrr::map(x, map_definitions_file)
   x <- rbind_(x)
@@ -436,16 +405,18 @@ definitions_file <- function() {
 map_definitions_file <- function(x) {
   x$axis <- fill_(x$axis)
   x$name <- fill_(x$name)
+
   x$field <- ifelse_(
     x$entity == "axis/terms/includes",
     "includes",
     x$field
   )
+
   x <- ss_(x, x$entity %!=% "axis")
   x <- av_(x, entry = x$entity == "axis/terms/title")
   x <- av_(x, run = vctrs::vec_identify_runs(x$entry))
 
-  runs <- cheapr::counts(pull_(ss_(x, x$entry), "run"))
+  runs <- count_(pull_(ss_(x, x$entry), "run"))
   runs <- pull_(ss_(runs, runs$count > 1L), "key")
 
   xrun <- ss_(x, x$run %iin% runs)
@@ -456,7 +427,7 @@ map_definitions_file <- function(x) {
       x,
       collapse::gby(xrun, run) |>
         collapse::mtt(value = cheapr::paste_(value, collapse = " | ")) |>
-        collapse::funique(cols = "run") |>
+        funique_(cols = "run") |>
         collapse::fungroup()
     ) |>
       rorderv_(c("run"))
@@ -472,7 +443,7 @@ process_includes <- function() {
   x <- ss_(x, x$field %==% "Includes", colnames(x) %!=% "field")
   collapse::setrename(x, value = "includes")
 
-  i <- cheapr::counts(x$entry)
+  i <- count_(x$entry)
   i <- ss_(i, i$count > 1L) |> pull_("key")
 
   rbind_(
@@ -481,7 +452,7 @@ process_includes <- function() {
       collapse::gby(entry, term) |>
       collapse::mtt(includes = cheapr::paste_(includes, collapse = " | ")) |>
       collapse::fungroup() |>
-      collapse::funique()
+      funique_()
   ) |>
     rorderv_(c("entry"))
 }

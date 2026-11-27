@@ -1,5 +1,5 @@
 library(procedural)
-x <- process_order()
+pcs_order <- process_order()
 usethis::use_data(pcs_order, overwrite = TRUE)
 
 # data transformation -----------------------------------------------------
