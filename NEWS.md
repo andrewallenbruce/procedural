@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# procedural 0.0.1.9021
+
+* simplified `definition` and `tables` function families
+* reprocessed `order` file
+* cleaned up `io` code flow
+
+
 # procedural 0.0.1.9020
 
 * renaming, restructuring, rewriting
