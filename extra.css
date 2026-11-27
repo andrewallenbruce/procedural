@@ -1,5 +1,5 @@
 h1, .h1 {
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1.25em;
 }
 
@@ -17,7 +17,7 @@ h4, .h4 {
 }
 
 dt {
-  color: rgb(38, 38, 38);
+  /* color: rgb(38, 38, 38); */
   text-decoration: underline;
   text-decoration-style: solid;
   text-underline-offset: 4px;
