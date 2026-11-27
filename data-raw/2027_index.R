@@ -1,124 +1,21 @@
+#    entry letter term                            act   value                      code
+#  * <int> <chr>  <chr>                           <chr> <chr>                      <chr>
+#  1     2 3      3M(tm) V.A.C.(R) Therapy System See   Activities of Daily Living F08
+#  2     6 A      Abdominohysterectomy            See   Resection, Uterus          0UT9
+#  3    28 A      Achillorrhaphy                  See   Repair, Tendons            0LQ
+#  4    38 A      Activa PC neurostimulator       Use   Stimulator Generator, Mult 0JH
+#  5    39 A      Activa RC neurostimulator       Use   Stimulator Generator, Mult 0JH
+#  6    40 A      Activa SC neurostimulator       Use   Stimulator Generator, Sing 0JH
+#  7    52 A      Adenoidotomy                    See   Drainage, Adenoids         0C9Q
+#  8    57 A      Adrenalorrhaphy                 See   Repair, Endocrine System   0GQ
+#  9    58 A      Adrenalotomy                    See   Drainage, Endocrine System 0G9
+# 10    60 A      Advisa (MRI)                    Use   Pacemaker, Dual Chamber in 0JH
+
 library(procedural)
 library(tibble)
+
 x <- process_index()
 
-non <- ss_(
-  x,
-  cheapr::is_na(x$lvl) & cheapr::is_na(x$lid),
-  colnames(x) %!iin% c("lvl", "lid", "source")
-)
-
-i <- cheapr::counts(non$entry) |> collapse::qTBL()
-i <- pull_(ss_(i, i$count > 1L), "key") |> unique()
-
-non_single <- ss_(non, non$entry %!iin% i, colnames(non) %!=% "row")
-non_single <- collapse::rsplit(non_single, ~field)
-collapse::setrename(non_single$code, value = "code")
-collapse::setrename(non_single$codes, value = "code")
-collapse::setrename(non_single$tab, value = "code")
-collapse::setrename(non_single$see, value = "see")
-collapse::setrename(non_single$use, value = "use")
-non_single$code <- rbind_(non_single$code, non_single$codes, non_single$tab)
-non_single$codes <- non_single$tab <- NULL
-
-non_single <- collapse::join(
-  non_single$code,
-  non_single$see,
-  how = "full",
-  on = c("entry", "letter", "term"),
-  verbose = 0L,
-  overid = 0L
-) |>
-  collapse::join(
-    non_single$use,
-    how = "full",
-    on = c("entry", "letter", "term"),
-    verbose = 0L,
-    overid = 0L
-  ) |>
-  collapse::colorderv(c("entry", "letter", "term", "see", "use", "code")) |>
-  rorderv_(c("letter", "entry"))
-
-non_multi <- ss_(non, non$entry %iin% i, colnames(non) %!=% "row")
-non_multi <- collapse::rsplit(non_multi, ~field)
-collapse::setrename(non_multi$see, value = "see")
-collapse::setrename(non_multi$`see/codes`, value = "see_code")
-collapse::setrename(non_multi$`see/tab`, value = "see_code")
-collapse::setrename(non_multi$use, value = "use")
-collapse::setrename(non_multi$`use/tab`, value = "use_code")
-
-non_multi$see <- collapse::join(
-  non_multi$see,
-  non_multi$`see/tab`,
-  how = "full",
-  on = c("entry", "letter", "term"),
-  verbose = 0L,
-  overid = 0L
-) |>
-  collapse::join(
-    non_multi$`see/codes`,
-    how = "full",
-    on = c("entry", "letter", "term"),
-    verbose = 0L,
-    overid = 0L
-  )
-non_multi$`see/tab` <- non_multi$`see/codes` <- NULL
-
-non_multi$use <- collapse::join(
-  non_multi$use,
-  non_multi$`use/tab`,
-  how = "full",
-  on = c("entry", "letter", "term"),
-  verbose = 0L,
-  overid = 0L
-)
-non_multi$`use/tab` <- NULL
-
-non_multi$see <- collapse::av(
-  non_multi$see,
-  code = ifelse_(
-    cheapr::is_na(non_multi$see$see_code_y) &
-      !cheapr::is_na(non_multi$see$see_code),
-    non_multi$see$see_code,
-    non_multi$see$see_code_y
-  )
-)
-
-non_multi$see$see_code_y <- non_multi$see$see_code <- NULL
-collapse::setrename(non_multi$use, use_code = "code", use = "value")
-non_multi$use <- collapse::av(
-  non_multi$use,
-  act = rep.int("Use", nrow_(non_multi$use))
-)
-collapse::setrename(non_multi$see, see = "value")
-non_multi$see <- collapse::av(
-  non_multi$see,
-  act = rep.int("See", nrow_(non_multi$see))
-)
-non_multi <- rbind_(non_multi) |>
-  rorderv_(c("letter", "entry")) |>
-  collapse::colorderv(c("entry", "letter", "term", "value", "act", "code"))
-non_single
-x <- ss_(
-  x,
-  !cheapr::is_na(x$lvl) & !cheapr::is_na(x$lid),
-  colnames(x) %!=% "source"
-)
-x <- collapse::rsplit(x, ~letter)
-x$G |>
-  print(n = 100)
-
-x$G$lvl |> unique()
-
-
-# g <- collapse::GRP(x, ~entry)
-# av_(
-#   g,
-#   # lvl = fill_(g$lv),
-#   lvN = csum_(g$field == "level")
-# ) |>
-#   print(n = 50)
-#
 # collapse::fgroup_by(x, entry) |>
 #   collapse::mtt(
 #     lvl = fill_(lv),

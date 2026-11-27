@@ -2,11 +2,13 @@
 % Please edit documentation in R/index.R
 \name{index}
 \alias{index}
-\title{PCS Alphabetic Index}
+\title{Search the PCS Alphabetic Index}
 \usage{
-index(term = NULL)
+index(letter = NULL, term = NULL)
 }
 \arguments{
+\item{letter}{\verb{<chr>} letter/chapter to filter to; A - Z, including 3}
+
 \item{term}{\verb{<chr>} term to search for}
 }
 \value{
@@ -24,8 +26,8 @@ table. Look up the term, follow it to the table, then build and verify the
 full seven-character code on its code page.
 }
 \examples{
-index("Abdominohysterectomy")
-index("Attain Ability")
-index("arthr*")
-index()
+index(term = "Abdominohysterectomy")
+index(term = "Attain Ability")
+index(term = "arthr*")
+index(letter = "3")
 }

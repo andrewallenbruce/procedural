@@ -5,7 +5,7 @@
 #' @examplesIf FALSE
 #' pcs("0G9000Z") |> as_gt()
 #' as_gt(pcs("0016070"))
-#' @export
+#' @noRd
 as_gt <- function(x) {
   x$axes |>
     gt::gt(rowname_col = "axis") |>
@@ -71,8 +71,7 @@ as_gt <- function(x) {
 #' @examplesIf FALSE
 #' pcs("0G9000Z") |> as_gt2()
 #' as_gt2(pcs("0016070"))
-#' @rdname as_gt
-#' @export
+#' @noRd
 as_gt2 <- function(x) {
   x$axes |>
     gt::gt(rowname_col = "axis") |>

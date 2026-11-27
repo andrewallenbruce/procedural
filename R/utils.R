@@ -77,27 +77,3 @@ un_ <- function(x) {
 name_ <- function(x, names = x, ...) {
   rlang::set_names(x = x, nm = names, ...)
 }
-
-#' @noRd
-is_single_id <- function(x, y) {
-  length(vctrs::vec_set_intersect(x, y)) == 1L
-}
-
-#' @noRd
-check_nchar <- function(
-  x,
-  n = 1,
-  arg = rlang::caller_arg(x),
-  call = rlang::caller_env()
-) {
-  check_number_whole(n, min = 1)
-
-  if (any_(nchar(x) != n)) {
-    cli::cli_abort(
-      "{.arg {arg}} must be {.val {n}} character{?s} long.",
-      arg = arg,
-      call = call
-    )
-  }
-  toupper(x)
-}

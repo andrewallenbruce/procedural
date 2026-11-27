@@ -4,7 +4,7 @@
 \alias{definitions}
 \alias{includes}
 \alias{explanations}
-\title{ICD-10-PCS Code Addenda}
+\title{PCS Code Addenda}
 \usage{
 definitions(section = NULL, axis = NULL, term = NULL)
 
@@ -23,27 +23,21 @@ explanations(section = NULL, axis = NULL, term = NULL)
 a \link[tibble:tibble]{tibble::tibble} containing the results
 }
 \description{
-ICD-10-PCS Code Addenda
+PCS Code Addenda
 }
 \examples{
-try(definitions(term = "drinnn"))
 definitions(term = "drain")
 definitions(section = "0", axis = 5)
 definitions(section = "B", term = "fluoro")
-definitions()
 
 
-try(includes(section = "3", axis = 5))
 includes(term = "drain")
 includes(section = "0", axis = 6, term = "^art")
 includes(section = "3", term = "pro")
-includes()
 
 
-try(explanations(section = "B"))
 explanations(term = "drain")
-explanations(section = "X", axis = 3, term = "destruction")
-explanations()
+explanations("X", 3, "destruction")
 
 
 }

@@ -7,7 +7,7 @@ template:
   bootstrap: 5
   theme: tango
   bslib:
-    font_scale: 1.1
+    font_scale: 1.15
     line_height: 2
     base_font: {google: "Roboto Condensed"}
     heading_font: {google: "Atkinson Hyperlegible"}
@@ -62,15 +62,7 @@ reference:
   desc: >
     ICD-10-PCS Building Blocks.
   contents:
-  - section
-  - system
   - table
   - definitions
   - index
-  - pcs_range
-
-- title: Presentation Options
-  desc: >
-    Tools for Visualization and Presentation.
-  contents:
-  - starts_with("as_gt")
+  - order

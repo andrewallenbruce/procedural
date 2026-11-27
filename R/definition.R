@@ -1,15 +1,22 @@
-#' ICD-10-PCS Code Addenda
+#' PCS Code Addenda
 #'
 #' @param section `<chr>` PCS section
 #' @param axis `<int>` PCS axis
 #' @param term `<chr>` PCS term
 #' @returns a [tibble::tibble] containing the results
 #' @examples
-#' try(definitions(term = "drinnn"))
 #' definitions(term = "drain")
 #' definitions(section = "0", axis = 5)
 #' definitions(section = "B", term = "fluoro")
-#' definitions()
+#'
+#'
+#' includes(term = "drain")
+#' includes(section = "0", axis = 6, term = "^art")
+#' includes(section = "3", term = "pro")
+#'
+#'
+#' explanations(term = "drain")
+#' explanations("X", 3, "destruction")
 #'
 #'
 #' @export
@@ -41,14 +48,6 @@ definitions <- function(section = NULL, axis = NULL, term = NULL) {
   return(x)
 }
 
-#' @examples
-#' try(includes(section = "3", axis = 5))
-#' includes(term = "drain")
-#' includes(section = "0", axis = 6, term = "^art")
-#' includes(section = "3", term = "pro")
-#' includes()
-#'
-#'
 #' @export
 #' @rdname definitions
 includes <- function(section = NULL, axis = NULL, term = NULL) {
@@ -65,7 +64,12 @@ includes <- function(section = NULL, axis = NULL, term = NULL) {
 
   if (!is.null(axis)) {
     axis <- as.character(axis)
-    axis <- rlang::arg_match(axis, as.character(collapse::funique(x[["axis"]])))
+    axis <- rlang::arg_match(
+      axis,
+      as.character(
+        collapse::funique(x[["axis"]])
+      )
+    )
     x <- ss_(x, x[["axis"]] %iin% axis)
   }
 
@@ -79,13 +83,6 @@ includes <- function(section = NULL, axis = NULL, term = NULL) {
   return(x)
 }
 
-#' @examples
-#' try(explanations(section = "B"))
-#' explanations(term = "drain")
-#' explanations(section = "X", axis = 3, term = "destruction")
-#' explanations()
-#'
-#'
 #' @export
 #' @rdname definitions
 explanations <- function(section = NULL, axis = NULL, term = NULL) {

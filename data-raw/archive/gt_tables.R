@@ -1,68 +1,80 @@
-tables() |>
-  group_by(section) |>
-  summarise(codes = sum(n_codes), prop = codes / 78220) |>
-  rename(code = section) |>
-  left_join(sections()[c('code', 'label')], by = join_by(code)) |>
-  select(code, label, codes, prop) |>
-  mutate(id = row_number(), .before = 1) |>
-  gt(rowname_col = "id") |>
-  fmt_percent(columns = prop, decimals = 1) |>
-  fmt_number(columns = codes, decimals = 0) |>
-  opt_table_font(font = google_font(name = "Rubik")) |>
-  cols_align(align = "center", columns = code) |>
-  cols_hide(c(codes, prop)) |>
-  tab_style(
-    style = list(
-      cell_fill(color = "lightgray", alpha = 0.5),
-      cell_text(weight = "bold")
-    ),
-    locations = cells_body(columns = code)
+s <- section()
+
+x <- table() |>
+  collapse::fgroup_by(section) |>
+  collapse::fsummarise(
+    codes = collapse::fsum(n_codes),
+    prop = codes / 78220L
   ) |>
-  opt_all_caps() |>
-  opt_align_table_header(align = "left") |>
-  tab_header(title = md("**ICD-10-PCS 2024** Sections")) |>
-  cols_nanoplot(
-    columns = codes,
+  collapse::rnm(code = "section")
+
+dplyr::left_join(
+  x,
+  s[c("code", "label")],
+  by = dplyr::join_by(code)
+) |>
+  ss_(col = c("code", "label", "codes", "prop")) |>
+  dplyr::mutate(id = dplyr::row_number(), .before = 1L)
+
+x |>
+  gt::gt(rowname_col = "id") |>
+  gt::fmt_percent(columns = "prop", decimals = 1L) |>
+  gt::fmt_number(columns = "codes", decimals = 0L) |>
+  gt::opt_table_font(font = gt::google_font(name = "Rubik")) |>
+  gt::cols_align(align = "center", columns = "code") |>
+  gt::cols_hide(c("codes", "prop")) |>
+  gt::tab_style(
+    style = list(
+      gt::cell_fill(color = "lightgray", alpha = 0.5),
+      gt::cell_text(weight = "bold")
+    ),
+    locations = gt::cells_body(columns = "code")
+  ) |>
+  gt::opt_all_caps() |>
+  gt::opt_align_table_header(align = "left") |>
+  gt::tab_header(title = gt::md("**ICD-10-PCS 2024** Sections")) |>
+  gt::cols_nanoplot(
+    columns = "codes",
     plot_type = "bar",
     new_col_label = "# of Codes",
-    options = nanoplot_options(
+    options = gt::nanoplot_options(
       data_bar_fill_color = "#0B0B45",
       data_bar_stroke_color = "#0B0B45",
       interactive_data_values = FALSE
     )
   ) |>
-  tab_style(
-    style = cell_borders(
+  gt::tab_style(
+    style = gt::cell_borders(
       sides = c("left"),
       weight = "5px",
       color = "lightgray"
     ),
-    locations = cells_body(columns = nanoplots)
+    locations = gt::cells_body(columns = "nanoplots")
   )
 
 #' @noRd
 .def_op <- function(x) {
   op <- definitions(
-    section = substr(x$input, 1, 1),
+    section = substr(x$input, 1L, 1L),
     axis = "3",
-    search = substr(x$input, 3, 3)
-  ) |>
-    dplyr::mutate(
-      definition = dplyr::if_else(
-        !is.na(explanation),
-        paste0(definition, ". ", explanation, "."),
+    search = substr(x$input, 3L, 3L)
+  )
+
+  op <- op |>
+    collapse::mtt(
+      definition = ifelse_(
+        !cheapr::is_na(explanation),
+        cheapr::paste_(definition, ". ", explanation, "."),
         definition
-      )
-    ) |>
-    dplyr::mutate(
-      display = glue::glue('{label}: <small>{definition}.</small>')
-    ) |>
-    dplyr::select(label, display) |>
-    unlist()
+      ),
+      display = cheapr::paste_(label, ": <small>", definition, ".</small>")
+    )
 
-  names(op)[2] <- op[['label']]
+  unlist(ss_(op, col = colnames(op) %iin% c("label", "display")))
 
-  op[2]
+  names(op)[2L] <- op[["label"]]
+
+  op[2L]
 }
 
 #' @noRd

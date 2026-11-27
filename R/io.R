@@ -139,7 +139,7 @@ process_index <- function() {
     ) |>
     collapse::fungroup()
 
-  ss_(
+  x <- ss_(
     x,
     col = match_(
       c(
@@ -156,56 +156,113 @@ process_index <- function() {
       colnames(x)
     )
   )
+
+  list(
+    non = index_non_level(x),
+    lvl = ss_(
+      x,
+      cheapr::intersect_(
+        cheapr::which_not_na(x$lvl),
+        cheapr::which_not_na(x$lid)
+      ),
+      colnames(x) %!iin% c("source")
+    )
+  )
 }
 
 #' @noRd
 index_non_level <- function(x) {
   non <- ss_(
     x,
-    cheapr::is_na(x$lvl) & cheapr::is_na(x$lid),
+    cheapr::intersect_(
+      cheapr::which_na(x$lvl),
+      cheapr::which_na(x$lid)
+    ),
     colnames(x) %!iin% c("lvl", "lid", "source")
   )
+
   i <- cheapr::counts(non$entry)
-  i <- pull_(ss_(i, i$count > 1L), "key")
+  i <- collapse::funique(pull_(ss_(i, i$count > 1L), "key"))
 
-  non_single <- ss_(non, non$entry %!iin% i)
+  single <- ss_(non, non$entry %!iin% i)
+  multi <- ss_(non, non$entry %iin% i)
 
-  non_single <- collapse::rsplit(non_single, ~field)
-  collapse::setrename(non_single$code, value = "code")
-  collapse::setrename(non_single$codes, value = "code")
-  collapse::setrename(non_single$tab, value = "code")
-  collapse::setrename(non_single$see, value = "see")
-  collapse::setrename(non_single$use, value = "use")
-  non_single$code <- rbind_(non_single$code, non_single$codes, non_single$tab)
-  non_single$codes <- non_single$tab <- NULL
+  usee_one <- ss_(single, single$field %iin% c("use", "see"))
+  code_one <- ss_(single, single$field %!iin% c("use", "see"))
 
-  non_single <- collapse::join(
-    non_single$code,
-    non_single$see,
-    how = "full",
-    on = c("row", "entry", "letter", "term"),
-    verbose = 0L,
-    overid = 0L
+  collapse::setrename(usee_one, field = "act")
+  collapse::setrename(code_one, field = "act", value = "code")
+
+  collapse::gv(code_one, "act") <- cheapr::val_match(
+    code_one$act,
+    "code" ~ "use::code",
+    "tab" ~ "see::tab",
+    "codes" ~ "see::codes",
+    .default = NA_character_
+  )
+
+  single <- rbind_(
+    usee_one,
+    code_one,
+    fill_in = TRUE
   ) |>
-    collapse::join(
-      non_single$use,
-      how = "full",
-      on = c("row", "entry", "letter", "term"),
-      verbose = 0L,
-      overid = 0L
-    ) |>
+    rorderv_(c("row", "letter", "entry")) |>
     collapse::colorderv(c(
       "row",
       "entry",
       "letter",
       "term",
-      "see",
-      "use",
-      "code"
-    )) |>
-    rorderv_(c("letter", "row", "entry"))
+      "act",
+      "value"
+    ))
 
-  non_multi <- ss_(non, non$entry %iin% i)
+  collapse::gv(multi, "field") <- gsub(
+    "/",
+    "::",
+    multi$field,
+    fixed = TRUE
+  )
+
+  usee_two <- ss_(multi, multi$field %iin% c("use", "see"))
+  code_two <- ss_(
+    multi,
+    multi$field %!iin% c("use", "see"),
+    colnames(multi) %!iin% c("row", "term")
+  )
+
+  collapse::setrename(usee_two, field = "act")
+  collapse::setrename(code_two, field = "act", value = "code")
+
+  multi <- collapse::join(
+    usee_two,
+    code_two,
+    how = "full",
+    on = c("entry", "letter"),
+    verbose = 0L,
+    overid = 0L
+  ) |>
+    rorderv_(c("row", "letter", "entry")) |>
+    collapse::colorderv(c(
+      "row",
+      "entry",
+      "letter",
+      "term",
+      "act",
+      "value",
+      "act_code_two",
+      "code"
+    ))
+
+  non <- rbind_(single, multi, fill_in = TRUE) |>
+    rorderv_(c("row", "letter", "entry"))
+
+  collapse::gv(non, "act") <- ifelse_(
+    !cheapr::is_na(non$act_code_two),
+    non$act_code_two,
+    non$act
+  )
+
+  ss_(non, col = colnames(non) %!=% "act_code_two")
 }
 
 #' @noRd

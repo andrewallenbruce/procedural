@@ -11,7 +11,8 @@ download_links <- function() {
       "Codes File",
       "Conversion Table",
       "Code Tables and Index",
-      "Addendum"),
+      "Addendum"
+    ),
     filetype = c(
       "zip",
       "pdf",
@@ -19,7 +20,8 @@ download_links <- function() {
       "zip",
       "zip",
       "zip",
-      "zip"),
+      "zip"
+    ),
     link = c(
       "https://www.cms.gov/files/zip/2024-icd-10-pcs-order-file-long-and-abbreviated-titles-updated-12/19/2023.zip",
       "https://www.cms.gov/files/document/2024-official-icd-10-pcs-coding-guidelines-updated-12/19/2023.pdf",
@@ -27,5 +29,7 @@ download_links <- function() {
       "https://www.cms.gov/files/zip/2024-icd-10-pcs-codes-file-updated-12/19/2023.zip",
       "https://www.cms.gov/files/zip/2024-icd-10-pcs-conversion-table-updated-12/19/2023.zip",
       "https://www.cms.gov/files/zip/2024-icd-10-pcs-code-tables-and-index-updated-12/19/2023.zip",
-      "https://www.cms.gov/files/zip/2024-icd-10-pcs-addendum-updated-12/19/2023.zip"))
+      "https://www.cms.gov/files/zip/2024-icd-10-pcs-addendum-updated-12/19/2023.zip"
+    )
+  )
 }
