@@ -6,8 +6,9 @@ deploy:
 template:
   bootstrap: 5
   theme: tango
+  light-switch: true
   bslib:
-    font_scale: 1.6
+    font_scale: 1.1
     line_height: 2
     base_font: {google: "Inter"}
     heading_font: {google: "Fraunces"}

@@ -15,9 +15,25 @@ library(procedural)
 library(tibble)
 
 x <- procedural:::process_index()
-x$non
+x$non$act <- ifelse_(
+  !cheapr::is_na(x$non$code),
+  cheapr::paste_(x$non$act, cheapr::paste_(" <[", x$non$code, "]>")),
+  x$non$act
+)
 
-lv1_1 <- ss_(lvl_1, grep("::", lvl_1$field, fixed = TRUE)) |>
+codes <- ss_(x$lvl$`1`, grep("::", x$lvl$`1`$field, fixed = TRUE))
+act <- ss_(x$lvl$`1`, grep("::", x$lvl$`1`$field, fixed = TRUE, invert = TRUE))
+
+i_title <- ss_(x$lvl$`1`, x$lvl$`1`$field %==% "title") |>
+  _$entry |>
+  cheapr::unique_()
+
+s <- ss_(x$lvl$`1`, x$lvl$`1`$entry %iin% i_title) |> collapse::rsplit(~field)
+ss_(s$title, )
+
+
+print(n = 200)
+codes <- ss_(x$lvl$`1`, grep("::", x$lvl$`1`$field, fixed = TRUE)) |>
   collapse::rnm(field = "act::code", value = "code") |>
   collapse::mtt(uid = cheapr::paste_(entry, letter, lid)) |>
   collapse::slt(c(
@@ -31,7 +47,10 @@ lv1_1 <- ss_(lvl_1, grep("::", lvl_1$field, fixed = TRUE)) |>
   )) |>
   collapse::roworderv(c("letter", "entry", "row"))
 
-lv1_2 <- ss_(lvl_1, grep("::", lvl_1$field, fixed = TRUE, invert = TRUE)) |>
+act <- ss_(
+  x$lvl$`1`,
+  grep("::", x$lvl$`1`$field, fixed = TRUE, invert = TRUE)
+) |>
   collapse::rnm(field = "act") |>
   collapse::mtt(uid = cheapr::paste_(entry, letter, lid)) |>
   collapse::slt(c("uid", "row", "entry", "letter", "act", "value", "term")) |>
@@ -56,8 +75,9 @@ lvl_1 <- collapse::join(
     "act::code",
     "code"
   ))
-lvl_1 |> print(n = 300)
-lvl_1 <- ss_(lvl_1, col = colnames(lvl_1) %!iin% c("uid")) |> print(n = 300)
+lvl_1 <- ss_(lvl_1, col = colnames(lvl_1) %!iin% c("uid"))
+
+funique_(lvl_1$act) |> print(n = 300)
 
 collapse::rsplit(lvl_1, ~letter)
 
